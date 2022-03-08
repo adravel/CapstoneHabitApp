@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "506754367256",
+    "project_id": "capstone-habit-app-dev",
+    "storage_bucket": "capstone-habit-app-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506754367256:android:f24ff212101d8d14d9e86d",
+        "android_client_info": {
+          "package_name": "com.example.capstonehabitapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "506754367256-dlthocvp5sq7cshsc207fju2qlpqgf7t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCl5xC0BIJ2rq3SFeaNHRse26kgi1KB1X4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "506754367256-dlthocvp5sq7cshsc207fju2qlpqgf7t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
