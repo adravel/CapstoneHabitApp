@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstonehabitapp.databinding.ItemTaskBinding
 
-class TaskAdapter(var tasks: List<Task>)
+class TaskAdapter(private var tasks: List<Task>)
     : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     inner class TaskViewHolder(val itemBinding: ItemTaskBinding): RecyclerView.ViewHolder(itemBinding.root)
@@ -20,8 +20,9 @@ class TaskAdapter(var tasks: List<Task>)
         holder.itemBinding.apply {
             titleText.text = tasks[position].title
             areaText.text = tasks[position].area
-            timeLimitText.text = tasks[position].timeLimit
-            statusText.text = tasks[position].status
+            val timeLimit = "${tasks[position].startTimeLimit} - ${tasks[position].finishTimeLimit}"
+            timeLimitText.text = timeLimit
+            statusText.text = tasks[position].status.toString()
         }
     }
 
