@@ -1,9 +1,22 @@
 <resources>
     <string name="app_name">Capstone Habit App</string>
-    <string name="task_list">Daftar Pekerjaan</string>
-    <!-- Placeholder -->
+    <!-- Placeholders -->
     <string name="task_title_placeholder">Merapikan Tempat Tidur</string>
     <string name="task_area_placeholder">Kamar Tidur</string>
     <string name="task_time_limit_placeholder">07:00 – 10:00</string>
+    <string name="task_duration_placeholder">15 menit</string>
     <string name="task_status_placeholder">Selesai Dikerjakan</string>
-</resources>
+    <string name="task_detail_placeholder">Pekerjaan dapat dimulai dari merapikan area A dilanjutkan merapikan area B dengan alat X.</string>
+    <string name="task_grade_points_placeholder">9</string>
+    <string name="task_notes_placeholder">Sudah cukup bagus. Bagian x perlu dirapikan lalu ditata lagi bagian y supaya terlihat lebih rapi</string>
+    <!-- UI Components -->
+    <string name="task_list">Daftar Pekerjaan</string>
+    <string name="task_title">Nama Pekerjaan</string>
+    <string name="task_area">Area Pengerjaan</string>
+    <string name="task_time_limit">Tenggat Waktu</string>
+    <string name="task_duration">Durasi</string>
+    <string name="task_status">Status</string>
+    <string name="task_detail">Detail Pekerjaan</string>
+    <string name="task_grade_points">Nilai</string>
+    <string name="task_notes">Catatan</string>
+    </resources>

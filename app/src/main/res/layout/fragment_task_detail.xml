@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:background="@color/light_4"
+    tools:context=".TaskDetailFragment">
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/area_text"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task_area"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_data_text"/>
+
+    <TextView
+        android:id="@+id/time_limit_text"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task_time_limit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/area_data_text"/>
+
+    <TextView
+        android:id="@+id/duration_text"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task_duration"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/time_limit_data_text"/>
+
+    <TextView
+        android:id="@+id/status_text"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task_status"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/duration_data_text"/>
+
+    <TextView
+        android:id="@+id/detail_text"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task_detail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/status_data_text"/>
+
+    <TextView
+        android:id="@+id/grade_points_text"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task_grade_points"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detail_data_text"/>
+
+    <TextView
+        android:id="@+id/notes_text"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task_notes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/grade_points_data_text"/>
+
+    <TextView
+        android:id="@+id/title_data_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task_title_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/title_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/area_data_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task_area_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/title_data_text"
+        app:layout_constraintTop_toBottomOf="@id/title_data_text" />
+
+    <TextView
+        android:id="@+id/time_limit_data_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task_time_limit_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/title_data_text"
+        app:layout_constraintTop_toBottomOf="@id/area_data_text" />
+
+    <TextView
+        android:id="@+id/duration_data_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task_duration_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/title_data_text"
+        app:layout_constraintTop_toBottomOf="@id/time_limit_data_text" />
+
+    <TextView
+        android:id="@+id/status_data_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task_status_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/title_data_text"
+        app:layout_constraintTop_toBottomOf="@id/duration_data_text" />
+
+    <TextView
+        android:id="@+id/detail_data_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task_detail_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/title_data_text"
+        app:layout_constraintTop_toBottomOf="@id/status_data_text" />
+
+    <TextView
+        android:id="@+id/grade_points_data_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task_grade_points_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/title_data_text"
+        app:layout_constraintTop_toBottomOf="@id/detail_data_text" />
+
+    <TextView
+        android:id="@+id/notes_data_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/task_notes_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/title_data_text"
+        app:layout_constraintTop_toBottomOf="@id/grade_points_data_text" />
+
+    <Button
+        android:id="@+id/change_task_status_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Kerjakan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notes_data_text" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
