@@ -1,8 +1,11 @@
 package com.example.capstonehabitapp
 
+import com.google.firebase.firestore.DocumentId
 import java.util.*
 
 data class Task(
+    @DocumentId
+    var id: String = "",
     var title: String = "",
     var category: String = "",
     var difficulty: Long = -1,

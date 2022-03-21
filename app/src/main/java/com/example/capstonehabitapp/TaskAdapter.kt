@@ -2,6 +2,7 @@ package com.example.capstonehabitapp
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstonehabitapp.databinding.ItemTaskBinding
 
@@ -23,6 +24,10 @@ class TaskAdapter(private var tasks: List<Task>)
             val timeLimit = "${tasks[position].startTimeLimit} - ${tasks[position].finishTimeLimit}"
             timeLimitText.text = timeLimit
             statusText.text = tasks[position].status.toString()
+        }
+        holder.itemView.setOnClickListener { view ->
+            val action = TaskListFragmentDirections.actionTaskListFragmentToTaskDetailFragment(tasks[position].id)
+            view.findNavController().navigate(action)
         }
     }
 
