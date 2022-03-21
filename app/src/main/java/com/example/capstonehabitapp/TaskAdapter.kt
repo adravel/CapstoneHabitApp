@@ -18,6 +18,7 @@ class TaskAdapter(private var tasks: List<Task>)
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
+        // Bind the data to RecyclerView item's TextViews
         holder.itemBinding.apply {
             titleText.text = tasks[position].title
             areaText.text = tasks[position].area
@@ -25,6 +26,8 @@ class TaskAdapter(private var tasks: List<Task>)
             timeLimitText.text = timeLimit
             statusText.text = tasks[position].status.toString()
         }
+
+        // Set RecyclerView item OnClickListener to navigate to Task Detail screen
         holder.itemView.setOnClickListener { view ->
             val action = TaskListFragmentDirections.actionTaskListFragmentToTaskDetailFragment(tasks[position].id)
             view.findNavController().navigate(action)

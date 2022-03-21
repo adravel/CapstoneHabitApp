@@ -21,10 +21,11 @@ import java.lang.Exception
 
 class TaskDetailFragment : Fragment() {
 
+    private val TAG = "TaskDetailFragment"
+
     private var _binding: FragmentTaskDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val TAG = "TaskDetailFragment"
     private lateinit var taskId: String
 
     private val testParentId = "2p8at5eicReHAP1P4zDu"
@@ -62,8 +63,13 @@ class TaskDetailFragment : Fragment() {
 
     private fun getTaskDetail(taskId: String) = CoroutineScope(Dispatchers.IO).launch {
         try {
+            // Call Firestore get() method to query the data
             val querySnapshot = tasksCollectionRef.document(taskId).get().await()
+
+            // Convert the document into Task object
             val task = querySnapshot.toObject<Task>()
+
+            // Bind the data to TextViews
             withContext(Dispatchers.Main) {
                 if (task != null) {
                     binding.titleDataText.text = task.title
@@ -77,6 +83,7 @@ class TaskDetailFragment : Fragment() {
                     binding.notesDataText.text = task.notes
                 }
             }
+
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {
                 Toast.makeText(requireContext(), "Pengambilan data gagal", Toast.LENGTH_LONG).show()

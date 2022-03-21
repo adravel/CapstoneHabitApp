@@ -21,10 +21,10 @@ import java.lang.Exception
 
 class TaskListFragment : Fragment() {
 
+    private val TAG = "TaskListFragment"
+
     private var _binding: FragmentTaskListBinding? = null
     private val binding get() = _binding!!
-
-    private val TAG = "TaskListFragment"
 
     private lateinit var taskList: MutableList<Task>
     private lateinit var taskAdapter: TaskAdapter
@@ -41,6 +41,7 @@ class TaskListFragment : Fragment() {
         // Set toolbar title
         activity?.title = getString(R.string.task_list)
 
+        // Initialize task list as an empty MutableList
         taskList = mutableListOf()
 
         _binding = FragmentTaskListBinding.inflate(inflater, container, false)
@@ -68,14 +69,19 @@ class TaskListFragment : Fragment() {
 
     private fun getTasks() = CoroutineScope(Dispatchers.IO).launch {
         try {
+            // Call Firestore get() method to query the data
             val querySnapshot = tasksCollectionRef.get().await()
+
+            // Convert each document into Task object and add them to task list
             for(document in querySnapshot.documents) {
                 document.toObject<Task>()?.let { taskList.add(it) }
             }
+
             withContext(Dispatchers.Main) {
                 taskAdapter.notifyDataSetChanged()
                 Toast.makeText(requireContext(), "Daftar pekerjaan telah diperbarui", Toast.LENGTH_LONG).show()
             }
+
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {
                 Toast.makeText(requireContext(), "Pengambilan data gagal", Toast.LENGTH_LONG).show()
