@@ -14,4 +14,5 @@
     <color name="light_3">#F5F4F2</color>
     <color name="light_4">#FCFBFA</color>
     <color name="state_success">#06C270</color>
+    <color name="grey">#C4C4C4</color>
 </resources>

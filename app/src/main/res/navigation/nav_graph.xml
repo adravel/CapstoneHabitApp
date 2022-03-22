@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/taskListFragment">
+    app:startDestination="@id/roleSelectionFragment">
 
     <fragment
         android:id="@+id/taskListFragment"
@@ -22,5 +22,23 @@
         <argument
             android:name="taskId"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/roleSelectionFragment"
+        android:name="com.example.capstonehabitapp.RoleSelectionFragment"
+        android:label="fragment_role_selection"
+        tools:layout="@layout/fragment_role_selection" >
+        <action
+            android:id="@+id/action_roleSelectionFragment_to_parentHomeFragment"
+            app:destination="@id/parentHomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/parentHomeFragment"
+        android:name="com.example.capstonehabitapp.ParentHomeFragment"
+        android:label="fragment_parent_home"
+        tools:layout="@layout/fragment_parent_home" >
+        <action
+            android:id="@+id/action_parentHomeFragment_to_roleSelectionFragment"
+            app:destination="@id/roleSelectionFragment" />
     </fragment>
 </navigation>
