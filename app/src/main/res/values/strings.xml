@@ -9,6 +9,8 @@
     <string name="task_detail_placeholder">Pekerjaan dapat dimulai dari merapikan area A dilanjutkan merapikan area B dengan alat X.</string>
     <string name="task_grade_points_placeholder">9</string>
     <string name="task_notes_placeholder">Sudah cukup bagus. Bagian x perlu dirapikan lalu ditata lagi bagian y supaya terlihat lebih rapi</string>
+    <!-- Misc -->
+    <string name="role_preference_key">rolePref</string>
     <!-- UI Components -->
     <string name="task_list">Daftar Pekerjaan</string>
     <string name="task_title">Nama Pekerjaan</string>

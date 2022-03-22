@@ -1,5 +1,6 @@
 package com.example.capstonehabitapp
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,8 @@ import androidx.navigation.findNavController
 import com.example.capstonehabitapp.databinding.FragmentRoleSelectionBinding
 
 class RoleSelectionFragment: Fragment() {
+
+    private val TAG = "RoleSelectionFragment"
 
     private var _binding: FragmentRoleSelectionBinding? = null
     private val binding get() = _binding!!
@@ -29,8 +32,19 @@ class RoleSelectionFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Define a shared preference for storing role selection
+        val sharedPref = activity?.getSharedPreferences(getString(R.string.role_preference_key), Context.MODE_PRIVATE)
+
         binding.chooseParentRoleCard.setOnClickListener {
+            sharedPref?.edit()?.putBoolean("isParent", true)?.apply()
+
             it.findNavController().navigate(R.id.parentHomeFragment)
+        }
+
+        binding.chooseChildRoleCard.setOnClickListener {
+            sharedPref?.edit()?.putBoolean("isParent", false)?.apply()
+
+            // it.findNavController().navigate(R.id.childSelectionFragment)
         }
     }
 
