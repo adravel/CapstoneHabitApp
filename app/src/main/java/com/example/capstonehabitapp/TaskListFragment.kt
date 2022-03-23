@@ -53,7 +53,7 @@ class TaskListFragment : Fragment() {
 
         // Set the adapter and layoutManager for task list RecyclerView
         taskAdapter = TaskAdapter(taskList)
-        binding.recycleView.apply {
+        binding.taskListRecycleView.apply {
             adapter = taskAdapter
             layoutManager = LinearLayoutManager(context)
         }
