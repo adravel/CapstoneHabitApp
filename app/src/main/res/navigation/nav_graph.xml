@@ -44,5 +44,14 @@
         android:id="@+id/childAccountSelectionFragment"
         android:name="com.example.capstonehabitapp.ChildAccountSelectionFragment"
         android:label="fragment_child_account_selection"
-        tools:layout="@layout/fragment_child_account_selection" />
+        tools:layout="@layout/fragment_child_account_selection" >
+        <action
+            android:id="@+id/action_childAccountSelectionFragment_to_childHomeFragment"
+            app:destination="@id/childHomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/childHomeFragment"
+        android:name="com.example.capstonehabitapp.ChildHomeFragment"
+        android:label="fragment_child_home"
+        tools:layout="@layout/fragment_child_home" />
 </navigation>
