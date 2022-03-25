@@ -36,13 +36,13 @@ class RoleSelectionFragment: Fragment() {
         val sharedPref = activity?.getSharedPreferences(getString(R.string.role_preference_key), Context.MODE_PRIVATE)
         val editor = sharedPref?.edit()
 
-        binding.chooseParentRoleCard.setOnClickListener {
+        binding.parentRoleCard.setOnClickListener {
             editor?.putBoolean("isParent", true)?.apply()
 
             it.findNavController().navigate(R.id.parentHomeFragment)
         }
 
-        binding.chooseChildRoleCard.setOnClickListener {
+        binding.childRoleCard.setOnClickListener {
             editor?.putBoolean("isParent", false)?.apply()
 
              it.findNavController().navigate(R.id.childAccountSelectionFragment)
