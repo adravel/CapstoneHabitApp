@@ -39,7 +39,11 @@
         android:id="@+id/parentHomeFragment"
         android:name="com.example.capstonehabitapp.ParentHomeFragment"
         android:label="fragment_parent_home"
-        tools:layout="@layout/fragment_parent_home" />
+        tools:layout="@layout/fragment_parent_home" >
+        <action
+            android:id="@+id/action_parentHomeFragment_to_taskListFragment"
+            app:destination="@id/taskListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/childAccountSelectionFragment"
         android:name="com.example.capstonehabitapp.ChildAccountSelectionFragment"
@@ -53,5 +57,9 @@
         android:id="@+id/childHomeFragment"
         android:name="com.example.capstonehabitapp.ChildHomeFragment"
         android:label="fragment_child_home"
-        tools:layout="@layout/fragment_child_home" />
+        tools:layout="@layout/fragment_child_home" >
+        <action
+            android:id="@+id/action_childHomeFragment_to_taskListFragment"
+            app:destination="@id/taskListFragment" />
+    </fragment>
 </navigation>

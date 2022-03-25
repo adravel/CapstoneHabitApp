@@ -5,16 +5,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     android:background="@color/light_4"
     tools:context=".ParentHomeFragment">
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="PARENT HOME FRAGMENT"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/parent_avatar_image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/image_placeholder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/greetings_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/greetings"
+        android:textAllCaps="true"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/parent_avatar_image"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/parent_name_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text=""
+        tools:text="Ibu Melati !"
+        android:textAllCaps="true"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/greetings_text"
+        app:layout_constraintTop_toBottomOf="@+id/greetings_text" />
+
+    <Button
+        android:id="@+id/task_menu_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:text="@string/task"
+        app:layout_constraintEnd_toStartOf="@+id/shop_menu_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/parent_avatar_image" />
+
+    <Button
+        android:id="@+id/shop_menu_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:text="@string/shop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/task_menu_card"
+        app:layout_constraintTop_toBottomOf="@+id/parent_avatar_image" />
+
+    <Button
+        android:id="@+id/achievement_menu_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:text="@string/child_achievement"
+        app:layout_constraintEnd_toStartOf="@+id/history_menu_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_menu_card" />
+
+    <Button
+        android:id="@+id/history_menu_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:text="@string/child_history"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/achievement_menu_card"
+        app:layout_constraintTop_toBottomOf="@+id/task_menu_card" />
+
+    <TextView
+        android:id="@+id/tasks_need_grading_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/tasks_need_grading"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/achievement_menu_card" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/task_need_grading_card"
+        android:layout_width="0dp"
+        android:layout_height="72dp"
+        android:backgroundTint="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tasks_need_grading_text" />
+
+    <Button
+        android:id="@+id/help_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/help"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_need_grading_card" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

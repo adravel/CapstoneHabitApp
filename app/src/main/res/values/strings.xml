@@ -27,4 +27,11 @@
     <string name="choose_role">Pilih Role</string>
     <string name="choose_child_account">Pilih Akun Anak</string>
     <string name="add_child">Tambah Anak</string>
+    <string name="tasks_need_grading">Pekerjaan yang belum dinilai</string>
+    <string name="help">Bantuan</string>
+    <string name="greetings">Halo,</string>
+    <string name="task">Pekerjaan</string>
+    <string name="shop">Toko</string>
+    <string name="child_achievement">Prestasi Anak</string>
+    <string name="child_history">Riwayat Anak</string>
 </resources>
