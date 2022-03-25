@@ -10,7 +10,10 @@
     <string name="task_grade_points_placeholder">9</string>
     <string name="task_notes_placeholder">Sudah cukup bagus. Bagian x perlu dirapikan lalu ditata lagi bagian y supaya terlihat lebih rapi</string>
     <string name="child_name_placeholder">Alfa</string>
-    <string name="task_info_placeholder">17 April 2022 - Alfa</string>
+    <string name="task_info_placeholder">17 April 2022 - Info</string>
+    <string name="child_greetings_placeholder">Halo, Alfa !</string>
+    <string name="child_level_placeholder">Level : Prajurit</string>
+    <string name="child_exp_placeholder">Exp : 20/100</string>
     <!-- Misc -->
     <string name="role_preference_key">rolePref</string>
     <!-- UI Components -->
@@ -28,11 +31,15 @@
     <string name="choose_role">Pilih Role</string>
     <string name="choose_child_account">Pilih Akun Anak</string>
     <string name="add_child">Tambah Anak</string>
+    <string name="task">Pekerjaan</string>
     <string name="tasks_need_grading">Pekerjaan yang belum dinilai</string>
+    <string name="tasks_unfinished">Pekerjaan yang belum selesai</string>
     <string name="help">Bantuan</string>
     <string name="greetings">Halo,</string>
-    <string name="task">Pekerjaan</string>
     <string name="shop">Toko</string>
+    <string name="house">Rumah Adat</string>
     <string name="child_achievement">Prestasi Anak</string>
     <string name="child_history">Riwayat Anak</string>
+    <string name="leaderboard">Peringkat</string>
+    <string name="history">Riwayat</string>
 </resources>
