@@ -75,7 +75,7 @@ class TaskDetailFragment : Fragment() {
                     binding.titleDataText.text = task.title
                     binding.areaDataText.text = task.area
                     val timeLimit = "${task.startTimeLimit} - ${task.finishTimeLimit}"
-                    binding.timeLimitText.text = timeLimit
+                    binding.timeLimitDataText.text = timeLimit
                     binding.durationDataText.text = "-"
                     binding.statusDataText.text = task.status.toString()
                     binding.detailDataText.text = task.detail

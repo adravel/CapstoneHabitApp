@@ -6,6 +6,8 @@ import java.util.*
 data class Task(
     @DocumentId
     var id: String = "",
+    var childId: String = "",
+    var childName: String = "",
     var title: String = "",
     var category: String = "",
     var difficulty: Long = -1,
@@ -16,8 +18,9 @@ data class Task(
     var detail: String = "",
     var gradePoints: Long = -1,
     var notes: String = "",
-    var createTime: Date? = null,
-    var startTime: Date? = null,
-    var finishTime: Date? = null,
+    var timeCreated: Date? = null,
+    var timeStartWorking: Date? = null,
+    var timeFinishWorking: Date? = null,
+    var timeAskForGrading: Date? = null,
     var photoUri: String = ""
 )

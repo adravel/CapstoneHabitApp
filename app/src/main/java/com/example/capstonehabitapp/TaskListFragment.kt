@@ -51,15 +51,15 @@ class TaskListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Get all task data from Firestore
+        getTasks()
+
         // Set the adapter and layoutManager for task list RecyclerView
         taskAdapter = TaskAdapter(taskList)
         binding.taskListRecycleView.apply {
             adapter = taskAdapter
             layoutManager = LinearLayoutManager(context)
         }
-
-        // Get all task data from Firestore
-        getTasks()
     }
 
     override fun onDestroyView() {

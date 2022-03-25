@@ -86,14 +86,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/achievement_menu_card" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/task_need_grading_card"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/essential_task_list_recycler_view"
         android:layout_width="0dp"
-        android:layout_height="72dp"
-        android:backgroundTint="@color/white"
-        android:clickable="true"
-        android:focusable="true"
-        app:cardCornerRadius="10dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tasks_need_grading_text" />
@@ -105,6 +101,6 @@
         android:text="@string/help"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_need_grading_card" />
+        app:layout_constraintTop_toBottomOf="@+id/essential_task_list_recycler_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

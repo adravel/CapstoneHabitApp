@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_parentHomeFragment_to_taskListFragment"
             app:destination="@id/taskListFragment" />
+        <action
+            android:id="@+id/action_parentHomeFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/childAccountSelectionFragment"
@@ -61,5 +64,8 @@
         <action
             android:id="@+id/action_childHomeFragment_to_taskListFragment"
             app:destination="@id/taskListFragment" />
+        <action
+            android:id="@+id/action_childHomeFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
     </fragment>
 </navigation>
