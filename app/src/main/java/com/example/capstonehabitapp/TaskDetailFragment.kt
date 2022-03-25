@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.capstonehabitapp.databinding.FragmentTaskDetailBinding
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -29,8 +30,7 @@ class TaskDetailFragment : Fragment() {
     private lateinit var taskId: String
 
     private val testParentId = "2p8at5eicReHAP1P4zDu"
-    private val db = Firebase.firestore
-    private val tasksCollectionRef = db.collection("parents").document(testParentId).collection("tasks")
+    private lateinit var parentDocRef: DocumentReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +39,9 @@ class TaskDetailFragment : Fragment() {
 
         // Set toolbar title
         activity?.title = getString(R.string.task_detail)
+
+        // Initialize Firebase reference
+        parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
 
         // Initialize task ID using Safe Args provided by navigation component
         val args: TaskDetailFragmentArgs by navArgs()
@@ -52,7 +55,6 @@ class TaskDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Get task detail data from Firestore
-        // Log.d(TAG, "Fetching task detail for task with ID: $taskId")
         getTaskDetail(taskId)
     }
 
@@ -64,7 +66,11 @@ class TaskDetailFragment : Fragment() {
     private fun getTaskDetail(taskId: String) = CoroutineScope(Dispatchers.IO).launch {
         try {
             // Call Firestore get() method to query the data
-            val querySnapshot = tasksCollectionRef.document(taskId).get().await()
+            val querySnapshot = parentDocRef
+                .collection("tasks")
+                .document(taskId)
+                .get()
+                .await()
 
             // Convert the document into Task object
             val task = querySnapshot.toObject<Task>()
@@ -91,5 +97,4 @@ class TaskDetailFragment : Fragment() {
             }
         }
     }
-
 }

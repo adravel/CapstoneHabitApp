@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstonehabitapp.databinding.FragmentChildAccountSelectionBinding
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -29,8 +30,7 @@ class ChildAccountSelectionFragment: Fragment() {
     private lateinit var childAccountAdapter: ChildAccountAdapter
 
     private val testParentId = "2p8at5eicReHAP1P4zDu"
-    private val db = Firebase.firestore
-    private val childCollectionRef = db.collection("parents").document(testParentId).collection("children")
+    private lateinit var parentDocRef: DocumentReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +39,9 @@ class ChildAccountSelectionFragment: Fragment() {
 
         // Set toolbar title
         activity?.title = getString(R.string.choose_child_account)
+
+        // Initialize Firebase reference
+        parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
 
         // Initialize child account list as an empty MutableList
         childAccountList = mutableListOf()
@@ -57,7 +60,7 @@ class ChildAccountSelectionFragment: Fragment() {
             layoutManager = LinearLayoutManager(context)
         }
 
-        // Get all child data from Firestore
+        // Get all children data from Firestore
         getChildren()
     }
 
@@ -69,7 +72,10 @@ class ChildAccountSelectionFragment: Fragment() {
     private fun getChildren() = CoroutineScope(Dispatchers.IO).launch {
         try {
             // Call Firestore get() method to query the data
-            val querySnapshot = childCollectionRef.get().await()
+            val querySnapshot = parentDocRef
+                .collection("children")
+                .get()
+                .await()
 
             // Convert each document into Task object and add them to task list
             for(document in querySnapshot.documents) {

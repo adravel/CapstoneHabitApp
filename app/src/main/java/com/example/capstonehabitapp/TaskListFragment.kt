@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstonehabitapp.databinding.FragmentTaskListBinding
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -30,8 +31,7 @@ class TaskListFragment : Fragment() {
     private lateinit var taskAdapter: TaskAdapter
 
     private val testParentId = "2p8at5eicReHAP1P4zDu"
-    private val db = Firebase.firestore
-    private val tasksCollectionRef = db.collection("parents").document(testParentId).collection("tasks")
+    private lateinit var parentDocRef: DocumentReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +40,9 @@ class TaskListFragment : Fragment() {
 
         // Set toolbar title
         activity?.title = getString(R.string.task_list)
+
+        // Initialize Firebase reference
+        parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
 
         // Initialize task list as an empty MutableList
         taskList = mutableListOf()
@@ -51,15 +54,15 @@ class TaskListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Get all task data from Firestore
-        getTasks()
-
         // Set the adapter and layoutManager for task list RecyclerView
         taskAdapter = TaskAdapter(taskList)
         binding.taskListRecycleView.apply {
             adapter = taskAdapter
             layoutManager = LinearLayoutManager(context)
         }
+
+        // Get all tasks data from Firestore
+        getTasks()
     }
 
     override fun onDestroyView() {
@@ -70,7 +73,10 @@ class TaskListFragment : Fragment() {
     private fun getTasks() = CoroutineScope(Dispatchers.IO).launch {
         try {
             // Call Firestore get() method to query the data
-            val querySnapshot = tasksCollectionRef.get().await()
+            val querySnapshot = parentDocRef
+                .collection("tasks")
+                .get()
+                .await()
 
             // Convert each document into Task object and add them to task list
             for(document in querySnapshot.documents) {

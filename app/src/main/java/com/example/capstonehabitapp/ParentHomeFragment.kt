@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstonehabitapp.databinding.FragmentParentHomeBinding
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -31,14 +32,15 @@ class ParentHomeFragment: Fragment() {
     private lateinit var essentialTaskAdapter: EssentialTaskAdapter
 
     private val testParentId = "2p8at5eicReHAP1P4zDu"
-    private val db = Firebase.firestore
-    private val parentDocumentRef = db.collection("parents").document(testParentId)
-    private val tasksCollectionRef = db.collection("parents").document(testParentId).collection("tasks")
+    private lateinit var parentDocRef: DocumentReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        // Initialize Firebase reference
+        parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
 
         // Initialize essential task list as an empty MutableList
         essentialTaskList = mutableListOf()
@@ -50,18 +52,18 @@ class ParentHomeFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Get parent data from Firestore
-        getParent(testParentId)
-
-        // Get essential tasks data from Firestore
-        getEssentialTasks()
-
         // Set the adapter and layoutManager for essential task list RecyclerView
         essentialTaskAdapter = EssentialTaskAdapter(essentialTaskList, true)
         binding.essentialTaskListRecyclerView.apply {
             adapter = essentialTaskAdapter
             layoutManager = LinearLayoutManager(context)
         }
+
+        // Get parent data from Firestore
+        getParent()
+
+        // Get essential tasks data from Firestore
+        getEssentialTasks()
 
         binding.taskMenuCard.setOnClickListener {
             it.findNavController().navigate(R.id.taskListFragment)
@@ -73,10 +75,10 @@ class ParentHomeFragment: Fragment() {
         _binding = null
     }
 
-    private fun getParent(parentId: String) = CoroutineScope(Dispatchers.IO).launch {
+    private fun getParent() = CoroutineScope(Dispatchers.IO).launch {
         try {
             // Call Firestore get() method to query the data
-            val querySnapshot = parentDocumentRef.get().await()
+            val querySnapshot = parentDocRef.get().await()
             val parentName = querySnapshot.getString("name")
             val parentIsMale = querySnapshot.getBoolean("isMale")
 
@@ -96,7 +98,11 @@ class ParentHomeFragment: Fragment() {
     private fun getEssentialTasks() = CoroutineScope(Dispatchers.IO).launch {
         try {
             // Call Firestore get() method to query tasks that need grading
-            val querySnapshot = tasksCollectionRef.whereEqualTo("status", 3).get().await()
+            val querySnapshot = parentDocRef
+                .collection("tasks")
+                .whereEqualTo("status", 3)
+                .get()
+                .await()
 
             // Convert each document into Task object and add them to task list
             for(document in querySnapshot.documents) {
