@@ -1,4 +1,4 @@
-package com.example.capstonehabitapp
+package com.example.capstonehabitapp.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentRoleSelectionBinding
 
 class RoleSelectionFragment: Fragment() {

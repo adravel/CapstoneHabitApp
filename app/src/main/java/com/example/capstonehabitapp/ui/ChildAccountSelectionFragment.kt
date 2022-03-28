@@ -1,4 +1,4 @@
-package com.example.capstonehabitapp
+package com.example.capstonehabitapp.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -7,8 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.navArgs
-import com.example.capstonehabitapp.databinding.FragmentTaskDetailBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.capstonehabitapp.model.Child
+import com.example.capstonehabitapp.R
+import com.example.capstonehabitapp.adapter.ChildAccountAdapter
+import com.example.capstonehabitapp.databinding.FragmentChildAccountSelectionBinding
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -20,14 +23,14 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 
-class TaskDetailFragment : Fragment() {
+class ChildAccountSelectionFragment: Fragment() {
+    private val TAG = "ChildAccountSelection"
 
-    private val TAG = "TaskDetailFragment"
-
-    private var _binding: FragmentTaskDetailBinding? = null
+    private var _binding: FragmentChildAccountSelectionBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var taskId: String
+    private lateinit var childAccountList: MutableList<Child>
+    private lateinit var childAccountAdapter: ChildAccountAdapter
 
     private val testParentId = "2p8at5eicReHAP1P4zDu"
     private lateinit var parentDocRef: DocumentReference
@@ -38,24 +41,30 @@ class TaskDetailFragment : Fragment() {
     ): View {
 
         // Set toolbar title
-        activity?.title = getString(R.string.task_detail)
+        activity?.title = getString(R.string.choose_child_account)
 
         // Initialize Firebase reference
         parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
 
-        // Initialize task ID using Safe Args provided by navigation component
-        val args: TaskDetailFragmentArgs by navArgs()
-        taskId = args.taskId
+        // Initialize child account list as an empty MutableList
+        childAccountList = mutableListOf()
 
-        _binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
+        _binding = FragmentChildAccountSelectionBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Get task detail data from Firestore
-        getTaskDetail(taskId)
+        // Set the adapter and layoutManager for child list RecyclerView
+        childAccountAdapter = ChildAccountAdapter(childAccountList)
+        binding.childAccountListRecycleView.apply {
+            adapter = childAccountAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
+
+        // Get all children data from Firestore
+        getChildren()
     }
 
     override fun onDestroyView() {
@@ -63,31 +72,21 @@ class TaskDetailFragment : Fragment() {
         _binding = null
     }
 
-    private fun getTaskDetail(taskId: String) = CoroutineScope(Dispatchers.IO).launch {
+    private fun getChildren() = CoroutineScope(Dispatchers.IO).launch {
         try {
             // Call Firestore get() method to query the data
             val querySnapshot = parentDocRef
-                .collection("tasks")
-                .document(taskId)
+                .collection("children")
                 .get()
                 .await()
 
-            // Convert the document into Task object
-            val task = querySnapshot.toObject<Task>()
+            // Convert each document into Task object and add them to task list
+            for(document in querySnapshot.documents) {
+                document.toObject<Child>()?.let { childAccountList.add(it) }
+            }
 
-            // Bind the data to TextViews
             withContext(Dispatchers.Main) {
-                if (task != null) {
-                    binding.titleDataText.text = task.title
-                    binding.areaDataText.text = task.area
-                    val timeLimit = "${task.startTimeLimit} - ${task.finishTimeLimit}"
-                    binding.timeLimitDataText.text = timeLimit
-                    binding.durationDataText.text = "-"
-                    binding.statusDataText.text = task.status.toString()
-                    binding.detailDataText.text = task.detail
-                    binding.gradePointsDataText.text = task.gradePoints.toString()
-                    binding.notesDataText.text = task.notes
-                }
+                childAccountAdapter.notifyDataSetChanged()
             }
 
         } catch (e: Exception) {

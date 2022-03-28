@@ -1,10 +1,12 @@
-package com.example.capstonehabitapp
+package com.example.capstonehabitapp.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.capstonehabitapp.model.Child
+import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.ItemChildAccountBinding
 
 class ChildAccountAdapter(private var children: List<Child>)

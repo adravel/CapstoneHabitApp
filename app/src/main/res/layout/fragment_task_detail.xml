@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layout_margin="16dp"
     android:background="@color/light_4"
-    tools:context=".TaskDetailFragment">
+    tools:context=".ui.TaskDetailFragment">
 
     <TextView
         android:id="@+id/title_text"

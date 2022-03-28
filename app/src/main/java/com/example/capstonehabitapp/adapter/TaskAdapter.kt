@@ -1,10 +1,12 @@
-package com.example.capstonehabitapp
+package com.example.capstonehabitapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.capstonehabitapp.model.Task
 import com.example.capstonehabitapp.databinding.ItemTaskBinding
+import com.example.capstonehabitapp.ui.TaskListFragmentDirections
 
 class TaskAdapter(private var tasks: List<Task>)
     : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {

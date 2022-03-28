@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="20dp"
     android:background="@color/light_4"
-    tools:context=".ChildAccountSelectionFragment">
+    tools:context=".ui.ChildAccountSelectionFragment">
 
     <TextView
         android:id="@+id/choose_child_account_text"

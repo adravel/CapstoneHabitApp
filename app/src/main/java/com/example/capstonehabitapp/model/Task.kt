@@ -1,4 +1,4 @@
-package com.example.capstonehabitapp
+package com.example.capstonehabitapp.model
 
 import com.google.firebase.firestore.DocumentId
 import java.util.*

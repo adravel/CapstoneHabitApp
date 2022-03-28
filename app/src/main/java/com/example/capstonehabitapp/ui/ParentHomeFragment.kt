@@ -1,4 +1,4 @@
-package com.example.capstonehabitapp
+package com.example.capstonehabitapp.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +9,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.capstonehabitapp.R
+import com.example.capstonehabitapp.model.Task
+import com.example.capstonehabitapp.adapter.EssentialTaskAdapter
 import com.example.capstonehabitapp.databinding.FragmentParentHomeBinding
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore

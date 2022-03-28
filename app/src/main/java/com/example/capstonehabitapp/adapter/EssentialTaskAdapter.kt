@@ -1,11 +1,13 @@
-package com.example.capstonehabitapp
+package com.example.capstonehabitapp.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.capstonehabitapp.model.Task
 import com.example.capstonehabitapp.databinding.ItemEssentialTaskBinding
+import com.example.capstonehabitapp.ui.ChildHomeFragmentDirections
+import com.example.capstonehabitapp.ui.ParentHomeFragmentDirections
 
 class EssentialTaskAdapter(private var tasks: List<Task>, private var isForParent: Boolean)
     : RecyclerView.Adapter<EssentialTaskAdapter.TaskViewHolder>() {

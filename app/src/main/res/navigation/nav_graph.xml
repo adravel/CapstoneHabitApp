@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/taskListFragment"
-        android:name="com.example.capstonehabitapp.TaskListFragment"
+        android:name="com.example.capstonehabitapp.ui.TaskListFragment"
         android:label="fragment_task_list"
         tools:layout="@layout/fragment_task_list" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/taskDetailFragment"
-        android:name="com.example.capstonehabitapp.TaskDetailFragment"
+        android:name="com.example.capstonehabitapp.ui.TaskDetailFragment"
         android:label="fragment_task_detail"
         tools:layout="@layout/fragment_task_detail" >
         <argument
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/roleSelectionFragment"
-        android:name="com.example.capstonehabitapp.RoleSelectionFragment"
+        android:name="com.example.capstonehabitapp.ui.RoleSelectionFragment"
         android:label="fragment_role_selection"
         tools:layout="@layout/fragment_role_selection" >
         <action
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/parentHomeFragment"
-        android:name="com.example.capstonehabitapp.ParentHomeFragment"
+        android:name="com.example.capstonehabitapp.ui.ParentHomeFragment"
         android:label="fragment_parent_home"
         tools:layout="@layout/fragment_parent_home" >
         <action
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/childAccountSelectionFragment"
-        android:name="com.example.capstonehabitapp.ChildAccountSelectionFragment"
+        android:name="com.example.capstonehabitapp.ui.ChildAccountSelectionFragment"
         android:label="fragment_child_account_selection"
         tools:layout="@layout/fragment_child_account_selection" >
         <action
@@ -58,7 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/childHomeFragment"
-        android:name="com.example.capstonehabitapp.ChildHomeFragment"
+        android:name="com.example.capstonehabitapp.ui.ChildHomeFragment"
         android:label="fragment_child_home"
         tools:layout="@layout/fragment_child_home" >
         <action
