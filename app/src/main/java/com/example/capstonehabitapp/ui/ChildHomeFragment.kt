@@ -58,7 +58,7 @@ class ChildHomeFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Set the adapter and layoutManager for essential task list RecyclerView
-        essentialTaskAdapter = EssentialTaskAdapter(essentialTaskList, true)
+        essentialTaskAdapter = EssentialTaskAdapter(essentialTaskList, false)
         binding.essentialTaskListRecyclerView.apply {
             adapter = essentialTaskAdapter
             layoutManager = LinearLayoutManager(context)
