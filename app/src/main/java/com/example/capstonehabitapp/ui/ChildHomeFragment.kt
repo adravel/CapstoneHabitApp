@@ -94,7 +94,6 @@ class ChildHomeFragment: Fragment() {
                 .await()
             val child = querySnapshot.toObject<Child>()
 
-            // Bind the data to Views
             withContext(Dispatchers.Main) {
                 if (child != null) {
                     // Get the name of the level
@@ -114,10 +113,11 @@ class ChildHomeFragment: Fragment() {
                     // Determine total points needed to level up
                     val pointsToLevelUp = child.level.toInt() * 50
 
+                    // Bind the data to Views
                     binding.apply {
-                        greetingsText.text = "Halo, ${child.name} !"
-                        levelText.text = "Level : $levelName"
-                        expText.text = "Exp : ${child.totalPoints}/$pointsToLevelUp"
+                        greetingsText.text = getString(R.string.child_greetings_placeholder, child.name)
+                        levelText.text = getString(R.string.child_level_placeholder, levelName)
+                        expText.text = getString(R.string.child_exp_placeholder, child.totalPoints.toInt(), pointsToLevelUp)
                         expProgressBar.max = pointsToLevelUp
                         expProgressBar.progress = child.totalPoints.toInt()
                     }

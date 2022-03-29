@@ -24,12 +24,10 @@ class EssentialTaskAdapter(private var tasks: List<Task>, private var isForParen
         // Bind the data to RecyclerView item's Views
         holder.itemBinding.apply {
             titleText.text = tasks[position].title
-
-            val info = if (isForParent)
+            infoText.text = if (isForParent)
                 "${tasks[position].timeAskForGrading} - ${tasks[position].childName}"
             else
                 "${tasks[position].timeFinishWorking} - ${tasks[position].area}"
-            infoText.text = info
         }
 
         // Set RecyclerView item OnClickListener to navigate to Task Detail screen

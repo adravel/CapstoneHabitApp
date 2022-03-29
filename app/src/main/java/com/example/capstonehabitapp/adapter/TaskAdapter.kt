@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.model.Task
 import com.example.capstonehabitapp.databinding.ItemTaskBinding
 import com.example.capstonehabitapp.ui.TaskListFragmentDirections
@@ -20,12 +21,18 @@ class TaskAdapter(private var tasks: List<Task>)
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
+        // Get ViewHolder's ItemView context
+        val context = holder.itemView.context
+
         // Bind the data to RecyclerView item's TextViews
         holder.itemBinding.apply {
             titleText.text = tasks[position].title
             areaText.text = tasks[position].area
-            val timeLimit = "${tasks[position].startTimeLimit} - ${tasks[position].finishTimeLimit}"
-            timeLimitText.text = timeLimit
+            timeLimitText.text = context.getString(
+                R.string.task_time_limit_placeholder,
+                tasks[position].startTimeLimit,
+                tasks[position].finishTimeLimit
+            )
             statusText.text = tasks[position].status.toString()
         }
 
