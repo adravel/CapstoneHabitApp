@@ -9,7 +9,8 @@ data class Child(
     var name: String = "",
     var isMale: Boolean = true,
     var age: Long = -1,
-    var points: Long = -1,
+    var totalPoints: Long = -1,
+    var currentPoints: Long = -1,
     var level: Long = -1,
     var badge: Long = -1,
     var createTime: Date? = null

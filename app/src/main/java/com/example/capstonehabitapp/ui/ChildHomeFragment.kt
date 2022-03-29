@@ -97,9 +97,30 @@ class ChildHomeFragment: Fragment() {
             // Bind the data to Views
             withContext(Dispatchers.Main) {
                 if (child != null) {
-                    binding.greetingsText.text = "Halo, ${child.name} !"
-                    binding.levelText.text = "Level : ${child.level}"
-                    binding.expText.text = "Exp : ${child.points}/100"
+                    // Get the name of the level
+                    val levelName = when (child.level.toInt()) {
+                        1 -> getString(R.string.level_1_name)
+                        2 -> getString(R.string.level_2_name)
+                        3 -> getString(R.string.level_3_name)
+                        4 -> getString(R.string.level_4_name)
+                        5 -> getString(R.string.level_5_name)
+                        6 -> getString(R.string.level_6_name)
+                        7 -> getString(R.string.level_7_name)
+                        8 -> getString(R.string.level_8_name)
+                        9 -> getString(R.string.level_9_name)
+                        else -> getString(R.string.level_10_name)
+                    }
+
+                    // Determine total points needed to level up
+                    val pointsToLevelUp = child.level.toInt() * 50
+
+                    binding.apply {
+                        greetingsText.text = "Halo, ${child.name} !"
+                        levelText.text = "Level : $levelName"
+                        expText.text = "Exp : ${child.totalPoints}/$pointsToLevelUp"
+                        expProgressBar.max = pointsToLevelUp
+                        expProgressBar.progress = child.totalPoints.toInt()
+                    }
                 }
             }
 

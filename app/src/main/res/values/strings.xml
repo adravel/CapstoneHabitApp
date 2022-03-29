@@ -16,6 +16,17 @@
     <string name="child_exp_placeholder">Exp : 20/100</string>
     <!-- Misc -->
     <string name="role_preference_key">rolePref</string>
+    <!-- Game Components -->
+    <string name="level_1_name">Prajurit</string>
+    <string name="level_2_name">Kopral</string>
+    <string name="level_3_name">Sersan</string>
+    <string name="level_4_name">Letnan</string>
+    <string name="level_5_name">Pembantu Letnan</string>
+    <string name="level_6_name">Kapten</string>
+    <string name="level_7_name">Mayor</string>
+    <string name="level_8_name">Letnan Kolonen</string>
+    <string name="level_9_name">Kolonen</string>
+    <string name="level_10_name">Jendral</string>
     <!-- UI Components -->
     <string name="task_list">Daftar Pekerjaan</string>
     <string name="task_title">Nama Pekerjaan</string>
