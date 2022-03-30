@@ -27,7 +27,7 @@ class EssentialTaskAdapter(private var tasks: List<Task>, private var isForParen
             infoText.text = if (isForParent)
                 "${tasks[position].timeAskForGrading} - ${tasks[position].childName}"
             else
-                "${tasks[position].timeFinishWorking} - ${tasks[position].area}"
+                "${tasks[position].timeStartWorking} - ${tasks[position].area}"
         }
 
         // Set RecyclerView item OnClickListener to navigate to Task Detail screen

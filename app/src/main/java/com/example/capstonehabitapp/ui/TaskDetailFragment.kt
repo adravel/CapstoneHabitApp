@@ -1,11 +1,13 @@
 package com.example.capstonehabitapp.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.capstonehabitapp.R
@@ -56,8 +58,12 @@ class TaskDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Check the user's role from shared preference
+        val sharedPref = activity?.getSharedPreferences(getString(R.string.role_preference_key), Context.MODE_PRIVATE)
+        val isParent = sharedPref?.getBoolean("isParent", true)
+
         // Get task detail data from Firestore
-        getTaskDetail(taskId)
+        getTaskDetail(taskId, isParent!!)
     }
 
     override fun onDestroyView() {
@@ -65,7 +71,7 @@ class TaskDetailFragment : Fragment() {
         _binding = null
     }
 
-    private fun getTaskDetail(taskId: String) = CoroutineScope(Dispatchers.IO).launch {
+    private fun getTaskDetail(taskId: String, isForParent: Boolean) = CoroutineScope(Dispatchers.IO).launch {
         try {
             // Call Firestore get() method to query the data
             val querySnapshot = parentDocRef
@@ -77,21 +83,129 @@ class TaskDetailFragment : Fragment() {
             // Convert the document into Task object
             val task = querySnapshot.toObject<Task>()
 
-            // Bind the data to TextViews
             withContext(Dispatchers.Main) {
                 if (task != null) {
-                    binding.titleDataText.text = task.title
-                    binding.areaDataText.text = task.area
-                    binding.timeLimitDataText.text = getString(
-                        R.string.task_time_limit_placeholder,
-                        task.startTimeLimit,
-                        task.finishTimeLimit
-                    )
-                    binding.durationDataText.text = "-"
-                    binding.statusDataText.text = task.status.toString()
-                    binding.detailDataText.text = task.detail
-                    binding.gradePointsDataText.text = task.gradePoints.toString()
-                    binding.notesDataText.text = task.notes
+                    val status = task.status.toInt()
+
+                    // Display task details
+                    binding.apply {
+
+                        // Display data that is unaffected by status
+                        titleDataText.text = task.title
+                        areaDataText.text = task.area
+                        difficultyDataText.text = when (task.difficulty.toInt()) {
+                            0 -> getString(R.string.task_difficulty_0)
+                            1 -> getString(R.string.task_difficulty_1)
+                            2 -> getString(R.string.task_difficulty_2)
+                            else -> ""
+                        }
+                        // TODO: Implement task repetition data display
+                        repetitionDataText.text = "NOT_YET_IMPLEMENTED"
+                        timeLimitDataText.text = getString(
+                            R.string.task_time_limit_placeholder,
+                            task.startTimeLimit,
+                            task.finishTimeLimit
+                        )
+                        detailDataText.text = task.detail
+
+                        // Display the rest of the data according to status
+                        when (status) {
+
+                            // State: Task default state
+                            0 -> {
+                                durationDataText.text = "-"
+                                statusDataText.text = getString(R.string.task_status_0)
+                                statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_error))
+                                if (isForParent) {
+                                    gradePointsDataText.text = "-"
+                                    notesDataText.text = "-"
+                                    changeTaskStatusButton.visibility = View.GONE
+                                }
+                                else {
+                                    View.GONE.let {
+                                        gradePointsText.visibility = it
+                                        gradePointsDataText.visibility = it
+                                        notesText.visibility = it
+                                        notesDataText.visibility = it
+                                    }
+                                    changeTaskStatusButton.text = getString(R.string.button_label_start_task)
+                                }
+                            }
+
+                            // State: Task is in progress
+                            1 -> {
+                                durationDataText.text = "-"
+                                statusDataText.text = getString(R.string.task_status_1_with_child_name, task.childName)
+                                statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_warning_dark))
+                                if (isForParent) {
+                                    gradePointsDataText.text = "-"
+                                    notesDataText.text = "-"
+                                    changeTaskStatusButton.visibility = View.GONE
+                                }
+                                else {
+                                    View.GONE.let {
+                                        gradePointsText.visibility = it
+                                        gradePointsDataText.visibility = it
+                                        notesText.visibility = it
+                                        notesDataText.visibility = it
+                                    }
+                                    changeTaskStatusButton.text = getString(R.string.button_label_finish_task)
+                                }
+                            }
+
+                            // State: Task is finished
+                            2 -> {
+                                // TODO: Implement task duration data display
+                                durationDataText.text = "NOT_YET_IMPLEMENTED"
+                                statusDataText.text = getString(R.string.task_status_2_with_child_name, task.childName)
+                                statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_success))
+                                if (isForParent) {
+                                    gradePointsDataText.text = "-"
+                                    notesDataText.text = "-"
+                                    changeTaskStatusButton.text = getString(R.string.button_label_grade_task)
+                                    changeTaskStatusButton.isEnabled = false
+                                }
+                                else {
+                                    View.GONE.let {
+                                        gradePointsText.visibility = it
+                                        gradePointsDataText.visibility = it
+                                        notesText.visibility = it
+                                        notesDataText.visibility = it
+                                    }
+                                    changeTaskStatusButton.text = getString(R.string.button_label_ask_for_grading)
+                                }
+                            }
+
+                            // State: Waiting for grading
+                            3 -> {
+                                // TODO: Implement task duration data display
+                                durationDataText.text = "NOT_YET_IMPLEMENTED"
+                                if (isForParent) {
+                                    statusDataText.text = getString(R.string.task_status_3_for_parent_role_with_child_name, task.childName)
+                                    statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_error))
+                                    changeTaskStatusButton.text = getString(R.string.button_label_grade_task)
+                                }
+                                else {
+                                    statusDataText.text = getString(R.string.task_status_3_for_child_role)
+                                    statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_info))
+                                    changeTaskStatusButton.visibility = View.GONE
+                                }
+                                gradePointsDataText.text = "-"
+                                notesDataText.text = "-"
+                            }
+
+                            // State: Task has been graded
+                            4 -> {
+                                // TODO: Implement task duration data display
+                                durationDataText.text = "NOT_YET_IMPLEMENTED"
+                                statusDataText.text = getString(R.string.task_status_4)
+                                statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_success))
+                                gradePointsDataText.text = task.gradePoints.toString()
+                                notesDataText.text = task.notes
+                                changeTaskStatusButton.visibility = View.GONE
+                            }
+                        }
+                    }
                 }
             }
 

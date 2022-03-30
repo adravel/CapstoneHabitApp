@@ -1,5 +1,6 @@
 package com.example.capstonehabitapp.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -57,8 +58,12 @@ class TaskListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Check the user's role from shared preference
+        val sharedPref = activity?.getSharedPreferences(getString(R.string.role_preference_key), Context.MODE_PRIVATE)
+        val isParent = sharedPref?.getBoolean("isParent", true)
+
         // Set the adapter and layoutManager for task list RecyclerView
-        taskAdapter = TaskAdapter(taskList)
+        taskAdapter = TaskAdapter(taskList, isParent!!)
         binding.taskListRecycleView.apply {
             adapter = taskAdapter
             layoutManager = LinearLayoutManager(context)
@@ -88,7 +93,7 @@ class TaskListFragment : Fragment() {
 
             withContext(Dispatchers.Main) {
                 taskAdapter.notifyDataSetChanged()
-                Toast.makeText(requireContext(), "Daftar pekerjaan telah diperbarui", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Daftar pekerjaan telah diperbarui", Toast.LENGTH_SHORT).show()
             }
 
         } catch (e: Exception) {
