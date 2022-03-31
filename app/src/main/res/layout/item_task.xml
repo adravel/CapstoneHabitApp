@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="10dp"
@@ -18,7 +19,7 @@
             android:id="@+id/title_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/task_title_placeholder"
+            tools:text="@string/task_title_placeholder"
             android:textColor="@color/dark_1"
             android:textSize="16sp"/>
 
@@ -26,7 +27,7 @@
             android:id="@+id/area_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/task_area_placeholder"
+            tools:text="@string/task_area_placeholder"
             android:textColor="@color/dark_2"
             android:textSize="16sp"/>
 
@@ -34,7 +35,7 @@
             android:id="@+id/time_limit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/task_time_limit_placeholder"
+            tools:text="@string/task_time_limit_placeholder"
             android:textColor="@color/dark_2"
             android:textSize="16sp"/>
 
@@ -42,7 +43,7 @@
             android:id="@+id/status_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/task_status_placeholder"
+            tools:text="@string/task_status_placeholder"
             android:textColor="@color/state_success"
             android:textSize="16sp"/>
 

@@ -93,7 +93,7 @@
         android:id="@+id/title_data_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/task_title_placeholder"
+        tools:text="@string/task_title_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/title_text"
         app:layout_constraintTop_toTopOf="parent" />
@@ -102,7 +102,7 @@
         android:id="@+id/area_data_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/task_area_placeholder"
+        tools:text="@string/task_area_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title_data_text"
         app:layout_constraintTop_toBottomOf="@id/title_data_text" />
@@ -111,7 +111,7 @@
         android:id="@+id/difficulty_data_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/task_difficulty_placeholder"
+        tools:text="@string/task_difficulty_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title_data_text"
         app:layout_constraintTop_toBottomOf="@id/area_data_text" />
@@ -120,7 +120,7 @@
         android:id="@+id/repetition_data_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/task_repetition_placeholder"
+        tools:text="@string/task_repetition_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title_data_text"
         app:layout_constraintTop_toBottomOf="@id/difficulty_data_text" />
@@ -129,7 +129,7 @@
         android:id="@+id/time_limit_data_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/task_time_limit_placeholder"
+        tools:text="@string/task_time_limit_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title_data_text"
         app:layout_constraintTop_toBottomOf="@id/repetition_data_text" />
@@ -138,7 +138,7 @@
         android:id="@+id/duration_data_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/task_duration_placeholder"
+        tools:text="@string/task_duration_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title_data_text"
         app:layout_constraintTop_toBottomOf="@id/time_limit_data_text" />
@@ -147,7 +147,7 @@
         android:id="@+id/status_data_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/task_status_placeholder"
+        tools:text="@string/task_status_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title_data_text"
         app:layout_constraintTop_toBottomOf="@id/duration_data_text" />
@@ -156,7 +156,7 @@
         android:id="@+id/detail_data_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/task_detail_placeholder"
+        tools:text="@string/task_detail_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title_data_text"
         app:layout_constraintTop_toBottomOf="@id/status_data_text" />
@@ -165,7 +165,7 @@
         android:id="@+id/grade_points_data_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/task_grade_points_placeholder"
+        tools:text="@string/task_grade_points_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title_data_text"
         app:layout_constraintTop_toBottomOf="@id/detail_data_text" />
@@ -174,7 +174,7 @@
         android:id="@+id/notes_data_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/task_notes_placeholder"
+        tools:text="@string/task_notes_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title_data_text"
         app:layout_constraintTop_toBottomOf="@id/grade_points_data_text" />
@@ -183,7 +183,7 @@
         android:id="@+id/change_task_status_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/button_label_start_task"
+        tools:text="@string/button_label_start_task"
         android:textColor="@color/light_3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

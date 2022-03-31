@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/task_need_grading_card"
     android:layout_width="match_parent"
     android:layout_height="72dp"
@@ -20,7 +21,7 @@
             android:id="@+id/title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/task_title_placeholder"
+            tools:text="@string/task_title_placeholder"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,7 +29,7 @@
             android:id="@+id/info_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/task_info_placeholder"
+            tools:text="@string/task_info_placeholder"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_text" />
 
