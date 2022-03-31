@@ -93,7 +93,6 @@ class TaskListFragment : Fragment() {
 
             withContext(Dispatchers.Main) {
                 taskAdapter.notifyDataSetChanged()
-                Toast.makeText(requireContext(), "Daftar pekerjaan telah diperbarui", Toast.LENGTH_SHORT).show()
             }
 
         } catch (e: Exception) {
