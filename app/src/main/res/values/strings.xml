@@ -6,7 +6,7 @@
     <string name="task_difficulty_placeholder">Mudah</string>
     <string name="task_repetition_placeholder">Senin, Selasa, Jumat</string>
     <string name="task_time_limit_placeholder">%1$s – %2$s</string>
-    <string name="task_duration_placeholder">15 menit</string>
+    <string name="task_duration_placeholder">%1$d menit</string>
     <string name="task_status_placeholder">Selesai Dikerjakan</string>
     <string name="task_detail_placeholder">Pekerjaan dapat dimulai dari merapikan area A dilanjutkan merapikan area B dengan alat X.</string>
     <string name="task_grade_points_placeholder">9</string>

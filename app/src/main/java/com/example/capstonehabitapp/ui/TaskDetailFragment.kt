@@ -83,10 +83,19 @@ class TaskDetailFragment : Fragment() {
             // Convert the document into Task object
             val task = querySnapshot.toObject<Task>()
 
-            withContext(Dispatchers.Main) {
-                if (task != null) {
-                    val status = task.status.toInt()
+            if (task != null) {
+                val status = task.status.toInt()
 
+                // Calculate the duration
+                var duration = 0
+                if (task.timeStartWorking != null && task.timeFinishWorking != null) {
+                    val start = task.timeStartWorking!!
+                    val finish = task.timeFinishWorking!!
+                    val diffInMinutes = (finish.seconds - start.seconds) / 60
+                    duration = diffInMinutes.toInt()
+                }
+
+                withContext(Dispatchers.Main) {
                     // Display task details
                     binding.apply {
 
@@ -155,8 +164,7 @@ class TaskDetailFragment : Fragment() {
 
                             // State: Task is finished
                             2 -> {
-                                // TODO: Implement task duration data display
-                                durationDataText.text = "NOT_YET_IMPLEMENTED"
+                                durationDataText.text = getString(R.string.task_duration_placeholder, duration)
                                 statusDataText.text = getString(R.string.task_status_2_with_child_name, task.childName)
                                 statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_success))
                                 if (isForParent) {
@@ -178,8 +186,7 @@ class TaskDetailFragment : Fragment() {
 
                             // State: Waiting for grading
                             3 -> {
-                                // TODO: Implement task duration data display
-                                durationDataText.text = "NOT_YET_IMPLEMENTED"
+                                durationDataText.text = getString(R.string.task_duration_placeholder, duration)
                                 if (isForParent) {
                                     statusDataText.text = getString(R.string.task_status_3_for_parent_role_with_child_name, task.childName)
                                     statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_error))
@@ -196,8 +203,7 @@ class TaskDetailFragment : Fragment() {
 
                             // State: Task has been graded
                             4 -> {
-                                // TODO: Implement task duration data display
-                                durationDataText.text = "NOT_YET_IMPLEMENTED"
+                                durationDataText.text = getString(R.string.task_duration_placeholder, duration)
                                 statusDataText.text = getString(R.string.task_status_4)
                                 statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_success))
                                 gradePointsDataText.text = task.gradePoints.toString()
