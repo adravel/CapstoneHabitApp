@@ -8,6 +8,7 @@ import com.example.capstonehabitapp.model.Task
 import com.example.capstonehabitapp.databinding.ItemEssentialTaskBinding
 import com.example.capstonehabitapp.ui.ChildHomeFragmentDirections
 import com.example.capstonehabitapp.ui.ParentHomeFragmentDirections
+import com.example.capstonehabitapp.util.getDateString
 
 class EssentialTaskAdapter(private var tasks: List<Task>, private var isForParent: Boolean)
     : RecyclerView.Adapter<EssentialTaskAdapter.TaskViewHolder>() {
@@ -24,10 +25,16 @@ class EssentialTaskAdapter(private var tasks: List<Task>, private var isForParen
         // Bind the data to RecyclerView item's Views
         holder.itemBinding.apply {
             titleText.text = tasks[position].title
-            infoText.text = if (isForParent)
-                "${tasks[position].timeAskForGrading} - ${tasks[position].childName}"
-            else
-                "${tasks[position].timeStartWorking} - ${tasks[position].area}"
+            infoText.text = if (isForParent) {
+                val timestamp = tasks[position].timeAskForGrading
+                val date = getDateString(timestamp!!)
+                "$date - ${tasks[position].childName}"
+            }
+            else {
+                val timestamp = tasks[position].timeStartWorking
+                val date = getDateString(timestamp!!)
+                "$date - ${tasks[position].area}"
+            }
         }
 
         // Set RecyclerView item OnClickListener to navigate to Task Detail screen

@@ -1,5 +1,6 @@
 package com.example.capstonehabitapp.model
 
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentId
 import java.util.*
 
@@ -18,9 +19,9 @@ data class Task(
     var detail: String = "",
     var gradePoints: Long = 0,
     var notes: String = "",
-    var timeCreated: Date? = null,
-    var timeStartWorking: Date? = null,
-    var timeFinishWorking: Date? = null,
-    var timeAskForGrading: Date? = null,
+    var timeCreated: Timestamp? = null,
+    var timeStartWorking: Timestamp? = null,
+    var timeFinishWorking: Timestamp? = null,
+    var timeAskForGrading: Timestamp? = null,
     var photoUri: String = ""
 )
