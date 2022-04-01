@@ -34,7 +34,9 @@ class ChildAccountAdapter(private var children: List<Child>)
         // Set RecyclerView item OnClickListener to store childId in a shared preference
         holder.itemView.setOnClickListener {
             val childId = children[position].id
+            val childName = children[position].name
             editor.putString("selectedChildId", childId)?.apply()
+            editor.putString("selectedChildName", childName)?.apply()
 
             it.findNavController().navigate(R.id.childHomeFragment)
         }

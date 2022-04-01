@@ -14,6 +14,7 @@ import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.model.Task
 import com.example.capstonehabitapp.databinding.FragmentTaskDetailBinding
 import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -32,6 +33,7 @@ class TaskDetailFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var taskId: String
+    private var taskStatus = 0
 
     private val testParentId = "2p8at5eicReHAP1P4zDu"
     private lateinit var parentDocRef: DocumentReference
@@ -58,12 +60,28 @@ class TaskDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Check the user's role from shared preference
+        // Get user's role, child ID, and child name data from shared preference
         val sharedPref = activity?.getSharedPreferences(getString(R.string.role_preference_key), Context.MODE_PRIVATE)
         val isParent = sharedPref?.getBoolean("isParent", true)
+        val childId = sharedPref?.getString("selectedChildId", "")
+        val childName = sharedPref?.getString("selectedChildName", "")
 
         // Get task detail data from Firestore
         getTaskDetail(taskId, isParent!!)
+
+        // Set button OnClickListener depending on task status and user's role
+        binding.changeTaskStatusButton.setOnClickListener {
+            if (isParent) {
+                // TODO: Implement on button click function to grade task
+                Toast.makeText(requireContext(), "NOT_YET_IMPLEMENTED", Toast.LENGTH_SHORT).show()
+            } else {
+                when (taskStatus) {
+                    0 -> startTask(childId!!, childName!!)
+                    1 -> finishTask()
+                    2 -> askForGrading()
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -84,7 +102,7 @@ class TaskDetailFragment : Fragment() {
             val task = querySnapshot.toObject<Task>()
 
             if (task != null) {
-                val status = task.status.toInt()
+                taskStatus = task.status.toInt()
 
                 // Calculate the duration
                 var duration = 0
@@ -118,7 +136,7 @@ class TaskDetailFragment : Fragment() {
                         detailDataText.text = task.detail
 
                         // Display the rest of the data according to status
-                        when (status) {
+                        when (taskStatus) {
 
                             // State: Task default state
                             0 -> {
@@ -129,8 +147,7 @@ class TaskDetailFragment : Fragment() {
                                     gradePointsDataText.text = "-"
                                     notesDataText.text = "-"
                                     changeTaskStatusButton.visibility = View.GONE
-                                }
-                                else {
+                                } else {
                                     View.GONE.let {
                                         gradePointsText.visibility = it
                                         gradePointsDataText.visibility = it
@@ -150,8 +167,7 @@ class TaskDetailFragment : Fragment() {
                                     gradePointsDataText.text = "-"
                                     notesDataText.text = "-"
                                     changeTaskStatusButton.visibility = View.GONE
-                                }
-                                else {
+                                } else {
                                     View.GONE.let {
                                         gradePointsText.visibility = it
                                         gradePointsDataText.visibility = it
@@ -172,8 +188,7 @@ class TaskDetailFragment : Fragment() {
                                     notesDataText.text = "-"
                                     changeTaskStatusButton.text = getString(R.string.button_label_grade_task)
                                     changeTaskStatusButton.isEnabled = false
-                                }
-                                else {
+                                } else {
                                     View.GONE.let {
                                         gradePointsText.visibility = it
                                         gradePointsDataText.visibility = it
@@ -191,8 +206,7 @@ class TaskDetailFragment : Fragment() {
                                     statusDataText.text = getString(R.string.task_status_3_for_parent_role_with_child_name, task.childName)
                                     statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_error))
                                     changeTaskStatusButton.text = getString(R.string.button_label_grade_task)
-                                }
-                                else {
+                                } else {
                                     statusDataText.text = getString(R.string.task_status_3_for_child_role)
                                     statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_info))
                                     changeTaskStatusButton.visibility = View.GONE
@@ -217,8 +231,103 @@ class TaskDetailFragment : Fragment() {
 
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {
-                Toast.makeText(requireContext(), "Pengambilan data gagal", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Pengambilan data gagal", Toast.LENGTH_SHORT).show()
                 e.message?.let { Log.e(TAG, it) }
+            }
+        }
+    }
+
+    private fun startTask(childId: String, childName: String) {
+        val updates = hashMapOf(
+            "status" to 1,
+            "childId" to childId,
+            "childName" to childName,
+            "timeStartWorking" to FieldValue.serverTimestamp()
+        )
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                // Update the necessary field in Firestore document
+                parentDocRef
+                    .collection("tasks")
+                    .document(taskId)
+                    .update(updates)
+                    .await()
+
+                // Call getTaskDetail method again to update the UI
+                getTaskDetail(taskId, false)
+
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "Pekerjaan telah dimulai!", Toast.LENGTH_SHORT).show()
+                }
+
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "Update gagal", Toast.LENGTH_SHORT).show()
+                    e.message?.let { Log.e(TAG, it) }
+                }
+            }
+        }
+    }
+
+    private fun finishTask() {
+        val updates = hashMapOf(
+            "status" to 2,
+            "timeFinishWorking" to FieldValue.serverTimestamp()
+        )
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                // Update the necessary field in Firestore document
+                parentDocRef
+                    .collection("tasks")
+                    .document(taskId)
+                    .update(updates)
+                    .await()
+
+                // Call getTaskDetail method again to update the UI
+                getTaskDetail(taskId, false)
+
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "Pekerjaan berhasil diselesaikan!", Toast.LENGTH_SHORT).show()
+                }
+
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "Update gagal", Toast.LENGTH_SHORT).show()
+                    e.message?.let { Log.e(TAG, it) }
+                }
+            }
+        }
+    }
+
+    private fun askForGrading() {
+        val updates = hashMapOf(
+            "status" to 3,
+            "timeAskForGrading" to FieldValue.serverTimestamp()
+        )
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                // Update the necessary field in Firestore document
+                parentDocRef
+                    .collection("tasks")
+                    .document(taskId)
+                    .update(updates)
+                    .await()
+
+                // Call getTaskDetail method again to update the UI
+                getTaskDetail(taskId, false)
+
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "Permintaan penilaian telah dikirim!", Toast.LENGTH_SHORT).show()
+                }
+
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "Update gagal", Toast.LENGTH_SHORT).show()
+                    e.message?.let { Log.e(TAG, it) }
+                }
             }
         }
     }
