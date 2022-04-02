@@ -97,7 +97,7 @@ class TaskListFragment : Fragment() {
 
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {
-                Toast.makeText(requireContext(), "Pengambilan data gagal", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Pengambilan data gagal", Toast.LENGTH_SHORT).show()
                 e.message?.let { Log.e(TAG, it) }
             }
         }
