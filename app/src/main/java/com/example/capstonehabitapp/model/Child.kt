@@ -8,10 +8,10 @@ data class Child(
     @DocumentId
     var id: String = "",
     var name: String = "",
-    var age: Long = -1,
-    var totalPoints: Long = -1,
-    var currentPoints: Long = -1,
-    var level: Long = -1,
-    var badge: Long = -1,
+    var age: Long = 0,
+    var totalPoints: Long = 0,
+    var currentPoints: Long = 0,
+    var level: Long = 0,
+    var badge: Long = 0,
     var timeCreated: Timestamp? = null
 )
