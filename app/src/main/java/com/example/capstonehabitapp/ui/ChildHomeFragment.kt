@@ -65,8 +65,8 @@ class ChildHomeFragment: Fragment() {
         }
 
         // Retrieve child ID from shared preference
-        val sharedPref = activity?.getSharedPreferences(getString(R.string.role_preference_key), Context.MODE_PRIVATE)
-        val childId = sharedPref?.getString("selectedChildId", "")
+        val sharedPref = activity?.getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
+        val childId = sharedPref?.getString(getString(R.string.role_pref_child_id_key), "")
 
         // Get child and essential task data from Firestore
         if (childId != null && childId != "") {

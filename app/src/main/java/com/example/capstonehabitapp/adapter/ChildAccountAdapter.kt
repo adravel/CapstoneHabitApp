@@ -28,15 +28,15 @@ class ChildAccountAdapter(private var children: List<Child>)
         val context = holder.itemView.context
 
         // Define shared preference for storing child ID
-        val sharedPref = context.getSharedPreferences(context.getString(R.string.role_preference_key), Context.MODE_PRIVATE)
+        val sharedPref = context.getSharedPreferences(context.getString(R.string.role_pref_key), Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
 
         // Set RecyclerView item OnClickListener to store childId in a shared preference
         holder.itemView.setOnClickListener {
             val childId = children[position].id
             val childName = children[position].name
-            editor.putString("selectedChildId", childId)?.apply()
-            editor.putString("selectedChildName", childName)?.apply()
+            editor.putString(context.getString(R.string.role_pref_child_id_key), childId)?.apply()
+            editor.putString(context.getString(R.string.role_pref_child_name_key), childName)?.apply()
 
             it.findNavController().navigate(R.id.childHomeFragment)
         }

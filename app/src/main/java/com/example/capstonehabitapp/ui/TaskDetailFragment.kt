@@ -61,10 +61,10 @@ class TaskDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Get user's role, child ID, and child name data from shared preference
-        val sharedPref = activity?.getSharedPreferences(getString(R.string.role_preference_key), Context.MODE_PRIVATE)
-        val isParent = sharedPref?.getBoolean("isParent", true)
-        val childId = sharedPref?.getString("selectedChildId", "")
-        val childName = sharedPref?.getString("selectedChildName", "")
+        val sharedPref = activity?.getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
+        val isParent = sharedPref?.getBoolean(getString(R.string.role_pref_is_parent_key), true)
+        val childId = sharedPref?.getString(getString(R.string.role_pref_child_id_key), "")
+        val childName = sharedPref?.getString(getString(R.string.role_pref_child_name_key), "")
 
         // Get task detail data from Firestore
         getTaskDetail(taskId, isParent!!)

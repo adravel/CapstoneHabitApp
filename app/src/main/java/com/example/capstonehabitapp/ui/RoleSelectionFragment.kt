@@ -34,17 +34,17 @@ class RoleSelectionFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Define a shared preference for storing role selection
-        val sharedPref = activity?.getSharedPreferences(getString(R.string.role_preference_key), Context.MODE_PRIVATE)
+        val sharedPref = activity?.getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
         val editor = sharedPref?.edit()
 
         binding.parentRoleCard.setOnClickListener {
-            editor?.putBoolean("isParent", true)?.apply()
+            editor?.putBoolean(getString(R.string.role_pref_is_parent_key), true)?.apply()
 
             it.findNavController().navigate(R.id.parentHomeFragment)
         }
 
         binding.childRoleCard.setOnClickListener {
-            editor?.putBoolean("isParent", false)?.apply()
+            editor?.putBoolean(getString(R.string.role_pref_is_parent_key), false)?.apply()
 
              it.findNavController().navigate(R.id.childAccountSelectionFragment)
         }
