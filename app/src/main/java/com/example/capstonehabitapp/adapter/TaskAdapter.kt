@@ -10,7 +10,7 @@ import com.example.capstonehabitapp.model.Task
 import com.example.capstonehabitapp.databinding.ItemTaskBinding
 import com.example.capstonehabitapp.ui.TaskListFragmentDirections
 
-class TaskAdapter(private var tasks: List<Task>, private var isForParent: Boolean)
+class TaskAdapter(private var tasks: MutableList<Task>, private var isForParent: Boolean)
     : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     inner class TaskViewHolder(val itemBinding: ItemTaskBinding): RecyclerView.ViewHolder(itemBinding.root)
@@ -73,5 +73,11 @@ class TaskAdapter(private var tasks: List<Task>, private var isForParent: Boolea
 
     override fun getItemCount(): Int {
         return tasks.size
+    }
+
+    fun updateTaskList(newList: List<Task>) {
+        tasks.clear()
+        tasks.addAll(newList)
+        notifyDataSetChanged()
     }
 }

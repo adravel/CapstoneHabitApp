@@ -13,8 +13,6 @@ import com.example.capstonehabitapp.databinding.FragmentRoleSelectionBinding
 
 class RoleSelectionFragment: Fragment() {
 
-    private val TAG = "RoleSelectionFragment"
-
     private var _binding: FragmentRoleSelectionBinding? = null
     private val binding get() = _binding!!
 
