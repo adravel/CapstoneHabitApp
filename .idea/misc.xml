@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/fab_add_icon.xml" value="0.168" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/ic_fab_add.xml" value="0.1475" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/image_placeholder.xml" value="0.168" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/card_task.xml" value="0.264" />
@@ -12,6 +13,7 @@
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_child_selection.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_parent_home.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_role_selection.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_task_creation.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_task_detail.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_task_list.xml" value="0.2" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_test.xml" value="0.264" />

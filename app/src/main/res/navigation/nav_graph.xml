@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_taskListFragment_to_taskDetailFragment"
             app:destination="@id/taskDetailFragment" />
+        <action
+            android:id="@+id/action_taskListFragment_to_taskCreationFragment"
+            app:destination="@id/taskCreationFragment" />
     </fragment>
     <fragment
         android:id="@+id/taskDetailFragment"
@@ -66,6 +69,15 @@
             app:destination="@id/taskListFragment" />
         <action
             android:id="@+id/action_childHomeFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskCreationFragment"
+        android:name="com.example.capstonehabitapp.ui.TaskCreationFragment"
+        android:label="fragment_task_creation"
+        tools:layout="@layout/fragment_task_creation" >
+        <action
+            android:id="@+id/action_taskCreationFragment_to_taskDetailFragment"
             app:destination="@id/taskDetailFragment" />
     </fragment>
 </navigation>

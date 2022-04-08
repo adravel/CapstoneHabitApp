@@ -2,11 +2,13 @@ package com.example.capstonehabitapp.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.adapter.TaskAdapter
@@ -57,6 +59,16 @@ class TaskListFragment : Fragment() {
         // Observe tasks LiveData in ViewModel
         viewModel.getTasks().observe(viewLifecycleOwner) { task ->
             taskAdapter.updateTaskList(task)
+        }
+
+        if (isParent) {
+            // Set FAB OnClickListener
+            binding.fab.setOnClickListener {
+                view.findNavController().navigate(R.id.taskCreationFragment)
+            }
+        } else {
+            // Hide the FAB if user is Child
+            binding.fab.visibility = View.GONE
         }
     }
 

@@ -33,7 +33,7 @@
         android:id="@+id/add_child_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/add_child"
+        android:text="@string/button_label_add_child"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/child_account_list_recycle_view" />
