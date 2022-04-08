@@ -7,5 +7,5 @@
     android:layout_height="wrap_content"
     tools:text="@string/child_name_placeholder"
     android:textColor="@color/light_3"
-    android:backgroundTint="@color/main_button_background_color">
+    android:backgroundTint="@color/primary_button_background_color">
 </Button>
