@@ -5,4 +5,5 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
-    android:text="@string/task_difficulty_0" />
+    android:text="@string/task_difficulty_0"
+    android:textColor="@color/dark_1"/>

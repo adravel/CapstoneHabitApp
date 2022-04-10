@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="16dp"
-    android:background="@color/light_4"
     tools:context=".ui.TaskDetailFragment">
 
     <TextView
@@ -14,6 +13,7 @@
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="@string/task_title"
+        android:textColor="@color/dark_1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -22,6 +22,7 @@
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="@string/task_area"
+        android:textColor="@color/dark_1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_data_text"/>
 
@@ -30,6 +31,7 @@
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="@string/task_difficulty"
+        android:textColor="@color/dark_1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/area_data_text"/>
 
@@ -38,6 +40,7 @@
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="@string/task_repetition"
+        android:textColor="@color/dark_1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/difficulty_data_text"/>
 
@@ -46,6 +49,7 @@
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="@string/task_time_limit"
+        android:textColor="@color/dark_1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/repetition_data_text"/>
 
@@ -54,6 +58,7 @@
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="@string/task_duration"
+        android:textColor="@color/dark_1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/time_limit_data_text"/>
 
@@ -62,6 +67,7 @@
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="@string/task_status"
+        android:textColor="@color/dark_1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/duration_data_text"/>
 
@@ -70,6 +76,7 @@
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="@string/task_detail"
+        android:textColor="@color/dark_1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/status_data_text"/>
 
@@ -78,6 +85,7 @@
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="@string/task_grade_points"
+        android:textColor="@color/dark_1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/detail_data_text"/>
 
@@ -86,6 +94,7 @@
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="@string/task_notes"
+        android:textColor="@color/dark_1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/grade_points_data_text"/>
 
@@ -93,42 +102,47 @@
         android:id="@+id/title_data_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="@string/task_title_placeholder"
+        android:textColor="@color/dark_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/title_text"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/task_title_placeholder" />
 
     <TextView
         android:id="@+id/area_data_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="@string/task_area_placeholder"
+        android:textColor="@color/dark_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title_data_text"
-        app:layout_constraintTop_toBottomOf="@id/title_data_text" />
+        app:layout_constraintTop_toBottomOf="@id/title_data_text"
+        tools:text="@string/task_area_placeholder" />
 
     <TextView
         android:id="@+id/difficulty_data_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="@string/task_difficulty_placeholder"
+        android:textColor="@color/dark_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title_data_text"
-        app:layout_constraintTop_toBottomOf="@id/area_data_text" />
+        app:layout_constraintTop_toBottomOf="@id/area_data_text"
+        tools:text="@string/task_difficulty_placeholder" />
 
     <TextView
         android:id="@+id/repetition_data_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="@string/task_repetition_placeholder"
+        android:textColor="@color/dark_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title_data_text"
-        app:layout_constraintTop_toBottomOf="@id/difficulty_data_text" />
+        app:layout_constraintTop_toBottomOf="@id/difficulty_data_text"
+        tools:text="@string/task_repetition_placeholder" />
 
     <TextView
         android:id="@+id/time_limit_data_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textColor="@color/dark_1"
         tools:text="@string/task_time_limit_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title_data_text"
@@ -138,56 +152,61 @@
         android:id="@+id/duration_data_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="@string/task_duration_placeholder"
+        android:textColor="@color/dark_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title_data_text"
-        app:layout_constraintTop_toBottomOf="@id/time_limit_data_text" />
+        app:layout_constraintTop_toBottomOf="@id/time_limit_data_text"
+        tools:text="@string/task_duration_placeholder" />
 
     <TextView
         android:id="@+id/status_data_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="@string/task_status_placeholder"
+        android:textColor="@color/dark_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title_data_text"
-        app:layout_constraintTop_toBottomOf="@id/duration_data_text" />
+        app:layout_constraintTop_toBottomOf="@id/duration_data_text"
+        tools:text="@string/task_status_placeholder" />
 
     <TextView
         android:id="@+id/detail_data_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="@string/task_detail_placeholder"
+        android:textColor="@color/dark_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title_data_text"
-        app:layout_constraintTop_toBottomOf="@id/status_data_text" />
+        app:layout_constraintTop_toBottomOf="@id/status_data_text"
+        tools:text="@string/task_detail_placeholder" />
 
     <TextView
         android:id="@+id/grade_points_data_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="@string/task_grade_points_placeholder"
+        android:textColor="@color/dark_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title_data_text"
-        app:layout_constraintTop_toBottomOf="@id/detail_data_text" />
+        app:layout_constraintTop_toBottomOf="@id/detail_data_text"
+        tools:text="@string/task_grade_points_placeholder" />
 
     <TextView
         android:id="@+id/notes_data_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="@string/task_notes_placeholder"
+        android:textColor="@color/dark_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/title_data_text"
-        app:layout_constraintTop_toBottomOf="@id/grade_points_data_text" />
+        app:layout_constraintTop_toBottomOf="@id/grade_points_data_text"
+        tools:text="@string/task_notes_placeholder" />
 
     <Button
         android:id="@+id/change_task_status_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="@string/button_label_start_task"
         android:textColor="@color/light_3"
         android:backgroundTint="@color/primary_button_background_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notes_data_text" />
+        app:layout_constraintTop_toBottomOf="@+id/notes_data_text"
+        tools:text="@string/button_label_start_task" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

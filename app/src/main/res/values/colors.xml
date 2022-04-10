@@ -7,13 +7,20 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <!-- Custom color -->
+    <!-- Main color -->
     <color name="green">#146356</color>
+    <color name="dark_green">#103A33</color>
+    <color name="subtle_green">#D4F4C8</color>
+    <!-- Secondary color -->
+    <color name="dark_cream">#9C794D</color>
+    <!-- Dark -->
     <color name="dark_1">#3A3C3C</color>
     <color name="dark_2">#848E8D</color>
     <color name="dark_4">#D2D9D7</color>
+    <!-- Light -->
     <color name="light_3">#F5F4F2</color>
     <color name="light_4">#FCFBFA</color>
+    <!-- State -->
     <color name="state_error">#D22424</color>
     <color name="state_success">#06C270</color>
     <color name="state_warning_dark">#BB980A</color>
