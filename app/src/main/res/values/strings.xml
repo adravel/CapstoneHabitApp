@@ -44,6 +44,12 @@
     <string name="task_status_3_for_parent_role_with_child_name">[%1$s] Meminta Penilaian</string>
     <string name="task_status_3_for_child_role">Menunggu Penilaian</string>
     <string name="task_status_4">Sudah Dinilai</string>
+    <!-- Menu -->
+    <string-array name="difficulties">
+        <item>Mudah</item>
+        <item>Sedang</item>
+        <item>Sulit</item>
+    </string-array>
     <!-- UI Components -->
     <string name="task">Pekerjaan</string>
     <string name="tasks_need_grading">Pekerjaan yang belum dinilai</string>
@@ -82,4 +88,6 @@
     <string name="button_label_ask_for_grading">Minta Nilai</string>
     <string name="button_label_grade_task">Beri Nilai</string>
     <string name="button_label_create_task">Buat Pekerjaan</string>
+    <string name="hint_text">Type something</string>
+    <string name="hint_time">00:00</string>
 </resources>

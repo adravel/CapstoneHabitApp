@@ -1,215 +1,273 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:fillViewport="true"
     android:background="@color/light_4"
     tools:context=".ui.TaskCreationFragment">
 
-    <TextView
-        android:id="@+id/task_title_text"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/task_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:padding="16dp">
 
-    <EditText
-        android:id="@+id/task_title_edit_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="Type something"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_title_text" />
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/task_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/task_area_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/task_area"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_title_edit_text" />
-
-    <EditText
-        android:id="@+id/task_area_edit_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:hint="Type something"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_area_text" />
-
-    <TextView
-        android:id="@+id/task_difficulty_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/task_difficulty"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_area_edit_text" />
-
-    <EditText
-        android:id="@+id/task_difficulty_edit_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:hint="Type something"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_difficulty_text" />
-
-    <TextView
-        android:id="@+id/task_time_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/task_time"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_difficulty_edit_text" />
-
-    <TextView
-        android:id="@+id/day_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/day"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_time_text" />
-
-    <LinearLayout
-        android:id="@+id/day_layout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/day_text">
-
-        <CheckBox
-            android:id="@+id/day_1_check_box"
-            android:layout_weight="1"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/title_text_input_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Sn" />
+            app:hintEnabled="false"
+            app:boxBackgroundColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_text">
 
-        <CheckBox
-            android:id="@+id/day_2_check_box"
-            android:layout_weight="1"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/title_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:hint="@string/hint_text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/area_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/task_area"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_text_input_layout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/area_text_input_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Sl" />
+            app:hintEnabled="false"
+            app:boxBackgroundColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/area_text">
 
-        <CheckBox
-            android:id="@+id/day_3_check_box"
-            android:layout_weight="1"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/area_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:hint="@string/hint_text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/difficulty_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/task_difficulty"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/area_text_input_layout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:id="@+id/difficulty_text_input_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Ra" />
+            app:boxBackgroundColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/difficulty_text">
 
-        <CheckBox
-            android:id="@+id/day_4_check_box"
-            android:layout_weight="1"
+            <AutoCompleteTextView
+                android:id="@+id/difficulty_auto_complete_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="none"
+                android:text="@string/task_difficulty_0"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/task_time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/difficulty_text_input_layout" />
+
+        <TextView
+            android:id="@+id/day_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/day"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time_text" />
+
+        <LinearLayout
+            android:id="@+id/day_linear_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Ka" />
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/day_text">
 
-        <CheckBox
-            android:id="@+id/day_5_check_box"
-            android:layout_weight="1"
+            <CheckBox
+                android:id="@+id/day_1_check_box"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Sn" />
+
+            <CheckBox
+                android:id="@+id/day_2_check_box"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Sl" />
+
+            <CheckBox
+                android:id="@+id/day_3_check_box"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Ra" />
+
+            <CheckBox
+                android:id="@+id/day_4_check_box"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Ka" />
+
+            <CheckBox
+                android:id="@+id/day_5_check_box"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Ju" />
+
+            <CheckBox
+                android:id="@+id/day_6_check_box"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Sb" />
+
+            <CheckBox
+                android:id="@+id/day_7_check_box"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Mi" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/time_limit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/task_time_limit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/day_linear_layout" />
+
+        <TextView
+            android:id="@+id/start_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time_limit_text" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/start_time_text_input_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            app:boxBackgroundColor="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/start_text"
+            app:layout_constraintTop_toBottomOf="@+id/time_limit_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/start_time_limit_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:hint="@string/hint_time" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/finish_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/finish"
+            app:layout_constraintStart_toEndOf="@+id/start_time_text_input_layout"
+            app:layout_constraintTop_toBottomOf="@+id/time_limit_text" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/finish_time_limit_text_input_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            app:boxBackgroundColor="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/finish_text"
+            app:layout_constraintTop_toBottomOf="@+id/time_limit_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/finish_time_limit_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:hint="@string/hint_time" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/detail_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/task_detail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/start_time_text_input_layout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/detail_text_input_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Ju" />
+            app:hintEnabled="false"
+            app:boxBackgroundColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detail_text">
 
-        <CheckBox
-            android:id="@+id/day_6_check_box"
-            android:layout_weight="1"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/detail_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text|textMultiLine"
+                android:lines="5"
+                android:gravity="top"
+                android:hint="@string/hint_text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/create_task_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Sb" />
+            android:backgroundTint="@color/primary_button_background_color"
+            android:text="@string/button_label_create_task"
+            android:textColor="@color/light_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detail_text_input_layout" />
 
-        <CheckBox
-            android:id="@+id/day_7_check_box"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Mi" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
 
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/task_time_limit_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/task_time_limit"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/day_layout" />
-
-    <TextView
-        android:id="@+id/start_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/start"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_time_limit_text" />
-
-    <EditText
-        android:id="@+id/task_start_time_limit_edit_text"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:hint="00:00"
-        android:inputType="text"
-        app:layout_constraintStart_toEndOf="@+id/start_text"
-        app:layout_constraintTop_toBottomOf="@+id/task_time_limit_text" />
-
-    <TextView
-        android:id="@+id/finish_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/finish"
-        app:layout_constraintStart_toEndOf="@+id/task_start_time_limit_edit_text"
-        app:layout_constraintTop_toBottomOf="@+id/task_time_limit_text" />
-
-    <EditText
-        android:id="@+id/task_finish_time_limit_edit_text"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:hint="00:00"
-        android:inputType="text"
-        app:layout_constraintStart_toEndOf="@+id/finish_text"
-        app:layout_constraintTop_toBottomOf="@+id/task_time_limit_text" />
-
-    <TextView
-        android:id="@+id/task_detail_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/task_detail"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_start_time_limit_edit_text" />
-
-    <EditText
-        android:id="@+id/task_detail_edit_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Type something"
-        android:inputType="text|textMultiLine"
-        android:lines="5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_detail_text" />
-
-    <Button
-        android:id="@+id/create_task_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/primary_button_background_color"
-        android:text="@string/button_label_create_task"
-        android:textColor="@color/light_3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_detail_edit_text" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>

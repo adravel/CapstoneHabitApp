@@ -15,6 +15,16 @@ class TaskCreationViewModel: ViewModel() {
     private val testParentId = "2p8at5eicReHAP1P4zDu"
     private val parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
 
+    // Get difficulty as integer
+    fun getDifficultyInt(difficulty: String): Int {
+        return when (difficulty) {
+            "Mudah" -> 0
+            "Sedang" -> 1
+            "Sulit" -> 2
+            else -> 0
+        }
+    }
+
     // Add new task to Firestore and return its ID
     fun addTaskToFirebase(
         title: String,

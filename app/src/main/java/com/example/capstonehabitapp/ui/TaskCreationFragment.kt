@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -20,10 +21,21 @@ class TaskCreationFragment : Fragment() {
 
     private lateinit var viewModel: TaskCreationViewModel
 
+    override fun onResume() {
+        super.onResume()
+
+        // Set array adapter for difficulty drop-down menu
+        val difficulties = resources.getStringArray(R.array.difficulties)
+        val arrayAdapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, difficulties)
+        binding.difficultyAutoCompleteTextView.setAdapter(arrayAdapter)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // Inflate the layout for this fragment
+        _binding = FragmentTaskCreationBinding.inflate(inflater, container, false)
 
         // Set toolbar title
         activity?.title = getString(R.string.create_task)
@@ -31,7 +43,6 @@ class TaskCreationFragment : Fragment() {
         // Initialize the ViewModel
         viewModel = ViewModelProvider(this)[TaskCreationViewModel::class.java]
 
-        _binding = FragmentTaskCreationBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -43,13 +54,13 @@ class TaskCreationFragment : Fragment() {
             createTaskButton.isEnabled = false
 
             // Set TextChangedListener for task title, area, and difficulty EditTexts
-            val editTexts = listOf(taskTitleEditText, taskAreaEditText, taskDifficultyEditText)
+            val editTexts = listOf(titleEditText, areaEditText, difficultyAutoCompleteTextView)
             for (editText in editTexts) {
                 editText.addTextChangedListener(object : TextWatcher {
                     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                        val et1 = taskTitleEditText.text.toString().trim()
-                        val et2 = taskAreaEditText.text.toString().trim()
-                        val et3 = taskDifficultyEditText.text.toString().trim()
+                        val et1 = titleEditText.text.toString().trim()
+                        val et2 = areaEditText.text.toString().trim()
+                        val et3 = difficultyAutoCompleteTextView.text.toString().trim()
 
                         // Enable button if the EditTexts is not empty
                         createTaskButton.isEnabled = et1.isNotEmpty()
@@ -63,12 +74,12 @@ class TaskCreationFragment : Fragment() {
             }
 
             createTaskButton.setOnClickListener {
-                val title = taskTitleEditText.text.toString()
-                val area = taskAreaEditText.text.toString()
-                val difficulty = taskDifficultyEditText.text.toString().toInt()
-                val startTimeLimit = taskStartTimeLimitEditText.text.toString()
-                val finishTimeLimit = taskFinishTimeLimitEditText.text.toString()
-                val detail = taskDetailEditText.text.toString()
+                val title = titleEditText.text.toString()
+                val area = areaEditText.text.toString()
+                val difficulty = viewModel.getDifficultyInt(difficultyAutoCompleteTextView.text.toString())
+                val startTimeLimit = startTimeLimitEditText.text.toString()
+                val finishTimeLimit = finishTimeLimitEditText.text.toString()
+                val detail = detailEditText.text.toString()
 
                 // add new task data to Firestore and get the ID
                 val id = viewModel.addTaskToFirebase(title, area, difficulty, startTimeLimit, finishTimeLimit, detail)
