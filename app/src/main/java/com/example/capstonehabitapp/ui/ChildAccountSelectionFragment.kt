@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.adapter.ChildAccountAdapter
@@ -19,7 +19,7 @@ class ChildAccountSelectionFragment: Fragment() {
 
     private lateinit var childAccountAdapter: ChildAccountAdapter
 
-    private lateinit var viewModel: ChildAccountSelectionViewModel
+    private val viewModel: ChildAccountSelectionViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,9 +28,6 @@ class ChildAccountSelectionFragment: Fragment() {
 
         // Set toolbar title
         activity?.title = getString(R.string.choose_child_account)
-
-        // Initialize the ViewModel
-        viewModel = ViewModelProvider(this)[ChildAccountSelectionViewModel::class.java]
 
         _binding = FragmentChildAccountSelectionBinding.inflate(inflater, container, false)
         return binding.root

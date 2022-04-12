@@ -2,12 +2,11 @@ package com.example.capstonehabitapp.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstonehabitapp.R
@@ -22,7 +21,7 @@ class TaskListFragment : Fragment() {
 
     private lateinit var taskAdapter: TaskAdapter
 
-    private lateinit var viewModel: TaskListViewModel
+    private val viewModel: TaskListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,9 +30,6 @@ class TaskListFragment : Fragment() {
 
         // Set toolbar title
         activity?.title = getString(R.string.task_list)
-
-        // Initialize the ViewModel
-        viewModel = ViewModelProvider(this)[TaskListViewModel::class.java]
 
         _binding = FragmentTaskListBinding.inflate(inflater, container, false)
         return binding.root

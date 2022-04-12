@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstonehabitapp.adapter.EssentialTaskAdapter
@@ -21,14 +21,12 @@ class ChildHomeFragment: Fragment() {
 
     private lateinit var essentialTaskAdapter: EssentialTaskAdapter
 
-    private lateinit var viewModel: ChildHomeViewModel
+    private val viewModel: ChildHomeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        viewModel = ViewModelProvider(this)[ChildHomeViewModel::class.java]
 
         _binding = FragmentChildHomeBinding.inflate(inflater, container, false)
         return binding.root

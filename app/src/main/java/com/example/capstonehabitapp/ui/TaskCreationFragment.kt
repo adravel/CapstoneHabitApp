@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentTaskCreationBinding
@@ -19,7 +19,7 @@ class TaskCreationFragment : Fragment() {
     private var _binding: FragmentTaskCreationBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: TaskCreationViewModel
+    private val viewModel: TaskCreationViewModel by viewModels()
 
     override fun onResume() {
         super.onResume()
@@ -39,9 +39,6 @@ class TaskCreationFragment : Fragment() {
 
         // Set toolbar title
         activity?.title = getString(R.string.create_task)
-
-        // Initialize the ViewModel
-        viewModel = ViewModelProvider(this)[TaskCreationViewModel::class.java]
 
         return binding.root
     }
