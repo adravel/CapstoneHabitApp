@@ -10,7 +10,7 @@ import com.example.capstonehabitapp.ui.ChildHomeFragmentDirections
 import com.example.capstonehabitapp.ui.ParentHomeFragmentDirections
 import com.example.capstonehabitapp.util.getDateString
 
-class EssentialTaskAdapter(private var tasks: MutableList<Task>, private var isForParent: Boolean)
+class EssentialTaskAdapter(private val tasks: MutableList<Task>, private var isForParent: Boolean)
     : RecyclerView.Adapter<EssentialTaskAdapter.TaskViewHolder>() {
 
     inner class TaskViewHolder(val itemBinding: ItemEssentialTaskBinding): RecyclerView.ViewHolder(itemBinding.root)
@@ -51,7 +51,7 @@ class EssentialTaskAdapter(private var tasks: MutableList<Task>, private var isF
         return tasks.size
     }
 
-    fun updateEssentialTasksList(newList: List<Task>) {
+    fun updateList(newList: List<Task>) {
         tasks.clear()
         tasks.addAll(newList)
         notifyDataSetChanged()

@@ -54,7 +54,7 @@ class TaskListFragment : Fragment() {
 
         // Observe tasks LiveData in ViewModel
         viewModel.tasks.observe(viewLifecycleOwner) { task ->
-            taskAdapter.updateTaskList(task)
+            taskAdapter.updateList(task)
         }
 
         if (isParent) {

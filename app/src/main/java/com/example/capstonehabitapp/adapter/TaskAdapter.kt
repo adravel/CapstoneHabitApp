@@ -10,7 +10,7 @@ import com.example.capstonehabitapp.model.Task
 import com.example.capstonehabitapp.databinding.ItemTaskBinding
 import com.example.capstonehabitapp.ui.TaskListFragmentDirections
 
-class TaskAdapter(private var tasks: MutableList<Task>, private var isForParent: Boolean)
+class TaskAdapter(private val tasks: MutableList<Task>, private val isForParent: Boolean)
     : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     inner class TaskViewHolder(val itemBinding: ItemTaskBinding): RecyclerView.ViewHolder(itemBinding.root)
@@ -75,7 +75,7 @@ class TaskAdapter(private var tasks: MutableList<Task>, private var isForParent:
         return tasks.size
     }
 
-    fun updateTaskList(newList: List<Task>) {
+    fun updateList(newList: List<Task>) {
         tasks.clear()
         tasks.addAll(newList)
         notifyDataSetChanged()

@@ -1,7 +1,6 @@
 package com.example.capstonehabitapp.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -10,7 +9,7 @@ import com.example.capstonehabitapp.model.Child
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.ItemChildAccountBinding
 
-class ChildAccountAdapter(private var children: MutableList<Child>)
+class ChildAccountAdapter(private val children: MutableList<Child>)
     : RecyclerView.Adapter<ChildAccountAdapter.ChildAccountViewHolder>() {
 
     inner class ChildAccountViewHolder(val itemBinding: ItemChildAccountBinding): RecyclerView.ViewHolder(itemBinding.root)
@@ -47,7 +46,7 @@ class ChildAccountAdapter(private var children: MutableList<Child>)
         return children.size
     }
 
-    fun updateChildAccountList(newList: List<Child>) {
+    fun updateList(newList: List<Child>) {
         children.clear()
         children.addAll(newList)
         notifyDataSetChanged()

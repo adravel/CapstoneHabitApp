@@ -54,7 +54,7 @@ class ParentHomeFragment: Fragment() {
 
         // Observe essential tasks LiveData in ViewModel
         viewModel.essentialTasks.observe(viewLifecycleOwner) { tasks ->
-            essentialTaskAdapter.updateEssentialTasksList(tasks)
+            essentialTaskAdapter.updateList(tasks)
         }
 
         binding.taskMenuCard.setOnClickListener {

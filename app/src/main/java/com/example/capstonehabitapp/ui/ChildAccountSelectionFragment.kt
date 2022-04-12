@@ -49,7 +49,7 @@ class ChildAccountSelectionFragment: Fragment() {
         // Observe child accounts LiveData in ViewModel
         viewModel.children.observe(viewLifecycleOwner) { children ->
             if (children.isNotEmpty()) {
-                childAccountAdapter.updateChildAccountList(children)
+                childAccountAdapter.updateList(children)
             }
         }
     }
