@@ -20,11 +20,12 @@ class RoleSelectionFragment: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // Inflate layout for this fragment
+        _binding = FragmentRoleSelectionBinding.inflate(inflater, container, false)
 
         // Hide action bar
         (activity as AppCompatActivity).supportActionBar?.hide()
 
-        _binding = FragmentRoleSelectionBinding.inflate(inflater, container, false)
         return binding.root
     }
 

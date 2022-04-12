@@ -24,6 +24,7 @@ class GradingMethodSelectionDialogFragment: DialogFragment() {
 
         // Set rounded corner background for this dialog
         dialog!!.window?.setBackgroundDrawableResource(R.drawable.rounded_corner)
+
         return binding.root
     }
 

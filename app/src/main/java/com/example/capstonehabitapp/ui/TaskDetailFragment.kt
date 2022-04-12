@@ -29,6 +29,8 @@ class TaskDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // Inflate layout for this fragment
+        _binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
 
         // Set toolbar title
         activity?.title = getString(R.string.task_detail)
@@ -37,7 +39,6 @@ class TaskDetailFragment : Fragment() {
         val args: TaskDetailFragmentArgs by navArgs()
         taskId = args.taskId
 
-        _binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 

@@ -25,11 +25,12 @@ class ChildAccountSelectionFragment: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // Inflate layout for this fragment
+        _binding = FragmentChildAccountSelectionBinding.inflate(inflater, container, false)
 
         // Set toolbar title
         activity?.title = getString(R.string.choose_child_account)
 
-        _binding = FragmentChildAccountSelectionBinding.inflate(inflater, container, false)
         return binding.root
     }
 

@@ -34,7 +34,7 @@ class TaskCreationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
+        // Inflate layout for this fragment
         _binding = FragmentTaskCreationBinding.inflate(inflater, container, false)
 
         // Set toolbar title

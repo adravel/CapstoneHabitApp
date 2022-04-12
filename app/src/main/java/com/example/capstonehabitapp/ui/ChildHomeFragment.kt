@@ -27,8 +27,9 @@ class ChildHomeFragment: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
+        // Inflate layout for this fragment
         _binding = FragmentChildHomeBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
