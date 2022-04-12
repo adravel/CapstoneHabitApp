@@ -15,10 +15,9 @@ import java.lang.Exception
 class TaskListViewModel: ViewModel() {
     private val testParentId = "2p8at5eicReHAP1P4zDu"
     private val parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
-    private val tasks: MutableLiveData<List<Task>> = MutableLiveData()
 
-    // Function to return observable immutable LiveData
-    fun getTasks(): LiveData<List<Task>> = tasks
+    private val _tasks: MutableLiveData<List<Task>> = MutableLiveData()
+    val tasks: LiveData<List<Task>> = _tasks
 
     // Fetch tasks data from Firestore
     fun getTasksFromFirebase() {
@@ -36,7 +35,7 @@ class TaskListViewModel: ViewModel() {
                 for(document in querySnapshot.documents) {
                     document.toObject<Task>()?.let { responseList.add(it) }
                 }
-                tasks.postValue(responseList)
+                _tasks.postValue(responseList)
 
             } catch (e: Exception) {
                 e.message?.let { Log.e("TaskList", it) }

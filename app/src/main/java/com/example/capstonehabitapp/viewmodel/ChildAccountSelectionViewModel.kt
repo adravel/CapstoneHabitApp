@@ -17,10 +17,9 @@ import java.lang.Exception
 class ChildAccountSelectionViewModel: ViewModel() {
     private val testParentId = "2p8at5eicReHAP1P4zDu"
     private val parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
-    private val children: MutableLiveData<List<Child>> = MutableLiveData()
 
-    // Function to return observable immutable LiveData
-    fun getChildren():LiveData<List<Child>> = children
+    private val _children: MutableLiveData<List<Child>> = MutableLiveData()
+    val children: LiveData<List<Child>> = _children
 
     // Fetch children data from Firestore
     fun getChildrenFromFirebase() {
@@ -39,7 +38,7 @@ class ChildAccountSelectionViewModel: ViewModel() {
                     document.toObject<Child>()?.let { responseList.add(it) }
                 }
 
-                children.postValue(responseList)
+                _children.postValue(responseList)
 
             } catch (e: Exception) {
                 e.message?.let { Log.e("ChildAccountSelection", it) }

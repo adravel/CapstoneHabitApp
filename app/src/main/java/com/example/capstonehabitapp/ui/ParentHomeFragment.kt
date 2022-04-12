@@ -48,12 +48,12 @@ class ParentHomeFragment: Fragment() {
         viewModel.getEssentialTasksFromFirebase()
 
         // Observe parent name LiveData in ViewModel
-        viewModel.getParentName().observe(viewLifecycleOwner) { parentName ->
+        viewModel.parentName.observe(viewLifecycleOwner) { parentName ->
             binding.parentNameText.text = "$parentName !"
         }
 
         // Observe essential tasks LiveData in ViewModel
-        viewModel.getEssentialTasks().observe(viewLifecycleOwner) { tasks ->
+        viewModel.essentialTasks.observe(viewLifecycleOwner) { tasks ->
             essentialTaskAdapter.updateEssentialTasksList(tasks)
         }
 

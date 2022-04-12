@@ -53,12 +53,12 @@ class ChildHomeFragment: Fragment() {
         }
 
         // Observe essential tasks LiveData in ViewModel
-        viewModel.getEssentialTasks().observe(viewLifecycleOwner) { tasks ->
+        viewModel.essentialTasks.observe(viewLifecycleOwner) { tasks ->
             essentialTaskAdapter.updateEssentialTasksList(tasks)
         }
 
         // Observe child LiveData in ViewModel
-        viewModel.getChild().observe(viewLifecycleOwner) { child ->
+        viewModel.child.observe(viewLifecycleOwner) { child ->
             val levelName = when (child.level.toInt()) {
                 1 -> getString(R.string.level_1_name)
                 2 -> getString(R.string.level_2_name)

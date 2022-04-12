@@ -47,7 +47,7 @@ class ChildAccountSelectionFragment: Fragment() {
         viewModel.getChildrenFromFirebase()
 
         // Observe child accounts LiveData in ViewModel
-        viewModel.getChildren().observe(viewLifecycleOwner) { children ->
+        viewModel.children.observe(viewLifecycleOwner) { children ->
             if (children.isNotEmpty()) {
                 childAccountAdapter.updateChildAccountList(children)
             }

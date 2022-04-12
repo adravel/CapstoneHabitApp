@@ -18,12 +18,11 @@ import java.lang.Exception
 class ChildHomeViewModel: ViewModel() {
     private val testParentId = "2p8at5eicReHAP1P4zDu"
     private val parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
-    private val child: MutableLiveData<Child> = MutableLiveData()
-    private val essentialTasks: MutableLiveData<List<Task>> = MutableLiveData()
 
-    // Functions to return observable immutable LiveData
-    fun getChild(): LiveData<Child> = child
-    fun getEssentialTasks(): LiveData<List<Task>> = essentialTasks
+    private val _child: MutableLiveData<Child> = MutableLiveData()
+    val child: LiveData<Child> = _child
+    private val _essentialTasks: MutableLiveData<List<Task>> = MutableLiveData()
+    val essentialTasks: LiveData<List<Task>> = _essentialTasks
 
     // Calculate total points needed to level up
     fun getPointsToLevelUp(level: Int): Int {
@@ -44,7 +43,7 @@ class ChildHomeViewModel: ViewModel() {
                     .await()
                 response = querySnapshot.toObject<Child>()!!
 
-                child.postValue(response)
+                _child.postValue(response)
 
             } catch (e: Exception) {
                 e.message?.let { Log.e("ChildHome", it) }
@@ -71,7 +70,7 @@ class ChildHomeViewModel: ViewModel() {
                     document.toObject<Task>()?.let { responseList.add(it) }
                 }
 
-                essentialTasks.postValue(responseList)
+                _essentialTasks.postValue(responseList)
 
             } catch (e: Exception) {
                 e.message?.let { Log.e("ChildHome", it) }

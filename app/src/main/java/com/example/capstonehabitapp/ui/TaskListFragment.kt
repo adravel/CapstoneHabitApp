@@ -53,7 +53,7 @@ class TaskListFragment : Fragment() {
         viewModel.getTasksFromFirebase()
 
         // Observe tasks LiveData in ViewModel
-        viewModel.getTasks().observe(viewLifecycleOwner) { task ->
+        viewModel.tasks.observe(viewLifecycleOwner) { task ->
             taskAdapter.updateTaskList(task)
         }
 

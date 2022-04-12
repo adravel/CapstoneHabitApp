@@ -54,7 +54,7 @@ class TaskDetailFragment : Fragment() {
         viewModel.getTaskFromFirebase(taskId)
 
         // Observe task LiveData in SharedViewModel
-        viewModel.getTask().observe(viewLifecycleOwner) { task ->
+        viewModel.task.observe(viewLifecycleOwner) { task ->
 
             // Handle the case of observing task LiveData multiple times
             if (task.id != taskId) {

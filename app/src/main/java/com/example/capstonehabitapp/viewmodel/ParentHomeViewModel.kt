@@ -17,12 +17,11 @@ import java.lang.Exception
 class ParentHomeViewModel: ViewModel() {
     private val testParentId = "2p8at5eicReHAP1P4zDu"
     private val parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
-    private val parentName: MutableLiveData<String> = MutableLiveData()
-    private val essentialTasks: MutableLiveData<List<Task>> = MutableLiveData()
 
-    // Functions to return observable immutable LiveData
-    fun getParentName(): LiveData<String> = parentName
-    fun getEssentialTasks(): LiveData<List<Task>> = essentialTasks
+    private val _parentName: MutableLiveData<String> = MutableLiveData()
+    val parentName: LiveData<String> = _parentName
+    private val _essentialTasks: MutableLiveData<List<Task>> = MutableLiveData()
+    val essentialTasks: LiveData<List<Task>> = _essentialTasks
 
     // Fetch parent data from Firestore
     fun getParentFromFirebase() = CoroutineScope(Dispatchers.IO).launch {
@@ -33,7 +32,7 @@ class ParentHomeViewModel: ViewModel() {
             val isMale = querySnapshot.getBoolean("isMale")
 
             val nameWithTitle = if (isMale!!) "Pak $name" else "Ibu $name"
-            parentName.postValue(nameWithTitle)
+            _parentName.postValue(nameWithTitle)
 
         } catch (e: Exception) {
             e.message?.let { Log.e("ParentHome", it) }
@@ -57,7 +56,7 @@ class ParentHomeViewModel: ViewModel() {
                 for(document in querySnapshot.documents) {
                     document.toObject<Task>()?.let { responseList.add(it) }
                 }
-                essentialTasks.postValue(responseList)
+                _essentialTasks.postValue(responseList)
 
             } catch (e: Exception) {
                 e.message?.let { Log.e("ParentHome", it) }

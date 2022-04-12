@@ -62,7 +62,7 @@ class GradingFormFragment: Fragment() {
             })
 
             // Observe task data in SharedViewModel
-            viewModel.getTask().observe(viewLifecycleOwner) { task ->
+            viewModel.task.observe(viewLifecycleOwner) { task ->
                 // Display task data in finished state
                 titleDataText.text = task.title
                 areaDataText.text = task.area
