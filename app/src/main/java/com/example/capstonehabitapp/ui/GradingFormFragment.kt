@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
@@ -80,7 +81,15 @@ class GradingFormFragment: Fragment() {
                     task.finishTimeLimit
                 )
                 durationDataText.text = viewModel.getTaskDurationString(task)
-                statusDataText.text = getString(R.string.task_status_2_with_child_name, task.childName)
+                if (task.status.toInt() == 2) {
+                    // When user chose to grade directly
+                    statusDataText.text = getString(R.string.task_status_2_with_child_name, task.childName)
+                    statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_success))
+                } else {
+                    // When user chose to grade remotely
+                    statusDataText.text = getString(R.string.task_status_3_for_parent_role_with_child_name, task.childName)
+                    statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_error))
+                }
                 detailDataText.text = task.detail
 
                 // Set grade task button OnClickListener
@@ -91,6 +100,7 @@ class GradingFormFragment: Fragment() {
 
                     // Update task data to Firestore
                     viewModel.gradeTask(task.id, gradePoints, notes)
+
                     view.findNavController().popBackStack()
                 }
             }

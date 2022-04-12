@@ -1,19 +1,22 @@
 package com.example.capstonehabitapp.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentGradingMethodSelectionDialogBinding
+import com.example.capstonehabitapp.viewmodel.TaskDetailViewModel
 
 class GradingMethodSelectionDialogFragment: DialogFragment() {
 
     private var _binding: FragmentGradingMethodSelectionDialogBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: TaskDetailViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,8 +40,12 @@ class GradingMethodSelectionDialogFragment: DialogFragment() {
         }
 
         binding.remoteGradingButton.setOnClickListener {
-            // TODO: Create function to ask parent for grading, Use TaskDetailViewModel
-            Log.i("GradingMethodSelection", "Parent")
+            // Ask parent for grading
+            viewModel.task.observe(viewLifecycleOwner) { task ->
+                viewModel.askForGrading(task.id)
+            }
+
+            findNavController().popBackStack()
         }
     }
 

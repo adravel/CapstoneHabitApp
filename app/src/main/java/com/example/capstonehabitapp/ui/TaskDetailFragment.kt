@@ -2,7 +2,6 @@ package com.example.capstonehabitapp.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,15 +71,13 @@ class TaskDetailFragment : Fragment() {
                 }
             } else {
                 // Display task data correctly
-                Log.i("TaskDetail", task.toString())
                 displayTaskData(task, isParent!!)
             }
 
             // Set button OnClickListener depending on the task status and user's role
             binding.changeTaskStatusButton.setOnClickListener {
                 if (isParent == true) {
-                    // TODO: Implement on button click function for navigating to Grading form
-                    Log.i("TaskDetail", "This button on click function is not implemented yet")
+                    view.findNavController().navigate(R.id.gradingFormFragment)
                 } else {
                     when (task.status.toInt()) {
                         0 -> viewModel.startTask(taskId, childId!!, childName!!)
