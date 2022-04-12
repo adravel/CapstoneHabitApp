@@ -44,11 +44,19 @@
     <string name="task_status_3_for_parent_role_with_child_name">[%1$s] Meminta Penilaian</string>
     <string name="task_status_3_for_child_role">Menunggu Penilaian</string>
     <string name="task_status_4">Sudah Dinilai</string>
+    <string name="task_grade_0">Sangat Baik</string>
+    <string name="task_grade_1">Baik</string>
+    <string name="task_grade_2">Kurang</string>
     <!-- Menu -->
     <string-array name="difficulties">
-        <item>Mudah</item>
-        <item>Sedang</item>
-        <item>Sulit</item>
+        <item>@string/task_difficulty_0</item>
+        <item>@string/task_difficulty_1</item>
+        <item>@string/task_difficulty_2</item>
+    </string-array>
+    <string-array name="grades">
+        <item>@string/task_grade_0</item>
+        <item>@string/task_grade_1</item>
+        <item>@string/task_grade_2</item>
     </string-array>
     <!-- UI Components -->
     <string name="task">Pekerjaan</string>
@@ -82,12 +90,15 @@
     <string name="day">Hari</string>
     <string name="start">Mulai</string>
     <string name="finish">Selesai</string>
+    <string name="ask_parent_for_grading">Meminta penilaian ke orang tua</string>
     <string name="button_label_add_child">Tambah Anak</string>
     <string name="button_label_start_task">Kerjakan</string>
     <string name="button_label_finish_task">Selesai</string>
     <string name="button_label_ask_for_grading">Minta Nilai</string>
     <string name="button_label_grade_task">Beri Nilai</string>
     <string name="button_label_create_task">Buat Pekerjaan</string>
+    <string name="button_label_grade_by_child">Nilai Langsung</string>
+    <string name="button_label_grade_by_parent">Kirim Permintaan Penilaian</string>
     <string name="hint_text">Type something</string>
     <string name="hint_time">00:00</string>
 </resources>

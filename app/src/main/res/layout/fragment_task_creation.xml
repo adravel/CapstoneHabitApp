@@ -82,6 +82,7 @@
             android:id="@+id/difficulty_text_input_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:hintEnabled="false"
             app:boxBackgroundColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

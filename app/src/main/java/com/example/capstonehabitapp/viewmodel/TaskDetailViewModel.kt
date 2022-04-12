@@ -33,6 +33,29 @@ class TaskDetailViewModel: ViewModel() {
         return "$duration menit"
     }
 
+    // Calculate grade points depending on the difficulty and grade
+    fun getGradePointsInt(difficulty: Int, grade: String): Int {
+        var gradePoints = 0
+        when (difficulty) {
+            0 -> gradePoints = when (grade) {
+                "Kurang" -> 3
+                "Baik" -> 4
+                else -> 6
+            }
+            1 -> gradePoints = when (grade) {
+                "Kurang" -> 5
+                "Baik" -> 6
+                else -> 8
+            }
+            2 -> gradePoints = when (grade) {
+                "Kurang" -> 7
+                "Baik" -> 8
+                else -> 10
+            }
+        }
+        return gradePoints
+    }
+
     // Fetch task data from Firebase
     fun getTaskFromFirebase(taskId: String) {
         var response: Task
@@ -57,22 +80,8 @@ class TaskDetailViewModel: ViewModel() {
         }
     }
 
-    // Button click function
-    fun changeTaskStatus(taskId: String, taskStatus: Int, isForParent: Boolean, childId: String, childName: String) {
-        if (isForParent) {
-            // TODO: Implement on button click function to grade task
-            Log.i(TAG, "Button on click function is not implemented yet")
-        } else {
-            when (taskStatus) {
-                0 -> startTask(taskId, childId, childName)
-                1 -> finishTask(taskId)
-                2 -> askForGrading(taskId)
-            }
-        }
-    }
-
     // Update task state to 1
-    private fun startTask(taskId: String, childId: String, childName: String) {
+    fun startTask(taskId: String, childId: String, childName: String) {
         val updates = hashMapOf(
             "status" to 1,
             "childId" to childId,
@@ -99,7 +108,7 @@ class TaskDetailViewModel: ViewModel() {
     }
 
     // Update task status to 2
-    private fun finishTask(taskId: String) {
+    fun finishTask(taskId: String) {
         val updates = hashMapOf(
             "status" to 2,
             "timeFinishWorking" to FieldValue.serverTimestamp()
@@ -124,7 +133,7 @@ class TaskDetailViewModel: ViewModel() {
     }
 
     // Update task status to 3
-    private fun askForGrading(taskId: String) {
+    fun askForGrading(taskId: String) {
         val updates = hashMapOf(
             "status" to 3,
             "timeAskForGrading" to FieldValue.serverTimestamp()
@@ -141,6 +150,29 @@ class TaskDetailViewModel: ViewModel() {
 
                 // Fetch task from Firestore again to update the UI
                 getTaskFromFirebase(taskId)
+
+            } catch (e: Exception) {
+                e.message?.let { Log.e(TAG, it) }
+            }
+        }
+    }
+
+    // Update task status to 4
+    fun gradeTask(taskId: String, gradePoints: Int, notes: String) {
+        val updates = hashMapOf<String, Any>(
+            "status" to 4,
+            "gradePoints" to gradePoints,
+            "notes" to notes
+        )
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                // Update the necessary field in Firestore document
+                parentDocRef
+                    .collection("tasks")
+                    .document(taskId)
+                    .update(updates)
+                    .await()
 
             } catch (e: Exception) {
                 e.message?.let { Log.e(TAG, it) }

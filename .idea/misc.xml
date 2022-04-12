@@ -6,11 +6,15 @@
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/fab_add_icon.xml" value="0.168" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/ic_fab_add.xml" value="0.1475" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/image_placeholder.xml" value="0.168" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/rounded_corner.xml" value="0.1445" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/card_task.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_ask_for_grading_dialog.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_child_account_selection.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_child_home.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_child_selection.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_grading_form.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_grading_method_selection_dialog.xml" value="0.20863616930312098" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_parent_home.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_role_selection.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_task_creation.xml" value="0.264" />
