@@ -34,18 +34,19 @@ class GradingMethodSelectionDialogFragment: DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.directGradingButton.setOnClickListener {
-            // Navigate to grading form page
-            findNavController().navigate(R.id.gradingFormFragment)
-        }
-
-        binding.remoteGradingButton.setOnClickListener {
-            // Ask parent for grading
-            viewModel.task.observe(viewLifecycleOwner) { task ->
-                viewModel.askForGrading(task.id)
+        viewModel.task.observe(viewLifecycleOwner) { task ->
+            binding.directGradingButton.setOnClickListener {
+                // Navigate to grading form page
+                findNavController().navigate(R.id.gradingFormFragment)
             }
 
-            findNavController().popBackStack()
+            binding.remoteGradingButton.setOnClickListener {
+                // Ask parent for grading
+                viewModel.askForGrading(task.id)
+
+                // Dismiss this dialog
+                findNavController().popBackStack()
+            }
         }
     }
 

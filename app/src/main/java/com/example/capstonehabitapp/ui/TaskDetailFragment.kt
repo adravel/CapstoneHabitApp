@@ -56,6 +56,7 @@ class TaskDetailFragment : Fragment() {
         // Observe task LiveData in SharedViewModel
         viewModel.task.observe(viewLifecycleOwner) { task ->
 
+            // TODO: Fix bug in displaying task data when navigating from grading form page (task ID does not change so the solution below does not work)
             // Handle the case of observing task LiveData multiple times
             if (task.id != taskId) {
                 // Reset task data and make all Views that might be hidden visible
@@ -77,6 +78,7 @@ class TaskDetailFragment : Fragment() {
             // Set button OnClickListener depending on the task status and user's role
             binding.changeTaskStatusButton.setOnClickListener {
                 if (isParent == true) {
+                    //Navigate to grading form page
                     view.findNavController().navigate(R.id.gradingFormFragment)
                 } else {
                     when (task.status.toInt()) {

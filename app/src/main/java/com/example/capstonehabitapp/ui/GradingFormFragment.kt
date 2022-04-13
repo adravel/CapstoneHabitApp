@@ -10,9 +10,11 @@ import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentGradingFormBinding
+import com.example.capstonehabitapp.viewmodel.GradingFormViewModel
 import com.example.capstonehabitapp.viewmodel.TaskDetailViewModel
 
 class GradingFormFragment: Fragment() {
@@ -20,7 +22,8 @@ class GradingFormFragment: Fragment() {
     private var _binding: FragmentGradingFormBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: TaskDetailViewModel by activityViewModels()
+    private val taskDetailViewModel: TaskDetailViewModel by activityViewModels()
+    private val gradingFormViewModel: GradingFormViewModel by viewModels()
 
     override fun onResume() {
         super.onResume()
@@ -45,7 +48,6 @@ class GradingFormFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-
             // Disable grade task button by default
             gradeTaskButton.isEnabled = false
 
@@ -62,8 +64,11 @@ class GradingFormFragment: Fragment() {
                 override fun afterTextChanged(p0: Editable?) {}
             })
 
-            // Observe task data in SharedViewModel
-            viewModel.task.observe(viewLifecycleOwner) { task ->
+            // Observe task LiveData in SharedViewModel
+            taskDetailViewModel.task.observe(viewLifecycleOwner) { task ->
+                // Fetch child data from Firestore
+                gradingFormViewModel.getChildFromFirebase(task.childId)
+
                 // Display task data in finished state
                 titleDataText.text = task.title
                 areaDataText.text = task.area
@@ -80,7 +85,7 @@ class GradingFormFragment: Fragment() {
                     task.startTimeLimit,
                     task.finishTimeLimit
                 )
-                durationDataText.text = viewModel.getTaskDurationString(task)
+                durationDataText.text = taskDetailViewModel.getTaskDurationString(task)
                 if (task.status.toInt() == 2) {
                     // When user chose to grade directly
                     statusDataText.text = getString(R.string.task_status_2_with_child_name, task.childName)
@@ -92,16 +97,22 @@ class GradingFormFragment: Fragment() {
                 }
                 detailDataText.text = task.detail
 
-                // Set grade task button OnClickListener
-                gradeTaskButton.setOnClickListener {
-                    val grade = gradeAutoCompleteTextView.text.toString()
-                    val gradePoints = viewModel.getGradePointsInt(task.difficulty.toInt(), grade)
-                    val notes = notesEditText.text.toString()
+                // Observe child LiveData in ViewModel
+                gradingFormViewModel.child.observe(viewLifecycleOwner) { child ->
+                    // Set grade task button OnClickListener
+                    gradeTaskButton.setOnClickListener {
+                        val grade = gradeAutoCompleteTextView.text.toString()
+                        val gradePoints = gradingFormViewModel.getGradePointsInt(task.difficulty.toInt(), grade)
+                        val notes = notesEditText.text.toString()
 
-                    // Update task data to Firestore
-                    viewModel.gradeTask(task.id, gradePoints, notes)
+                        // Update task data to Firestore
+                        gradingFormViewModel.gradeTask(task.id, gradePoints, notes)
 
-                    view.findNavController().popBackStack()
+                        // Update child data to Firestore
+                        gradingFormViewModel.updateChildPointsAndLevel(child, gradePoints)
+
+                        view.findNavController().popBackStack()
+                    }
                 }
             }
         }

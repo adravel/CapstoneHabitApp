@@ -29,6 +29,12 @@ class ChildHomeViewModel: ViewModel() {
         return level * 50
     }
 
+    // Handle total points when the child has reached max level
+    fun getTotalPoints(totalPoints: Int, level: Int): Int {
+        val pointsToLevelUp = getPointsToLevelUp(level)
+        return if (totalPoints >= pointsToLevelUp && level == 10) pointsToLevelUp else totalPoints
+    }
+
     // Fetch child data from Firestore
     fun getChildFromFirebase(childId: String) {
         var response: Child

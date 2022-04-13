@@ -31,29 +31,6 @@ class TaskDetailViewModel: ViewModel() {
         return "$duration menit"
     }
 
-    // Calculate grade points depending on the difficulty and grade
-    fun getGradePointsInt(difficulty: Int, grade: String): Int {
-        var gradePoints = 0
-        when (difficulty) {
-            0 -> gradePoints = when (grade) {
-                "Kurang" -> 3
-                "Baik" -> 4
-                else -> 6
-            }
-            1 -> gradePoints = when (grade) {
-                "Kurang" -> 5
-                "Baik" -> 6
-                else -> 8
-            }
-            2 -> gradePoints = when (grade) {
-                "Kurang" -> 7
-                "Baik" -> 8
-                else -> 10
-            }
-        }
-        return gradePoints
-    }
-
     // Fetch task data from Firebase
     fun getTaskFromFirebase(taskId: String) {
         var response: Task
@@ -148,29 +125,6 @@ class TaskDetailViewModel: ViewModel() {
 
                 // Fetch task from Firestore again to update the UI
                 getTaskFromFirebase(taskId)
-
-            } catch (e: Exception) {
-                e.message?.let { Log.e(TAG, it) }
-            }
-        }
-    }
-
-    // Update task status to 4
-    fun gradeTask(taskId: String, gradePoints: Int, notes: String) {
-        val updates = hashMapOf<String, Any>(
-            "status" to 4,
-            "gradePoints" to gradePoints,
-            "notes" to notes
-        )
-
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                // Update the necessary field in Firestore document
-                parentDocRef
-                    .collection("tasks")
-                    .document(taskId)
-                    .update(updates)
-                    .await()
 
             } catch (e: Exception) {
                 e.message?.let { Log.e(TAG, it) }
