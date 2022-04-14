@@ -191,6 +191,7 @@ class TaskDetailFragment : Fragment() {
                         statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_error))
                         changeTaskStatusButton.visibility = View.VISIBLE
                         changeTaskStatusButton.text = getString(R.string.button_label_grade_task)
+                        changeTaskStatusButton.isEnabled = true
                     } else {
                         statusDataText.text = getString(R.string.task_status_3_for_child_role)
                         statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_info))
