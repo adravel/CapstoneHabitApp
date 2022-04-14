@@ -58,8 +58,14 @@ class ParentHomeFragment: Fragment() {
             essentialTaskAdapter.updateList(tasks)
         }
 
-        binding.taskMenuCard.setOnClickListener {
-            it.findNavController().navigate(R.id.taskListFragment)
+        binding.apply {
+            taskMenuCard.setOnClickListener {
+                it.findNavController().navigate(R.id.taskListFragment)
+            }
+
+            shopMenuCard.setOnClickListener {
+                it.findNavController().navigate(R.id.shopFragment)
+            }
         }
     }
 

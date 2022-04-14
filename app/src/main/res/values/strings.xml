@@ -91,6 +91,8 @@
     <string name="start">Mulai</string>
     <string name="finish">Selesai</string>
     <string name="ask_parent_for_grading">Meminta penilaian ke orang tua</string>
+    <string name="pick_tools">Pilih Alat</string>
+    <!-- Button Label -->
     <string name="button_label_add_child">Tambah Anak</string>
     <string name="button_label_start_task">Kerjakan</string>
     <string name="button_label_finish_task">Selesai</string>
@@ -100,6 +102,9 @@
     <string name="button_label_grade_by_child">Nilai Langsung</string>
     <string name="button_label_grade_by_parent">Kirim Permintaan Penilaian</string>
     <string name="button_label_open_task_photo">Lihat Foto Pekerjaan</string>
+    <string name="button_label_sell">Jual</string>
+    <string name="button_label_sold">Terjual</string>
+    <!-- Hint -->
     <string name="hint_text">Type something</string>
     <string name="hint_time">00:00</string>
 </resources>

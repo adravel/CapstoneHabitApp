@@ -55,6 +55,9 @@
         <action
             android:id="@+id/action_parentHomeFragment_to_taskDetailFragment"
             app:destination="@id/taskDetailFragment" />
+        <action
+            android:id="@+id/action_parentHomeFragment_to_shopFragment"
+            app:destination="@id/shopFragment" />
     </fragment>
     <fragment
         android:id="@+id/childAccountSelectionFragment"
@@ -99,4 +102,9 @@
         android:name="com.example.capstonehabitapp.ui.GradingFormFragment"
         android:label="fragment_grading_form"
         tools:layout="@layout/fragment_grading_form" />
+    <fragment
+        android:id="@+id/shopFragment"
+        android:name="com.example.capstonehabitapp.ui.ShopFragment"
+        android:label="ShopFragment"
+        tools:layout="@layout/fragment_shop" />
 </navigation>
