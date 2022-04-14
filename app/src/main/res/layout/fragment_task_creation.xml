@@ -270,7 +270,7 @@
             android:id="@+id/create_task_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/primary_button_background_color"
+            android:backgroundTint="@color/button_green_background_color"
             android:text="@string/button_label_create_task"
             android:textColor="@color/light_3"
             app:layout_constraintEnd_toEndOf="parent"

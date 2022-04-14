@@ -224,7 +224,7 @@
         android:layout_height="wrap_content"
         android:text="@string/button_label_open_task_photo"
         android:textColor="@color/light_3"
-        android:backgroundTint="@color/primary_button_background_color"
+        android:backgroundTint="@color/button_green_background_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notes_text_input_layout" />
@@ -235,7 +235,7 @@
         android:layout_height="wrap_content"
         android:text="@string/button_label_grade_task"
         android:textColor="@color/light_3"
-        android:backgroundTint="@color/primary_button_background_color"
+        android:backgroundTint="@color/button_green_background_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/open_photo_button" />

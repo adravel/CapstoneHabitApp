@@ -203,7 +203,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/light_3"
-        android:backgroundTint="@color/primary_button_background_color"
+        android:backgroundTint="@color/button_green_background_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/notes_data_text"
