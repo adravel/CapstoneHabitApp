@@ -15,7 +15,7 @@
     <string name="task_info_placeholder">17 April 2022 - Nama/Area Pengerjaan</string>
     <string name="child_greetings_placeholder">Halo, %1$s !</string>
     <string name="child_level_placeholder">Level : %1$s</string>
-    <string name="child_exp_placeholder">Exp : %1$d/%2$d</string>
+    <string name="child_exp_placeholder">Exp : %1$d/50</string>
     <!-- Misc -->
     <string name="role_pref_key">rolePref</string>
     <string name="role_pref_is_parent_key">isParent</string>

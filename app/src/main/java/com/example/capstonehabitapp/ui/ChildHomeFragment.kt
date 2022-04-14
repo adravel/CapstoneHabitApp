@@ -72,16 +72,15 @@ class ChildHomeFragment: Fragment() {
                 9 -> getString(R.string.level_9_name)
                 else -> getString(R.string.level_10_name)
             }
-            val pointsToLevelUp = viewModel.getPointsToLevelUp(child.level.toInt())
-            val totalPoints = viewModel.getTotalPoints(child.totalPoints.toInt(), child.level.toInt())
+
+            val progress = viewModel.getProgress(child.totalPoints.toInt(), child.level.toInt())
 
             // Bind the data to Views
             binding.apply {
                 greetingsText.text = getString(R.string.child_greetings_placeholder, child.name)
                 levelText.text = getString(R.string.child_level_placeholder, levelName)
-                expText.text = getString(R.string.child_exp_placeholder, totalPoints, pointsToLevelUp)
-                expProgressBar.max = pointsToLevelUp
-                expProgressBar.progress = totalPoints
+                expText.text = getString(R.string.child_exp_placeholder, progress)
+                expProgressBar.progress = progress
             }
         }
 

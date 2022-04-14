@@ -105,10 +105,6 @@ class GradingFormViewModel: ViewModel() {
             level++
         }
 
-//        Log.i("GradingForm", "Level = $level")
-//        Log.i("GradingForm", "Total Points = $totalPoints")
-//        Log.i("GradingForm", "Current Points = $currentPoints")
-
         val updates = hashMapOf<String, Any>(
             "level" to level,
             "totalPoints" to totalPoints,

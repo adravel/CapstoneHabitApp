@@ -24,15 +24,12 @@ class ChildHomeViewModel: ViewModel() {
     private val _essentialTasks: MutableLiveData<List<Task>> = MutableLiveData()
     val essentialTasks: LiveData<List<Task>> = _essentialTasks
 
-    // Calculate total points needed to level up
-    fun getPointsToLevelUp(level: Int): Int {
-        return level * 50
-    }
-
-    // Handle total points when the child has reached max level
-    fun getTotalPoints(totalPoints: Int, level: Int): Int {
-        val pointsToLevelUp = getPointsToLevelUp(level)
-        return if (totalPoints >= pointsToLevelUp && level == 10) pointsToLevelUp else totalPoints
+    // Determine the progress for leveling up in the scale of 50 points
+    fun getProgress(totalPoints: Int, level: Int): Int {
+        val scale = 50
+        val maxLevel = 10
+        val progress = totalPoints - ((level - 1) * scale)
+        return if (progress >= scale && level == maxLevel) scale else progress
     }
 
     // Fetch child data from Firestore
