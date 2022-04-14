@@ -56,13 +56,12 @@ class TaskDetailFragment : Fragment() {
         // Observe task LiveData in SharedViewModel
         viewModel.task.observe(viewLifecycleOwner) { task ->
 
-            // TODO: Fix bug in displaying task data when navigating from grading form page (task ID does not change so the solution below does not work)
             // Handle the case of observing task LiveData multiple times
             if (task.id != taskId) {
-                // Reset task data and make all Views that might be hidden visible
+                // Display an empty task data
                 displayTaskData(Task(), isParent!!)
                 binding.apply {
-                    View.VISIBLE.let {
+                    View.GONE.let {
                         gradePointsText.visibility = it
                         gradePointsDataText.visibility = it
                         notesText.visibility = it
@@ -71,7 +70,7 @@ class TaskDetailFragment : Fragment() {
                     }
                 }
             } else {
-                // Display task data correctly
+                // Display task data correctly depending on status and user's role
                 displayTaskData(task, isParent!!)
             }
 
@@ -135,6 +134,7 @@ class TaskDetailFragment : Fragment() {
                             notesText.visibility = it
                             notesDataText.visibility = it
                         }
+                        changeTaskStatusButton.visibility = View.VISIBLE
                         changeTaskStatusButton.text = getString(R.string.button_label_start_task)
                     }
                 }
@@ -155,6 +155,7 @@ class TaskDetailFragment : Fragment() {
                             notesText.visibility = it
                             notesDataText.visibility = it
                         }
+                        changeTaskStatusButton.visibility = View.VISIBLE
                         changeTaskStatusButton.text = getString(R.string.button_label_finish_task)
                     }
                 }
@@ -167,6 +168,7 @@ class TaskDetailFragment : Fragment() {
                     if (isForParent) {
                         gradePointsDataText.text = "-"
                         notesDataText.text = "-"
+                        changeTaskStatusButton.visibility = View.VISIBLE
                         changeTaskStatusButton.text = getString(R.string.button_label_grade_task)
                         changeTaskStatusButton.isEnabled = false
                     } else {
@@ -176,6 +178,7 @@ class TaskDetailFragment : Fragment() {
                             notesText.visibility = it
                             notesDataText.visibility = it
                         }
+                        changeTaskStatusButton.visibility = View.VISIBLE
                         changeTaskStatusButton.text = getString(R.string.button_label_ask_for_grading)
                     }
                 }
@@ -186,11 +189,18 @@ class TaskDetailFragment : Fragment() {
                     if (isForParent) {
                         statusDataText.text = getString(R.string.task_status_3_for_parent_role_with_child_name, task.childName)
                         statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_error))
+                        changeTaskStatusButton.visibility = View.VISIBLE
                         changeTaskStatusButton.text = getString(R.string.button_label_grade_task)
                     } else {
                         statusDataText.text = getString(R.string.task_status_3_for_child_role)
                         statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_info))
                         changeTaskStatusButton.visibility = View.GONE
+                    }
+                    View.VISIBLE.let {
+                        gradePointsText.visibility = it
+                        gradePointsDataText.visibility = it
+                        notesText.visibility = it
+                        notesDataText.visibility = it
                     }
                     gradePointsDataText.text = "-"
                     notesDataText.text = "-"
@@ -201,6 +211,12 @@ class TaskDetailFragment : Fragment() {
                     durationDataText.text = viewModel.getTaskDurationString(task)
                     statusDataText.text = getString(R.string.task_status_4)
                     statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_success))
+                    View.VISIBLE.let {
+                        gradePointsText.visibility = it
+                        gradePointsDataText.visibility = it
+                        notesText.visibility = it
+                        notesDataText.visibility = it
+                    }
                     gradePointsDataText.text = task.gradePoints.toString()
                     notesDataText.text = task.notes
                     changeTaskStatusButton.visibility = View.GONE
