@@ -2,12 +2,13 @@ package com.example.capstonehabitapp.model
 
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentId
-import java.util.*
 
 data class Child(
     @DocumentId
     var id: String = "",
     var name: String = "",
+    @field:JvmField
+    var isMale: Boolean = true,
     var totalPoints: Long = 0,
     var currentPoints: Long = 0,
     var level: Long = 0,
