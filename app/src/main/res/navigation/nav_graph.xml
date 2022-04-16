@@ -106,5 +106,20 @@
         android:id="@+id/shopFragment"
         android:name="com.example.capstonehabitapp.ui.ShopFragment"
         android:label="ShopFragment"
-        tools:layout="@layout/fragment_shop" />
+        tools:layout="@layout/fragment_shop" >
+        <action
+            android:id="@+id/action_shopFragment_to_toolSaleConfirmationDialogFragment"
+            app:destination="@id/toolSaleConfirmationDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/toolSaleConfirmationDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.ToolSaleConfirmationDialogFragment"
+        android:label="ToolSaleConfirmationDialogFragment" >
+        <argument
+            android:name="toolName"
+            app:argType="string" />
+        <argument
+            android:name="childName"
+            app:argType="string" />
+    </dialog>
 </navigation>

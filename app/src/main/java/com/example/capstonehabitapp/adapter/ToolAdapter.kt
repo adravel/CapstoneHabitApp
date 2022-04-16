@@ -1,14 +1,18 @@
 package com.example.capstonehabitapp.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.ItemToolBinding
 import com.example.capstonehabitapp.model.Tool
+import com.example.capstonehabitapp.ui.ShopFragmentDirections
 
-class ToolAdapter(private val tools: MutableList<Tool>)
+class ToolAdapter(
+    private val tools: MutableList<Tool>,
+    private val childId: String,
+    private val childName: String)
     : RecyclerView.Adapter<ToolAdapter.ToolViewHolder>() {
 
     inner class ToolViewHolder(val itemBinding: ItemToolBinding): RecyclerView.ViewHolder(itemBinding.root)
@@ -36,11 +40,14 @@ class ToolAdapter(private val tools: MutableList<Tool>)
                 sellButton.isEnabled = true
                 sellButton.text = context.getString(R.string.button_label_sell)
             }
-        }
 
-        // Set RecyclerView item OnClickListener to navigate to Task Detail screen
-        holder.itemView.setOnClickListener { view ->
-            Log.i("Tool", "Item clicked")
+            sellButton.setOnClickListener { view ->
+                val action = ShopFragmentDirections.actionShopFragmentToToolSaleConfirmationDialogFragment(
+                    tools[position].name,
+                    childName
+                )
+                view.findNavController().navigate(action)
+            }
         }
     }
 

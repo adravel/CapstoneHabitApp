@@ -18,6 +18,11 @@ class ShopFragment: Fragment() {
 
     private lateinit var toolAdapter: ToolAdapter
 
+    // TODO: Retrieve child data from child account selection page instead by using Safe Args
+    // Temporary child data placeholder
+    private val childId = "SY4sCyU8voo79y4MdZNp"
+    private val childName = "Adi"
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,19 +39,17 @@ class ShopFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val dummy = mutableListOf(
-            Tool("Meriam 1", crushingTool = true, sold = true, 7, 15, ""),
-            Tool("Meriam 2", crushingTool = true, sold = false, 10, 20, ""),
-            Tool("Meriam 3", crushingTool = true, sold = false, 20, 35, ""),
-            Tool("Meriam 4", crushingTool = true, sold = false, 30, 40, ""),
-            Tool("Meriam 1", crushingTool = true, sold = true, 7, 15, ""),
-            Tool("Meriam 2", crushingTool = true, sold = false, 10, 20, ""),
-            Tool("Meriam 3", crushingTool = true, sold = false, 20, 35, ""),
-            Tool("Meriam 4", crushingTool = true, sold = false, 30, 40, "")
+        val dummyList = mutableListOf(
+            Tool("1", "Meriam 1", crushingTool = true, sold = false, 7, 15, ""),
+            Tool("2", "Meriam 2", crushingTool = true, sold = false, 10, 20, ""),
+            Tool("3", "Meriam 3", crushingTool = true, sold = false, 20, 35, ""),
+            Tool("4", "Meriam 4", crushingTool = true, sold = false, 30, 40, ""),
+            Tool("5", "Sapu", crushingTool = false, sold = false, 15, 25, ""),
+            Tool("6", "Palu", crushingTool = false, sold = false, 12, 20, "")
         )
 
         // Set the adapter and layoutManager for task list RecyclerView
-        toolAdapter = ToolAdapter(dummy)
+        toolAdapter = ToolAdapter(dummyList, childId, childName)
         binding.toolListRecyclerView.apply {
             adapter = toolAdapter
             layoutManager = GridLayoutManager(context, 2)
