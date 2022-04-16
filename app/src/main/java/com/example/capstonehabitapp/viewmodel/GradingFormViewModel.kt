@@ -21,24 +21,37 @@ class GradingFormViewModel: ViewModel() {
     private val _child: MutableLiveData<Child> = MutableLiveData()
     val child: LiveData<Child> = _child
 
+    // Convert grade string to integer
+    fun getGradeInt(grade: String): Int {
+        return when (grade) {
+            "Kurang" -> 1
+            "Baik" -> 2
+            "Sangat Baik" -> 3
+            else -> 0
+        }
+    }
+
     // Calculate grade points depending on the difficulty and grade
-    fun getGradePointsInt(difficulty: Int, grade: String): Int {
+    fun getGradePoints(difficulty: Int, grade: Int): Int {
         var gradePoints = 0
         when (difficulty) {
             0 -> gradePoints = when (grade) {
-                "Kurang" -> 3
-                "Baik" -> 4
-                else -> 6
+                1 -> 3
+                2 -> 4
+                3 -> 6
+                else -> 0
             }
             1 -> gradePoints = when (grade) {
-                "Kurang" -> 5
-                "Baik" -> 6
-                else -> 8
+                1 -> 5
+                2 -> 6
+                3 -> 8
+                else -> 0
             }
             2 -> gradePoints = when (grade) {
-                "Kurang" -> 7
-                "Baik" -> 8
-                else -> 10
+                1 -> 7
+                2 -> 8
+                3 -> 10
+                else -> 0
             }
         }
         return gradePoints
@@ -67,10 +80,10 @@ class GradingFormViewModel: ViewModel() {
     }
 
     // Update task status to 4
-    fun gradeTask(taskId: String, gradePoints: Int, notes: String) {
+    fun gradeTask(taskId: String, grade: Int, notes: String) {
         val updates = hashMapOf<String, Any>(
             "status" to 4,
-            "gradePoints" to gradePoints,
+            "grade" to grade,
             "notes" to notes
         )
 

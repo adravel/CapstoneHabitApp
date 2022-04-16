@@ -17,7 +17,7 @@ data class Task(
     var finishTimeLimit: String = "",
     var status: Long = 0,
     var detail: String = "",
-    var gradePoints: Long = 0,
+    var grade: Long = 0,
     var notes: String = "",
     var timeCreated: Timestamp? = null,
     var timeStartWorking: Timestamp? = null,

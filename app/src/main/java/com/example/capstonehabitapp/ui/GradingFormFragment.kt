@@ -101,12 +101,16 @@ class GradingFormFragment: Fragment() {
                 gradingFormViewModel.child.observe(viewLifecycleOwner) { child ->
                     // Set grade task button OnClickListener
                     gradeTaskButton.setOnClickListener {
-                        val grade = gradeAutoCompleteTextView.text.toString()
-                        val gradePoints = gradingFormViewModel.getGradePointsInt(task.difficulty.toInt(), grade)
+                        // Grade data in the form of integer
+                        val grade = gradingFormViewModel.getGradeInt(gradeAutoCompleteTextView.text.toString())
+
+                        // Points that the child will get after completing the task
+                        val gradePoints = gradingFormViewModel.getGradePoints(task.difficulty.toInt(), grade)
+
                         val notes = notesEditText.text.toString()
 
                         // Update task data to Firestore
-                        gradingFormViewModel.gradeTask(task.id, gradePoints, notes)
+                        gradingFormViewModel.gradeTask(task.id, grade, notes)
 
                         // Update child data to Firestore
                         gradingFormViewModel.updateChildPointsAndLevel(child, gradePoints)

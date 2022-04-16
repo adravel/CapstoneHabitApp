@@ -45,9 +45,9 @@
     <string name="task_status_3_for_parent_role_with_child_name">[%1$s] Meminta Penilaian</string>
     <string name="task_status_3_for_child_role">Menunggu Penilaian</string>
     <string name="task_status_4">Sudah Dinilai</string>
-    <string name="task_grade_0">Sangat Baik</string>
-    <string name="task_grade_1">Baik</string>
-    <string name="task_grade_2">Kurang</string>
+    <string name="task_grade_1">Kurang</string>
+    <string name="task_grade_2">Baik</string>
+    <string name="task_grade_3">Sangat Baik</string>
     <!-- Menu -->
     <string-array name="difficulties">
         <item>@string/task_difficulty_0</item>
@@ -55,9 +55,9 @@
         <item>@string/task_difficulty_2</item>
     </string-array>
     <string-array name="grades">
-        <item>@string/task_grade_0</item>
-        <item>@string/task_grade_1</item>
+        <item>@string/task_grade_3</item>
         <item>@string/task_grade_2</item>
+        <item>@string/task_grade_1</item>
     </string-array>
     <!-- UI Components -->
     <string name="task">Pekerjaan</string>

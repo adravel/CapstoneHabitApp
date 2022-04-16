@@ -218,7 +218,12 @@ class TaskDetailFragment : Fragment() {
                         notesText.visibility = it
                         notesDataText.visibility = it
                     }
-                    gradePointsDataText.text = task.gradePoints.toString()
+                    gradePointsDataText.text = when (task.grade.toInt()) {
+                        1 -> getString(R.string.task_grade_1)
+                        2 -> getString(R.string.task_grade_2)
+                        3 -> getString(R.string.task_grade_3)
+                        else -> "-"
+                    }
                     notesDataText.text = task.notes
                     changeTaskStatusButton.visibility = View.GONE
                 }
