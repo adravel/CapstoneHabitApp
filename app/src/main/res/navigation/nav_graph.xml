@@ -113,6 +113,12 @@
         <action
             android:id="@+id/action_shopFragment_to_toolSaleConfirmationDialogFragment"
             app:destination="@id/toolSaleConfirmationDialogFragment" />
+        <argument
+            android:name="childId"
+            app:argType="string" />
+        <argument
+            android:name="childName"
+            app:argType="string" />
     </fragment>
     <dialog
         android:id="@+id/toolSaleConfirmationDialogFragment"

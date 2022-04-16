@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.adapter.ToolAdapter
@@ -18,10 +19,8 @@ class ShopFragment: Fragment() {
 
     private lateinit var toolAdapter: ToolAdapter
 
-    // TODO: Retrieve child data from child account selection page instead by using Safe Args
-    // Temporary child data placeholder
-    private val childId = "SY4sCyU8voo79y4MdZNp"
-    private val childName = "Adi"
+    private lateinit var childId: String
+    private lateinit var childName: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +31,11 @@ class ShopFragment: Fragment() {
 
         // Set toolbar title
         activity?.title = getString(R.string.pick_tools)
+
+        // Initialize tool name and child name using Safe Args provided by navigation component
+        val args: ShopFragmentArgs by navArgs()
+        childId = args.childId
+        childName = args.childName
 
         return binding.root
     }

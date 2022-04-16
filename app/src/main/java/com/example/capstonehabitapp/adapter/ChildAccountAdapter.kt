@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.capstonehabitapp.model.Child
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.ItemChildAccountBinding
+import com.example.capstonehabitapp.ui.ChildAccountSelectionFragmentDirections
 
 class ChildAccountAdapter(private val children: MutableList<Child>, private val isForParent: Boolean)
     : RecyclerView.Adapter<ChildAccountAdapter.ChildAccountViewHolder>() {
@@ -38,7 +39,11 @@ class ChildAccountAdapter(private val children: MutableList<Child>, private val 
 
             if (isForParent) {
                 // Navigate to shop page
-                view.findNavController().navigate(R.id.shopFragment)
+                val action = ChildAccountSelectionFragmentDirections.actionChildAccountSelectionFragmentToShopFragment(
+                    childId,
+                    childName
+                )
+                view.findNavController().navigate(action)
             } else {
                 // Store childId and childName in shared preference
                 editor.putString(context.getString(R.string.role_pref_child_id_key), childId)?.apply()
