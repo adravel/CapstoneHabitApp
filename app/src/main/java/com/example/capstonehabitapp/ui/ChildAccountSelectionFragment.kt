@@ -1,5 +1,6 @@
 package com.example.capstonehabitapp.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,8 +38,12 @@ class ChildAccountSelectionFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Get user's role data from shared preference
+        val sharedPref = activity?.getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
+        val isParent = sharedPref?.getBoolean(getString(R.string.role_pref_is_parent_key), true)
+
         // Set the adapter and layoutManager for child list RecyclerView
-        childAccountAdapter = ChildAccountAdapter(mutableListOf())
+        childAccountAdapter = ChildAccountAdapter(mutableListOf(), isParent!!)
         binding.childAccountListRecycleView.apply {
             adapter = childAccountAdapter
             layoutManager = LinearLayoutManager(context)
@@ -53,6 +58,9 @@ class ChildAccountSelectionFragment: Fragment() {
                 childAccountAdapter.updateList(children)
             }
         }
+
+        // Show option to add new child only when Child is selecting their accounts
+        binding.addChildButton.visibility = if (isParent) View.GONE else View.VISIBLE
     }
 
     override fun onDestroyView() {

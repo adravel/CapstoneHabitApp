@@ -64,7 +64,7 @@ class ParentHomeFragment: Fragment() {
             }
 
             shopMenuCard.setOnClickListener {
-                it.findNavController().navigate(R.id.shopFragment)
+                it.findNavController().navigate(R.id.childAccountSelectionFragment)
             }
         }
     }

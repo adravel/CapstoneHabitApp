@@ -9,7 +9,7 @@ import com.example.capstonehabitapp.model.Child
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.ItemChildAccountBinding
 
-class ChildAccountAdapter(private val children: MutableList<Child>)
+class ChildAccountAdapter(private val children: MutableList<Child>, private val isForParent: Boolean)
     : RecyclerView.Adapter<ChildAccountAdapter.ChildAccountViewHolder>() {
 
     inner class ChildAccountViewHolder(val itemBinding: ItemChildAccountBinding): RecyclerView.ViewHolder(itemBinding.root)
@@ -31,14 +31,22 @@ class ChildAccountAdapter(private val children: MutableList<Child>)
         val sharedPref = context.getSharedPreferences(context.getString(R.string.role_pref_key), Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
 
-        // Set RecyclerView item OnClickListener to store childId in a shared preference
-        holder.itemView.setOnClickListener {
+        // Set RecyclerView item OnClickListener
+        holder.itemView.setOnClickListener { view ->
             val childId = children[position].id
             val childName = children[position].name
-            editor.putString(context.getString(R.string.role_pref_child_id_key), childId)?.apply()
-            editor.putString(context.getString(R.string.role_pref_child_name_key), childName)?.apply()
 
-            it.findNavController().navigate(R.id.childHomeFragment)
+            if (isForParent) {
+                // Navigate to shop page
+                view.findNavController().navigate(R.id.shopFragment)
+            } else {
+                // Store childId and childName in shared preference
+                editor.putString(context.getString(R.string.role_pref_child_id_key), childId)?.apply()
+                editor.putString(context.getString(R.string.role_pref_child_name_key), childName)?.apply()
+
+                // Navigate to child home page
+                view.findNavController().navigate(R.id.childHomeFragment)
+            }
         }
     }
 

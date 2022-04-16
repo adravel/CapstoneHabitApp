@@ -56,8 +56,8 @@
             android:id="@+id/action_parentHomeFragment_to_taskDetailFragment"
             app:destination="@id/taskDetailFragment" />
         <action
-            android:id="@+id/action_parentHomeFragment_to_shopFragment"
-            app:destination="@id/shopFragment" />
+            android:id="@+id/action_parentHomeFragment_to_childAccountSelectionFragment"
+            app:destination="@id/childAccountSelectionFragment" />
     </fragment>
     <fragment
         android:id="@+id/childAccountSelectionFragment"
@@ -67,6 +67,9 @@
         <action
             android:id="@+id/action_childAccountSelectionFragment_to_childHomeFragment"
             app:destination="@id/childHomeFragment" />
+        <action
+            android:id="@+id/action_childAccountSelectionFragment_to_shopFragment"
+            app:destination="@id/shopFragment" />
     </fragment>
     <fragment
         android:id="@+id/childHomeFragment"
