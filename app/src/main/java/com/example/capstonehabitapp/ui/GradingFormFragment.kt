@@ -73,43 +73,51 @@ class GradingFormFragment: Fragment() {
                 if (taskResponse is Response.Success) {
                     val task = taskResponse.data
 
-                    // Fetch child data from Firestore
-                    gradingFormViewModel.getChildFromFirebase(task.childId)
-
                     // Display task data in finished state
                     displayTaskData(task)
 
-                    // Observe child LiveData in ViewModel
-                    gradingFormViewModel.child.observe(viewLifecycleOwner) { childResponse ->
-                        when (childResponse) {
-                            is Response.Loading -> {}
-                            is Response.Success -> {
-                                val child = childResponse.data
+                    // Set grade task button OnClickListener
+                    gradeTaskButton.setOnClickListener {
+                        // Get grade data in the form of integer
+                        val grade = gradingFormViewModel.getGradeInt(gradeAutoCompleteTextView.text.toString())
 
-                                // Set grade task button OnClickListener
-                                gradeTaskButton.setOnClickListener {
-                                    // Grade data in the form of integer
-                                    val grade = gradingFormViewModel.getGradeInt(gradeAutoCompleteTextView.text.toString())
+                        // Calculate points that the child will get after completing the task
+                        val gradePoints = gradingFormViewModel.getGradePoints(task.difficulty.toInt(), grade)
 
-                                    // Points that the child will get after completing the task
-                                    val gradePoints = gradingFormViewModel.getGradePoints(task.difficulty.toInt(), grade)
+                        val notes = notesEditText.text.toString()
 
-                                    val notes = notesEditText.text.toString()
+                        // Grade task by updating task and child documents in Firestore
+                        gradingFormViewModel.gradeTask(
+                            task.id,
+                            task.childId,
+                            grade,
+                            gradePoints,
+                            notes
+                        )
+                    }
+                }
+            }
 
-                                    // Update task data to Firestore
-                                    gradingFormViewModel.gradeTask(task.id, grade, notes)
+            // Observe task grade points LiveData in ViewModel
+            // This value determines whether the grading transaction is successful or not
+            gradingFormViewModel.taskGradePoints.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is Response.Loading -> {}
+                    is Response.Success -> {
+                        val gradePoints = response.data
 
-                                    // Update child data to Firestore
-                                    gradingFormViewModel.updateChildPointsAndLevel(child, gradePoints)
+                        Toast.makeText(
+                            context,
+                            getString(R.string.grading_success, gradePoints),
+                            Toast.LENGTH_SHORT
+                        ).show()
 
-                                    view.findNavController().popBackStack()
-                                }
-                            }
-                            is Response.Failure -> {
-                                Log.e("GradingForm", childResponse.message)
-                                Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
-                            }
-                        }
+                        // Return to task detail page
+                        view.findNavController().popBackStack()
+                    }
+                    is Response.Failure -> {
+                        Log.e("GradingForm", response.message)
+                        Toast.makeText(context, getString(R.string.request_failed), Toast.LENGTH_SHORT).show()
                     }
                 }
             }

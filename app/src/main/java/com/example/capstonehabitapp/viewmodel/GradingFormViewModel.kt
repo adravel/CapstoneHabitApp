@@ -1,13 +1,10 @@
 package com.example.capstonehabitapp.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.capstonehabitapp.model.Child
 import com.example.capstonehabitapp.util.Response
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,8 +16,8 @@ class GradingFormViewModel: ViewModel() {
     private val testParentId = "2p8at5eicReHAP1P4zDu"
     private val parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
 
-    private val _child: MutableLiveData<Response<Child>> = MutableLiveData()
-    val child: LiveData<Response<Child>> = _child
+    private val _taskGradePoints: MutableLiveData<Response<Int>> = MutableLiveData()
+    val taskGradePoints: LiveData<Response<Int>> = _taskGradePoints
 
     // Convert grade string to integer
     fun getGradeInt(grade: String): Int {
@@ -58,86 +55,56 @@ class GradingFormViewModel: ViewModel() {
         return gradePoints
     }
 
-    // Fetch child data from Firestore
-    fun getChildFromFirebase(childId: String) {
-        var response: Child
+    // Update task status to 4 and
+    // update child totalPoints, currentPoints, and level simultaneously
+    // using Firestore transaction operation
+    fun gradeTask(taskId: String, childId: String, grade: Int, gradePoints: Int, notes: String) {
+        _taskGradePoints.postValue(Response.Loading())
 
-        _child.postValue(Response.Loading())
-
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                // Call Firestore get() method to query the data and convert it to Child object
-                val querySnapshot = parentDocRef
-                    .collection("children")
-                    .document(childId)
-                    .get()
-                    .await()
-                response = querySnapshot.toObject<Child>()!!
-
-                _child.postValue(Response.Success(response))
-
-            } catch (e: Exception) {
-                e.message?.let { _child.postValue(Response.Failure(it)) }
-            }
-        }
-    }
-
-    // Update task status to 4
-    fun gradeTask(taskId: String, grade: Int, notes: String) {
-        val updates = hashMapOf<String, Any>(
-            "status" to 4,
-            "grade" to grade,
-            "notes" to notes
-        )
+        val taskDocRef = parentDocRef.collection("tasks").document(taskId)
+        val childDocRef = parentDocRef.collection("children").document(childId)
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                // Update the necessary field in Firestore document
-                parentDocRef
-                    .collection("tasks")
-                    .document(taskId)
-                    .update(updates)
-                    .await()
+                Firebase.firestore.runTransaction { transaction ->
+                    // Call Firestore get() method to query child data
+                    val querySnapshot = transaction.get(childDocRef)
+
+                    val totalPoints = querySnapshot.getLong("totalPoints")!!.toInt() + gradePoints
+                    var currentPoints = querySnapshot.getLong("currentPoints")!!.toInt() + gradePoints
+                    var level = querySnapshot.getLong("level")!!.toInt()
+                    val pointsToLevelUp = level * 50
+
+                    // Level up if the child has enough points to level up and has not reached max level
+                    if (totalPoints >= pointsToLevelUp && level < 10) {
+                        // Gain bonus
+                        currentPoints += level * 5
+
+                        // Level up
+                        level++
+                    }
+
+                    val taskUpdates = hashMapOf<String, Any>(
+                        "status" to 4,
+                        "grade" to grade,
+                        "notes" to notes
+                    )
+
+                    val childUpdates = hashMapOf<String, Any>(
+                        "level" to level,
+                        "totalPoints" to totalPoints,
+                        "currentPoints" to currentPoints
+                    )
+
+                    // Update task and child documents
+                    transaction.update(taskDocRef, taskUpdates)
+                    transaction.update(childDocRef, childUpdates)
+                }.await()
+
+                _taskGradePoints.postValue(Response.Success(gradePoints))
 
             } catch (e: Exception) {
-                e.message?.let { Log.e("GradingForm", it) }
-            }
-        }
-    }
-
-    // Update child totalPoints, currentPoints, and level after grading the task
-    fun updateChildPointsAndLevel(child: Child, gradePoints: Int) {
-        val totalPoints = child.totalPoints.toInt() + gradePoints
-        var currentPoints = child.currentPoints.toInt() + gradePoints
-        var level = child.level.toInt()
-        val pointsToLevelUp = level * 50
-
-        // Level up if the child has enough points to level up and has not reached max level
-        if (totalPoints >= pointsToLevelUp && level < 10) {
-            // Gain bonus
-            currentPoints += level * 5
-
-            // Level up
-            level++
-        }
-
-        val updates = hashMapOf<String, Any>(
-            "level" to level,
-            "totalPoints" to totalPoints,
-            "currentPoints" to currentPoints
-        )
-
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                // Update the necessary field in Firestore document
-                parentDocRef
-                    .collection("children")
-                    .document(child.id)
-                    .update(updates)
-                    .await()
-
-            } catch (e: Exception) {
-                e.message?.let { Log.e("GradingForm", it) }
+                e.message?.let { _taskGradePoints.postValue(Response.Failure(it)) }
             }
         }
     }
