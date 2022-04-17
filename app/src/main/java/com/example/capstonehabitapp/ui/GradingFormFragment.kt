@@ -3,10 +3,12 @@ package com.example.capstonehabitapp.ui
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -14,6 +16,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentGradingFormBinding
+import com.example.capstonehabitapp.model.Task
+import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.viewmodel.GradingFormViewModel
 import com.example.capstonehabitapp.viewmodel.TaskDetailViewModel
 
@@ -65,57 +69,47 @@ class GradingFormFragment: Fragment() {
             })
 
             // Observe task LiveData in SharedViewModel
-            taskDetailViewModel.task.observe(viewLifecycleOwner) { task ->
-                // Fetch child data from Firestore
-                gradingFormViewModel.getChildFromFirebase(task.childId)
+            taskDetailViewModel.task.observe(viewLifecycleOwner) { taskResponse ->
+                if (taskResponse is Response.Success) {
+                    val task = taskResponse.data
 
-                // Display task data in finished state
-                titleDataText.text = task.title
-                areaDataText.text = task.area
-                difficultyDataText.text = when (task.difficulty.toInt()) {
-                    0 -> getString(R.string.task_difficulty_0)
-                    1 -> getString(R.string.task_difficulty_1)
-                    2 -> getString(R.string.task_difficulty_2)
-                    else -> getString(R.string.task_difficulty_0)
-                }
-                // TODO: Implement task repetition data display in ViewModel
-                repetitionDataText.text = "NOT_YET_IMPLEMENTED"
-                timeLimitDataText.text = getString(
-                    R.string.task_time_limit_placeholder,
-                    task.startTimeLimit,
-                    task.finishTimeLimit
-                )
-                durationDataText.text = taskDetailViewModel.getTaskDurationString(task)
-                if (task.status.toInt() == 2) {
-                    // When user chose to grade directly
-                    statusDataText.text = getString(R.string.task_status_2_with_child_name, task.childName)
-                    statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_success))
-                } else {
-                    // When user chose to grade remotely
-                    statusDataText.text = getString(R.string.task_status_3_for_parent_role_with_child_name, task.childName)
-                    statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_error))
-                }
-                detailDataText.text = task.detail
+                    // Fetch child data from Firestore
+                    gradingFormViewModel.getChildFromFirebase(task.childId)
 
-                // Observe child LiveData in ViewModel
-                gradingFormViewModel.child.observe(viewLifecycleOwner) { child ->
-                    // Set grade task button OnClickListener
-                    gradeTaskButton.setOnClickListener {
-                        // Grade data in the form of integer
-                        val grade = gradingFormViewModel.getGradeInt(gradeAutoCompleteTextView.text.toString())
+                    // Display task data in finished state
+                    displayTaskData(task)
 
-                        // Points that the child will get after completing the task
-                        val gradePoints = gradingFormViewModel.getGradePoints(task.difficulty.toInt(), grade)
+                    // Observe child LiveData in ViewModel
+                    gradingFormViewModel.child.observe(viewLifecycleOwner) { childResponse ->
+                        when (childResponse) {
+                            is Response.Loading -> {}
+                            is Response.Success -> {
+                                val child = childResponse.data
 
-                        val notes = notesEditText.text.toString()
+                                // Set grade task button OnClickListener
+                                gradeTaskButton.setOnClickListener {
+                                    // Grade data in the form of integer
+                                    val grade = gradingFormViewModel.getGradeInt(gradeAutoCompleteTextView.text.toString())
 
-                        // Update task data to Firestore
-                        gradingFormViewModel.gradeTask(task.id, grade, notes)
+                                    // Points that the child will get after completing the task
+                                    val gradePoints = gradingFormViewModel.getGradePoints(task.difficulty.toInt(), grade)
 
-                        // Update child data to Firestore
-                        gradingFormViewModel.updateChildPointsAndLevel(child, gradePoints)
+                                    val notes = notesEditText.text.toString()
 
-                        view.findNavController().popBackStack()
+                                    // Update task data to Firestore
+                                    gradingFormViewModel.gradeTask(task.id, grade, notes)
+
+                                    // Update child data to Firestore
+                                    gradingFormViewModel.updateChildPointsAndLevel(child, gradePoints)
+
+                                    view.findNavController().popBackStack()
+                                }
+                            }
+                            is Response.Failure -> {
+                                Log.e("GradingForm", childResponse.message)
+                                Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
+                            }
+                        }
                     }
                 }
             }
@@ -125,5 +119,37 @@ class GradingFormFragment: Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    // Display task data in finished state
+    private fun displayTaskData(task: Task) {
+        binding.apply {
+            titleDataText.text = task.title
+            areaDataText.text = task.area
+            difficultyDataText.text = when (task.difficulty.toInt()) {
+                0 -> getString(R.string.task_difficulty_0)
+                1 -> getString(R.string.task_difficulty_1)
+                2 -> getString(R.string.task_difficulty_2)
+                else -> getString(R.string.task_difficulty_0)
+            }
+            // TODO: Implement task repetition data display in ViewModel
+            repetitionDataText.text = "NOT_YET_IMPLEMENTED"
+            timeLimitDataText.text = getString(
+                R.string.task_time_limit_placeholder,
+                task.startTimeLimit,
+                task.finishTimeLimit
+            )
+            durationDataText.text = taskDetailViewModel.getTaskDurationString(task)
+            if (task.status.toInt() == 2) {
+                // When user chose to grade directly
+                statusDataText.text = getString(R.string.task_status_2_with_child_name, task.childName)
+                statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_success))
+            } else {
+                // When user chose to grade remotely
+                statusDataText.text = getString(R.string.task_status_3_for_parent_role_with_child_name, task.childName)
+                statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_error))
+            }
+            detailDataText.text = task.detail
+        }
     }
 }

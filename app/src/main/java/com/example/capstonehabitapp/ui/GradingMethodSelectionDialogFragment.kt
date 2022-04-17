@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentGradingMethodSelectionDialogBinding
+import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.viewmodel.TaskDetailViewModel
 
 class GradingMethodSelectionDialogFragment: DialogFragment() {
@@ -34,18 +35,22 @@ class GradingMethodSelectionDialogFragment: DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.task.observe(viewLifecycleOwner) { task ->
-            binding.directGradingButton.setOnClickListener {
-                // Navigate to grading form page
-                findNavController().navigate(R.id.gradingFormFragment)
-            }
+        viewModel.task.observe(viewLifecycleOwner) { response ->
+            if (response is Response.Success) {
+                val task = response.data
 
-            binding.remoteGradingButton.setOnClickListener {
-                // Ask parent for grading
-                viewModel.askForGrading(task.id)
+                binding.directGradingButton.setOnClickListener {
+                    // Navigate to grading form page
+                    findNavController().navigate(R.id.gradingFormFragment)
+                }
 
-                // Dismiss this dialog
-                findNavController().popBackStack()
+                binding.remoteGradingButton.setOnClickListener {
+                    // Ask parent for grading
+                    viewModel.askForGrading(task.id)
+
+                    // Dismiss this dialog
+                    findNavController().popBackStack()
+                }
             }
         }
     }

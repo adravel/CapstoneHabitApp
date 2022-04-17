@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.capstonehabitapp.model.Task
+import com.example.capstonehabitapp.util.Response
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -20,8 +21,8 @@ class TaskDetailViewModel: ViewModel() {
     private val testParentId = "2p8at5eicReHAP1P4zDu"
     private val parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
 
-    private val _task: MutableLiveData<Task> = MutableLiveData()
-    val task: LiveData<Task> = _task
+    private val _task: MutableLiveData<Response<Task>> = MutableLiveData()
+    val task: LiveData<Response<Task>> = _task
 
     // Calculate task duration
     fun getTaskDurationString(task: Task): String {
@@ -35,6 +36,8 @@ class TaskDetailViewModel: ViewModel() {
     fun getTaskFromFirebase(taskId: String) {
         var response: Task
 
+        _task.postValue(Response.Loading())
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 // Call Firestore get() method to query the data
@@ -47,10 +50,10 @@ class TaskDetailViewModel: ViewModel() {
                 // Convert the document into Task object
                 response = querySnapshot.toObject<Task>()!!
 
-                _task.postValue(response)
+                _task.postValue(Response.Success(response))
 
             } catch (e: Exception) {
-                e.message?.let { Log.e(TAG, it) }
+                e.message?.let { _task.postValue(Response.Failure(it)) }
             }
         }
     }

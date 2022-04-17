@@ -2,9 +2,11 @@ package com.example.capstonehabitapp.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -13,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentTaskDetailBinding
 import com.example.capstonehabitapp.model.Task
+import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.viewmodel.TaskDetailViewModel
 
 class TaskDetailFragment : Fragment() {
@@ -54,37 +57,32 @@ class TaskDetailFragment : Fragment() {
         viewModel.getTaskFromFirebase(taskId)
 
         // Observe task LiveData in SharedViewModel
-        viewModel.task.observe(viewLifecycleOwner) { task ->
+        viewModel.task.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Response.Loading -> displayEmptyTask()
+                is Response.Success -> {
+                    val task = response.data
 
-            // Handle the case of observing task LiveData multiple times
-            if (task.id != taskId) {
-                // Display an empty task data
-                displayTaskData(Task(), isParent!!)
-                binding.apply {
-                    View.GONE.let {
-                        gradePointsText.visibility = it
-                        gradePointsDataText.visibility = it
-                        notesText.visibility = it
-                        notesDataText.visibility = it
-                        changeTaskStatusButton.visibility = it
+                    // Display task data correctly depending on status and user's role
+                    displayTaskData(task, isParent!!)
+
+                    // Set button OnClickListener depending on the task status and user's role
+                    binding.changeTaskStatusButton.setOnClickListener {
+                        if (isParent == true) {
+                            //Navigate to grading form page
+                            view.findNavController().navigate(R.id.gradingFormFragment)
+                        } else {
+                            when (task.status.toInt()) {
+                                0 -> viewModel.startTask(taskId, childId!!, childName!!)
+                                1 -> viewModel.finishTask(taskId)
+                                2 -> view.findNavController().navigate(R.id.gradingMethodSelectionDialogFragment)
+                            }
+                        }
                     }
                 }
-            } else {
-                // Display task data correctly depending on status and user's role
-                displayTaskData(task, isParent!!)
-            }
-
-            // Set button OnClickListener depending on the task status and user's role
-            binding.changeTaskStatusButton.setOnClickListener {
-                if (isParent == true) {
-                    //Navigate to grading form page
-                    view.findNavController().navigate(R.id.gradingFormFragment)
-                } else {
-                    when (task.status.toInt()) {
-                        0 -> viewModel.startTask(taskId, childId!!, childName!!)
-                        1 -> viewModel.finishTask(taskId)
-                        2 -> view.findNavController().navigate(R.id.gradingMethodSelectionDialogFragment)
-                    }
+                is Response.Failure -> {
+                    Log.e("TaskDetail", response.message)
+                    Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -93,6 +91,27 @@ class TaskDetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    // Display empty task for when data is still being loaded
+    private fun displayEmptyTask() {
+        binding.apply {
+            titleDataText.text = ""
+            areaDataText.text = ""
+            difficultyDataText.text = ""
+            repetitionDataText.text = ""
+            timeLimitDataText.text = ""
+            statusDataText.text = ""
+            detailDataText.text = ""
+
+            View.GONE.let {
+                gradePointsText.visibility = it
+                gradePointsDataText.visibility = it
+                notesText.visibility = it
+                notesDataText.visibility = it
+                changeTaskStatusButton.visibility = it
+            }
+        }
     }
 
     // Display task data

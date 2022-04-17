@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.capstonehabitapp.model.Child
+import com.example.capstonehabitapp.util.Response
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -18,8 +19,8 @@ class GradingFormViewModel: ViewModel() {
     private val testParentId = "2p8at5eicReHAP1P4zDu"
     private val parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
 
-    private val _child: MutableLiveData<Child> = MutableLiveData()
-    val child: LiveData<Child> = _child
+    private val _child: MutableLiveData<Response<Child>> = MutableLiveData()
+    val child: LiveData<Response<Child>> = _child
 
     // Convert grade string to integer
     fun getGradeInt(grade: String): Int {
@@ -61,6 +62,8 @@ class GradingFormViewModel: ViewModel() {
     fun getChildFromFirebase(childId: String) {
         var response: Child
 
+        _child.postValue(Response.Loading())
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 // Call Firestore get() method to query the data and convert it to Child object
@@ -71,10 +74,10 @@ class GradingFormViewModel: ViewModel() {
                     .await()
                 response = querySnapshot.toObject<Child>()!!
 
-                _child.postValue(response)
+                _child.postValue(Response.Success(response))
 
             } catch (e: Exception) {
-                e.message?.let { Log.e("GradingForm", it) }
+                e.message?.let { _child.postValue(Response.Failure(it)) }
             }
         }
     }

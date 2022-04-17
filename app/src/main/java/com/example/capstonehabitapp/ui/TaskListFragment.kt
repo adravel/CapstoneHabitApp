@@ -2,16 +2,19 @@ package com.example.capstonehabitapp.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.adapter.TaskAdapter
 import com.example.capstonehabitapp.databinding.FragmentTaskListBinding
+import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.viewmodel.TaskListViewModel
 
 class TaskListFragment : Fragment() {
@@ -54,8 +57,18 @@ class TaskListFragment : Fragment() {
         viewModel.getTasksFromFirebase()
 
         // Observe tasks LiveData in ViewModel
-        viewModel.tasks.observe(viewLifecycleOwner) { task ->
-            taskAdapter.updateList(task)
+        viewModel.tasks.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Response.Loading -> {}
+                is Response.Success -> {
+                    val task = response.data
+                    taskAdapter.updateList(task)
+                }
+                is Response.Failure -> {
+                    Log.e("TaskList", response.message)
+                    Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         if (isParent) {

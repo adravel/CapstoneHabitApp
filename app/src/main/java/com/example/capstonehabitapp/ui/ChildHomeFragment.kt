@@ -2,9 +2,11 @@ package com.example.capstonehabitapp.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstonehabitapp.adapter.EssentialTaskAdapter
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentChildHomeBinding
+import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.viewmodel.ChildHomeViewModel
 
 class ChildHomeFragment: Fragment() {
@@ -54,33 +57,54 @@ class ChildHomeFragment: Fragment() {
         }
 
         // Observe essential tasks LiveData in ViewModel
-        viewModel.essentialTasks.observe(viewLifecycleOwner) { tasks ->
-            essentialTaskAdapter.updateList(tasks)
+        viewModel.essentialTasks.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Response.Loading -> {}
+                is Response.Success -> {
+                    val tasks = response.data
+                    if (tasks.isNotEmpty()) essentialTaskAdapter.updateList(tasks)
+                }
+                is Response.Failure -> {
+                    Log.e("ChildHome", response.message)
+                    Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         // Observe child LiveData in ViewModel
-        viewModel.child.observe(viewLifecycleOwner) { child ->
-            val levelName = when (child.level.toInt()) {
-                1 -> getString(R.string.level_1_name)
-                2 -> getString(R.string.level_2_name)
-                3 -> getString(R.string.level_3_name)
-                4 -> getString(R.string.level_4_name)
-                5 -> getString(R.string.level_5_name)
-                6 -> getString(R.string.level_6_name)
-                7 -> getString(R.string.level_7_name)
-                8 -> getString(R.string.level_8_name)
-                9 -> getString(R.string.level_9_name)
-                else -> getString(R.string.level_10_name)
-            }
+        viewModel.child.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Response.Loading -> {}
+                is Response.Success -> {
+                    val child = response.data
 
-            val progress = viewModel.getProgress(child.totalPoints.toInt(), child.level.toInt())
+                    val levelName = when (child.level.toInt()) {
+                        1 -> getString(R.string.level_1_name)
+                        2 -> getString(R.string.level_2_name)
+                        3 -> getString(R.string.level_3_name)
+                        4 -> getString(R.string.level_4_name)
+                        5 -> getString(R.string.level_5_name)
+                        6 -> getString(R.string.level_6_name)
+                        7 -> getString(R.string.level_7_name)
+                        8 -> getString(R.string.level_8_name)
+                        9 -> getString(R.string.level_9_name)
+                        else -> getString(R.string.level_10_name)
+                    }
 
-            // Bind the data to Views
-            binding.apply {
-                greetingsText.text = getString(R.string.child_greetings_placeholder, child.name)
-                levelText.text = getString(R.string.child_level_placeholder, levelName)
-                expText.text = getString(R.string.child_exp_placeholder, progress)
-                expProgressBar.progress = progress
+                    val progress = viewModel.getProgress(child.totalPoints.toInt(), child.level.toInt())
+
+                    // Bind the data to Views
+                    binding.apply {
+                        greetingsText.text = getString(R.string.child_greetings_placeholder, child.name)
+                        levelText.text = getString(R.string.child_level_placeholder, levelName)
+                        expText.text = getString(R.string.child_exp_placeholder, progress)
+                        expProgressBar.progress = progress
+                    }
+                }
+                is Response.Failure -> {
+                    Log.e("ChildHome", response.message)
+                    Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
+                }
             }
         }
 

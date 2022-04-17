@@ -1,8 +1,8 @@
 package com.example.capstonehabitapp.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.capstonehabitapp.model.Task
+import com.example.capstonehabitapp.util.Response
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -16,12 +16,14 @@ class TaskListViewModel: ViewModel() {
     private val testParentId = "2p8at5eicReHAP1P4zDu"
     private val parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
 
-    private val _tasks: MutableLiveData<List<Task>> = MutableLiveData()
-    val tasks: LiveData<List<Task>> = _tasks
+    private val _tasks: MutableLiveData<Response<List<Task>>> = MutableLiveData()
+    val tasks: LiveData<Response<List<Task>>> = _tasks
 
     // Fetch tasks data from Firestore
     fun getTasksFromFirebase() {
         val responseList: MutableList<Task> = mutableListOf()
+
+        _tasks.postValue(Response.Loading())
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -35,10 +37,11 @@ class TaskListViewModel: ViewModel() {
                 for(document in querySnapshot.documents) {
                     document.toObject<Task>()?.let { responseList.add(it) }
                 }
-                _tasks.postValue(responseList)
+
+                _tasks.postValue(Response.Success(responseList))
 
             } catch (e: Exception) {
-                e.message?.let { Log.e("TaskList", it) }
+                e.message?.let { _tasks.postValue(Response.Failure(it)) }
             }
         }
     }

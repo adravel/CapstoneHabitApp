@@ -2,9 +2,11 @@ package com.example.capstonehabitapp.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.adapter.EssentialTaskAdapter
 import com.example.capstonehabitapp.databinding.FragmentParentHomeBinding
+import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.viewmodel.ParentHomeViewModel
 
 class ParentHomeFragment: Fragment() {
@@ -49,13 +52,33 @@ class ParentHomeFragment: Fragment() {
         viewModel.getEssentialTasksFromFirebase()
 
         // Observe parent name LiveData in ViewModel
-        viewModel.parentName.observe(viewLifecycleOwner) { parentName ->
-            binding.parentNameText.text = "$parentName !"
+        viewModel.parentName.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Response.Loading -> {}
+                is Response.Success -> {
+                    val parentName = response.data
+                    binding.parentNameText.text = "$parentName !"
+                }
+                is Response.Failure -> {
+                    Log.e("ParentHome", response.message)
+                    Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         // Observe essential tasks LiveData in ViewModel
-        viewModel.essentialTasks.observe(viewLifecycleOwner) { tasks ->
-            essentialTaskAdapter.updateList(tasks)
+        viewModel.essentialTasks.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Response.Loading -> {}
+                is Response.Success -> {
+                    val tasks = response.data
+                    essentialTaskAdapter.updateList(tasks)
+                }
+                is Response.Failure -> {
+                    Log.e("ParentHome", response.message)
+                    Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         binding.apply {

@@ -109,4 +109,6 @@
     <!-- Hint -->
     <string name="hint_text">Type something</string>
     <string name="hint_time">00:00</string>
+    <!-- Toast Messages -->
+    <string name="data_fetch_failed">Pengambilan data gagal</string>
 </resources>

@@ -2,15 +2,18 @@ package com.example.capstonehabitapp.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.adapter.ChildAccountAdapter
 import com.example.capstonehabitapp.databinding.FragmentChildAccountSelectionBinding
+import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.viewmodel.ChildAccountSelectionViewModel
 
 class ChildAccountSelectionFragment: Fragment() {
@@ -53,9 +56,17 @@ class ChildAccountSelectionFragment: Fragment() {
         viewModel.getChildrenFromFirebase()
 
         // Observe child accounts LiveData in ViewModel
-        viewModel.children.observe(viewLifecycleOwner) { children ->
-            if (children.isNotEmpty()) {
-                childAccountAdapter.updateList(children)
+        viewModel.children.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Response.Loading -> {}
+                is Response.Success -> {
+                    val children = response.data
+                    if (children.isNotEmpty()) childAccountAdapter.updateList(children)
+                }
+                is Response.Failure -> {
+                    Log.e("ChildAccountSelection", response.message)
+                    Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
