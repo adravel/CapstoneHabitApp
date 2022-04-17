@@ -1,6 +1,5 @@
 package com.example.capstonehabitapp.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,12 +16,13 @@ import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 
 class TaskDetailViewModel: ViewModel() {
-    private val TAG = "TaskDetail"
     private val testParentId = "2p8at5eicReHAP1P4zDu"
     private val parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
 
     private val _task: MutableLiveData<Response<Task>> = MutableLiveData()
     val task: LiveData<Response<Task>> = _task
+    private val _taskStatusChange: MutableLiveData<Response<Int>> = MutableLiveData()
+    val taskStatusChange: LiveData<Response<Int>> = _taskStatusChange
 
     // Calculate task duration
     fun getTaskDurationString(task: Task): String {
@@ -37,6 +37,7 @@ class TaskDetailViewModel: ViewModel() {
         var response: Task
 
         _task.postValue(Response.Loading())
+        _taskStatusChange.postValue(Response.Loading())
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -60,6 +61,8 @@ class TaskDetailViewModel: ViewModel() {
 
     // Update task state to 1
     fun startTask(taskId: String, childId: String, childName: String) {
+        _taskStatusChange.postValue(Response.Loading())
+
         val updates = hashMapOf(
             "status" to 1,
             "childId" to childId,
@@ -76,17 +79,18 @@ class TaskDetailViewModel: ViewModel() {
                     .update(updates)
                     .await()
 
-                // Fetch task from Firestore again to update the UI
-                getTaskFromFirebase(taskId)
+                _taskStatusChange.postValue(Response.Success(1))
 
             } catch (e: Exception) {
-                e.message?.let { Log.e(TAG, it) }
+                e.message?.let { _taskStatusChange.postValue(Response.Failure(it)) }
             }
         }
     }
 
     // Update task status to 2
     fun finishTask(taskId: String) {
+        _taskStatusChange.postValue(Response.Loading())
+
         val updates = hashMapOf(
             "status" to 2,
             "timeFinishWorking" to FieldValue.serverTimestamp()
@@ -101,17 +105,18 @@ class TaskDetailViewModel: ViewModel() {
                     .update(updates)
                     .await()
 
-                // Fetch task from Firestore again to update the UI
-                getTaskFromFirebase(taskId)
+                _taskStatusChange.postValue(Response.Success(2))
 
             } catch (e: Exception) {
-                e.message?.let { Log.e(TAG, it) }
+                e.message?.let { _taskStatusChange.postValue(Response.Failure(it)) }
             }
         }
     }
 
     // Update task status to 3
     fun askForGrading(taskId: String) {
+        _taskStatusChange.postValue(Response.Loading())
+
         val updates = hashMapOf(
             "status" to 3,
             "timeAskForGrading" to FieldValue.serverTimestamp()
@@ -126,11 +131,10 @@ class TaskDetailViewModel: ViewModel() {
                     .update(updates)
                     .await()
 
-                // Fetch task from Firestore again to update the UI
-                getTaskFromFirebase(taskId)
+                _taskStatusChange.postValue(Response.Success(3))
 
             } catch (e: Exception) {
-                e.message?.let { Log.e(TAG, it) }
+                e.message?.let { _taskStatusChange.postValue(Response.Failure(it)) }
             }
         }
     }

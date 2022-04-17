@@ -111,4 +111,10 @@
     <string name="hint_time">00:00</string>
     <!-- Toast Messages -->
     <string name="data_fetch_failed">Pengambilan data gagal</string>
+    <string name="task_creation_success">Pekerjaan berhasil dibuat!</string>
+    <string name="task_creation_failed">Gagal membuat pekerjaan</string>
+    <string name="task_start_success">Pekerjaan dimulai!</string>
+    <string name="task_finish_success">Pekerjaan berhasil diselesaikan!</string>
+    <string name="ask_for_grading_success">Permintaan penilaian berhasil dikirim!</string>
+    <string name="request_failed">Permintaan gagal</string>
 </resources>

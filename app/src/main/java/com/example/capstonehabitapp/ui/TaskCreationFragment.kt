@@ -3,15 +3,18 @@ package com.example.capstonehabitapp.ui
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentTaskCreationBinding
+import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.viewmodel.TaskCreationViewModel
 
 class TaskCreationFragment : Fragment() {
@@ -78,12 +81,28 @@ class TaskCreationFragment : Fragment() {
                 val finishTimeLimit = finishTimeLimitEditText.text.toString()
                 val detail = detailEditText.text.toString()
 
-                // add new task data to Firestore and get the ID
-                val id = viewModel.addTaskToFirebase(title, area, difficulty, startTimeLimit, finishTimeLimit, detail)
+                // Add new task data to Firestore
+                viewModel.addTaskToFirebase(title, area, difficulty, startTimeLimit, finishTimeLimit, detail)
 
-                // Navigate to task detail page
-                val action = TaskCreationFragmentDirections.actionTaskCreationFragmentToTaskDetailFragment(id)
-                view.findNavController().navigate(action)
+                // Observe task ID data in ViewModel
+                viewModel.taskId.observe(viewLifecycleOwner) { response ->
+                    when (response) {
+                        is Response.Loading -> {}
+                        is Response.Success -> {
+                            val taskId = response.data
+
+                            Toast.makeText(context, getString(R.string.task_creation_success), Toast.LENGTH_SHORT).show()
+
+                            // Navigate to task detail page
+                            val action = TaskCreationFragmentDirections.actionTaskCreationFragmentToTaskDetailFragment(taskId)
+                            view.findNavController().navigate(action)
+                        }
+                        is Response.Failure -> {
+                            Log.e("TaskCreation", response.message)
+                            Toast.makeText(context, getString(R.string.task_creation_failed), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
             }
         }
     }

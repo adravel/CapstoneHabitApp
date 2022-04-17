@@ -1,7 +1,9 @@
 package com.example.capstonehabitapp.viewmodel
 
-import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.capstonehabitapp.util.Response
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -14,6 +16,9 @@ import java.lang.Exception
 class TaskCreationViewModel: ViewModel() {
     private val testParentId = "2p8at5eicReHAP1P4zDu"
     private val parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
+
+    private val _taskId: MutableLiveData<Response<String>> = MutableLiveData()
+    val taskId: LiveData<Response<String>> = _taskId
 
     // Get difficulty as integer
     fun getDifficultyInt(difficulty: String): Int {
@@ -32,10 +37,9 @@ class TaskCreationViewModel: ViewModel() {
         difficulty: Int,
         startTimeLimit: String,
         finishTimeLimit: String,
-        detail: String): String {
+        detail: String) {
 
-        // Generate empty document reference
-        val taskDocRef = parentDocRef.collection("tasks").document()
+        _taskId.postValue(Response.Loading())
 
         val newTask = hashMapOf(
             "title" to title,
@@ -50,13 +54,16 @@ class TaskCreationViewModel: ViewModel() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                // Send the data using Firestore set() method
-                taskDocRef.set(newTask).await()
+                // Add the data to Firestore
+                val querySnapshot = parentDocRef.collection("tasks").add(newTask).await()
+
+                val taskId = querySnapshot.id
+
+                _taskId.postValue(Response.Success(taskId))
 
             } catch (e: Exception) {
-                e.message?.let { Log.e("TaskCreation", it) }
+                e.message?.let { _taskId.postValue(Response.Failure(it)) }
             }
         }
-        return taskDocRef.id
     }
 }
