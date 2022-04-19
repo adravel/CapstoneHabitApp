@@ -2,18 +2,16 @@ package com.example.capstonehabitapp.ui
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.capstonehabitapp.R
-import com.example.capstonehabitapp.databinding.FragmentToolSaleConfirmationDialogBinding
+import com.example.capstonehabitapp.databinding.FragmentTwoButtonsDialogBinding
 
 class ToolSaleConfirmationDialogFragment: DialogFragment() {
 
-    private var _binding: FragmentToolSaleConfirmationDialogBinding? = null
+    private var _binding: FragmentTwoButtonsDialogBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var toolName: String
@@ -24,7 +22,7 @@ class ToolSaleConfirmationDialogFragment: DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate layout for this fragment
-        _binding = FragmentToolSaleConfirmationDialogBinding.inflate(inflater, container, false)
+        _binding = FragmentTwoButtonsDialogBinding.inflate(inflater, container, false)
 
         // Set rounded corner background for this dialog
         dialog!!.window?.setBackgroundDrawableResource(R.drawable.rounded_corner)
@@ -40,9 +38,12 @@ class ToolSaleConfirmationDialogFragment: DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.messageText.text = getString(R.string.tool_sale_confirmation_message_placeholder, toolName, childName)
+        binding.messageText.text = getString(R.string.tool_sale_confirmation_message, toolName, childName)
+        binding.positiveButton.text = getString(R.string.button_label_sell)
+        binding.negativeButton.text = getString(R.string.button_label_cancel)
 
-        binding.sellButton.setOnClickListener {
+        // Set button onClickListener for selling item
+        binding.positiveButton.setOnClickListener {
             // TODO: Write method to sell this tool and change its status to sold
             Log.i("ToolSaleConfirmation", "Tool $toolName is sold to $childName")
 
@@ -50,7 +51,8 @@ class ToolSaleConfirmationDialogFragment: DialogFragment() {
             findNavController().popBackStack()
         }
 
-        binding.cancelButton.setOnClickListener {
+        // Set button onClickListener for canceling action
+        binding.negativeButton.setOnClickListener {
             // Dismiss this dialog
             findNavController().popBackStack()
         }

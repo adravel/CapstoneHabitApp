@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Capstone Habit App</string>
-    <!-- Placeholders -->
+    <!-- Data Placeholders -->
     <string name="task_title_placeholder">Merapikan tempat tidur</string>
     <string name="task_area_placeholder">Kamar Tidur</string>
     <string name="task_difficulty_placeholder">Mudah</string>
@@ -16,7 +16,8 @@
     <string name="child_greetings_placeholder">Halo, %1$s !</string>
     <string name="child_level_placeholder">Level : %1$s</string>
     <string name="child_exp_placeholder">Exp : %1$d/50</string>
-    <string name="tool_sale_confirmation_message_placeholder">Jual [%1$s] ke [%2$s] ?</string>
+    <!-- Lorem Ipsum -->
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <!-- Misc -->
     <string name="role_pref_key">rolePref</string>
     <string name="role_pref_is_parent_key">isParent</string>
@@ -48,7 +49,7 @@
     <string name="task_grade_1">Kurang</string>
     <string name="task_grade_2">Baik</string>
     <string name="task_grade_3">Sangat Baik</string>
-    <!-- Menu -->
+    <!-- Menus -->
     <string-array name="difficulties">
         <item>@string/task_difficulty_0</item>
         <item>@string/task_difficulty_1</item>
@@ -93,7 +94,7 @@
     <string name="finish">Selesai</string>
     <string name="ask_parent_for_grading">Meminta penilaian ke orang tua</string>
     <string name="pick_tools">Pilih Alat</string>
-    <!-- Button Label -->
+    <!-- Button Labels -->
     <string name="button_label_add_child">Tambah Anak</string>
     <string name="button_label_start_task">Kerjakan</string>
     <string name="button_label_finish_task">Selesai</string>
@@ -105,10 +106,16 @@
     <string name="button_label_open_task_photo">Lihat Foto Pekerjaan</string>
     <string name="button_label_sell">Jual</string>
     <string name="button_label_sold">Terjual</string>
+    <string name="button_label_yes">Ya</string>
+    <string name="button_label_no">Tidak</string>
+    <string name="button_label_ok">Oke</string>
     <string name="button_label_cancel">Batal</string>
-    <!-- Hint -->
+    <!-- Hints -->
     <string name="hint_text">Type something</string>
     <string name="hint_time">00:00</string>
+    <!-- Dialog Messages -->
+    <string name="tool_sale_confirmation_message">Jual %1$s ke %2$s ?</string>
+    <string name="grading_method_selection_message">Apakah kamu sedang bersama orang tua mu sekarang?</string>
     <!-- Toast Messages -->
     <string name="data_fetch_failed">Pengambilan data gagal</string>
     <string name="task_creation_success">Pekerjaan berhasil dibuat!</string>
