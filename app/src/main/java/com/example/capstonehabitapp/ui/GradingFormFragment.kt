@@ -109,7 +109,7 @@ class GradingFormFragment: Fragment() {
                         Toast.makeText(
                             context,
                             getString(R.string.grading_success, gradePoints),
-                            Toast.LENGTH_SHORT
+                            Toast.LENGTH_LONG
                         ).show()
 
                         // Return to task detail page

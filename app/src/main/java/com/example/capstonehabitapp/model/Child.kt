@@ -10,7 +10,7 @@ data class Child(
     @field:JvmField
     var isMale: Boolean = true,
     var totalPoints: Long = 0,
-    var currentPoints: Long = 0,
+    var cash: Long = 0,
     var level: Long = 0,
     var badge: Long = 0,
     var timeCreated: Timestamp? = null

@@ -71,14 +71,14 @@ class GradingFormViewModel: ViewModel() {
                     val querySnapshot = transaction.get(childDocRef)
 
                     val totalPoints = querySnapshot.getLong("totalPoints")!!.toInt() + gradePoints
-                    var currentPoints = querySnapshot.getLong("currentPoints")!!.toInt() + gradePoints
+                    var cash = querySnapshot.getLong("cash")!!.toInt() + (gradePoints * 10)
                     var level = querySnapshot.getLong("level")!!.toInt()
                     val pointsToLevelUp = level * 50
 
                     // Level up if the child has enough points to level up and has not reached max level
                     if (totalPoints >= pointsToLevelUp && level < 10) {
                         // Gain bonus
-                        currentPoints += level * 5
+                        cash += level * 5 * 10
 
                         // Level up
                         level++
@@ -93,7 +93,7 @@ class GradingFormViewModel: ViewModel() {
                     val childUpdates = hashMapOf<String, Any>(
                         "level" to level,
                         "totalPoints" to totalPoints,
-                        "currentPoints" to currentPoints
+                        "cash" to cash
                     )
 
                     // Update task and child documents
