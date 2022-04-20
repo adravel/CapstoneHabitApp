@@ -81,10 +81,10 @@ class ShopFragment: Fragment() {
             when (response) {
                 is Response.Loading -> {}
                 is Response.Success -> {
-                    val toolName = response.data
-
-                    // Clear LiveData value so the success dialog won't be shown again
+                    // Clear the LiveData so the code below will be executed only once
                     viewModel.toolNameResponseHandled()
+
+                    val toolName = response.data
 
                     // Fetch tools data again to update the sale status
                     viewModel.getToolsFromFirebase(childId)
@@ -94,7 +94,7 @@ class ShopFragment: Fragment() {
                     view.findNavController().navigate(action)
                 }
                 is Response.Failure -> {
-                    // Clear LiveData value so the Toast won't be shown again
+                    // Clear the LiveData so the code below will be executed only once
                     viewModel.toolNameResponseHandled()
 
                     Log.e("Shop", response.message)

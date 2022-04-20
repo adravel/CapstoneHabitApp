@@ -92,6 +92,9 @@ class TaskDetailFragment : Fragment() {
             when (response) {
                 is Response.Loading -> {}
                 is Response.Success -> {
+                    // Clear the LiveData so the code below will be executed only once
+                    viewModel.taskStatusChangeResponseHandled()
+
                     // Display a toast when task status changes
                     // i.e. when the button is clicked and the function is executed successfully
                     when (response.data) {
@@ -104,6 +107,9 @@ class TaskDetailFragment : Fragment() {
                     viewModel.getTaskFromFirebase(taskId)
                 }
                 is Response.Failure -> {
+                    // Clear the LiveData so the code below will be executed only once
+                    viewModel.taskStatusChangeResponseHandled()
+
                     Log.e("TaskDetail", response.message)
                     Toast.makeText(context, getString(R.string.request_failed), Toast.LENGTH_SHORT).show()
                 }

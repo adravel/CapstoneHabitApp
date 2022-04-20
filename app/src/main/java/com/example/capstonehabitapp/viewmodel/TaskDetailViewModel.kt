@@ -37,7 +37,6 @@ class TaskDetailViewModel: ViewModel() {
         var response: Task
 
         _task.postValue(Response.Loading())
-        _taskStatusChange.postValue(Response.Loading())
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -137,5 +136,10 @@ class TaskDetailViewModel: ViewModel() {
                 e.message?.let { _taskStatusChange.postValue(Response.Failure(it)) }
             }
         }
+    }
+
+    // Set task status change LiveData value to null
+    fun taskStatusChangeResponseHandled() {
+        _taskStatusChange.value = null
     }
 }
