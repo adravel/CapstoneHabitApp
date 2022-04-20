@@ -33,7 +33,7 @@ class ToolAdapter(
             powerText.text = tools[position].power.toString()
             priceText.text = tools[position].price.toString()
 
-            if (tools[position].sold) {
+            if (tools[position].isForSale) {
                 sellButton.isEnabled = false
                 sellButton.text = context.getString(R.string.button_label_sold)
             } else {
@@ -43,7 +43,9 @@ class ToolAdapter(
 
             sellButton.setOnClickListener { view ->
                 val action = ShopFragmentDirections.actionShopFragmentToToolSaleConfirmationDialogFragment(
+                    tools[position].id,
                     tools[position].name,
+                    childId,
                     childName
                 )
                 view.findNavController().navigate(action)

@@ -115,6 +115,7 @@
     <string name="hint_time">00:00</string>
     <!-- Dialog Messages -->
     <string name="tool_sale_confirmation_message">Jual %1$s ke %2$s ?</string>
+    <string name="tool_sale_success_message">%1$s berhasil dijual.</string>
     <string name="grading_method_selection_message">Apakah kamu sedang bersama orang tua mu sekarang?</string>
     <!-- Toast Messages -->
     <string name="data_fetch_failed">Pengambilan data gagal</string>

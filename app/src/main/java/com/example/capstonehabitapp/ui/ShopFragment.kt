@@ -1,16 +1,21 @@
 package com.example.capstonehabitapp.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.adapter.ToolAdapter
 import com.example.capstonehabitapp.databinding.FragmentShopBinding
-import com.example.capstonehabitapp.model.Tool
+import com.example.capstonehabitapp.util.Response
+import com.example.capstonehabitapp.viewmodel.ShopViewModel
 
 class ShopFragment: Fragment() {
 
@@ -21,6 +26,8 @@ class ShopFragment: Fragment() {
 
     private lateinit var childId: String
     private lateinit var childName: String
+
+    private val viewModel: ShopViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,20 +50,57 @@ class ShopFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val dummyList = mutableListOf(
-            Tool("1", "Meriam 1", crushingTool = true, sold = false, 7, 15, ""),
-            Tool("2", "Meriam 2", crushingTool = true, sold = false, 10, 20, ""),
-            Tool("3", "Meriam 3", crushingTool = true, sold = false, 20, 35, ""),
-            Tool("4", "Meriam 4", crushingTool = true, sold = false, 30, 40, ""),
-            Tool("5", "Sapu", crushingTool = false, sold = false, 15, 25, ""),
-            Tool("6", "Palu", crushingTool = false, sold = false, 12, 20, "")
-        )
-
         // Set the adapter and layoutManager for task list RecyclerView
-        toolAdapter = ToolAdapter(dummyList, childId, childName)
+        toolAdapter = ToolAdapter(mutableListOf(), childId, childName)
         binding.toolListRecyclerView.apply {
             adapter = toolAdapter
             layoutManager = GridLayoutManager(context, 2)
+        }
+
+        // Fetch tools data from Firestore
+        viewModel.getToolsFromFirebase(childId)
+
+        // Observe tools LiveData in ViewModel
+        viewModel.tools.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Response.Loading -> {}
+                is Response.Success -> {
+                    val tools = response.data
+                    toolAdapter.updateList(tools)
+                }
+                is Response.Failure -> {
+                    Log.e("Shop", response.message)
+                    Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        // Observe toolName LiveData in ViewModel
+        // This value determines whether tool sale query is successful or not
+        viewModel.toolName.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Response.Loading -> {}
+                is Response.Success -> {
+                    val toolName = response.data
+
+                    // Clear LiveData value so the success dialog won't be shown again
+                    viewModel.toolNameResponseHandled()
+
+                    // Fetch tools data again to update the sale status
+                    viewModel.getToolsFromFirebase(childId)
+
+                    // Show tool sale success dialog
+                    val action = ShopFragmentDirections.actionShopFragmentToToolSaleSuccessDialogFragment(toolName)
+                    view.findNavController().navigate(action)
+                }
+                is Response.Failure -> {
+                    // Clear LiveData value so the Toast won't be shown again
+                    viewModel.toolNameResponseHandled()
+
+                    Log.e("Shop", response.message)
+                    Toast.makeText(context, getString(R.string.request_failed), Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 

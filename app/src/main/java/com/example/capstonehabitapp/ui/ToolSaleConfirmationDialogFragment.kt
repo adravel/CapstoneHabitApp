@@ -4,18 +4,24 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentTwoButtonsDialogBinding
+import com.example.capstonehabitapp.viewmodel.ShopViewModel
 
 class ToolSaleConfirmationDialogFragment: DialogFragment() {
 
     private var _binding: FragmentTwoButtonsDialogBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var toolId: String
     private lateinit var toolName: String
+    private lateinit var childId: String
     private lateinit var childName: String
+
+    private val viewModel: ShopViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,9 +33,11 @@ class ToolSaleConfirmationDialogFragment: DialogFragment() {
         // Set rounded corner background for this dialog
         dialog!!.window?.setBackgroundDrawableResource(R.drawable.rounded_corner)
 
-        // Initialize tool name and child name using Safe Args provided by navigation component
+        // Initialize tool and child data using Safe Args provided by navigation component
         val args: ToolSaleConfirmationDialogFragmentArgs by navArgs()
+        toolId = args.tooldId
         toolName = args.toolName
+        childId = args.childId
         childName = args.childName
 
         return binding.root
@@ -44,8 +52,8 @@ class ToolSaleConfirmationDialogFragment: DialogFragment() {
 
         // Set button onClickListener for selling item
         binding.positiveButton.setOnClickListener {
-            // TODO: Write method to sell this tool and change its status to sold
-            Log.i("ToolSaleConfirmation", "Tool $toolName is sold to $childName")
+            // Sell this tool
+            viewModel.setToolForSale(childId, toolId, toolName)
 
             // Dismiss this dialog
             findNavController().popBackStack()
