@@ -16,6 +16,7 @@
     <string name="child_greetings_placeholder">Halo, %1$s !</string>
     <string name="child_level_placeholder">Level : %1$s</string>
     <string name="child_exp_placeholder">Exp : %1$d/50</string>
+    <string name="house_hp_placeholder">HP : %1$d/%2$d</string>
     <!-- Lorem Ipsum -->
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <!-- Misc -->

@@ -45,7 +45,12 @@ class HouseRescueConfirmationDialogFragment: DialogFragment() {
         // Set button onClickListener for rescuing the house
         binding.positiveButton.setOnClickListener {
             // Navigate to house detail page
-            // findNavController().navigate(R.id.houseDetailFragment)
+            val action = HouseRescueConfirmationDialogFragmentDirections
+                .actionHouseRescueConfirmationDialogFragmentToHouseDetailFragment(
+                    houseId,
+                    houseName
+                )
+            findNavController().navigate(action)
         }
 
         // Set button onClickListener for canceling action

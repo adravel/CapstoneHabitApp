@@ -26,7 +26,7 @@ class HouseAdapter(private val houses: MutableList<House>): RecyclerView.Adapter
         // Bind the data to RecyclerView item's Views
         holder.itemBinding.apply {
             nameText.text = houses[position].name
-            hpText.text = houses[position].hp.toString()
+            hpText.text = houses[position].maxHp.toString()
             islandText.text = houses[position].island
 
             if (houses[position].status.toInt() == 0) {

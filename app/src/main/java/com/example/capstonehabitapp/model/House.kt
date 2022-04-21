@@ -10,5 +10,6 @@ data class House(
     val name: String = "",
     val island: String = "",
     val description: String = "",
+    val maxHp: Long = 0,
     val assetImage: String = ""
 )

@@ -170,5 +170,20 @@
         <argument
             android:name="houseName"
             app:argType="string" />
+        <action
+            android:id="@+id/action_houseRescueConfirmationDialogFragment_to_houseDetailFragment"
+            app:destination="@id/houseDetailFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/houseDetailFragment"
+        android:name="com.example.capstonehabitapp.ui.HouseDetailFragment"
+        android:label="HouseDetailFragment"
+        tools:layout="@layout/fragment_house_detail">
+        <argument
+            android:name="houseId"
+            app:argType="string" />
+        <argument
+            android:name="houseName"
+            app:argType="string" />
+    </fragment>
 </navigation>
