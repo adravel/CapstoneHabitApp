@@ -33,6 +33,9 @@ class HouseAdapter(private val houses: MutableList<House>): RecyclerView.Adapter
                 // Disable button if house has not been unlocked
                 rescueButton.isEnabled = false
                 rescueButton.text = context.getString(R.string.button_label_locked)
+
+                // Overlay image with icon
+                assetImage.setImageResource(R.drawable.ic_placeholder)
             } else {
                 rescueButton.isEnabled = true
                 rescueButton.text = context.getString(R.string.button_label_rescue)
