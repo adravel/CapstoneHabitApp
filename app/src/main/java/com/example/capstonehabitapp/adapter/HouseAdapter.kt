@@ -2,10 +2,12 @@ package com.example.capstonehabitapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.ItemHouseBinding
 import com.example.capstonehabitapp.model.House
+import com.example.capstonehabitapp.ui.HouseListFragmentDirections
 
 class HouseAdapter(private val houses: MutableList<House>): RecyclerView.Adapter<HouseAdapter.HouseViewHolder>() {
 
@@ -34,6 +36,15 @@ class HouseAdapter(private val houses: MutableList<House>): RecyclerView.Adapter
             } else {
                 rescueButton.isEnabled = true
                 rescueButton.text = context.getString(R.string.button_label_rescue)
+            }
+
+            rescueButton.setOnClickListener { view ->
+                // Display house rescue confirmation dialog
+                val action = HouseListFragmentDirections.actionHouseListFragmentToHouseRescueConfirmationDialogFragment(
+                    houses[position].id,
+                    houses[position].name
+                )
+                view.findNavController().navigate(action)
             }
         }
     }

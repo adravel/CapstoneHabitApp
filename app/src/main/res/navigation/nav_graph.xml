@@ -155,5 +155,20 @@
         android:id="@+id/houseListFragment"
         android:name="com.example.capstonehabitapp.ui.HouseListFragment"
         android:label="HouseListFragment"
-        tools:layout="@layout/fragment_house_list"/>
+        tools:layout="@layout/fragment_house_list">
+        <action
+            android:id="@+id/action_houseListFragment_to_houseRescueConfirmationDialogFragment"
+            app:destination="@id/houseRescueConfirmationDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/houseRescueConfirmationDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.HouseRescueConfirmationDialogFragment"
+        android:label="HouseRescueConfirmationDialogFragment" >
+        <argument
+            android:name="houseId"
+            app:argType="string" />
+        <argument
+            android:name="houseName"
+            app:argType="string" />
+    </dialog>
 </navigation>
