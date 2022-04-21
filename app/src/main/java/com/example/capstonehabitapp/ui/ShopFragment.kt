@@ -50,7 +50,7 @@ class ShopFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set the adapter and layoutManager for task list RecyclerView
+        // Set the adapter and layoutManager for tool list RecyclerView
         toolAdapter = ToolAdapter(mutableListOf(), childId, childName)
         binding.toolListRecyclerView.apply {
             adapter = toolAdapter

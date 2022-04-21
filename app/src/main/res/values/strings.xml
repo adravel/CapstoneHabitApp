@@ -94,6 +94,7 @@
     <string name="finish">Selesai</string>
     <string name="ask_parent_for_grading">Meminta penilaian ke orang tua</string>
     <string name="pick_tools">Pilih Alat</string>
+    <string name="pick_houses">Pilih Rumah Adat</string>
     <!-- Button Labels -->
     <string name="button_label_add_child">Tambah Anak</string>
     <string name="button_label_start_task">Kerjakan</string>
@@ -110,6 +111,8 @@
     <string name="button_label_no">Tidak</string>
     <string name="button_label_ok">Oke</string>
     <string name="button_label_cancel">Batal</string>
+    <string name="button_label_rescue">Selamatkan</string>
+    <string name="button_label_locked">Terkunci</string>
     <!-- Hints -->
     <string name="hint_text">Type something</string>
     <string name="hint_time">00:00</string>

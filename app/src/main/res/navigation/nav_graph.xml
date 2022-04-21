@@ -82,6 +82,9 @@
         <action
             android:id="@+id/action_childHomeFragment_to_taskDetailFragment"
             app:destination="@id/taskDetailFragment" />
+        <action
+            android:id="@+id/action_childHomeFragment_to_houseListFragment"
+            app:destination="@id/houseListFragment" />
     </fragment>
     <fragment
         android:id="@+id/taskCreationFragment"
@@ -148,4 +151,9 @@
             android:name="toolName"
             app:argType="string" />
     </dialog>
+    <fragment
+        android:id="@+id/houseListFragment"
+        android:name="com.example.capstonehabitapp.ui.HouseListFragment"
+        android:label="HouseListFragment"
+        tools:layout="@layout/fragment_house_list"/>
 </navigation>

@@ -111,6 +111,10 @@ class ChildHomeFragment: Fragment() {
         binding.taskMenuCard.setOnClickListener {
             it.findNavController().navigate(R.id.taskListFragment)
         }
+
+        binding.houseMenuCard.setOnClickListener {
+            it.findNavController().navigate(R.id.houseListFragment)
+        }
     }
 
     override fun onDestroyView() {
