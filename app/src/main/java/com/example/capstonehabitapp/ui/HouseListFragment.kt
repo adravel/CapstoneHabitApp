@@ -1,15 +1,20 @@
 package com.example.capstonehabitapp.ui
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.adapter.HouseAdapter
 import com.example.capstonehabitapp.databinding.FragmentHouseListBinding
-import com.example.capstonehabitapp.model.House
+import com.example.capstonehabitapp.util.Response
+import com.example.capstonehabitapp.viewmodel.HouseListViewModel
 
 class HouseListFragment: Fragment() {
 
@@ -17,6 +22,8 @@ class HouseListFragment: Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var houseAdapter: HouseAdapter
+
+    private val viewModel: HouseListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,18 +41,35 @@ class HouseListFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val dummyList = mutableListOf(
-            House("abc", 1, 0, 150, "Rumah Adat 1", "Jawa", getString(R.string.lorem_ipsum), ""),
-            House("gr1", 2, 1, 200, "Rumah Adat 2", "Kalimantan", getString(R.string.lorem_ipsum), ""),
-            House("vyo", 3, 1, 170, "Rumah Adat 3", "Papua",  getString(R.string.lorem_ipsum), ""),
-            House("9fu", 4, 2, 180, "Rumah Adat 4", "Sumatera",  getString(R.string.lorem_ipsum), "")
-        )
-
         // Set the adapter and layoutManager for task list RecyclerView
-        houseAdapter = HouseAdapter(dummyList)
+        houseAdapter = HouseAdapter(mutableListOf())
         binding.houseListRecyclerView.apply {
             adapter = houseAdapter
             layoutManager = GridLayoutManager(context, 2)
+        }
+
+        // Retrieve child ID from shared preference
+        val sharedPref = activity?.getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
+        val childId = sharedPref?.getString(getString(R.string.role_pref_child_id_key), "")
+
+        // Fetch houses data from Firestore
+        if (childId != null && childId != "") {
+            viewModel.getHousesFromFirebase(childId)
+        }
+
+        // Observe houses LiveData in ViewModel
+        viewModel.houses.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Response.Loading -> {}
+                is Response.Success -> {
+                    val houses = response.data
+                    houseAdapter.updateList(houses)
+                }
+                is Response.Failure -> {
+                    Log.e("HouseList", response.message)
+                    Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
