@@ -14,6 +14,7 @@ import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentHouseDetailBinding
 import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.viewmodel.HouseDetailViewModel
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class HouseDetailFragment: Fragment() {
 
@@ -22,6 +23,8 @@ class HouseDetailFragment: Fragment() {
 
     private lateinit var houseId: String
     private lateinit var houseName: String
+
+    private lateinit var shopBottomSheetBehavior: BottomSheetBehavior<*>
 
     private val viewModel: HouseDetailViewModel by viewModels()
 
@@ -40,11 +43,36 @@ class HouseDetailFragment: Fragment() {
         // Set toolbar title
         activity?.title = houseName
 
+        // Initialize bottom sheet
+        shopBottomSheetBehavior = BottomSheetBehavior.from(binding.shopBottomSheetCard)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Set bottom sheet behavior to flip arrow icon when bottom sheet is expanded
+        shopBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_EXPANDED -> binding.arrowIconImage.scaleY = -1F
+                    BottomSheetBehavior.STATE_COLLAPSED -> binding.arrowIconImage.scaleY = 1F
+                    else -> {}
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+        })
+
+        // Set arrow icon onClickListener to expand/collapse the bottom sheet
+        binding.arrowIconImage.setOnClickListener {
+            if (shopBottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
+                shopBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            } else {
+                shopBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            }
+        }
 
         // Retrieve child ID from shared preference
         val sharedPref = activity?.getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
