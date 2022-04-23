@@ -51,7 +51,7 @@ class ShopFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Set the adapter and layoutManager for tool list RecyclerView
-        toolAdapter = ToolAdapter(mutableListOf(), childId, childName)
+        toolAdapter = ToolAdapter(mutableListOf(), true, childId, childName)
         binding.toolListRecyclerView.apply {
             adapter = toolAdapter
             layoutManager = GridLayoutManager(context, 2)

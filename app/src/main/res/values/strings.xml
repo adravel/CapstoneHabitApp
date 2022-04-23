@@ -106,6 +106,7 @@
     <string name="button_label_grade_by_child">Nilai Langsung</string>
     <string name="button_label_grade_by_parent">Kirim Permintaan Penilaian</string>
     <string name="button_label_open_task_photo">Lihat Foto Pekerjaan</string>
+    <string name="button_label_buy">Beli</string>
     <string name="button_label_sell">Jual</string>
     <string name="button_label_sold">Terjual</string>
     <string name="button_label_yes">Ya</string>
@@ -114,6 +115,7 @@
     <string name="button_label_cancel">Batal</string>
     <string name="button_label_rescue">Selamatkan</string>
     <string name="button_label_locked">Terkunci</string>
+    <string name="button_label_use">Gunakan</string>
     <!-- Hints -->
     <string name="hint_text">Type something</string>
     <string name="hint_time">00:00</string>

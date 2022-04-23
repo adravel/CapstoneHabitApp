@@ -10,8 +10,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.capstonehabitapp.R
+import com.example.capstonehabitapp.adapter.ToolAdapter
 import com.example.capstonehabitapp.databinding.FragmentHouseDetailBinding
+import com.example.capstonehabitapp.model.Tool
 import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.viewmodel.HouseDetailViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -20,6 +23,8 @@ class HouseDetailFragment: Fragment() {
 
     private var _binding: FragmentHouseDetailBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var toolAdapter: ToolAdapter
 
     private lateinit var houseId: String
     private lateinit var houseName: String
@@ -52,36 +57,28 @@ class HouseDetailFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set bottom sheet behavior to flip arrow icon when bottom sheet is expanded
-        shopBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                when (newState) {
-                    BottomSheetBehavior.STATE_EXPANDED -> binding.arrowIconImage.scaleY = -1F
-                    BottomSheetBehavior.STATE_COLLAPSED -> binding.arrowIconImage.scaleY = 1F
-                    else -> {}
-                }
-            }
-
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
-        })
-
-        // Set arrow icon onClickListener to expand/collapse the bottom sheet
-        binding.arrowIconImage.setOnClickListener {
-            if (shopBottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
-                shopBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-            } else {
-                shopBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-            }
-        }
-
         // Retrieve child ID from shared preference
         val sharedPref = activity?.getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
         val childId = sharedPref?.getString(getString(R.string.role_pref_child_id_key), "")
 
-        // Fetch house detail data from Firestore
-        if (childId != null && childId != "") {
-            viewModel.getHouseFromFirebase(childId, houseId)
+        val dummyList = mutableListOf(
+            Tool("abc", 1, true, true, "Alat 1", 20, 200, ""),
+            Tool("asd", 2, true, true, "Alat 2", 20, 200, ""),
+            Tool("a9f", 3, true, true, "Alat 3", 20, 200, ""),
+            Tool("axa", 4, true, true, "Alat 4", 20, 200, ""),
+            Tool("a9f", 3, true, true, "Alat 3", 20, 200, ""),
+            Tool("axa", 4, true, true, "Alat 4", 20, 200, ""),
+        )
+
+        // Set the adapter and layoutManager for tool list RecyclerView
+        toolAdapter = ToolAdapter(dummyList, false, childId!!)
+        binding.toolListRecyclerView.apply {
+            adapter = toolAdapter
+            layoutManager = GridLayoutManager(context, 2)
         }
+
+        // Fetch house detail data from Firestore
+        viewModel.getHouseFromFirebase(childId, houseId)
 
         // Observe house LiveData in ViewModel
         viewModel.house.observe(viewLifecycleOwner) { response ->
@@ -101,6 +98,28 @@ class HouseDetailFragment: Fragment() {
                     Log.e("HouseDetail", response.message)
                     Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
                 }
+            }
+        }
+
+        // Set bottom sheet behavior to flip arrow icon when bottom sheet is expanded
+        shopBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_EXPANDED -> binding.arrowIconImage.scaleY = -1F
+                    BottomSheetBehavior.STATE_COLLAPSED -> binding.arrowIconImage.scaleY = 1F
+                    else -> {}
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+        })
+
+        // Set arrow icon onClickListener to expand/collapse the bottom sheet
+        binding.arrowIconImage.setOnClickListener {
+            if (shopBottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
+                shopBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            } else {
+                shopBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             }
         }
     }
