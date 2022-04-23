@@ -128,12 +128,12 @@
                 android:id="@+id/cash_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dana : Rp 2.400"
                 android:textColor="@color/state_info_dark"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/shop_text"
-                app:layout_constraintBottom_toBottomOf="@id/shop_text"/>
+                app:layout_constraintBottom_toBottomOf="@id/shop_text"
+                tools:text="Dana : Rp 2400" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/tool_list_recycler_view"

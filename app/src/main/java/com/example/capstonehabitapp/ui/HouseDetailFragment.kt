@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.adapter.ToolAdapter
 import com.example.capstonehabitapp.databinding.FragmentHouseDetailBinding
-import com.example.capstonehabitapp.model.Tool
 import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.viewmodel.HouseDetailViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -61,24 +60,17 @@ class HouseDetailFragment: Fragment() {
         val sharedPref = activity?.getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
         val childId = sharedPref?.getString(getString(R.string.role_pref_child_id_key), "")
 
-        val dummyList = mutableListOf(
-            Tool("abc", 1, true, true, "Alat 1", 20, 200, ""),
-            Tool("asd", 2, true, true, "Alat 2", 20, 200, ""),
-            Tool("a9f", 3, true, true, "Alat 3", 20, 200, ""),
-            Tool("axa", 4, true, true, "Alat 4", 20, 200, ""),
-            Tool("a9f", 3, true, true, "Alat 3", 20, 200, ""),
-            Tool("axa", 4, true, true, "Alat 4", 20, 200, ""),
-        )
-
         // Set the adapter and layoutManager for tool list RecyclerView
-        toolAdapter = ToolAdapter(dummyList, false, childId!!)
+        toolAdapter = ToolAdapter(mutableListOf(), false, childId!!)
         binding.toolListRecyclerView.apply {
             adapter = toolAdapter
             layoutManager = GridLayoutManager(context, 2)
         }
 
-        // Fetch house detail data from Firestore
+        // Fetch house detail and tools data from Firestore
         viewModel.getHouseFromFirebase(childId, houseId)
+        viewModel.getToolsForSaleFromFirebase(childId)
+        viewModel.getChildCashFromFirestore(childId)
 
         // Observe house LiveData in ViewModel
         viewModel.house.observe(viewLifecycleOwner) { response ->
@@ -93,6 +85,36 @@ class HouseDetailFragment: Fragment() {
                         houseHpProgressBar.max = house.maxHp.toInt()
                         houseHpProgressBar.progress = house.hp.toInt()
                     }
+                }
+                is Response.Failure -> {
+                    Log.e("HouseDetail", response.message)
+                    Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        // Observe tools LiveData in ViewModel
+        viewModel.tools.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Response.Loading -> {}
+                is Response.Success -> {
+                    val tools = response.data
+                    toolAdapter.updateList(tools)
+                }
+                is Response.Failure -> {
+                    Log.e("HouseDetail", response.message)
+                    Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        // Observe child cash LiveData in ViewModel
+        viewModel.childCash.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Response.Loading -> {}
+                is Response.Success -> {
+                    val cash = response.data
+                    binding.cashText.text = getString(R.string.child_cash_placeholder, cash)
                 }
                 is Response.Failure -> {
                     Log.e("HouseDetail", response.message)
