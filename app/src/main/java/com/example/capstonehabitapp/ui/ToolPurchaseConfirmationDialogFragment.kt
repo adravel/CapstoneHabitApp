@@ -19,7 +19,6 @@ class ToolPurchaseConfirmationDialogFragment: DialogFragment() {
 
     private lateinit var toolId: String
     private lateinit var toolName: String
-    private lateinit var childId: String
 
     private val viewModel: HouseDetailViewModel by activityViewModels()
 
@@ -37,7 +36,6 @@ class ToolPurchaseConfirmationDialogFragment: DialogFragment() {
         val args: ToolPurchaseConfirmationDialogFragmentArgs by navArgs()
         toolId = args.toolId
         toolName = args.toolName
-        childId = args.childId
 
         return binding.root
     }
@@ -51,7 +49,8 @@ class ToolPurchaseConfirmationDialogFragment: DialogFragment() {
 
         // Set button onClickListener for purchasing tool item
         binding.positiveButton.setOnClickListener {
-            // TODO: Write function to buy item, calculate child cash and house hp
+            // Buy tool item
+            viewModel.purchaseTool(toolId)
 
             // Dismiss this dialog
             findNavController().popBackStack()

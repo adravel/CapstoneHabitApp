@@ -64,8 +64,7 @@ class ToolAdapter(
                     val action = HouseDetailFragmentDirections
                         .actionHouseDetailFragmentToToolPurchaseConfirmationDialogFragment(
                             tools[position].id,
-                            tools[position].name,
-                            childId
+                            tools[position].name
                         )
                     view.findNavController().navigate(action)
                 }

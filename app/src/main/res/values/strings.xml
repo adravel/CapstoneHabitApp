@@ -135,4 +135,6 @@
     <string name="ask_for_grading_success">Permintaan penilaian berhasil dikirim!</string>
     <string name="grading_success">Pekerjaan berhasil dinilai! Anak mendapat tambahan %1$d poin</string>
     <string name="request_failed">Permintaan gagal</string>
+    <string name="tool_purchase_success">Alat berhasil dibeli!</string>
+    <string name="not_enough_cash_failure">Dana tidak cukup untuk membeli alat</string>
 </resources>

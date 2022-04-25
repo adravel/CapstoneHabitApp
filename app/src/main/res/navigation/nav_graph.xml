@@ -199,8 +199,5 @@
         <argument
             android:name="toolName"
             app:argType="string" />
-        <argument
-            android:name="childId"
-            app:argType="string" />
     </dialog>
 </navigation>

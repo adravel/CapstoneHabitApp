@@ -60,20 +60,25 @@ class HouseDetailFragment: Fragment() {
         val sharedPref = activity?.getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
         val childId = sharedPref?.getString(getString(R.string.role_pref_child_id_key), "")
 
+        // Set child and house document IDs
+        viewModel.setChildId(childId!!)
+        viewModel.setHouseId(houseId)
+
         // Set the adapter and layoutManager for tool list RecyclerView
-        toolAdapter = ToolAdapter(mutableListOf(), false, childId!!)
+        toolAdapter = ToolAdapter(mutableListOf(), false, childId)
         binding.toolListRecyclerView.apply {
             adapter = toolAdapter
             layoutManager = GridLayoutManager(context, 2)
         }
 
-        // Fetch house detail and tools data from Firestore
-        viewModel.getHouseFromFirebase(childId, houseId)
-        viewModel.getToolsForSaleFromFirebase(childId)
-        viewModel.getChildCashFromFirestore(childId)
+        // Fetch house detail, tool list, and child cash data from Firestore
+        viewModel.getHouseFromFirebase()
+        viewModel.getToolsForSaleFromFirebase()
+        viewModel.getChildCashFromFirestore()
 
         // Observe house LiveData in ViewModel
         viewModel.house.observe(viewLifecycleOwner) { response ->
+            Log.d("HouseDetail", "Observing house data...")
             when (response) {
                 is Response.Loading -> {}
                 is Response.Success -> {
@@ -119,6 +124,32 @@ class HouseDetailFragment: Fragment() {
                 is Response.Failure -> {
                     Log.e("HouseDetail", response.message)
                     Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        // Observe tool purchase status in ViewModel
+        // This value determines whether tool purchase transaction is successful or not
+        viewModel.toolPurchaseResult.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Response.Loading -> {}
+                is Response.Success -> {
+                    // Clear the LiveData so the code below will be executed only once
+                    viewModel.toolPurchaseResultResponseHandled()
+
+                    Toast.makeText(context, getString(R.string.tool_purchase_success), Toast.LENGTH_SHORT).show()
+
+                    // Fetch the data to update the Views
+                    viewModel.getHouseFromFirebase()
+                    viewModel.getChildCashFromFirestore()
+                }
+                is Response.Failure -> {
+                    // Show error message as a toast
+                    if (response.message == "cash") {
+                        Toast.makeText(context, getString(R.string.not_enough_cash_failure), Toast.LENGTH_LONG).show()
+                    } else {
+                        Log.e("HouseDetail", response.message)
+                        Toast.makeText(context, getString(R.string.request_failed), Toast.LENGTH_SHORT).show()                    }
                 }
             }
         }

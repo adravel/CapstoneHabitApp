@@ -19,15 +19,24 @@ class HouseDetailViewModel: ViewModel() {
     private val testParentId = "2p8at5eicReHAP1P4zDu"
     private val parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
 
+    private var childId = ""
+    private var houseId = ""
+
     private val _house: MutableLiveData<Response<House>> = MutableLiveData()
     val house: LiveData<Response<House>> = _house
     private val _tools: MutableLiveData<Response<List<Tool>>> = MutableLiveData()
     val tools: LiveData<Response<List<Tool>>> = _tools
     private val _childCash: MutableLiveData<Response<Int>> = MutableLiveData()
     val childCash: LiveData<Response<Int>> = _childCash
+    private val _toolPurchaseResult: MutableLiveData<Response<Int>> = MutableLiveData()
+    val toolPurchaseResult: LiveData<Response<Int>> = _toolPurchaseResult
+
+    // Functions to set document IDs
+    fun setChildId(id: String) { childId = id }
+    fun setHouseId(id: String) { houseId = id }
 
     // Fetch house data from Firestore
-    fun getHouseFromFirebase(childId: String, houseId: String) {
+    fun getHouseFromFirebase() {
         _house.postValue(Response.Loading())
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -53,7 +62,7 @@ class HouseDetailViewModel: ViewModel() {
 
     // Fetch tools data from Firestore
     // where isForSale value is true
-    fun getToolsForSaleFromFirebase(childId: String) {
+    fun getToolsForSaleFromFirebase() {
         val responseList: MutableList<Tool> = mutableListOf()
 
         _tools.postValue(Response.Loading())
@@ -82,7 +91,7 @@ class HouseDetailViewModel: ViewModel() {
     }
 
     // Fetch cash data in child document from Firestore
-    fun getChildCashFromFirestore(childId: String) {
+    fun getChildCashFromFirestore() {
         _childCash.postValue(Response.Loading())
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -102,5 +111,55 @@ class HouseDetailViewModel: ViewModel() {
                 e.message?.let { _childCash.postValue(Response.Failure(it)) }
             }
         }
+    }
+
+    // Use tool to destroy the fort
+    // This function subtracts tool price from child cash
+    // and tool power from house hp
+    fun purchaseTool(toolId: String) {
+        _toolPurchaseResult.postValue(Response.Loading())
+
+        val childDocRef = parentDocRef.collection("children").document(childId)
+        val houseDocRef = childDocRef.collection("houses").document(houseId)
+        val toolDocRef = childDocRef.collection("tools").document(toolId)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                Firebase.firestore.runTransaction { transaction ->
+                    val childSnapshot = transaction.get(childDocRef)
+                    val houseSnapshot = transaction.get(houseDocRef)
+                    val toolSnapshot = transaction.get(toolDocRef)
+
+                    // Calculate new value of cash after subtraction
+                    val cash = childSnapshot.getLong("cash")!! - toolSnapshot.getLong("price")!!
+                    if (cash < 0) {
+                        _toolPurchaseResult.postValue(Response.Failure("cash"))
+                        return@runTransaction
+                    }
+
+                    // Calculate value of health points data after subtraction
+                    val hp = houseSnapshot.getLong("hp")!! - toolSnapshot.getLong("power")!!
+
+                    // Update child and house documents
+                    transaction.update(childDocRef, "cash", cash)
+                    transaction.update(houseDocRef, "hp", hp)
+                }.await()
+
+                // Check if there is any failure in completing transaction
+                if (_toolPurchaseResult.value is Response.Failure) {
+                    return@launch
+                } else {
+                    _toolPurchaseResult.postValue(Response.Success(1))
+                }
+
+            } catch (e: Exception) {
+                e.message?.let { _toolPurchaseResult.postValue(Response.Failure(it)) }
+            }
+        }
+    }
+
+    // Set tool name LiveData value to null
+    fun toolPurchaseResultResponseHandled() {
+        _toolPurchaseResult.value = null
     }
 }
