@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.capstonehabitapp.R
@@ -30,7 +30,7 @@ class HouseDetailFragment: Fragment() {
 
     private lateinit var shopBottomSheetBehavior: BottomSheetBehavior<*>
 
-    private val viewModel: HouseDetailViewModel by viewModels()
+    private val viewModel: HouseDetailViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

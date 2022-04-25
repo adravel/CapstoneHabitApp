@@ -131,7 +131,7 @@
         android:name="com.example.capstonehabitapp.ui.ToolSaleConfirmationDialogFragment"
         android:label="ToolSaleConfirmationDialogFragment" >
         <argument
-            android:name="tooldId"
+            android:name="toolId"
             app:argType="string" />
         <argument
             android:name="toolName"
@@ -185,5 +185,22 @@
         <argument
             android:name="houseName"
             app:argType="string" />
+        <action
+            android:id="@+id/action_houseDetailFragment_to_toolPurchaseConfirmationDialogFragment"
+            app:destination="@id/toolPurchaseConfirmationDialogFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/toolPurchaseConfirmationDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.ToolPurchaseConfirmationDialogFragment"
+        android:label="ToolPurchaseConfirmationDialogFragment" >
+        <argument
+            android:name="toolId"
+            app:argType="string" />
+        <argument
+            android:name="toolName"
+            app:argType="string" />
+        <argument
+            android:name="childId"
+            app:argType="string" />
+    </dialog>
 </navigation>

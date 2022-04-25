@@ -138,7 +138,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/tool_list_recycler_view"
                 android:layout_width="0dp"
-                android:layout_height="500dp"
+                android:layout_height="400dp"
                 android:paddingVertical="10dp"
                 android:paddingHorizontal="8dp"
                 android:clipToPadding="false"

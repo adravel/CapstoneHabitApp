@@ -1,6 +1,5 @@
 package com.example.capstonehabitapp.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -8,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.ItemToolBinding
 import com.example.capstonehabitapp.model.Tool
+import com.example.capstonehabitapp.ui.HouseDetailFragmentDirections
 import com.example.capstonehabitapp.ui.ShopFragmentDirections
 
 class ToolAdapter(
@@ -46,6 +46,7 @@ class ToolAdapter(
                 }
 
                 sellButton.setOnClickListener { view ->
+                    // Display tool sale confirmation dialog
                     val action = ShopFragmentDirections.actionShopFragmentToToolSaleConfirmationDialogFragment(
                         tools[position].id,
                         tools[position].name,
@@ -58,9 +59,15 @@ class ToolAdapter(
                 // Set button text and function for Child in house detail page
                 sellButton.text = context.getString(R.string.button_label_buy)
 
-                sellButton.setOnClickListener {
-                    // TODO: Add function to buy tool item
-                    Log.d("ToolAdapter", "Tool item ${tools[position].name} has been bought")
+                sellButton.setOnClickListener { view ->
+                    // Display tool purchase confirmation dialog
+                    val action = HouseDetailFragmentDirections
+                        .actionHouseDetailFragmentToToolPurchaseConfirmationDialogFragment(
+                            tools[position].id,
+                            tools[position].name,
+                            childId
+                        )
+                    view.findNavController().navigate(action)
                 }
             }
         }
