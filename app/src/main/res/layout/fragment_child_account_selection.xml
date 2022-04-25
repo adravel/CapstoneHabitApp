@@ -30,14 +30,12 @@
         app:layout_constraintTop_toBottomOf="@+id/choose_child_account_text" />
 
     <com.google.android.material.button.MaterialButton
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:id="@+id/add_child_button"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_label_add_child"
-        android:textColor="@color/dark_1"
-        app:strokeColor="@color/green"
-        app:strokeWidth="1dp"
+        android:textColor="@color/green"
+        android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/child_account_list_recycle_view" />

@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Button
+<com.google.android.material.button.MaterialButton
+    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/child_account_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:textColor="@color/dark_1"
+    app:strokeColor="@color/green"
     tools:text="@string/child_name_placeholder">
-</Button>
+</com.google.android.material.button.MaterialButton>
