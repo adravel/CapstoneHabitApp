@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.capstonehabitapp.model.Tool
 import com.example.capstonehabitapp.util.Response
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -20,19 +19,17 @@ class ShopViewModel: ViewModel() {
     private val parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
 
     private val _tools: MutableLiveData<Response<List<Tool>>> = MutableLiveData()
-    val tools: LiveData<Response<List<Tool>>> = _tools
     private val _toolName: MutableLiveData<Response<String>> = MutableLiveData()
+    val tools: LiveData<Response<List<Tool>>> = _tools
     val toolName: LiveData<Response<String>> = _toolName
 
     // Fetch tools data from Firestore
     fun getToolsFromFirebase(childId: String) {
-        val responseList: MutableList<Tool> = mutableListOf()
-
         _tools.postValue(Response.Loading())
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val querySnapshot = parentDocRef
+                val snapshot = parentDocRef
                     .collection("children")
                     .document(childId)
                     .collection("tools")
@@ -40,11 +37,12 @@ class ShopViewModel: ViewModel() {
                     .await()
 
                 // Convert each document into Tool object and add them to the list
-                for (document in querySnapshot.documents) {
-                    document.toObject<Tool>()?. let { responseList.add(it) }
+                val tools = mutableListOf<Tool>()
+                for (document in snapshot.documents) {
+                    document.toObject<Tool>()?. let { tools.add(it) }
                 }
 
-                _tools.postValue(Response.Success(responseList))
+                _tools.postValue(Response.Success(tools))
 
             } catch (e: Exception) {
                 e.message?.let { _tools.postValue(Response.Failure(it)) }

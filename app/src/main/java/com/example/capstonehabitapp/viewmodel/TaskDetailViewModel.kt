@@ -20,8 +20,8 @@ class TaskDetailViewModel: ViewModel() {
     private val parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
 
     private val _task: MutableLiveData<Response<Task>> = MutableLiveData()
-    val task: LiveData<Response<Task>> = _task
     private val _taskStatusChange: MutableLiveData<Response<Int>> = MutableLiveData()
+    val task: LiveData<Response<Task>> = _task
     val taskStatusChange: LiveData<Response<Int>> = _taskStatusChange
 
     // Calculate task duration
@@ -34,23 +34,21 @@ class TaskDetailViewModel: ViewModel() {
 
     // Fetch task data from Firebase
     fun getTaskFromFirebase(taskId: String) {
-        var response: Task
-
         _task.postValue(Response.Loading())
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 // Call Firestore get() method to query the data
-                val querySnapshot = parentDocRef
+                val snapshot = parentDocRef
                     .collection("tasks")
                     .document(taskId)
                     .get()
                     .await()
 
                 // Convert the document into Task object
-                response = querySnapshot.toObject<Task>()!!
+                val task = snapshot.toObject<Task>()!!
 
-                _task.postValue(Response.Success(response))
+                _task.postValue(Response.Success(task))
 
             } catch (e: Exception) {
                 e.message?.let { _task.postValue(Response.Failure(it)) }

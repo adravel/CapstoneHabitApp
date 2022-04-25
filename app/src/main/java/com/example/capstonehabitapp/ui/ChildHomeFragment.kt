@@ -53,7 +53,7 @@ class ChildHomeFragment: Fragment() {
         // Fetch child and essential task data from Firestore
         if (childId != null && childId != "") {
             viewModel.getChildFromFirebase(childId)
-            viewModel.getEssentialTasksFromFirebase(childId)
+            viewModel.getEssentialTasksForChildFromFirebase(childId)
         }
 
         // Observe essential tasks LiveData in ViewModel

@@ -23,13 +23,11 @@ class HouseListViewModel: ViewModel() {
 
     // Fetch houses data from Firestore
     fun getHousesFromFirebase(childId: String) {
-        val responseList: MutableList<House> = mutableListOf()
-
         _houses.postValue(Response.Loading())
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val querySnapshot = parentDocRef
+                val snapshot = parentDocRef
                     .collection("children")
                     .document(childId)
                     .collection("houses")
@@ -37,11 +35,12 @@ class HouseListViewModel: ViewModel() {
                     .await()
 
                 // Convert each document into House object and add them to the list
-                for (document in querySnapshot.documents) {
-                    document.toObject<House>()?. let { responseList.add(it) }
+                val houses = mutableListOf<House>()
+                for (document in snapshot.documents) {
+                    document.toObject<House>()?. let { houses.add(it) }
                 }
 
-                _houses.postValue(Response.Success(responseList))
+                _houses.postValue(Response.Success(houses))
 
             } catch (e: Exception) {
                 e.message?.let { _houses.postValue(Response.Failure(it)) }

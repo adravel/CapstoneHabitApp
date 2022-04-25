@@ -20,8 +20,8 @@ class ChildHomeViewModel: ViewModel() {
     private val parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
 
     private val _child: MutableLiveData<Response<Child>> = MutableLiveData()
-    val child: LiveData<Response<Child>> = _child
     private val _essentialTasks: MutableLiveData<Response<List<Task>>> = MutableLiveData()
+    val child: LiveData<Response<Child>> = _child
     val essentialTasks: LiveData<Response<List<Task>>> = _essentialTasks
 
     // Determine the progress for leveling up in the scale of 50 points
@@ -34,21 +34,19 @@ class ChildHomeViewModel: ViewModel() {
 
     // Fetch child data from Firestore
     fun getChildFromFirebase(childId: String) {
-        var response: Child
-
         _child.postValue(Response.Loading())
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 // Call Firestore get() method to query the data and convert it to Child object
-                val querySnapshot = parentDocRef
+                val snapshot = parentDocRef
                     .collection("children")
                     .document(childId)
                     .get()
                     .await()
-                response = querySnapshot.toObject<Child>()!!
+                val child = snapshot.toObject<Child>()!!
 
-                _child.postValue(Response.Success(response))
+                _child.postValue(Response.Success(child))
 
             } catch (e: Exception) {
                 e.message?.let { _child.postValue(Response.Failure(it)) }
@@ -57,15 +55,13 @@ class ChildHomeViewModel: ViewModel() {
     }
 
     // Fetch essential tasks data from Firestore
-    fun getEssentialTasksFromFirebase(childId: String) {
-        val responseList: MutableList<Task> = mutableListOf()
-
+    fun getEssentialTasksForChildFromFirebase(childId: String) {
         _essentialTasks.postValue(Response.Loading())
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 // Call Firestore get() method to query tasks that need grading
-                val querySnapshot = parentDocRef
+                val snapshot = parentDocRef
                     .collection("tasks")
                     .whereEqualTo("childId", childId)
                     .whereEqualTo("status", 1)
@@ -73,11 +69,12 @@ class ChildHomeViewModel: ViewModel() {
                     .await()
 
                 // Convert each document into Task object and add them to essential task list
-                for(document in querySnapshot.documents) {
-                    document.toObject<Task>()?.let { responseList.add(it) }
+                val tasks = mutableListOf<Task>()
+                for(document in snapshot.documents) {
+                    document.toObject<Task>()?.let { tasks.add(it) }
                 }
 
-                _essentialTasks.postValue(Response.Success(responseList))
+                _essentialTasks.postValue(Response.Success(tasks))
 
             } catch (e: Exception) {
                 e.message?.let { _essentialTasks.postValue(Response.Failure(it)) }

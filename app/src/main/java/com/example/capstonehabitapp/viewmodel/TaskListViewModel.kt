@@ -21,24 +21,23 @@ class TaskListViewModel: ViewModel() {
 
     // Fetch tasks data from Firestore
     fun getTasksFromFirebase() {
-        val responseList: MutableList<Task> = mutableListOf()
-
         _tasks.postValue(Response.Loading())
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 // Call Firestore get() method to query the data
-                val querySnapshot = parentDocRef
+                val snapshot = parentDocRef
                     .collection("tasks")
                     .get()
                     .await()
 
                 // Convert each document into Task object and add them to task list
-                for(document in querySnapshot.documents) {
-                    document.toObject<Task>()?.let { responseList.add(it) }
+                val tasks = mutableListOf<Task>()
+                for(document in snapshot.documents) {
+                    document.toObject<Task>()?.let { tasks.add(it) }
                 }
 
-                _tasks.postValue(Response.Success(responseList))
+                _tasks.postValue(Response.Success(tasks))
 
             } catch (e: Exception) {
                 e.message?.let { _tasks.postValue(Response.Failure(it)) }

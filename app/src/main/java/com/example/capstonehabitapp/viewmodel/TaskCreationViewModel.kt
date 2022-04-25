@@ -55,9 +55,10 @@ class TaskCreationViewModel: ViewModel() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 // Add the data to Firestore
-                val querySnapshot = parentDocRef.collection("tasks").add(newTask).await()
+                val snapshot = parentDocRef.collection("tasks").add(newTask).await()
 
-                val taskId = querySnapshot.id
+                // Get task ID from the snapshot
+                val taskId = snapshot.id
 
                 _taskId.postValue(Response.Success(taskId))
 

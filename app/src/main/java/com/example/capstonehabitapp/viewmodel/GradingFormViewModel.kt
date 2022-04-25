@@ -68,11 +68,11 @@ class GradingFormViewModel: ViewModel() {
             try {
                 Firebase.firestore.runTransaction { transaction ->
                     // Call Firestore get() method to query child data
-                    val querySnapshot = transaction.get(childDocRef)
+                    val snapshot = transaction.get(childDocRef)
 
-                    val totalPoints = querySnapshot.getLong("totalPoints")!!.toInt() + gradePoints
-                    var cash = querySnapshot.getLong("cash")!!.toInt() + (gradePoints * 10)
-                    var level = querySnapshot.getLong("level")!!.toInt()
+                    val totalPoints = snapshot.getLong("totalPoints")!!.toInt() + gradePoints
+                    var cash = snapshot.getLong("cash")!!.toInt() + (gradePoints * 10)
+                    var level = snapshot.getLong("level")!!.toInt()
                     val pointsToLevelUp = level * 50
 
                     // Level up if the child has enough points to level up and has not reached max level

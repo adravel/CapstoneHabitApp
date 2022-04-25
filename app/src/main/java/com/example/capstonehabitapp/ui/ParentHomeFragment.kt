@@ -49,7 +49,7 @@ class ParentHomeFragment: Fragment() {
 
         // Fetch parent and essential task data from Firestore
         viewModel.getParentFromFirebase()
-        viewModel.getEssentialTasksFromFirebase()
+        viewModel.getEssentialTasksForParentFromFirebase()
 
         // Observe parent name LiveData in ViewModel
         viewModel.parentName.observe(viewLifecycleOwner) { response ->

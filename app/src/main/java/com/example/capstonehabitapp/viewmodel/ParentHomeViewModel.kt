@@ -19,50 +19,51 @@ class ParentHomeViewModel: ViewModel() {
     private val parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
 
     private val _parentName: MutableLiveData<Response<String>> = MutableLiveData()
-    val parentName: LiveData<Response<String>> = _parentName
     private val _essentialTasks: MutableLiveData<Response<List<Task>>> = MutableLiveData()
+    val parentName: LiveData<Response<String>> = _parentName
     val essentialTasks: LiveData<Response<List<Task>>> = _essentialTasks
 
     // Fetch parent data from Firestore
-    fun getParentFromFirebase() = CoroutineScope(Dispatchers.IO).launch {
+    fun getParentFromFirebase() {
         _parentName.postValue(Response.Loading())
 
-        try {
-            // Call Firestore get() method to query the data
-            val querySnapshot = parentDocRef.get().await()
-            val name = querySnapshot.getString("name")
-            val isMale = querySnapshot.getBoolean("isMale")
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                // Call Firestore get() method to query the data
+                val snapshot = parentDocRef.get().await()
+                val name = snapshot.getString("name")
+                val isMale = snapshot.getBoolean("isMale")
 
-            val nameWithTitle = if (isMale!!) "Pak $name" else "Ibu $name"
+                val nameWithTitle = if (isMale!!) "Pak $name" else "Ibu $name"
 
-            _parentName.postValue(Response.Success(nameWithTitle))
+                _parentName.postValue(Response.Success(nameWithTitle))
 
-        } catch (e: Exception) {
-            e.message?.let { _parentName.postValue(Response.Failure(it)) }
+            } catch (e: Exception) {
+                e.message?.let { _parentName.postValue(Response.Failure(it)) }
+            }
         }
     }
 
     // Fetch essential tasks data from Firestore
-    fun getEssentialTasksFromFirebase() {
-        val responseList: MutableList<Task> = mutableListOf()
-
+    fun getEssentialTasksForParentFromFirebase() {
         _essentialTasks.postValue(Response.Loading())
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 // Call Firestore get() method to query tasks that need grading
-                val querySnapshot = parentDocRef
+                val snapshot = parentDocRef
                     .collection("tasks")
                     .whereEqualTo("status", 3)
                     .get()
                     .await()
 
                 // Convert each document into Task object and add them to task list
-                for(document in querySnapshot.documents) {
-                    document.toObject<Task>()?.let { responseList.add(it) }
+                val tasks = mutableListOf<Task>()
+                for(document in snapshot.documents) {
+                    document.toObject<Task>()?.let { tasks.add(it) }
                 }
 
-                _essentialTasks.postValue(Response.Success(responseList))
+                _essentialTasks.postValue(Response.Success(tasks))
 
             } catch (e: Exception) {
                 e.message?.let { _essentialTasks.postValue(Response.Failure(it)) }
