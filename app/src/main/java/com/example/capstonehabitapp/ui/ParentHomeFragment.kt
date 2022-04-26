@@ -82,10 +82,17 @@ class ParentHomeFragment: Fragment() {
         }
 
         binding.apply {
+            // Set change role button onClickListener
+            toolbarLayout.changeRoleButton.setOnClickListener {
+                view.findNavController().navigate(R.id.roleSelectionFragment)
+            }
+
+            // Set task menu card onClickListener
             taskMenuCard.setOnClickListener {
                 it.findNavController().navigate(R.id.taskListFragment)
             }
 
+            // Set shop menu card onClickListener
             shopMenuCard.setOnClickListener {
                 it.findNavController().navigate(R.id.childAccountSelectionFragment)
             }

@@ -108,12 +108,21 @@ class ChildHomeFragment: Fragment() {
             }
         }
 
-        binding.taskMenuCard.setOnClickListener {
-            it.findNavController().navigate(R.id.taskListFragment)
-        }
+        binding.apply {
+            // Set change role button onClickListener
+            toolbarLayout.changeRoleButton.setOnClickListener {
+                view.findNavController().navigate(R.id.roleSelectionFragment)
+            }
 
-        binding.houseMenuCard.setOnClickListener {
-            it.findNavController().navigate(R.id.houseListFragment)
+            // Set task menu card onClickListener
+            taskMenuCard.setOnClickListener {
+                view.findNavController().navigate(R.id.taskListFragment)
+            }
+
+            // Set house menu card onClickListener
+            houseMenuCard.setOnClickListener {
+                view.findNavController().navigate(R.id.houseListFragment)
+            }
         }
     }
 

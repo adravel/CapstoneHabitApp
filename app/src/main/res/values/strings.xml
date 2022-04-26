@@ -83,6 +83,7 @@
     <string name="parent">Orang Tua</string>
     <string name="child">Anak</string>
     <string name="choose_role">Pilih Role</string>
+    <string name="change_role">Ganti Role</string>
     <string name="choose_child_account">Pilih Akun Anak</string>
     <string name="help">Bantuan</string>
     <string name="greetings">Halo,</string>
