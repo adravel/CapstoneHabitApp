@@ -34,7 +34,7 @@ class TaskListFragment : Fragment() {
         _binding = FragmentTaskListBinding.inflate(inflater, container, false)
 
         // Set toolbar title
-        activity?.title = getString(R.string.task_list)
+        binding.toolbarLayout.toolbar.title = getString(R.string.task_list)
 
         return binding.root
     }
@@ -69,6 +69,11 @@ class TaskListFragment : Fragment() {
                     Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+
+        // Set back button onClickListener
+        binding.toolbarLayout.toolbar.setNavigationOnClickListener {
+            view.findNavController().popBackStack()
         }
 
         if (isParent) {

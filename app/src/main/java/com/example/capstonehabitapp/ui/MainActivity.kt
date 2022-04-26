@@ -14,8 +14,5 @@ class MainActivity : AppCompatActivity() {
         // Initialize ViewBinding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        // Set Toolbar as the app bar
-        setSupportActionBar(binding.mainActivityToolbar)
     }
 }

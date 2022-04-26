@@ -79,6 +79,7 @@
     <string name="task_notes">Catatan</string>
     <string name="task_time">Waktu Pengerjaan</string>
     <string name="create_task">Buat Pekerjaan</string>
+    <string name="grading_form">Form Penilaian</string>
     <string name="parent">Orang Tua</string>
     <string name="child">Anak</string>
     <string name="choose_role">Pilih Role</string>

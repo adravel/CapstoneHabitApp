@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.capstonehabitapp.R
@@ -45,7 +46,7 @@ class HouseDetailFragment: Fragment() {
         houseName = args.houseName
 
         // Set toolbar title
-        activity?.title = houseName
+        binding.toolbarLayout.toolbar.title = houseName
 
         // Initialize bottom sheet
         shopBottomSheetBehavior = BottomSheetBehavior.from(binding.shopBottomSheetCard)
@@ -152,6 +153,11 @@ class HouseDetailFragment: Fragment() {
                         Toast.makeText(context, getString(R.string.request_failed), Toast.LENGTH_SHORT).show()                    }
                 }
             }
+        }
+
+        // Set back button onClickListener
+        binding.toolbarLayout.toolbar.setNavigationOnClickListener {
+            view.findNavController().popBackStack()
         }
 
         // Set bottom sheet behavior to flip arrow icon when bottom sheet is expanded

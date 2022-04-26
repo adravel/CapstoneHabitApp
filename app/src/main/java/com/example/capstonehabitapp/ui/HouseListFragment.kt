@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.adapter.HouseAdapter
@@ -33,7 +34,7 @@ class HouseListFragment: Fragment() {
         _binding = FragmentHouseListBinding.inflate(inflater, container, false)
 
         // Set toolbar title
-        activity?.title = getString(R.string.pick_houses)
+        binding.toolbarLayout.toolbar.title = getString(R.string.pick_houses)
 
         return binding.root
     }
@@ -70,6 +71,11 @@ class HouseListFragment: Fragment() {
                     Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+
+        // Set back button onClickListener
+        binding.toolbarLayout.toolbar.setNavigationOnClickListener {
+            view.findNavController().popBackStack()
         }
     }
 

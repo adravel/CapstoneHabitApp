@@ -45,6 +45,9 @@ class GradingFormFragment: Fragment() {
         // Inflate layout for this fragment
         _binding = FragmentGradingFormBinding.inflate(inflater, container, false)
 
+        // Set toolbar title
+        binding.toolbarLayout.toolbar.title = getString(R.string.grading_form)
+
         return binding.root
     }
 
@@ -121,6 +124,11 @@ class GradingFormFragment: Fragment() {
                     }
                 }
             }
+        }
+
+        // Set back button onClickListener
+        binding.toolbarLayout.toolbar.setNavigationOnClickListener {
+            view.findNavController().popBackStack()
         }
     }
 

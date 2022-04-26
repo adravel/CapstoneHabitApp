@@ -35,7 +35,7 @@ class TaskDetailFragment : Fragment() {
         _binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
 
         // Set toolbar title
-        activity?.title = getString(R.string.task_detail)
+        binding.toolbarLayout.toolbar.title = getString(R.string.task_detail)
 
         // Initialize task ID using Safe Args provided by navigation component
         val args: TaskDetailFragmentArgs by navArgs()
@@ -114,6 +114,11 @@ class TaskDetailFragment : Fragment() {
                     Toast.makeText(context, getString(R.string.request_failed), Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+
+        // Set back button onClickListener
+        binding.toolbarLayout.toolbar.setNavigationOnClickListener {
+            view.findNavController().popBackStack()
         }
     }
 

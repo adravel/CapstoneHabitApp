@@ -37,7 +37,7 @@ class ShopFragment: Fragment() {
         _binding = FragmentShopBinding.inflate(inflater, container, false)
 
         // Set toolbar title
-        activity?.title = getString(R.string.pick_tools)
+        binding.toolbarLayout.toolbar.title = getString(R.string.pick_tools)
 
         // Initialize tool name and child name using Safe Args provided by navigation component
         val args: ShopFragmentArgs by navArgs()
@@ -101,6 +101,11 @@ class ShopFragment: Fragment() {
                     Toast.makeText(context, getString(R.string.request_failed), Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+
+        // Set back button onClickListener
+        binding.toolbarLayout.toolbar.setNavigationOnClickListener {
+            view.findNavController().popBackStack()
         }
     }
 

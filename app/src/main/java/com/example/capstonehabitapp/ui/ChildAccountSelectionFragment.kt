@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.adapter.ChildAccountAdapter
@@ -33,7 +34,7 @@ class ChildAccountSelectionFragment: Fragment() {
         _binding = FragmentChildAccountSelectionBinding.inflate(inflater, container, false)
 
         // Set toolbar title
-        activity?.title = getString(R.string.choose_child_account)
+        binding.toolbarLayout.toolbar.title = getString(R.string.choose_child_account)
 
         return binding.root
     }
@@ -72,6 +73,11 @@ class ChildAccountSelectionFragment: Fragment() {
 
         // Show option to add new child only when Child is selecting their accounts
         binding.addChildButton.visibility = if (isParent) View.GONE else View.VISIBLE
+
+        // Set back button onClickListener
+        binding.toolbarLayout.toolbar.setNavigationOnClickListener {
+            view.findNavController().popBackStack()
+        }
     }
 
     override fun onDestroyView() {

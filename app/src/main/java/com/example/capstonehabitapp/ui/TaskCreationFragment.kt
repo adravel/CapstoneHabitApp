@@ -41,7 +41,7 @@ class TaskCreationFragment : Fragment() {
         _binding = FragmentTaskCreationBinding.inflate(inflater, container, false)
 
         // Set toolbar title
-        activity?.title = getString(R.string.create_task)
+        binding.toolbarLayout.toolbar.title = getString(R.string.create_task)
 
         return binding.root
     }
@@ -50,10 +50,10 @@ class TaskCreationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            // Disable button by default
+            // Disable create task button by default
             createTaskButton.isEnabled = false
 
-            // Set TextChangedListener for task title, area, and difficulty EditTexts
+            // Set textChangedListener for task title, area, and difficulty EditTexts
             val editTexts = listOf(titleEditText, areaEditText, difficultyAutoCompleteTextView)
             for (editText in editTexts) {
                 editText.addTextChangedListener(object : TextWatcher {
@@ -73,6 +73,12 @@ class TaskCreationFragment : Fragment() {
                 })
             }
 
+            // Set back button onClickListener
+            toolbarLayout.toolbar.setNavigationOnClickListener {
+                view.findNavController().popBackStack()
+            }
+
+            // Set create task button onClickListener
             createTaskButton.setOnClickListener {
                 val title = titleEditText.text.toString()
                 val area = areaEditText.text.toString()
