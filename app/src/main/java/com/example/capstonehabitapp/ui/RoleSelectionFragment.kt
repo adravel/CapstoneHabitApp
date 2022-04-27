@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentRoleSelectionBinding
 
@@ -23,9 +22,6 @@ class RoleSelectionFragment: Fragment() {
         // Inflate layout for this fragment
         _binding = FragmentRoleSelectionBinding.inflate(inflater, container, false)
 
-        // Hide action bar
-        (activity as AppCompatActivity).supportActionBar?.hide()
-
         return binding.root
     }
 
@@ -36,25 +32,27 @@ class RoleSelectionFragment: Fragment() {
         val sharedPref = activity?.getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
         val editor = sharedPref?.edit()
 
+        // Set Parent card onClickListener
         binding.parentRoleCard.setOnClickListener {
+            // Save Parent as role preference
             editor?.putBoolean(getString(R.string.role_pref_is_parent_key), true)?.apply()
 
-            it.findNavController().navigate(R.id.parentHomeFragment)
+            // Navigate to parent home page
+            findNavController().navigate(R.id.parentHomeFragment)
         }
 
+        // Set Child card onClickListener
         binding.childRoleCard.setOnClickListener {
+            // Save Child as role preference
             editor?.putBoolean(getString(R.string.role_pref_is_parent_key), false)?.apply()
 
-             it.findNavController().navigate(R.id.childAccountSelectionFragment)
+            // Navigate to child home page
+             findNavController().navigate(R.id.childAccountSelectionFragment)
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-
-        // Show action bar again
-        (activity as AppCompatActivity).supportActionBar?.show()
-
         _binding = null
     }
 }
