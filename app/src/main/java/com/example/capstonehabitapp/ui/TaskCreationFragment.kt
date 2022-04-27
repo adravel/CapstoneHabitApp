@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentTaskCreationBinding
@@ -99,9 +100,14 @@ class TaskCreationFragment : Fragment() {
 
                             Toast.makeText(context, getString(R.string.task_creation_success), Toast.LENGTH_SHORT).show()
 
+                            // Build navigation options to pop this fragment before navigating
+                            val navOptions = NavOptions.Builder()
+                                .setPopUpTo(R.id.taskCreationFragment, true)
+                                .build()
+
                             // Navigate to task detail page
                             val action = TaskCreationFragmentDirections.actionTaskCreationFragmentToTaskDetailFragment(taskId)
-                            view.findNavController().navigate(action)
+                            view.findNavController().navigate(action, navOptions)
                         }
                         is Response.Failure -> {
                             Log.e("TaskCreation", response.message)
