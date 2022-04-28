@@ -12,7 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentTaskCreationBinding
 import com.example.capstonehabitapp.util.Response
@@ -76,7 +76,7 @@ class TaskCreationFragment : Fragment() {
 
             // Set back button onClickListener
             toolbarLayout.toolbar.setNavigationOnClickListener {
-                view.findNavController().popBackStack()
+                findNavController().popBackStack()
             }
 
             // Set create task button onClickListener
@@ -107,7 +107,7 @@ class TaskCreationFragment : Fragment() {
 
                             // Navigate to task detail page
                             val action = TaskCreationFragmentDirections.actionTaskCreationFragmentToTaskDetailFragment(taskId)
-                            view.findNavController().navigate(action, navOptions)
+                            findNavController().navigate(action, navOptions)
                         }
                         is Response.Failure -> {
                             Log.e("TaskCreation", response.message)

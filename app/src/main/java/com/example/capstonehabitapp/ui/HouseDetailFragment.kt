@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.capstonehabitapp.R
@@ -156,7 +156,7 @@ class HouseDetailFragment: Fragment() {
 
         // Set back button onClickListener
         binding.toolbarLayout.toolbar.setNavigationOnClickListener {
-            view.findNavController().popBackStack()
+            findNavController().popBackStack()
         }
 
         // Set bottom sheet behavior to flip arrow icon when bottom sheet is expanded

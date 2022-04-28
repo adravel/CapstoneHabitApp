@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.adapter.TaskAdapter
@@ -73,13 +73,13 @@ class TaskListFragment : Fragment() {
 
         // Set back button onClickListener
         binding.toolbarLayout.toolbar.setNavigationOnClickListener {
-            view.findNavController().popBackStack()
+            findNavController().popBackStack()
         }
 
         if (isParent) {
             // Set FAB OnClickListener
             binding.fab.setOnClickListener {
-                view.findNavController().navigate(R.id.taskCreationFragment)
+                findNavController().navigate(R.id.taskCreationFragment)
             }
         } else {
             // Hide the FAB if user is Child

@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.capstonehabitapp.R
@@ -91,7 +91,7 @@ class ShopFragment: Fragment() {
 
                     // Show tool sale success dialog
                     val action = ShopFragmentDirections.actionShopFragmentToToolSaleSuccessDialogFragment(toolName)
-                    view.findNavController().navigate(action)
+                    findNavController().navigate(action)
                 }
                 is Response.Failure -> {
                     // Clear the LiveData so the code below will be executed only once
@@ -105,7 +105,7 @@ class ShopFragment: Fragment() {
 
         // Set back button onClickListener
         binding.toolbarLayout.toolbar.setNavigationOnClickListener {
-            view.findNavController().popBackStack()
+            findNavController().popBackStack()
         }
     }
 

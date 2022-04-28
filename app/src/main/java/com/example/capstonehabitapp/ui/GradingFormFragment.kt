@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentGradingFormBinding
 import com.example.capstonehabitapp.model.Task
@@ -116,7 +116,7 @@ class GradingFormFragment: Fragment() {
                         ).show()
 
                         // Return to task detail page
-                        view.findNavController().popBackStack()
+                        findNavController().popBackStack()
                     }
                     is Response.Failure -> {
                         Log.e("GradingForm", response.message)
@@ -128,7 +128,7 @@ class GradingFormFragment: Fragment() {
 
         // Set back button onClickListener
         binding.toolbarLayout.toolbar.setNavigationOnClickListener {
-            view.findNavController().popBackStack()
+            findNavController().popBackStack()
         }
     }
 

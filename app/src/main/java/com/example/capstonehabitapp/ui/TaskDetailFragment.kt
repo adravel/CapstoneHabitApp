@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentTaskDetailBinding
@@ -74,12 +74,12 @@ class TaskDetailFragment : Fragment() {
                     binding.changeTaskStatusButton.setOnClickListener {
                         if (isParent) {
                             //Navigate to grading form page
-                            view.findNavController().navigate(R.id.gradingFormFragment)
+                            findNavController().navigate(R.id.gradingFormFragment)
                         } else {
                             when (task.status.toInt()) {
                                 0 -> viewModel.startTask(taskId, childId, childName)
                                 1 -> viewModel.finishTask(taskId)
-                                2 -> view.findNavController().navigate(R.id.gradingMethodSelectionDialogFragment)
+                                2 -> findNavController().navigate(R.id.gradingMethodSelectionDialogFragment)
                             }
                         }
                     }
@@ -122,7 +122,7 @@ class TaskDetailFragment : Fragment() {
 
         // Set back button onClickListener
         binding.toolbarLayout.toolbar.setNavigationOnClickListener {
-            view.findNavController().popBackStack()
+            findNavController().popBackStack()
         }
     }
 
