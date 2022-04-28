@@ -10,6 +10,8 @@
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/ic_fab_add.xml" value="0.1475" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/ic_notification.xml" value="0.1445" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/ic_placeholder.xml" value="0.1445" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/ic_visibility.xml" value="0.1445" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/ic_visibility_off.xml" value="0.1445" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/image_placeholder.xml" value="0.168" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/rounded_corner.xml" value="0.1445" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
@@ -22,8 +24,10 @@
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_grading_method_selection_dialog.xml" value="0.20863616930312098" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_house_detail.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_house_list.xml" value="0.20863616930312098" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_login.xml" value="0.2" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_one_button_dialog.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_parent_home.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_register.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_role_selection.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_shop.xml" value="0.20863616930312098" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_task_creation.xml" value="0.264" />

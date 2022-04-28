@@ -99,8 +99,20 @@
     <string name="ask_parent_for_grading">Meminta penilaian ke orang tua</string>
     <string name="pick_tools">Pilih Alat</string>
     <string name="pick_houses">Pilih Rumah Adat</string>
-    <string name="welcome_page_title">Selamat Datang Prajurit</string>
+    <string name="welcome_page_title">Selamat datang prajurit</string>
     <string name="welcome_page_description">Selamatkan rumah adat dari\nserangan penjajah!</string>
+    <string name="register_page_title">Selamat datang kadet!</string>
+    <string name="register_page_description">Daftarkan dirimu menjadi prajurit terbaik\nuntuk menyelamatkan rumah adat kita\ndari serangan penjajah!</string>
+    <string name="login_page_title">Selamat datang\nkembali prajurit!</string>
+    <string name="login_page_description">Isikan identitas prajuritmu terlebih dahulu,\nsupaya tidak ada penyusup di kamp kita!</string>
+    <string name="name">Nama</string>
+    <string name="email">Email</string>
+    <string name="password">Kata sandi</string>
+    <string name="parental_role">Peran dalam keluarga</string>
+    <string name="father">Ayah</string>
+    <string name="mother">Ibu</string>
+    <string name="register_instead">Belum pernah mendaftar? Daftar di sini</string>
+    <string name="login_instead">Sudah menjadi prajurit? Masuk di sini</string>
     <!-- Button Labels -->
     <string name="button_label_add_child">Tambah Anak</string>
     <string name="button_label_start_task">Kerjakan</string>
@@ -126,6 +138,10 @@
     <!-- Hints -->
     <string name="hint_text">Type something</string>
     <string name="hint_time">00:00</string>
+    <string name="hint_user_name">Isikan nama aslimu…</string>
+    <string name="hint_user_email">Isikan emailmu…</string>
+    <string name="hint_user_password_register">Buat kata sandi untuk masuk…</string>
+    <string name="hint_user_password_login">Isikan kata sandi akunmu…</string>
     <!-- Dialog Messages -->
     <string name="tool_sale_confirmation_message">Jual %1$s ke %2$s ?</string>
     <string name="tool_sale_success_message">%1$s berhasil dijual.</string>
