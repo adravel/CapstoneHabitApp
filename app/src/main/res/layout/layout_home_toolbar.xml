@@ -10,11 +10,9 @@
 
     <Button
         android:id="@+id/change_role_button"
+        style="@style/text_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/change_role"
-        android:textColor="@color/green"
-        android:background="@android:color/transparent"/>
+        android:text="@string/change_role" />
     
     <ImageView
         android:id="@+id/notification_icon_image"
