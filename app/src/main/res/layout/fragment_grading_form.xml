@@ -240,25 +240,22 @@
 
     <Button
         android:id="@+id/open_photo_button"
+        style="@style/normal_button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginHorizontal="20dp"
         android:text="@string/button_label_open_task_photo"
-        android:textColor="@color/light_3"
-        android:backgroundTint="@color/button_green_background_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task_attributes_layout" />
 
     <Button
         android:id="@+id/grade_task_button"
+        style="@style/normal_button"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="20dp"
         android:text="@string/button_label_grade_task"
-        android:textColor="@color/light_3"
-        android:backgroundTint="@color/button_green_background_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/open_photo_button" />

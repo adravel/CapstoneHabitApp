@@ -284,15 +284,13 @@
 
             <Button
                 android:id="@+id/create_task_button"
+                style="@style/normal_button"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/button_green_background_color"
+                android:layout_marginTop="40dp"
                 android:text="@string/button_label_create_task"
-                android:textColor="@color/light_3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detail_text_input_layout" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
