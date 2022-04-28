@@ -29,13 +29,21 @@ class RoleSelectionFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Define a shared preference for storing role selection
-        val sharedPref = activity?.getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
-        val editor = sharedPref?.edit()
+        val sharedPref = requireActivity().getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
 
         // Set Parent card onClickListener
         binding.parentRoleCard.setOnClickListener {
             // Save Parent as role preference
-            editor?.putBoolean(getString(R.string.role_pref_is_parent_key), true)?.apply()
+            editor.putBoolean(getString(R.string.role_pref_is_parent_key), true).apply()
+
+            // Remove Child data preference if they exist
+            val childIdKey = getString(R.string.role_pref_child_id_key)
+            val childNameKey = getString(R.string.role_pref_child_name_key)
+            if (sharedPref.contains(childIdKey) && sharedPref.contains(childNameKey)) {
+                editor.remove(childIdKey).apply()
+                editor.remove(childNameKey).apply()
+            }
 
             // Navigate to parent home page
             findNavController().navigate(R.id.parentHomeFragment)
@@ -44,7 +52,7 @@ class RoleSelectionFragment: Fragment() {
         // Set Child card onClickListener
         binding.childRoleCard.setOnClickListener {
             // Save Child as role preference
-            editor?.putBoolean(getString(R.string.role_pref_is_parent_key), false)?.apply()
+            editor.putBoolean(getString(R.string.role_pref_is_parent_key), false).apply()
 
             // Navigate to child home page
              findNavController().navigate(R.id.childAccountSelectionFragment)

@@ -43,11 +43,11 @@ class ChildAccountSelectionFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Get user's role data from shared preference
-        val sharedPref = activity?.getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
-        val isParent = sharedPref?.getBoolean(getString(R.string.role_pref_is_parent_key), true)
+        val sharedPref = requireActivity().getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
+        val isParent = sharedPref.getBoolean(getString(R.string.role_pref_is_parent_key), true)
 
         // Set the adapter and layoutManager for child list RecyclerView
-        childAccountAdapter = ChildAccountAdapter(mutableListOf(), isParent!!)
+        childAccountAdapter = ChildAccountAdapter(mutableListOf(), isParent)
         binding.childAccountListRecycleView.apply {
             adapter = childAccountAdapter
             layoutManager = LinearLayoutManager(context)

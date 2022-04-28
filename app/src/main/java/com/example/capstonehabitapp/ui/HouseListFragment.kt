@@ -50,13 +50,11 @@ class HouseListFragment: Fragment() {
         }
 
         // Retrieve child ID from shared preference
-        val sharedPref = activity?.getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
-        val childId = sharedPref?.getString(getString(R.string.role_pref_child_id_key), "")
+        val sharedPref = requireActivity().getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
+        val childId = sharedPref.getString(getString(R.string.role_pref_child_id_key), "")!!
 
         // Fetch houses data from Firestore
-        if (childId != null && childId != "") {
-            viewModel.getHousesFromFirebase(childId)
-        }
+        viewModel.getHousesFromFirebase(childId)
 
         // Observe houses LiveData in ViewModel
         viewModel.houses.observe(viewLifecycleOwner) { response ->

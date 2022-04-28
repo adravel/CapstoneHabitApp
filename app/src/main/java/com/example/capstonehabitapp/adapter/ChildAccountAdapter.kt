@@ -46,8 +46,8 @@ class ChildAccountAdapter(private val children: MutableList<Child>, private val 
                 view.findNavController().navigate(action)
             } else {
                 // Store childId and childName in shared preference
-                editor.putString(context.getString(R.string.role_pref_child_id_key), childId)?.apply()
-                editor.putString(context.getString(R.string.role_pref_child_name_key), childName)?.apply()
+                editor.putString(context.getString(R.string.role_pref_child_id_key), childId).apply()
+                editor.putString(context.getString(R.string.role_pref_child_name_key), childName).apply()
 
                 // Navigate to child home page
                 view.findNavController().navigate(R.id.childHomeFragment)

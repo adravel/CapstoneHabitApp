@@ -43,11 +43,11 @@ class TaskListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Check the user's role from shared preference
-        val sharedPref = activity?.getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
-        val isParent = sharedPref?.getBoolean(getString(R.string.role_pref_is_parent_key), true)
+        val sharedPref = requireActivity().getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
+        val isParent = sharedPref.getBoolean(getString(R.string.role_pref_is_parent_key), true)
 
         // Set the adapter and layoutManager for task list RecyclerView
-        taskAdapter = TaskAdapter(mutableListOf(), isParent!!)
+        taskAdapter = TaskAdapter(mutableListOf(), isParent)
         binding.taskListRecycleView.apply {
             adapter = taskAdapter
             layoutManager = LinearLayoutManager(context)

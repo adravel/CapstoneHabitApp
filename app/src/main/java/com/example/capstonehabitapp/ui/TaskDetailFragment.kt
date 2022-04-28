@@ -24,6 +24,8 @@ class TaskDetailFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var taskId: String
+    private lateinit var childId: String
+    private lateinit var childName: String
 
     private val viewModel: TaskDetailViewModel by activityViewModels()
 
@@ -48,10 +50,12 @@ class TaskDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Get user's role, child ID, and child name data from shared preference
-        val sharedPref = activity?.getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
-        val isParent = sharedPref?.getBoolean(getString(R.string.role_pref_is_parent_key), true)
-        val childId = sharedPref?.getString(getString(R.string.role_pref_child_id_key), "")
-        val childName = sharedPref?.getString(getString(R.string.role_pref_child_name_key), "")
+        val sharedPref = requireActivity().getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
+        val isParent = sharedPref.getBoolean(getString(R.string.role_pref_is_parent_key), true)
+        if (!isParent) {
+            childId = sharedPref.getString(getString(R.string.role_pref_child_id_key), "")!!
+            childName = sharedPref.getString(getString(R.string.role_pref_child_name_key), "")!!
+        }
 
         // Fetch task detail data from Firestore
         viewModel.getTaskFromFirebase(taskId)
@@ -64,16 +68,16 @@ class TaskDetailFragment : Fragment() {
                     val task = response.data
 
                     // Display task data correctly depending on status and user's role
-                    displayTaskData(task, isParent!!)
+                    displayTaskData(task, isParent)
 
                     // Set button OnClickListener depending on the task status and user's role
                     binding.changeTaskStatusButton.setOnClickListener {
-                        if (isParent == true) {
+                        if (isParent) {
                             //Navigate to grading form page
                             view.findNavController().navigate(R.id.gradingFormFragment)
                         } else {
                             when (task.status.toInt()) {
-                                0 -> viewModel.startTask(taskId, childId!!, childName!!)
+                                0 -> viewModel.startTask(taskId, childId, childName)
                                 1 -> viewModel.finishTask(taskId)
                                 2 -> view.findNavController().navigate(R.id.gradingMethodSelectionDialogFragment)
                             }

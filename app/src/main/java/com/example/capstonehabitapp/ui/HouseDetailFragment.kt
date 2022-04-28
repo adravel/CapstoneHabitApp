@@ -58,11 +58,11 @@ class HouseDetailFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Retrieve child ID from shared preference
-        val sharedPref = activity?.getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
-        val childId = sharedPref?.getString(getString(R.string.role_pref_child_id_key), "")
+        val sharedPref = requireActivity().getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
+        val childId = sharedPref.getString(getString(R.string.role_pref_child_id_key), "")!!
 
         // Set child and house document IDs
-        viewModel.setChildId(childId!!)
+        viewModel.setChildId(childId)
         viewModel.setHouseId(houseId)
 
         // Set the adapter and layoutManager for tool list RecyclerView
@@ -79,7 +79,6 @@ class HouseDetailFragment: Fragment() {
 
         // Observe house LiveData in ViewModel
         viewModel.house.observe(viewLifecycleOwner) { response ->
-            Log.d("HouseDetail", "Observing house data...")
             when (response) {
                 is Response.Loading -> {}
                 is Response.Success -> {

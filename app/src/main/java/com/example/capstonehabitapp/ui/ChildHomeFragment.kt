@@ -60,14 +60,12 @@ class ChildHomeFragment: Fragment() {
         }
 
         // Retrieve child ID from shared preference
-        val sharedPref = activity?.getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
-        val childId = sharedPref?.getString(getString(R.string.role_pref_child_id_key), "")
+        val sharedPref = requireActivity().getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
+        val childId = sharedPref.getString(getString(R.string.role_pref_child_id_key), "")!!
 
         // Fetch child and essential task data from Firestore
-        if (childId != null && childId != "") {
-            viewModel.getChildFromFirebase(childId)
-            viewModel.getEssentialTasksForChildFromFirebase(childId)
-        }
+        viewModel.getChildFromFirebase(childId)
+        viewModel.getEssentialTasksForChildFromFirebase(childId)
 
         // Observe essential tasks LiveData in ViewModel
         viewModel.essentialTasks.observe(viewLifecycleOwner) { response ->
