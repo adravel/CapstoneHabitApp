@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="normal_button" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_height">36dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/light_3</item>
+        <item name="android:backgroundTint">@color/button_green_background_color</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
+    <style name="outline_button" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:layout_height">36dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/outline_button_text_color</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/outline_button_stroke_color</item>
+    </style>
+</resources>
