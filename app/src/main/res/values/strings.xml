@@ -99,6 +99,8 @@
     <string name="ask_parent_for_grading">Meminta penilaian ke orang tua</string>
     <string name="pick_tools">Pilih Alat</string>
     <string name="pick_houses">Pilih Rumah Adat</string>
+    <string name="welcome_page_title">Selamat Datang Prajurit</string>
+    <string name="welcome_page_description">Selamatkan rumah adat dari\nserangan penjajah!</string>
     <!-- Button Labels -->
     <string name="button_label_add_child">Tambah Anak</string>
     <string name="button_label_start_task">Kerjakan</string>
@@ -119,6 +121,8 @@
     <string name="button_label_rescue">Selamatkan</string>
     <string name="button_label_locked">Terkunci</string>
     <string name="button_label_use">Gunakan</string>
+    <string name="button_label_register">Daftar Menjadi Prajurit</string>
+    <string name="button_label_login">Masuk ke Kamp</string>
     <!-- Hints -->
     <string name="hint_text">Type something</string>
     <string name="hint_time">00:00</string>
