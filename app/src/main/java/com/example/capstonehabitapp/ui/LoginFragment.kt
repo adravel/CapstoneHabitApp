@@ -50,24 +50,24 @@ class LoginFragment: Fragment() {
                     override fun afterTextChanged(p0: Editable?) {}
                 })
             }
-        }
 
-        // Set login button onCLickListener
-        binding.loginButton.setOnClickListener {
-            // Navigate to role selection page
-            findNavController().navigate(R.id.roleSelectionFragment)
-        }
+            // Set login button onCLickListener
+            loginButton.setOnClickListener {
+                // Navigate to role selection page
+                findNavController().navigate(R.id.roleSelectionFragment)
+            }
 
-        // Set register option text onClickListener
-        binding.registerInsteadText.setOnClickListener {
-            // Build navigation options to pop this fragment before navigating
-            val navOptions = NavOptions.Builder()
-                .setPopUpTo(R.id.loginFragment, true)
-                .build()
+            // Set register option text onClickListener
+            registerInsteadText.setOnClickListener {
+                // Build navigation options to pop this fragment before navigating
+                val navOptions = NavOptions.Builder()
+                    .setPopUpTo(R.id.loginFragment, true)
+                    .build()
 
-            // Navigate to register page
-            val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
-            findNavController().navigate(action, navOptions)
+                // Navigate to register page
+                val action = LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
+                findNavController().navigate(action, navOptions)
+            }
         }
     }
 

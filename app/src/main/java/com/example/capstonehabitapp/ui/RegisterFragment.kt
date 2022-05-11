@@ -34,7 +34,6 @@ class RegisterFragment: Fragment() {
             // Disable register button by default
             registerButton.isEnabled = false
 
-            // TODO: Add listener for the radio buttons
             // Set textChangedListener for the EditTexts
             val editTexts = listOf(nameEditText, emailEditText, passwordEditText)
             for (editText in editTexts) {
@@ -44,34 +43,50 @@ class RegisterFragment: Fragment() {
                         val et2 = emailEditText.text.toString().trim()
                         val et3 = passwordEditText.text.toString().trim()
 
-                        // Enable button if the EditTexts is not empty
+                        // Enable button if the EditTexts are not empty
+                        // and a RadioButton is checked
                         registerButton.isEnabled = et1.isNotEmpty()
                                 && et2.isNotEmpty()
                                 && et3.isNotEmpty()
+                                && binding.parentalRoleRadioGroup.checkedRadioButtonId != -1
                     }
 
                     override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
                     override fun afterTextChanged(p0: Editable?) {}
                 })
             }
-        }
 
-        // Set register button onCLickListener
-        binding.registerButton.setOnClickListener {
-            // Navigate to role selection page
-            findNavController().navigate(R.id.roleSelectionFragment)
-        }
+            // Set parental role RadioGroup listener
+            parentalRoleRadioGroup.setOnCheckedChangeListener { _, checkedButtonId ->
+                val et1 = nameEditText.text.toString().trim()
+                val et2 = emailEditText.text.toString().trim()
+                val et3 = passwordEditText.text.toString().trim()
 
-        // Set login option text onClickListener
-        binding.loginInsteadText.setOnClickListener {
-            // Build navigation options to pop this fragment before navigating
-            val navOptions = NavOptions.Builder()
-                .setPopUpTo(R.id.registerFragment, true)
-                .build()
+                // Enable button if the EditTexts are not empty
+                // and a RadioButton is checked
+                registerButton.isEnabled = et1.isNotEmpty()
+                        && et2.isNotEmpty()
+                        && et3.isNotEmpty()
+                        && checkedButtonId != -1
+            }
 
-            // Navigate to login page
-            val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
-            findNavController().navigate(action, navOptions)
+            // Set register button onCLickListener
+            registerButton.setOnClickListener {
+                // Navigate to role selection page
+                findNavController().navigate(R.id.roleSelectionFragment)
+            }
+
+            // Set login option text onClickListener
+            loginInsteadText.setOnClickListener {
+                // Build navigation options to pop this fragment before navigating
+                val navOptions = NavOptions.Builder()
+                    .setPopUpTo(R.id.registerFragment, true)
+                    .build()
+
+                // Navigate to login page
+                val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
+                findNavController().navigate(action, navOptions)
+            }
         }
     }
 
