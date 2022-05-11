@@ -1,6 +1,8 @@
 package com.example.capstonehabitapp.ui
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +29,32 @@ class RegisterFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.apply {
+            // Disable register button by default
+            registerButton.isEnabled = false
+
+            // TODO: Add listener for the radio buttons
+            // Set textChangedListener for the EditTexts
+            val editTexts = listOf(nameEditText, emailEditText, passwordEditText)
+            for (editText in editTexts) {
+                editText.addTextChangedListener(object : TextWatcher {
+                    override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                        val et1 = nameEditText.text.toString().trim()
+                        val et2 = emailEditText.text.toString().trim()
+                        val et3 = passwordEditText.text.toString().trim()
+
+                        // Enable button if the EditTexts is not empty
+                        registerButton.isEnabled = et1.isNotEmpty()
+                                && et2.isNotEmpty()
+                                && et3.isNotEmpty()
+                    }
+
+                    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                    override fun afterTextChanged(p0: Editable?) {}
+                })
+            }
+        }
 
         // Set register button onCLickListener
         binding.registerButton.setOnClickListener {
