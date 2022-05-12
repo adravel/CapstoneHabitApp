@@ -135,6 +135,7 @@
     <string name="button_label_use">Gunakan</string>
     <string name="button_label_register">Daftar Menjadi Prajurit</string>
     <string name="button_label_login">Masuk ke Kamp</string>
+    <string name="button_label_logout">Keluar</string>
     <!-- Hints -->
     <string name="hint_text">Type something</string>
     <string name="hint_time">00:00</string>

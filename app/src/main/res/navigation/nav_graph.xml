@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_roleSelectionFragment_to_childSelectionFragment"
             app:destination="@id/childAccountSelectionFragment" />
+        <action
+            android:id="@+id/action_roleSelectionFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/parentHomeFragment"

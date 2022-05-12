@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentRoleSelectionBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class RoleSelectionFragment: Fragment() {
 
@@ -56,6 +58,18 @@ class RoleSelectionFragment: Fragment() {
 
             // Navigate to child home page
              findNavController().navigate(R.id.childAccountSelectionFragment)
+        }
+
+        // Set logout button onClickListener
+        binding.logoutButton.setOnClickListener {
+            // Logout from Firebase Auth
+            Firebase.auth.signOut()
+
+            // Remove all role preference values
+            editor.clear().apply()
+
+            // Navigate to welcome page
+            findNavController().navigate(R.id.welcomeFragment)
         }
     }
 
