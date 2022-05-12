@@ -6,10 +6,15 @@ import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.ActivityMainBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,10 +23,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // TODO: Do actual auth check
-        // Check whether the user is logged in or not from shared preference
-        val authPref = getSharedPreferences("authPref", Context.MODE_PRIVATE)
-        val isLoggedIn = authPref.getBoolean("isLoggedIn", false)
+        // Initialize Firebase Auth
+        auth = Firebase.auth
+
+        // Check whether the user is logged in or not
+        val isLoggedIn = auth.currentUser != null
 
         // Check the user's role from shared preference
         val rolePref = getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)

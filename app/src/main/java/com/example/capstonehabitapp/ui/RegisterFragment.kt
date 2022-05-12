@@ -3,19 +3,26 @@ package com.example.capstonehabitapp.ui
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentRegisterBinding
+import com.example.capstonehabitapp.util.Response
+import com.example.capstonehabitapp.viewmodel.RegisterViewModel
 
 class RegisterFragment: Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: RegisterViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,8 +79,35 @@ class RegisterFragment: Fragment() {
 
             // Set register button onCLickListener
             registerButton.setOnClickListener {
-                // Navigate to role selection page
-                findNavController().navigate(R.id.roleSelectionFragment)
+                val email = binding.emailEditText.text.toString().lowercase()
+                val password = binding.passwordEditText.text.toString()
+
+                // Call the method to register user
+                viewModel.registerUser(email, password)
+            }
+
+            // Observe user LiveData in ViewModel
+            // This value determines whether user registration is successful or not
+            viewModel.user.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is Response.Loading -> {}
+                    is Response.Success -> {
+                        Toast.makeText(context, getString(R.string.register_success), Toast.LENGTH_SHORT).show()
+
+                        // Build navigation options to pop all auth fragments before navigating
+                        val navOptions = NavOptions.Builder()
+                            .setPopUpTo(R.id.welcomeFragment, true)
+                            .build()
+
+                        // Navigate to role selection page
+                        val action = RegisterFragmentDirections.actionRegisterFragmentToRoleSelectionFragment()
+                        findNavController().navigate(action, navOptions)
+                    }
+                    is Response.Failure -> {
+                        Log.e("Register", response.message)
+                        Toast.makeText(context, getString(R.string.request_failed), Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
 
             // Set login option text onClickListener
