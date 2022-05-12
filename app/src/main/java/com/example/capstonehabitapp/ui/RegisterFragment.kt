@@ -79,11 +79,13 @@ class RegisterFragment: Fragment() {
 
             // Set register button onCLickListener
             registerButton.setOnClickListener {
-                val email = binding.emailEditText.text.toString().lowercase()
-                val password = binding.passwordEditText.text.toString()
+                val email = emailEditText.text.toString().lowercase()
+                val password = passwordEditText.text.toString()
+                val name = nameEditText.text.toString()
+                val isMale = parentalRoleRadioGroup.checkedRadioButtonId == R.id.father_radio_button
 
                 // Call the method to register user
-                viewModel.registerUser(email, password)
+                viewModel.registerUser(email, password, name, isMale)
             }
 
             // Observe user LiveData in ViewModel
