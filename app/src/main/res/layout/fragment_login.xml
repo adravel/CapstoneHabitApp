@@ -79,7 +79,6 @@
             android:layout_height="wrap_content"
             app:boxBackgroundColor="@color/white"
             app:hintEnabled="false"
-            app:endIconDrawable="@drawable/ic_visibility_off"
             app:endIconTint="@color/green"
             app:endIconMode="password_toggle"
             app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +90,7 @@
                 android:id="@+id/password_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/hint_user_name"
+                android:hint="@string/hint_user_password_login"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
