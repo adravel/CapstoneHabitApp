@@ -161,4 +161,5 @@
     <string name="tool_purchase_success">Alat berhasil dibeli!</string>
     <string name="not_enough_cash_failure">Dana tidak cukup untuk membeli alat</string>
     <string name="register_success">Pendaftaran akun berhasil!</string>
+    <string name="login_success">Berhasil masuk ke kamp!</string>
 </resources>
