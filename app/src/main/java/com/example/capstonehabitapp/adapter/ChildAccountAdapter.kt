@@ -45,7 +45,9 @@ class ChildAccountAdapter(private val children: MutableList<Child>, private val 
                 )
                 view.findNavController().navigate(action)
             } else {
-                // Store childId and childName in shared preference
+                // Set Child as role preference
+                // and store childId and childName in the preference
+                editor.putBoolean(context.getString(R.string.role_pref_is_parent_key), false).apply()
                 editor.putString(context.getString(R.string.role_pref_child_id_key), childId).apply()
                 editor.putString(context.getString(R.string.role_pref_child_name_key), childName).apply()
 

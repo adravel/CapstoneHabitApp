@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.adapter.ChildAccountAdapter
@@ -24,6 +25,8 @@ class ChildAccountSelectionFragment: Fragment() {
 
     private lateinit var childAccountAdapter: ChildAccountAdapter
 
+    private var isAddChildButtonVisible: Boolean? = null
+
     private val viewModel: ChildAccountSelectionViewModel by viewModels()
 
     override fun onCreateView(
@@ -35,6 +38,10 @@ class ChildAccountSelectionFragment: Fragment() {
 
         // Set toolbar title
         binding.toolbarLayout.toolbar.title = getString(R.string.choose_child_account)
+
+        // Initialize task ID using Safe Args provided by navigation component
+        val args: ChildAccountSelectionFragmentArgs by navArgs()
+        isAddChildButtonVisible = args.isAddChildButtonVisible
 
         return binding.root
     }
@@ -72,7 +79,7 @@ class ChildAccountSelectionFragment: Fragment() {
         }
 
         // Show option to add new child only when Child is selecting their accounts
-        binding.addChildButton.visibility = if (isParent) View.GONE else View.VISIBLE
+        binding.addChildButton.visibility = if (isAddChildButtonVisible!!) View.VISIBLE else View.GONE
 
         // Set back button onClickListener
         binding.toolbarLayout.toolbar.setNavigationOnClickListener {

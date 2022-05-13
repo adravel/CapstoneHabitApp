@@ -41,7 +41,7 @@
             android:id="@+id/action_roleSelectionFragment_to_parentHomeFragment"
             app:destination="@id/parentHomeFragment" />
         <action
-            android:id="@+id/action_roleSelectionFragment_to_childSelectionFragment"
+            android:id="@+id/action_roleSelectionFragment_to_childAccountSelectionFragment"
             app:destination="@id/childAccountSelectionFragment" />
         <action
             android:id="@+id/action_roleSelectionFragment_to_welcomeFragment"
@@ -76,6 +76,9 @@
         <action
             android:id="@+id/action_childAccountSelectionFragment_to_shopFragment"
             app:destination="@id/shopFragment" />
+        <argument
+            android:name="isAddChildButtonVisible"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/childHomeFragment"

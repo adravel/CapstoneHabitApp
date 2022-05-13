@@ -53,11 +53,11 @@ class RoleSelectionFragment: Fragment() {
 
         // Set Child card onClickListener
         binding.childRoleCard.setOnClickListener {
-            // Save Child as role preference
-            editor.putBoolean(getString(R.string.role_pref_is_parent_key), false).apply()
-
-            // Navigate to child home page
-             findNavController().navigate(R.id.childAccountSelectionFragment)
+            // Navigate to child account selection page
+            // and show add child button in that page
+            val action = RoleSelectionFragmentDirections
+                .actionRoleSelectionFragmentToChildAccountSelectionFragment(true)
+             findNavController().navigate(action)
         }
 
         // Set logout button onClickListener
