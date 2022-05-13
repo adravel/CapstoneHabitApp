@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.capstonehabitapp.util.Response
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -14,8 +15,10 @@ import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 
 class TaskCreationViewModel: ViewModel() {
-    private val testParentId = "2p8at5eicReHAP1P4zDu"
-    private val parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
+    private val auth = Firebase.auth
+    private val db = Firebase.firestore
+    private val parentId = auth.currentUser!!.uid
+    private val parentDocRef = db.collection("parents").document(parentId)
 
     private val _taskId: MutableLiveData<Response<String>> = MutableLiveData()
     val taskId: LiveData<Response<String>> = _taskId

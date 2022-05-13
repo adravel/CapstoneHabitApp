@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.capstonehabitapp.model.House
 import com.example.capstonehabitapp.model.Tool
 import com.example.capstonehabitapp.util.Response
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -16,8 +17,10 @@ import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 
 class HouseDetailViewModel: ViewModel() {
-    private val testParentId = "2p8at5eicReHAP1P4zDu"
-    private val parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
+    private val auth = Firebase.auth
+    private val db = Firebase.firestore
+    private val parentId = auth.currentUser!!.uid
+    private val parentDocRef = db.collection("parents").document(parentId)
 
     private var childId = ""
     private var houseId = ""
@@ -124,7 +127,7 @@ class HouseDetailViewModel: ViewModel() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                Firebase.firestore.runTransaction { transaction ->
+                db.runTransaction { transaction ->
                     val childSnapshot = transaction.get(childDocRef)
                     val houseSnapshot = transaction.get(houseDocRef)
                     val toolSnapshot = transaction.get(toolDocRef)

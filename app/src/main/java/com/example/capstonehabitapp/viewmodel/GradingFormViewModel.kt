@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.capstonehabitapp.util.Response
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
@@ -13,8 +14,10 @@ import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 
 class GradingFormViewModel: ViewModel() {
-    private val testParentId = "2p8at5eicReHAP1P4zDu"
-    private val parentDocRef = Firebase.firestore.collection("parents").document(testParentId)
+    private val auth = Firebase.auth
+    private val db = Firebase.firestore
+    private val parentId = auth.currentUser!!.uid
+    private val parentDocRef = db.collection("parents").document(parentId)
 
     private val _taskGradePoints: MutableLiveData<Response<Int>> = MutableLiveData()
     val taskGradePoints: LiveData<Response<Int>> = _taskGradePoints
@@ -66,7 +69,7 @@ class GradingFormViewModel: ViewModel() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                Firebase.firestore.runTransaction { transaction ->
+                db.runTransaction { transaction ->
                     // Call Firestore get() method to query child data
                     val snapshot = transaction.get(childDocRef)
 
