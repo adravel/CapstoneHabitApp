@@ -7,15 +7,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentAddChildBinding
+import com.example.capstonehabitapp.util.Response
+import com.example.capstonehabitapp.viewmodel.AddChildViewModel
 
 class AddChildFragment: Fragment() {
 
     private var _binding: FragmentAddChildBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: AddChildViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,10 +69,29 @@ class AddChildFragment: Fragment() {
 
             // Set add child button onCLickListener
             addChildButton.setOnClickListener {
-                val name = childNameEditText.text.toString().lowercase()
+                val name = childNameEditText.text.toString()
                 val isMale = childGenderRadioGroup.checkedRadioButtonId == R.id.male_radio_button
 
-                Log.i("AddChild", "$name, $isMale")
+                // Create new child document in Firebase
+                viewModel.addChildToFirebase(name, isMale)
+            }
+        }
+
+        // Observe childResponse LiveData in ViewModel
+        // This value determines whether child addition query is successful or not
+        viewModel.childResponse.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Response.Loading -> {}
+                is Response.Success -> {
+                    Toast.makeText(context, getString(R.string.child_addition_success), Toast.LENGTH_SHORT).show()
+
+                    // Return to child account selection page
+                    findNavController().popBackStack()
+                }
+                is Response.Failure -> {
+                    Log.e("AddChild", response.message)
+                    Toast.makeText(context, getString(R.string.request_failed), Toast.LENGTH_SHORT).show()
+                }
             }
         }
 
