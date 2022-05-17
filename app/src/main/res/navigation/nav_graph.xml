@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    tools:ignore="InvalidNavigation">
+    tools:ignore="InvalidNavigation"
+    app:startDestination="@id/addChildFragment">
 
     <fragment
         android:id="@+id/taskListFragment"
@@ -79,6 +80,9 @@
         <argument
             android:name="isAddChildButtonVisible"
             app:argType="boolean" />
+        <action
+            android:id="@+id/action_childAccountSelectionFragment_to_addChildFragment"
+            app:destination="@id/addChildFragment" />
     </fragment>
     <fragment
         android:id="@+id/childHomeFragment"
@@ -248,4 +252,9 @@
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addChildFragment"
+        android:name="com.example.capstonehabitapp.ui.AddChildFragment"
+        android:label="AddChildFragment"
+        tools:layout="@layout/fragment_add_child"/>
 </navigation>

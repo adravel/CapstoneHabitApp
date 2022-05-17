@@ -79,7 +79,12 @@ class ChildAccountSelectionFragment: Fragment() {
         }
 
         // Show option to add new child only when Child is selecting their accounts
+        // and set its onClickListener
         binding.addChildButton.visibility = if (isAddChildButtonVisible!!) View.VISIBLE else View.GONE
+        binding.addChildButton.setOnClickListener {
+            // Navigate to add child page
+            findNavController().navigate(R.id.addChildFragment)
+        }
 
         // Set back button onClickListener
         binding.toolbarLayout.toolbar.setNavigationOnClickListener {

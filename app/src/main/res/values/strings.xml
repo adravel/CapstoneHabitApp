@@ -113,6 +113,11 @@
     <string name="mother">Ibu</string>
     <string name="register_instead">Belum pernah mendaftar? Daftar di sini</string>
     <string name="login_instead">Sudah menjadi prajurit? Masuk di sini</string>
+    <string name="input_child_name">Masukkan Nama Anak</string>
+    <string name="input_child_gender">Jenis Kelamin Anak</string>
+    <string name="male">Laki-laki</string>
+    <string name="female">Perempuan</string>
+    <string name="add_child">Tambah Anak</string>
     <!-- Button Labels -->
     <string name="button_label_add_child">Tambah Anak</string>
     <string name="button_label_start_task">Kerjakan</string>
@@ -143,6 +148,7 @@
     <string name="hint_user_email">Isikan emailmu…</string>
     <string name="hint_user_password_register">Buat kata sandi untuk masuk…</string>
     <string name="hint_user_password_login">Isikan kata sandi akunmu…</string>
+    <string name="hint_child_name">Nama anak…</string>
     <!-- Dialog Messages -->
     <string name="tool_sale_confirmation_message">Jual %1$s ke %2$s ?</string>
     <string name="tool_sale_success_message">%1$s berhasil dijual.</string>
