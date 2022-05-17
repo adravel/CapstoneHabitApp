@@ -1,6 +1,5 @@
 package com.example.capstonehabitapp.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,7 +24,7 @@ class ChildAccountSelectionFragment: Fragment() {
 
     private lateinit var childAccountAdapter: ChildAccountAdapter
 
-    private var isAddChildButtonVisible: Boolean? = null
+    private var isForParent: Boolean? = null
 
     private val viewModel: ChildAccountSelectionViewModel by viewModels()
 
@@ -41,7 +40,7 @@ class ChildAccountSelectionFragment: Fragment() {
 
         // Initialize task ID using Safe Args provided by navigation component
         val args: ChildAccountSelectionFragmentArgs by navArgs()
-        isAddChildButtonVisible = args.isAddChildButtonVisible
+        isForParent = args.isForParent
 
         return binding.root
     }
@@ -49,12 +48,8 @@ class ChildAccountSelectionFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Get user's role data from shared preference
-        val sharedPref = requireActivity().getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
-        val isParent = sharedPref.getBoolean(getString(R.string.role_pref_is_parent_key), true)
-
         // Set the adapter and layoutManager for child list RecyclerView
-        childAccountAdapter = ChildAccountAdapter(mutableListOf(), isParent)
+        childAccountAdapter = ChildAccountAdapter(mutableListOf(), isForParent!!)
         binding.childAccountListRecycleView.apply {
             adapter = childAccountAdapter
             layoutManager = LinearLayoutManager(context)
@@ -80,7 +75,7 @@ class ChildAccountSelectionFragment: Fragment() {
 
         // Show option to add new child only when Child is selecting their accounts
         // and set its onClickListener
-        binding.addChildButton.visibility = if (isAddChildButtonVisible!!) View.VISIBLE else View.GONE
+        binding.addChildButton.visibility = if (!isForParent!!) View.VISIBLE else View.GONE
         binding.addChildButton.setOnClickListener {
             // Navigate to add child page
             findNavController().navigate(R.id.addChildFragment)

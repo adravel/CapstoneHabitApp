@@ -78,7 +78,7 @@
             android:id="@+id/action_childAccountSelectionFragment_to_shopFragment"
             app:destination="@id/shopFragment" />
         <argument
-            android:name="isAddChildButtonVisible"
+            android:name="isForParent"
             app:argType="boolean" />
         <action
             android:id="@+id/action_childAccountSelectionFragment_to_addChildFragment"

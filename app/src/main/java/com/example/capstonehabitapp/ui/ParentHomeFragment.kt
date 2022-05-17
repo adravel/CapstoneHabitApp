@@ -108,7 +108,7 @@ class ParentHomeFragment: Fragment() {
             // Set shop menu card onClickListener
             shopMenuCard.setOnClickListener {
                 val action = ParentHomeFragmentDirections
-                    .actionParentHomeFragmentToChildAccountSelectionFragment(false)
+                    .actionParentHomeFragmentToChildAccountSelectionFragment(true)
                 findNavController().navigate(action)
             }
         }

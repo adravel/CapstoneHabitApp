@@ -56,7 +56,7 @@ class RoleSelectionFragment: Fragment() {
             // Navigate to child account selection page
             // and show add child button in that page
             val action = RoleSelectionFragmentDirections
-                .actionRoleSelectionFragmentToChildAccountSelectionFragment(true)
+                .actionRoleSelectionFragmentToChildAccountSelectionFragment(false)
              findNavController().navigate(action)
         }
 
