@@ -118,6 +118,9 @@
     <string name="male">Laki-laki</string>
     <string name="female">Perempuan</string>
     <string name="add_child">Tambah Anak</string>
+    <string name="parent_account_verification">Verifikasi Akun Orang Tua</string>
+    <string name="input_password">Masukkan Password Akun</string>
+    <string name="input_password_description">Masukkan password akun Anda. Jangan berikan password kepada anak untuk mencegah terjadinya penilaian mandiri oleh anak.</string>
     <!-- Button Labels -->
     <string name="button_label_add_child">Tambah Anak</string>
     <string name="button_label_start_task">Kerjakan</string>
@@ -146,6 +149,7 @@
     <string name="hint_time">00:00</string>
     <string name="hint_user_name">Isikan nama aslimu…</string>
     <string name="hint_user_email">Isikan emailmu…</string>
+    <string name="hint_user_password">Isikan password…</string>
     <string name="hint_user_password_register">Buat kata sandi untuk masuk…</string>
     <string name="hint_user_password_login">Isikan kata sandi akunmu…</string>
     <string name="hint_child_name">Nama anak…</string>
@@ -169,4 +173,5 @@
     <string name="register_success">Pendaftaran akun berhasil!</string>
     <string name="login_success">Berhasil masuk ke kamp!</string>
     <string name="child_addition_success">Berhasil menambahkan anak!</string>
+    <string name="reauthentication_failed">Password tidak valid</string>
 </resources>

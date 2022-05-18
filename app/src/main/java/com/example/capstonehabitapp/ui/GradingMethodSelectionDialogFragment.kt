@@ -45,8 +45,8 @@ class GradingMethodSelectionDialogFragment: DialogFragment() {
 
                 // Set button onClickListener for selecting direct grading method
                 binding.positiveButton.setOnClickListener {
-                    // Navigate to grading form page
-                    findNavController().navigate(R.id.gradingFormFragment)
+                    // Navigate to parent account verification page
+                    findNavController().navigate(R.id.parentAccountVerificationFragment)
                 }
 
                 // Set button onClickListener for selecting remote grading method

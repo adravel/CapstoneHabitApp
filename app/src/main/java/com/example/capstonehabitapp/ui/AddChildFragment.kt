@@ -46,11 +46,11 @@ class AddChildFragment: Fragment() {
             // Set TextChangedListener for child name EditText
             childNameEditText.addTextChangedListener(object : TextWatcher {
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                    val gradeText = childNameEditText.text.toString().trim()
+                    val childNameText = childNameEditText.text.toString().trim()
 
                     // Enable button if the EditText are not empty
                     // and a RadioButton is checked
-                    addChildButton.isEnabled = gradeText.isNotEmpty()
+                    addChildButton.isEnabled = childNameText.isNotEmpty()
                             && childGenderRadioGroup.checkedRadioButtonId != -1
                 }
 
@@ -60,11 +60,11 @@ class AddChildFragment: Fragment() {
 
             // Set child gender RadioGroup listener
             childGenderRadioGroup.setOnCheckedChangeListener { _, checkedButtonId ->
-                val gradeText = childNameEditText.text.toString().trim()
+                val childNameText = childNameEditText.text.toString().trim()
 
                 // Enable button if the EditText are not empty
                 // and a RadioButton is checked
-                addChildButton.isEnabled = gradeText.isNotEmpty() && checkedButtonId != -1
+                addChildButton.isEnabled = childNameText.isNotEmpty() && checkedButtonId != -1
             }
 
             // Set add child button onCLickListener

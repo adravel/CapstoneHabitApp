@@ -116,8 +116,8 @@
         android:name="com.example.capstonehabitapp.ui.GradingMethodSelectionDialogFragment"
         android:label="GradingMethodSelectionDialogFragment" >
         <action
-            android:id="@+id/action_gradingMethodSelectionDialogFragment_to_gradingFormFragment"
-            app:destination="@id/gradingFormFragment" />
+            android:id="@+id/action_gradingMethodSelectionDialogFragment_to_parentAccountVerificationFragment"
+            app:destination="@id/parentAccountVerificationFragment" />
     </dialog>
     <fragment
         android:id="@+id/gradingFormFragment"
@@ -257,4 +257,13 @@
         android:name="com.example.capstonehabitapp.ui.AddChildFragment"
         android:label="AddChildFragment"
         tools:layout="@layout/fragment_add_child"/>
+    <fragment
+        android:id="@+id/parentAccountVerificationFragment"
+        android:name="com.example.capstonehabitapp.ui.ParentAccountVerificationFragment"
+        android:label="ParentAccountVerificationFragment"
+        tools:layout="@layout/fragment_parent_account_verification">
+        <action
+            android:id="@+id/action_parentAccountVerificationFragment_to_gradingFormFragment"
+            app:destination="@id/gradingFormFragment" />
+    </fragment>
 </navigation>
