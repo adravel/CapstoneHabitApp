@@ -35,6 +35,42 @@ class TaskDetailViewModel: ViewModel() {
         return "$duration menit"
     }
 
+    // Convert grade string to integer
+    fun getGradeInt(grade: String): Int {
+        return when (grade) {
+            "Kurang" -> 1
+            "Baik" -> 2
+            "Sangat Baik" -> 3
+            else -> 0
+        }
+    }
+
+    // Calculate grade points depending on the difficulty and grade
+    fun getGradePoints(difficulty: Int, grade: Int): Int {
+        var gradePoints = 0
+        when (difficulty) {
+            0 -> gradePoints = when (grade) {
+                1 -> 3
+                2 -> 4
+                3 -> 6
+                else -> 0
+            }
+            1 -> gradePoints = when (grade) {
+                1 -> 5
+                2 -> 6
+                3 -> 8
+                else -> 0
+            }
+            2 -> gradePoints = when (grade) {
+                1 -> 7
+                2 -> 8
+                3 -> 10
+                else -> 0
+            }
+        }
+        return gradePoints
+    }
+
     // Fetch task data from Firebase
     fun getTaskFromFirebase(taskId: String) {
         _task.postValue(Response.Loading())
@@ -132,6 +168,60 @@ class TaskDetailViewModel: ViewModel() {
                     .await()
 
                 _taskStatusChange.postValue(Response.Success(3))
+
+            } catch (e: Exception) {
+                e.message?.let { _taskStatusChange.postValue(Response.Failure(it)) }
+            }
+        }
+    }
+
+    // Update task status to 4
+    // and update child totalPoints, currentPoints, and level simultaneously
+    // using Firestore transaction operation
+    fun gradeTask(taskId: String, childId: String, grade: Int, gradePoints: Int, notes: String) {
+        _taskStatusChange.postValue(Response.Loading())
+
+        val taskDocRef = parentDocRef.collection("tasks").document(taskId)
+        val childDocRef = parentDocRef.collection("children").document(childId)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                db.runTransaction { transaction ->
+                    // Call Firestore get() method to query child data
+                    val snapshot = transaction.get(childDocRef)
+
+                    val totalPoints = snapshot.getLong("totalPoints")!!.toInt() + gradePoints
+                    var cash = snapshot.getLong("cash")!!.toInt() + (gradePoints * 10)
+                    var level = snapshot.getLong("level")!!.toInt()
+                    val pointsToLevelUp = level * 50
+
+                    // Level up if the child has enough points to level up and has not reached max level
+                    if (totalPoints >= pointsToLevelUp && level < 10) {
+                        // Gain bonus
+                        cash += level * 5 * 10
+
+                        // Level up
+                        level++
+                    }
+
+                    val taskUpdates = hashMapOf<String, Any>(
+                        "status" to 4,
+                        "grade" to grade,
+                        "notes" to notes
+                    )
+
+                    val childUpdates = hashMapOf<String, Any>(
+                        "level" to level,
+                        "totalPoints" to totalPoints,
+                        "cash" to cash
+                    )
+
+                    // Update task and child documents
+                    transaction.update(taskDocRef, taskUpdates)
+                    transaction.update(childDocRef, childUpdates)
+                }.await()
+
+                _taskStatusChange.postValue(Response.Success(4))
 
             } catch (e: Exception) {
                 e.message?.let { _taskStatusChange.postValue(Response.Failure(it)) }

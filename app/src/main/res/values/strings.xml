@@ -160,6 +160,7 @@
     <string name="tool_purchase_confirmation_message">Gunakan %1$s untuk menyerang benteng?</string>
     <string name="grading_method_selection_message">Apakah kamu sedang bersama orang tua mu sekarang?</string>
     <string name="house_rescue_confirmation_message">Selamatkan rumah %1$s?</string>
+    <string name="grading_success_message">Hebat! %1$s mendapatkan %2$d Poin!</string>
     <!-- Toast Messages -->
     <string name="data_fetch_failed">Pengambilan data gagal</string>
     <string name="task_creation_success">Pekerjaan berhasil dibuat!</string>
@@ -167,7 +168,6 @@
     <string name="task_start_success">Pekerjaan dimulai!</string>
     <string name="task_finish_success">Pekerjaan berhasil diselesaikan!</string>
     <string name="ask_for_grading_success">Permintaan penilaian berhasil dikirim!</string>
-    <string name="grading_success">Pekerjaan berhasil dinilai! Anak mendapat tambahan %1$d poin</string>
     <string name="request_failed">Permintaan gagal</string>
     <string name="tool_purchase_success">Alat berhasil dibeli!</string>
     <string name="not_enough_cash_failure">Dana tidak cukup untuk membeli alat</string>

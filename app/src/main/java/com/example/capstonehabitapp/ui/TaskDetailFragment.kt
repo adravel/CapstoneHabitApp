@@ -102,16 +102,17 @@ class TaskDetailFragment : Fragment() {
                     // Clear the LiveData so the code below will be executed only once
                     viewModel.taskStatusChangeResponseHandled()
 
+                    // Fetch task data to update the Views
+                    viewModel.getTaskFromFirebase(taskId)
+
                     // Display a toast when task status changes
                     // i.e. when the button is clicked and the function is executed successfully
                     when (response.data) {
                         1 -> Toast.makeText(context, getString(R.string.task_start_success), Toast.LENGTH_SHORT).show()
                         2 -> Toast.makeText(context, getString(R.string.task_finish_success), Toast.LENGTH_SHORT).show()
                         3 -> Toast.makeText(context, getString(R.string.ask_for_grading_success), Toast.LENGTH_SHORT).show()
+                        4 -> findNavController().navigate(R.id.gradingSuccessDialogFragment)
                     }
-
-                    // Fetch task data to update the Views
-                    viewModel.getTaskFromFirebase(taskId)
                 }
                 is Response.Failure -> {
                     // Clear the LiveData so the code below will be executed only once

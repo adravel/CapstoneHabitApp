@@ -12,13 +12,11 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentGradingFormBinding
 import com.example.capstonehabitapp.model.Task
 import com.example.capstonehabitapp.util.Response
-import com.example.capstonehabitapp.viewmodel.GradingFormViewModel
 import com.example.capstonehabitapp.viewmodel.TaskDetailViewModel
 
 class GradingFormFragment: Fragment() {
@@ -26,8 +24,7 @@ class GradingFormFragment: Fragment() {
     private var _binding: FragmentGradingFormBinding? = null
     private val binding get() = _binding!!
 
-    private val taskDetailViewModel: TaskDetailViewModel by activityViewModels()
-    private val gradingFormViewModel: GradingFormViewModel by viewModels()
+    private val viewModel: TaskDetailViewModel by activityViewModels()
 
     override fun onResume() {
         super.onResume()
@@ -72,7 +69,7 @@ class GradingFormFragment: Fragment() {
             })
 
             // Observe task LiveData in SharedViewModel
-            taskDetailViewModel.task.observe(viewLifecycleOwner) { taskResponse ->
+            viewModel.task.observe(viewLifecycleOwner) { taskResponse ->
                 if (taskResponse is Response.Success) {
                     val task = taskResponse.data
 
@@ -82,15 +79,15 @@ class GradingFormFragment: Fragment() {
                     // Set grade task button OnClickListener
                     gradeTaskButton.setOnClickListener {
                         // Get grade data in the form of integer
-                        val grade = gradingFormViewModel.getGradeInt(gradeAutoCompleteTextView.text.toString())
+                        val grade = viewModel.getGradeInt(gradeAutoCompleteTextView.text.toString())
 
                         // Calculate points that the child will get after completing the task
-                        val gradePoints = gradingFormViewModel.getGradePoints(task.difficulty.toInt(), grade)
+                        val gradePoints = viewModel.getGradePoints(task.difficulty.toInt(), grade)
 
                         val notes = notesEditText.text.toString()
 
                         // Grade task by updating task and child documents in Firestore
-                        gradingFormViewModel.gradeTask(
+                        viewModel.gradeTask(
                             task.id,
                             task.childId,
                             grade,
@@ -101,20 +98,12 @@ class GradingFormFragment: Fragment() {
                 }
             }
 
-            // Observe task grade points LiveData in ViewModel
+            // Observe taskStatusChange LiveData in ViewModel
             // This value determines whether the grading transaction is successful or not
-            gradingFormViewModel.taskGradePoints.observe(viewLifecycleOwner) { response ->
+            viewModel.taskStatusChange.observe(viewLifecycleOwner) { response ->
                 when (response) {
                     is Response.Loading -> {}
                     is Response.Success -> {
-                        val gradePoints = response.data
-
-                        Toast.makeText(
-                            context,
-                            getString(R.string.grading_success, gradePoints),
-                            Toast.LENGTH_LONG
-                        ).show()
-
                         // Return to task detail page
                         findNavController().popBackStack()
                     }
@@ -155,7 +144,7 @@ class GradingFormFragment: Fragment() {
                 task.startTimeLimit,
                 task.finishTimeLimit
             )
-            durationDataText.text = taskDetailViewModel.getTaskDurationString(task)
+            durationDataText.text = viewModel.getTaskDurationString(task)
             if (task.status.toInt() == 2) {
                 // When user chose to grade directly
                 statusDataText.text = getString(R.string.task_status_2_with_child_name, task.childName)

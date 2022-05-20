@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_taskDetailFragment_to_gradingFormFragment"
             app:destination="@id/gradingFormFragment" />
+        <action
+            android:id="@+id/action_taskDetailFragment_to_gradingSuccessDialogFragment"
+            app:destination="@id/gradingSuccessDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/roleSelectionFragment"
@@ -266,4 +269,8 @@
             android:id="@+id/action_parentAccountVerificationFragment_to_gradingFormFragment"
             app:destination="@id/gradingFormFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/gradingSuccessDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.GradingSuccessDialogFragment"
+        android:label="GradingSuccessDialogFragment" />
 </navigation>
