@@ -244,14 +244,14 @@ class TaskDetailFragment : Fragment() {
                 3 -> {
                     durationDataText.text = viewModel.getTaskDurationString(task)
                     if (isForParent) {
-                        statusDataText.text = getString(R.string.task_status_3_for_parent_role_with_child_name, task.childName)
+                        statusDataText.text = getString(R.string.task_status_3_for_parent_with_child_name, task.childName)
                         statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_error))
 
                         changeTaskStatusButton.visibility = show
                         changeTaskStatusButton.text = getString(R.string.button_label_grade_task)
                         changeTaskStatusButton.isEnabled = true
                     } else {
-                        statusDataText.text = getString(R.string.task_status_3_for_child_role)
+                        statusDataText.text = getString(R.string.task_status_3_for_child)
                         statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_info))
 
                         changeTaskStatusButton.visibility = hide

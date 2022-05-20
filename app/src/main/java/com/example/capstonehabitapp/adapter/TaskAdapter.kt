@@ -40,20 +40,20 @@ class TaskAdapter(private val tasks: MutableList<Task>, private val isForParent:
                     statusText.setTextColor(ContextCompat.getColor(context, R.color.state_error))
                 }
                 1 -> {
-                    statusText.text = context.getString(R.string.task_status_1)
+                    statusText.text = context.getString(R.string.task_status_1_with_child_name, tasks[position].childName)
                     statusText.setTextColor(ContextCompat.getColor(context, R.color.state_warning_dark))
                 }
                 2 -> {
-                    statusText.text = context.getString(R.string.task_status_2)
+                    statusText.text = context.getString(R.string.task_status_2_with_child_name, tasks[position].childName)
                     statusText.setTextColor(ContextCompat.getColor(context, R.color.state_success))
                 }
                 3 -> {
                     if (isForParent) {
-                        statusText.text = context.getString(R.string.task_status_3_for_parent_role)
+                        statusText.text = context.getString(R.string.task_status_3_for_parent_with_child_name, tasks[position].childName)
                         statusText.setTextColor(ContextCompat.getColor(context, R.color.state_error))
                     }
                     else {
-                        statusText.text = context.getString(R.string.task_status_3_for_child_role)
+                        statusText.text = context.getString(R.string.task_status_3_for_child_with_child_name, tasks[position].childName)
                         statusText.setTextColor(ContextCompat.getColor(context, R.color.state_info))
                     }
                 }
