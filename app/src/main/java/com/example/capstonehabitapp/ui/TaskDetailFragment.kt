@@ -27,6 +27,9 @@ class TaskDetailFragment : Fragment() {
     private lateinit var childId: String
     private lateinit var childName: String
 
+    private val hide = View.GONE
+    private val show = View.VISIBLE
+
     private val viewModel: TaskDetailViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -142,13 +145,11 @@ class TaskDetailFragment : Fragment() {
             statusDataText.text = ""
             detailDataText.text = ""
 
-            View.GONE.let {
-                gradePointsText.visibility = it
-                gradePointsDataText.visibility = it
-                notesText.visibility = it
-                notesDataText.visibility = it
-                changeTaskStatusButton.visibility = it
-            }
+            gradePointsText.visibility = hide
+            gradePointsDataText.visibility = hide
+            notesText.visibility = hide
+            notesDataText.visibility = hide
+            changeTaskStatusButton.visibility = hide
         }
     }
 
@@ -174,7 +175,6 @@ class TaskDetailFragment : Fragment() {
 
             // Display the rest of the data according to status
             when (task.status.toInt()) {
-
                 // State: Task default state
                 0 -> {
                     durationDataText.text = "-"
@@ -183,15 +183,15 @@ class TaskDetailFragment : Fragment() {
                     if (isForParent) {
                         gradePointsDataText.text = "-"
                         notesDataText.text = "-"
-                        changeTaskStatusButton.visibility = View.GONE
+
+                        changeTaskStatusButton.visibility = hide
                     } else {
-                        View.GONE.let {
-                            gradePointsText.visibility = it
-                            gradePointsDataText.visibility = it
-                            notesText.visibility = it
-                            notesDataText.visibility = it
-                        }
-                        changeTaskStatusButton.visibility = View.VISIBLE
+                        gradePointsText.visibility = hide
+                        gradePointsDataText.visibility = hide
+                        notesText.visibility = hide
+                        notesDataText.visibility = hide
+
+                        changeTaskStatusButton.visibility = show
                         changeTaskStatusButton.text = getString(R.string.button_label_start_task)
                     }
                 }
@@ -204,15 +204,15 @@ class TaskDetailFragment : Fragment() {
                     if (isForParent) {
                         gradePointsDataText.text = "-"
                         notesDataText.text = "-"
-                        changeTaskStatusButton.visibility = View.GONE
+
+                        changeTaskStatusButton.visibility = hide
                     } else {
-                        View.GONE.let {
-                            gradePointsText.visibility = it
-                            gradePointsDataText.visibility = it
-                            notesText.visibility = it
-                            notesDataText.visibility = it
-                        }
-                        changeTaskStatusButton.visibility = View.VISIBLE
+                        gradePointsText.visibility = hide
+                        gradePointsDataText.visibility = hide
+                        notesText.visibility = hide
+                        notesDataText.visibility = hide
+
+                        changeTaskStatusButton.visibility = if (task.childId == childId) show else hide
                         changeTaskStatusButton.text = getString(R.string.button_label_finish_task)
                     }
                 }
@@ -225,17 +225,17 @@ class TaskDetailFragment : Fragment() {
                     if (isForParent) {
                         gradePointsDataText.text = "-"
                         notesDataText.text = "-"
-                        changeTaskStatusButton.visibility = View.VISIBLE
+
+                        changeTaskStatusButton.visibility = show
                         changeTaskStatusButton.text = getString(R.string.button_label_grade_task)
                         changeTaskStatusButton.isEnabled = false
                     } else {
-                        View.GONE.let {
-                            gradePointsText.visibility = it
-                            gradePointsDataText.visibility = it
-                            notesText.visibility = it
-                            notesDataText.visibility = it
-                        }
-                        changeTaskStatusButton.visibility = View.VISIBLE
+                        gradePointsText.visibility = hide
+                        gradePointsDataText.visibility = hide
+                        notesText.visibility = hide
+                        notesDataText.visibility = hide
+
+                        changeTaskStatusButton.visibility = if (task.childId == childId) show else hide
                         changeTaskStatusButton.text = getString(R.string.button_label_ask_for_grading)
                     }
                 }
@@ -246,20 +246,21 @@ class TaskDetailFragment : Fragment() {
                     if (isForParent) {
                         statusDataText.text = getString(R.string.task_status_3_for_parent_role_with_child_name, task.childName)
                         statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_error))
-                        changeTaskStatusButton.visibility = View.VISIBLE
+
+                        changeTaskStatusButton.visibility = show
                         changeTaskStatusButton.text = getString(R.string.button_label_grade_task)
                         changeTaskStatusButton.isEnabled = true
                     } else {
                         statusDataText.text = getString(R.string.task_status_3_for_child_role)
                         statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_info))
-                        changeTaskStatusButton.visibility = View.GONE
+
+                        changeTaskStatusButton.visibility = hide
                     }
-                    View.VISIBLE.let {
-                        gradePointsText.visibility = it
-                        gradePointsDataText.visibility = it
-                        notesText.visibility = it
-                        notesDataText.visibility = it
-                    }
+                    gradePointsText.visibility = show
+                    gradePointsDataText.visibility = show
+                    notesText.visibility = show
+                    notesDataText.visibility = show
+
                     gradePointsDataText.text = "-"
                     notesDataText.text = "-"
                 }
@@ -269,12 +270,12 @@ class TaskDetailFragment : Fragment() {
                     durationDataText.text = viewModel.getTaskDurationString(task)
                     statusDataText.text = getString(R.string.task_status_4)
                     statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_success))
-                    View.VISIBLE.let {
-                        gradePointsText.visibility = it
-                        gradePointsDataText.visibility = it
-                        notesText.visibility = it
-                        notesDataText.visibility = it
-                    }
+
+                    gradePointsText.visibility = show
+                    gradePointsDataText.visibility = show
+                    notesText.visibility = show
+                    notesDataText.visibility = show
+
                     gradePointsDataText.text = when (task.grade.toInt()) {
                         1 -> getString(R.string.task_grade_1)
                         2 -> getString(R.string.task_grade_2)
@@ -282,7 +283,8 @@ class TaskDetailFragment : Fragment() {
                         else -> "-"
                     }
                     notesDataText.text = task.notes
-                    changeTaskStatusButton.visibility = View.GONE
+
+                    changeTaskStatusButton.visibility = hide
                 }
             }
         }
