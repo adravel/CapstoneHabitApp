@@ -191,17 +191,18 @@ class TaskDetailViewModel: ViewModel() {
                     val snapshot = transaction.get(childDocRef)
 
                     val totalPoints = snapshot.getLong("totalPoints")!!.toInt() + gradePoints
-                    var cash = snapshot.getLong("cash")!!.toInt() + (gradePoints * 10)
+                    val cash = snapshot.getLong("cash")!!.toInt() + (gradePoints * 10)
                     var level = snapshot.getLong("level")!!.toInt()
                     val pointsToLevelUp = level * 50
+                    var hasLeveledUp = false
 
                     // Level up if the child has enough points to level up and has not reached max level
                     if (totalPoints >= pointsToLevelUp && level < 10) {
-                        // Gain bonus
-                        cash += level * 5 * 10
-
                         // Level up
                         level++
+
+                        // Set the level up flag to true
+                        hasLeveledUp = true
                     }
 
                     val taskUpdates = hashMapOf<String, Any>(
@@ -212,6 +213,7 @@ class TaskDetailViewModel: ViewModel() {
 
                     val childUpdates = hashMapOf<String, Any>(
                         "level" to level,
+                        "hasLeveledUp" to hasLeveledUp,
                         "totalPoints" to totalPoints,
                         "cash" to cash
                     )

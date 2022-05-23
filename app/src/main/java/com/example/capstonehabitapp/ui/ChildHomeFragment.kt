@@ -59,7 +59,7 @@ class ChildHomeFragment: Fragment() {
             layoutManager = LinearLayoutManager(context)
         }
 
-        // Retrieve child ID from shared preference
+        // Retrieve child ID and level from shared preference
         val sharedPref = requireActivity().getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
         val childId = sharedPref.getString(getString(R.string.role_pref_child_id_key), "")!!
 
@@ -88,8 +88,9 @@ class ChildHomeFragment: Fragment() {
                 is Response.Loading -> {}
                 is Response.Success -> {
                     val child = response.data
+                    val level = child.level.toInt()
 
-                    val levelName = when (child.level.toInt()) {
+                    val levelName = when (level) {
                         1 -> getString(R.string.level_1_name)
                         2 -> getString(R.string.level_2_name)
                         3 -> getString(R.string.level_3_name)
@@ -102,7 +103,7 @@ class ChildHomeFragment: Fragment() {
                         else -> getString(R.string.level_10_name)
                     }
 
-                    val progress = viewModel.getProgress(child.totalPoints.toInt(), child.level.toInt())
+                    val progress = viewModel.getProgress(child.totalPoints.toInt(), level)
 
                     // Bind the data to Views
                     binding.apply {
@@ -110,6 +111,15 @@ class ChildHomeFragment: Fragment() {
                         levelText.text = getString(R.string.child_level_placeholder, levelName)
                         expText.text = getString(R.string.child_exp_placeholder, progress)
                         expProgressBar.progress = progress
+                    }
+
+                    // Display level up dialog if hasLeveledUp field value is true
+                    // and the level is higher than 1
+                    if (child.hasLeveledUp && level > 1) {
+                        // Go to level up dialog
+                        val action = ChildHomeFragmentDirections
+                            .actionChildHomeFragmentToLevelUpDialogFragment(childId, level)
+                        findNavController().navigate(action)
                     }
                 }
                 is Response.Failure -> {

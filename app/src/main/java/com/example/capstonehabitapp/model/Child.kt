@@ -12,6 +12,7 @@ data class Child(
     var totalPoints: Long = 0,
     var cash: Long = 0,
     var level: Long = 0,
+    var hasLeveledUp: Boolean = false,
     var badge: Long = 0,
     var timeCreated: Timestamp? = null
 )

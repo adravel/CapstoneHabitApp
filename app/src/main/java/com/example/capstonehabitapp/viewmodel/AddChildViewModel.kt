@@ -38,6 +38,7 @@ class AddChildViewModel: ViewModel() {
                         "totalPoints" to 0,
                         "cash" to 0,
                         "level" to 1,
+                        "hasLeveledUp" to false,
                         "badge" to 0,
                         "timeCreated" to FieldValue.serverTimestamp()
                     )

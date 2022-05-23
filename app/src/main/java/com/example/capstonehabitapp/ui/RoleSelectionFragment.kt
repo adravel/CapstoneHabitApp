@@ -43,8 +43,10 @@ class RoleSelectionFragment: Fragment() {
             val childIdKey = getString(R.string.role_pref_child_id_key)
             val childNameKey = getString(R.string.role_pref_child_name_key)
             if (sharedPref.contains(childIdKey) && sharedPref.contains(childNameKey)) {
-                editor.remove(childIdKey).apply()
-                editor.remove(childNameKey).apply()
+                editor
+                    .remove(childIdKey)
+                    .remove(childNameKey)
+                    .apply()
             }
 
             // Navigate to parent home page

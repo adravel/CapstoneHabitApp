@@ -104,6 +104,9 @@
         <action
             android:id="@+id/action_childHomeFragment_to_roleSelectionFragment"
             app:destination="@id/roleSelectionFragment" />
+        <action
+            android:id="@+id/action_childHomeFragment_to_levelUpDialogFragment"
+            app:destination="@id/levelUpDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/taskCreationFragment"
@@ -273,4 +276,15 @@
         android:id="@+id/gradingSuccessDialogFragment"
         android:name="com.example.capstonehabitapp.ui.GradingSuccessDialogFragment"
         android:label="GradingSuccessDialogFragment" />
+    <dialog
+        android:id="@+id/levelUpDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.LevelUpDialogFragment"
+        android:label="LevelUpDialogFragment" >
+        <argument
+            android:name="childId"
+            app:argType="string" />
+        <argument
+            android:name="childNewLevel"
+            app:argType="integer" />
+    </dialog>
 </navigation>
