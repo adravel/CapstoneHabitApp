@@ -22,6 +22,7 @@ class LevelUpDialogFragment: DialogFragment() {
 
     private lateinit var childId: String
     private var childNewLevel: Int = 0
+    private lateinit var childNewLevelName: String
 
      private val viewModel: LevelUpViewModel by viewModels()
 
@@ -39,6 +40,7 @@ class LevelUpDialogFragment: DialogFragment() {
         val args: LevelUpDialogFragmentArgs by navArgs()
         childId = args.childId
         childNewLevel = args.childNewLevel
+        childNewLevelName = args.childNewLevelName
 
         return binding.root
     }
@@ -50,7 +52,7 @@ class LevelUpDialogFragment: DialogFragment() {
         val bonus = viewModel.getBonus(childNewLevel)
 
         // Display the dialog message description text
-        binding.descriptionText.text = getString(R.string.level_up_message_description, childNewLevel, bonus)
+        binding.descriptionText.text = getString(R.string.level_up_message_description, childNewLevelName, bonus)
 
         // Set button onCLickListener
         binding.getBonusButton.setOnClickListener {

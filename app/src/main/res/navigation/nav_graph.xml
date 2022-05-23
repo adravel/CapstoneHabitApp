@@ -286,5 +286,8 @@
         <argument
             android:name="childNewLevel"
             app:argType="integer" />
+        <argument
+            android:name="childNewLevelName"
+            app:argType="string" />
     </dialog>
 </navigation>

@@ -118,7 +118,7 @@ class ChildHomeFragment: Fragment() {
                     if (child.hasLeveledUp && level > 1) {
                         // Go to level up dialog
                         val action = ChildHomeFragmentDirections
-                            .actionChildHomeFragmentToLevelUpDialogFragment(childId, level)
+                            .actionChildHomeFragmentToLevelUpDialogFragment(childId, level, levelName)
                         findNavController().navigate(action)
                     }
                 }

@@ -163,7 +163,7 @@
     <string name="house_rescue_confirmation_message">Selamatkan rumah %1$s?</string>
     <string name="grading_success_message">Hebat! %1$s mendapatkan %2$d Poin!</string>
     <string name="level_up_message_title">Kerja bagus, prajurit!</string>
-    <string name="level_up_message_description">Kamu berhasil naik peringkat menjadi %1$d! Kamu mendapat bonus dana Rp %2$d!</string>
+    <string name="level_up_message_description">Kamu berhasil naik peringkat menjadi %1$s! Kamu mendapat bonus dana Rp %2$d!</string>
     <!-- Toast Messages -->
     <string name="data_fetch_failed">Pengambilan data gagal</string>
     <string name="task_creation_success">Pekerjaan berhasil dibuat!</string>
