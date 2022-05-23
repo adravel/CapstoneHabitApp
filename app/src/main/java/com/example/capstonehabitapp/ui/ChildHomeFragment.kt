@@ -87,6 +87,11 @@ class ChildHomeFragment: Fragment() {
             when (response) {
                 is Response.Loading -> {}
                 is Response.Success -> {
+                    // Clear the LiveData so the code below will be executed only once
+                    // and the level up dialog would not be displayed again if the bonus
+                    // has been retrieved
+                    viewModel.childResponseHandled()
+
                     val child = response.data
                     val level = child.level.toInt()
 

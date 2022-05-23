@@ -84,4 +84,9 @@ class ChildHomeViewModel: ViewModel() {
             }
         }
     }
+
+    // Set child LiveData value to null
+    fun childResponseHandled() {
+        _child.value = null
+    }
 }
