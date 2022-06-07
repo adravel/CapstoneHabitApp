@@ -32,19 +32,6 @@
             tools:text="Nama Rumah" />
 
         <TextView
-            android:id="@+id/hp_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:textColor="@color/dark_2"
-            android:drawablePadding="8dp"
-            app:drawableStartCompat="@drawable/ic_placeholder"
-            app:drawableTint="@color/green"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name_text"
-            tools:text="HP (angka)" />
-
-        <TextView
             android:id="@+id/island_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,7 +41,7 @@
             app:drawableStartCompat="@drawable/ic_placeholder"
             app:drawableTint="@color/green"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/hp_text"
+            app:layout_constraintTop_toBottomOf="@+id/name_text"
             tools:text="Pulau" />
 
         <Button
