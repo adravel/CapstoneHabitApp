@@ -178,4 +178,6 @@
     <string name="login_success">Berhasil masuk ke kamp!</string>
     <string name="child_addition_success">Berhasil menambahkan anak!</string>
     <string name="reauthentication_failed">Password tidak valid</string>
+    <!-- TextInputLayout Helper/Error Messages -->
+    <string name="minimum_password_length_error">Password memerlukan minimal 6 karakter</string>
 </resources>

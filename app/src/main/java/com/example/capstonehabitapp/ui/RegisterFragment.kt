@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
@@ -54,13 +55,24 @@ class RegisterFragment: Fragment() {
                         // and a RadioButton is checked
                         registerButton.isEnabled = et1.isNotEmpty()
                                 && et2.isNotEmpty()
-                                && et3.isNotEmpty()
+                                && et3.length >= 6
                                 && binding.parentalRoleRadioGroup.checkedRadioButtonId != -1
                     }
 
                     override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
                     override fun afterTextChanged(p0: Editable?) {}
                 })
+            }
+
+            // Show error message if password length is less than 6 characters
+            // which is the required minimum length for Firebase Auth
+            passwordEditText.doOnTextChanged { text, _, _, _ ->
+                if (text!!.length < 6) {
+                    passwordTextInputLayout.error = getString(R.string.minimum_password_length_error)
+                    passwordTextInputLayout.setErrorIconDrawable(0)
+                } else {
+                    passwordTextInputLayout.error = null
+                }
             }
 
             // Set parental role RadioGroup listener
