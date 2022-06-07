@@ -15,8 +15,8 @@ import kotlinx.coroutines.tasks.await
 class ParentAccountVerificationViewModel: ViewModel() {
     private val auth = Firebase.auth
 
-    private val _reauthenticationResponse: MutableLiveData<Response<Int>> = MutableLiveData()
-    val reauthenticationResponse: LiveData<Response<Int>> = _reauthenticationResponse
+    private val _reauthenticationResponse: MutableLiveData<Response<Unit>> = MutableLiveData()
+    val reauthenticationResponse: LiveData<Response<Unit>> = _reauthenticationResponse
 
     // Reauthenticate the user by providing the password
     // to ensure that the one who currently use the app is the parent
@@ -34,7 +34,7 @@ class ParentAccountVerificationViewModel: ViewModel() {
                 // Reauthenticate the user
                 user.reauthenticate(credential).await()
 
-                _reauthenticationResponse.postValue(Response.Success(1))
+                _reauthenticationResponse.postValue(Response.Success(Unit))
 
             } catch(e: Exception) {
                 e.message?.let { _reauthenticationResponse.postValue(Response.Failure(it)) }

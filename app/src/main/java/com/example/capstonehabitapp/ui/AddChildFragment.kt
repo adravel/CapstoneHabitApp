@@ -77,9 +77,9 @@ class AddChildFragment: Fragment() {
             }
         }
 
-        // Observe childResponse LiveData in ViewModel
-        // This value determines whether child addition query is successful or not
-        viewModel.childResponse.observe(viewLifecycleOwner) { response ->
+        // Observe addChildResponse LiveData in ViewModel
+        // to determine whether child addition query is successful or not
+        viewModel.addChildResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Response.Loading -> {}
                 is Response.Success -> {

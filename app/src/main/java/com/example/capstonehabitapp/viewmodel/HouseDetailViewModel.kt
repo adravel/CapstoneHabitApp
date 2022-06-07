@@ -28,11 +28,11 @@ class HouseDetailViewModel: ViewModel() {
     private val _house: MutableLiveData<Response<House>> = MutableLiveData()
     private val _tools: MutableLiveData<Response<List<Tool>>> = MutableLiveData()
     private val _childCash: MutableLiveData<Response<Int>> = MutableLiveData()
-    private val _toolPurchaseResult: MutableLiveData<Response<Int>> = MutableLiveData()
+    private val _toolPurchaseResponse: MutableLiveData<Response<Unit>> = MutableLiveData()
     val house: LiveData<Response<House>> = _house
     val tools: LiveData<Response<List<Tool>>> = _tools
     val childCash: LiveData<Response<Int>> = _childCash
-    val toolPurchaseResult: LiveData<Response<Int>> = _toolPurchaseResult
+    val toolPurchaseResponse: LiveData<Response<Unit>> = _toolPurchaseResponse
 
     // Functions to set document IDs
     fun setChildId(id: String) { childId = id }
@@ -119,7 +119,7 @@ class HouseDetailViewModel: ViewModel() {
     // This function subtracts tool price from child cash
     // and tool power from house hp
     fun purchaseTool(toolId: String) {
-        _toolPurchaseResult.postValue(Response.Loading())
+        _toolPurchaseResponse.postValue(Response.Loading())
 
         val childDocRef = parentDocRef.collection("children").document(childId)
         val houseDocRef = childDocRef.collection("houses").document(houseId)
@@ -135,7 +135,7 @@ class HouseDetailViewModel: ViewModel() {
                     // Calculate new value of cash after subtraction
                     val cash = childSnapshot.getLong("cash")!! - toolSnapshot.getLong("price")!!
                     if (cash < 0) {
-                        _toolPurchaseResult.postValue(Response.Failure("cash"))
+                        _toolPurchaseResponse.postValue(Response.Failure("cash"))
                         return@runTransaction
                     }
 
@@ -148,20 +148,20 @@ class HouseDetailViewModel: ViewModel() {
                 }.await()
 
                 // Check if there is any failure in completing transaction
-                if (_toolPurchaseResult.value is Response.Failure) {
+                if (_toolPurchaseResponse.value is Response.Failure) {
                     return@launch
                 } else {
-                    _toolPurchaseResult.postValue(Response.Success(1))
+                    _toolPurchaseResponse.postValue(Response.Success(Unit))
                 }
 
             } catch (e: Exception) {
-                e.message?.let { _toolPurchaseResult.postValue(Response.Failure(it)) }
+                e.message?.let { _toolPurchaseResponse.postValue(Response.Failure(it)) }
             }
         }
     }
 
     // Set tool name LiveData value to null
     fun toolPurchaseResultResponseHandled() {
-        _toolPurchaseResult.value = null
+        _toolPurchaseResponse.value = null
     }
 }

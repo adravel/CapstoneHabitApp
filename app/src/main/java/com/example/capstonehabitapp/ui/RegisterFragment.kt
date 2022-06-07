@@ -100,9 +100,9 @@ class RegisterFragment: Fragment() {
                 viewModel.registerUser(email, password, name, isMale)
             }
 
-            // Observe user LiveData in ViewModel
-            // This value determines whether user registration is successful or not
-            viewModel.user.observe(viewLifecycleOwner) { response ->
+            // Observe registerResponse LiveData in ViewModel
+            // to determine whether user registration is successful or not
+            viewModel.registerResponse.observe(viewLifecycleOwner) { response ->
                 when (response) {
                     is Response.Loading -> {}
                     is Response.Success -> {

@@ -128,9 +128,9 @@ class HouseDetailFragment: Fragment() {
             }
         }
 
-        // Observe tool purchase status in ViewModel
-        // This value determines whether tool purchase transaction is successful or not
-        viewModel.toolPurchaseResult.observe(viewLifecycleOwner) { response ->
+        // Observe toolPurchaseResponse LiveData in ViewModel
+        // to determine whether tool purchase transaction is successful or not
+        viewModel.toolPurchaseResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Response.Loading -> {}
                 is Response.Success -> {

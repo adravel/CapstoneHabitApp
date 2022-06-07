@@ -16,12 +16,12 @@ class RegisterViewModel: ViewModel() {
     private val auth = Firebase.auth
     private val db = Firebase.firestore
 
-    private val _user: MutableLiveData<Response<Int>> = MutableLiveData()
-    val user: LiveData<Response<Int>> = _user
+    private val _registerResponse: MutableLiveData<Response<Unit>> = MutableLiveData()
+    val registerResponse: LiveData<Response<Unit>> = _registerResponse
 
     // Create a new user in Firebase Auth
     fun registerUser(email: String, password: String, name: String, isMale: Boolean) {
-        _user.postValue(Response.Loading())
+        _registerResponse.postValue(Response.Loading())
 
         var authSuccess = false
         var dbWriteSuccess = false
@@ -42,10 +42,10 @@ class RegisterViewModel: ViewModel() {
                 db.collection("parents").document(parentId).set(data).await()
                 dbWriteSuccess = true
 
-                _user.postValue(Response.Success(1))
+                _registerResponse.postValue(Response.Success(Unit))
 
             } catch(e: Exception) {
-                e.message?.let { _user.postValue(Response.Failure(it)) }
+                e.message?.let { _registerResponse.postValue(Response.Failure(it)) }
 
                 // Delete user account and logout
                 // if the query to create user Firebase Auth is successful

@@ -19,8 +19,8 @@ class LevelUpViewModel: ViewModel() {
     private val parentId = auth.currentUser!!.uid
     private val parentDocRef = db.collection("parents").document(parentId)
 
-    private val _cashUpdateResponse: MutableLiveData<Response<Int>> = MutableLiveData()
-    val cashUpdateResponse: LiveData<Response<Int>> = _cashUpdateResponse
+    private val _cashUpdateResponse: MutableLiveData<Response<Unit>> = MutableLiveData()
+    val cashUpdateResponse: LiveData<Response<Unit>> = _cashUpdateResponse
 
     // Calculate level up bonus
     fun getBonus(level: Int): Int {
@@ -51,7 +51,7 @@ class LevelUpViewModel: ViewModel() {
                     transaction.update(childDocRef, childUpdates)
                 }.await()
 
-                _cashUpdateResponse.postValue(Response.Success(1))
+                _cashUpdateResponse.postValue(Response.Success(Unit))
 
             } catch (e: Exception) {
                 e.message?.let { _cashUpdateResponse.postValue(Response.Failure(it)) }

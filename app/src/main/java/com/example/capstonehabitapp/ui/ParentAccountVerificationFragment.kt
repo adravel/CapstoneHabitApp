@@ -67,7 +67,7 @@ class ParentAccountVerificationFragment: Fragment() {
         }
 
         // Observe reauthenticationResponse LiveData in ViewModel
-        // This value determines whether the reauthentication is successful or not
+        // to determine whether the reauthentication is successful or not
         viewModel.reauthenticationResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Response.Loading -> {}

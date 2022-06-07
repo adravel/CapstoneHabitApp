@@ -65,7 +65,7 @@ class LevelUpDialogFragment: DialogFragment() {
         }
 
         // Observe cashUpdateResponse LiveData in ViewModel
-        // This value determines whether the cash update transaction is successful or not
+        // to determine whether cash update transaction is successful or not
         viewModel.cashUpdateResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Response.Loading -> {}

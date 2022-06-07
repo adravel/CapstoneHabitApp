@@ -14,22 +14,22 @@ import kotlinx.coroutines.tasks.await
 class LoginViewModel: ViewModel() {
     private val auth = Firebase.auth
 
-    private val _user: MutableLiveData<Response<Int>> = MutableLiveData()
-    val user: LiveData<Response<Int>> = _user
+    private val _loginResponse: MutableLiveData<Response<Unit>> = MutableLiveData()
+    val loginResponse: LiveData<Response<Unit>> = _loginResponse
 
     // Log user into Firebase Auth
     fun loginUser(email: String, password: String) {
-        _user.postValue(Response.Loading())
+        _loginResponse.postValue(Response.Loading())
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 // Create new user
                 auth.signInWithEmailAndPassword(email, password).await()
 
-                _user.postValue(Response.Success(1))
+                _loginResponse.postValue(Response.Success(Unit))
 
             } catch(e: Exception) {
-                e.message?.let { _user.postValue(Response.Failure(it)) }
+                e.message?.let { _loginResponse.postValue(Response.Failure(it)) }
             }
         }
     }

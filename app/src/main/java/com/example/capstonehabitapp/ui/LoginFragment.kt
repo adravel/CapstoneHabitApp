@@ -67,9 +67,9 @@ class LoginFragment: Fragment() {
                 viewModel.loginUser(email, password)
             }
 
-            // Observe user LiveData in ViewModel
-            // This value determines whether user login is successful or not
-            viewModel.user.observe(viewLifecycleOwner) { response ->
+            // Observe loginResponse LiveData in ViewModel
+            // to determine whether user login is successful or not
+            viewModel.loginResponse.observe(viewLifecycleOwner) { response ->
                 when (response) {
                     is Response.Loading -> {}
                     is Response.Success -> {

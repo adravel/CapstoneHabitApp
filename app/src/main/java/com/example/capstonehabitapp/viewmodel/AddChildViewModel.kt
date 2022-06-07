@@ -21,13 +21,13 @@ class AddChildViewModel: ViewModel() {
     private val parentId = auth.currentUser!!.uid
     private val parentDocRef = db.collection("parents").document(parentId)
 
-    private val _childResponse: MutableLiveData<Response<Int>> = MutableLiveData()
-    val childResponse: LiveData<Response<Int>> = _childResponse
+    private val _addChildResponse: MutableLiveData<Response<Unit>> = MutableLiveData()
+    val addChildResponse: LiveData<Response<Unit>> = _addChildResponse
 
     // Create new child, tool, and house documents simultaneously
     // using Firestore batch writes
     fun addChildToFirebase(name: String, isMale: Boolean) {
-        _childResponse.postValue(Response.Loading())
+        _addChildResponse.postValue(Response.Loading())
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -60,10 +60,10 @@ class AddChildViewModel: ViewModel() {
                     }
                 }.await()
 
-                _childResponse.postValue(Response.Success(1))
+                _addChildResponse.postValue(Response.Success(Unit))
 
             } catch(e: Exception) {
-                e.message?.let { _childResponse.postValue(Response.Failure(it)) }
+                e.message?.let { _addChildResponse.postValue(Response.Failure(it)) }
             }
         }
     }
