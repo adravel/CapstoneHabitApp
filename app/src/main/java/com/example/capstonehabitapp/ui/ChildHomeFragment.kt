@@ -16,6 +16,7 @@ import com.example.capstonehabitapp.adapter.EssentialTaskAdapter
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentChildHomeBinding
 import com.example.capstonehabitapp.util.Response
+import com.example.capstonehabitapp.util.getLevelNameString
 import com.example.capstonehabitapp.viewmodel.ChildHomeViewModel
 
 class ChildHomeFragment: Fragment() {
@@ -95,19 +96,7 @@ class ChildHomeFragment: Fragment() {
                     val child = response.data
                     val level = child.level.toInt()
 
-                    val levelName = when (level) {
-                        1 -> getString(R.string.level_1_name)
-                        2 -> getString(R.string.level_2_name)
-                        3 -> getString(R.string.level_3_name)
-                        4 -> getString(R.string.level_4_name)
-                        5 -> getString(R.string.level_5_name)
-                        6 -> getString(R.string.level_6_name)
-                        7 -> getString(R.string.level_7_name)
-                        8 -> getString(R.string.level_8_name)
-                        9 -> getString(R.string.level_9_name)
-                        else -> getString(R.string.level_10_name)
-                    }
-
+                    val levelName = getLevelNameString(requireContext(), level)
                     val progress = viewModel.getProgress(child.totalPoints.toInt(), level)
 
                     // Bind the data to Views
