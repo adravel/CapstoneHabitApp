@@ -16,7 +16,7 @@ import com.example.capstonehabitapp.adapter.ChildRankAdapter
 import com.example.capstonehabitapp.databinding.FragmentRankingBinding
 import com.example.capstonehabitapp.model.Child
 import com.example.capstonehabitapp.util.Response
-import com.example.capstonehabitapp.viewmodel.TaskListViewModel
+import com.example.capstonehabitapp.viewmodel.RankingViewModel
 
 class RankingFragment : Fragment() {
 
@@ -25,7 +25,7 @@ class RankingFragment : Fragment() {
 
     private lateinit var childRankAdapter: ChildRankAdapter
 
-    private val viewModel: TaskListViewModel by viewModels()
+    private val viewModel: RankingViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,52 +47,30 @@ class RankingFragment : Fragment() {
         val sharedPref = requireActivity().getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
         val isParent = sharedPref.getBoolean(getString(R.string.role_pref_is_parent_key), true)
 
-        // Dummy
-        val childrenDummies = mutableListOf(
-            Child(
-                name = "Alfa",
-                isMale = true,
-                totalPoints = 152,
-                level = 4,
-            ),
-            Child(
-                name = "Beta",
-                isMale = false,
-                totalPoints = 328,
-                level = 7,
-            ),
-            Child(
-                name = "Gama",
-                isMale = true,
-                totalPoints = 41,
-                level = 1,
-            )
-        )
-
         // Set the adapter and layoutManager for child rank RecyclerView
-        childRankAdapter = ChildRankAdapter(childrenDummies)
+        childRankAdapter = ChildRankAdapter(mutableListOf())
         binding.rankingRecycleView.apply {
             adapter = childRankAdapter
             layoutManager = LinearLayoutManager(context)
         }
 
-//        // Fetch children data from Firestore
-//        viewModel.getTasksFromFirebase()
+        // Fetch children data from Firestore
+        viewModel.getChildrenFromFirebase()
 
-        // Observe tasks LiveData in ViewModel
-//        viewModel.tasks.observe(viewLifecycleOwner) { response ->
-//            when (response) {
-//                is Response.Loading -> {}
-//                is Response.Success -> {
-//                    val task = response.data
-//                    taskAdapter.updateList(task)
-//                }
-//                is Response.Failure -> {
-//                    Log.e("TaskList", response.message)
-//                    Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        }
+        // Observe children LiveData in ViewModel
+        viewModel.children.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Response.Loading -> {}
+                is Response.Success -> {
+                    val task = response.data
+                    childRankAdapter.updateList(task)
+                }
+                is Response.Failure -> {
+                    Log.e("Ranking", response.message)
+                    Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
 
         // Set back button onClickListener
         binding.toolbarLayout.toolbar.setNavigationOnClickListener {

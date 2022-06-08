@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.capstonehabitapp.model.Child
 import com.example.capstonehabitapp.util.Response
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -15,7 +16,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 
-class ChildAccountSelectionViewModel: ViewModel() {
+class RankingViewModel: ViewModel() {
     private val auth = Firebase.auth
     private val db = Firebase.firestore
     private val parentId = auth.currentUser!!.uid
@@ -30,9 +31,11 @@ class ChildAccountSelectionViewModel: ViewModel() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                // Call Firestore get() method to query the data
+                // Call Firestore get() method to query a list of children data
+                // sorted by the total points in descending order
                 val snapshot = parentDocRef
                     .collection("children")
+                    .orderBy("totalPoints", Query.Direction.DESCENDING)
                     .get()
                     .await()
 
