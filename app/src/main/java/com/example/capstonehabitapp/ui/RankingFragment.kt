@@ -16,6 +16,7 @@ import com.example.capstonehabitapp.adapter.ChildRankAdapter
 import com.example.capstonehabitapp.databinding.FragmentRankingBinding
 import com.example.capstonehabitapp.model.Child
 import com.example.capstonehabitapp.util.Response
+import com.example.capstonehabitapp.util.getLevelNameString
 import com.example.capstonehabitapp.viewmodel.RankingViewModel
 
 class RankingFragment : Fragment() {
@@ -24,6 +25,8 @@ class RankingFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var childRankAdapter: ChildRankAdapter
+
+    private lateinit var childId: String
 
     private val viewModel: RankingViewModel by viewModels()
 
@@ -44,8 +47,10 @@ class RankingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Check the user's role from shared preference
+        // and get the child ID if the current Role is Child
         val sharedPref = requireActivity().getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
         val isParent = sharedPref.getBoolean(getString(R.string.role_pref_is_parent_key), true)
+        if (!isParent) childId = sharedPref.getString(getString(R.string.role_pref_child_id_key), "")!!
 
         // Set the adapter and layoutManager for child rank RecyclerView
         childRankAdapter = ChildRankAdapter(mutableListOf())
@@ -62,14 +67,27 @@ class RankingFragment : Fragment() {
             when (response) {
                 is Response.Loading -> {}
                 is Response.Success -> {
-                    val task = response.data
-                    childRankAdapter.updateList(task)
+                    val children = response.data
+                    childRankAdapter.updateList(children)
+
+                    // Get the index of the Child data that match the ID if the current user is Child
+                    // and show the highlighted rank card
+                    if (!isParent) {
+                        val index = children.indexOfFirst { it.id == childId}
+                        displayCurrentChildRankCard(children[index], index + 1)
+                    }
                 }
                 is Response.Failure -> {
                     Log.e("Ranking", response.message)
                     Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+
+        // Hide the highlighted rank card if the current user is Parent
+        if (isParent) {
+            binding.greyBackground.visibility = View.GONE
+            binding.highlightedChildRankCard.root.visibility = View.GONE
         }
 
         // Set back button onClickListener
@@ -81,5 +99,15 @@ class RankingFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    // Method for displaying the highlighted rank card
+    private fun displayCurrentChildRankCard(child: Child, rankNumber: Int) {
+        binding.highlightedChildRankCard.apply {
+            rankNumberText.text = rankNumber.toString()
+            nameText.text = child.name
+            levelNameText.text = getLevelNameString(requireContext(), child.level.toInt())
+            totalPointsText.text = getString(R.string.child_total_points_placeholder, child.totalPoints.toInt())
+        }
     }
 }
