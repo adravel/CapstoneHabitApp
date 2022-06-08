@@ -39,8 +39,10 @@ class TaskDetailFragment : Fragment() {
         // Inflate layout for this fragment
         _binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
 
-        // Set toolbar title
+        // Set toolbar title and menu icon
         binding.toolbarLayout.toolbar.title = getString(R.string.task_detail)
+        binding.toolbarLayout.iconImage.setBackgroundResource(R.drawable.ic_delete)
+        binding.toolbarLayout.iconImage.visibility = hide
 
         // Initialize task ID using Safe Args provided by navigation component
         val args: TaskDetailFragmentArgs by navArgs()
@@ -85,6 +87,17 @@ class TaskDetailFragment : Fragment() {
                                 2 -> findNavController().navigate(R.id.gradingMethodSelectionDialogFragment)
                             }
                         }
+                    }
+
+                    // Set delete menu icon visibility and onClickListener
+                    if (isParent && task.status.toInt() == 0) {
+                        binding.toolbarLayout.iconImage.visibility = show
+                        binding.toolbarLayout.iconImage.setOnClickListener {
+                            // TODO: Create delete task actual functionality
+                            Log.d("TaskDetail", "Delete button clicked")
+                        }
+                    } else {
+                        binding.toolbarLayout.iconImage.visibility = hide
                     }
                 }
                 is Response.Failure -> {

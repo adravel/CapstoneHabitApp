@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <include
-        layout="@layout/layout_toolbar"
+        layout="@layout/layout_toolbar_with_menu"
         android:id="@+id/toolbar_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
