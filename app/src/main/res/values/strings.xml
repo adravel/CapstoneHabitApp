@@ -146,6 +146,7 @@
     <string name="button_label_login">Masuk ke Kamp</string>
     <string name="button_label_logout">Keluar</string>
     <string name="button_label_get_bonus">Ambil Bonus</string>
+    <string name="button_label_delete">Hapus</string>
     <!-- Hints -->
     <string name="hint_text">Type something</string>
     <string name="hint_time">00:00</string>
@@ -164,6 +165,8 @@
     <string name="grading_success_message">Hebat! %1$s mendapatkan %2$d Poin!</string>
     <string name="level_up_message_title">Kerja bagus, prajurit!</string>
     <string name="level_up_message_description">Kamu berhasil naik peringkat menjadi %1$s! Kamu mendapat bonus dana Rp %2$d!</string>
+    <string name="task_delete_confirmation_message">Apa Anda yakin ingin menghapus pekerjaan ini?</string>
+    <string name="task_delete_success_message">Pekerjaan berhasil dihapus</string>
     <!-- Toast Messages -->
     <string name="data_fetch_failed">Pengambilan data gagal</string>
     <string name="task_creation_success">Pekerjaan berhasil dibuat!</string>

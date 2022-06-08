@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +26,21 @@ class TaskListFragment : Fragment() {
     private lateinit var taskAdapter: TaskAdapter
 
     private val viewModel: TaskListViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Set listener so this fragment will be able to know if a task document has been deleted
+        setFragmentResultListener("taskDelete") { _, bundle ->
+            // Check whether a task document has been deleted
+            val isTaskDeleted = bundle.getBoolean("isTaskDeleted")
+
+            // Display task delete success dialog if the flag is set to true
+            if (isTaskDeleted) {
+                findNavController().navigate(R.id.taskDeleteSuccessDialogFragment)
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

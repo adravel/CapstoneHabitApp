@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_taskListFragment_to_taskCreationFragment"
             app:destination="@id/taskCreationFragment" />
+        <action
+            android:id="@+id/action_taskListFragment_to_taskDeleteSuccessDialogFragment"
+            app:destination="@id/taskDeleteSuccessDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/taskDetailFragment"
@@ -35,6 +38,9 @@
         <action
             android:id="@+id/action_taskDetailFragment_to_gradingSuccessDialogFragment"
             app:destination="@id/gradingSuccessDialogFragment" />
+        <action
+            android:id="@+id/action_taskDetailFragment_to_taskDeleteConfirmationDialogFragment"
+            app:destination="@id/taskDeleteConfirmationDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/roleSelectionFragment"
@@ -301,4 +307,12 @@
         android:name="com.example.capstonehabitapp.ui.RankingFragment"
         android:label="RankingFragment"
         tools:layout="@layout/fragment_ranking"/>
+    <dialog
+        android:id="@+id/taskDeleteConfirmationDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.TaskDeleteConfirmationDialogFragment"
+        android:label="TaskDeleteConfirmationDialogFragment" />
+    <dialog
+        android:id="@+id/taskDeleteSuccessDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.TaskDeleteSuccessDialogFragment"
+        android:label="TaskDeleteSuccessDialogFragment" />
 </navigation>

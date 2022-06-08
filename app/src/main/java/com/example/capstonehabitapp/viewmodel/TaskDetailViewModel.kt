@@ -24,8 +24,10 @@ class TaskDetailViewModel: ViewModel() {
 
     private val _task: MutableLiveData<Response<Task>> = MutableLiveData()
     private val _taskStatusChange: MutableLiveData<Response<Int>> = MutableLiveData()
+    private val _taskDeleteResponse: MutableLiveData<Response<Unit>> = MutableLiveData()
     val task: LiveData<Response<Task>> = _task
     val taskStatusChange: LiveData<Response<Int>> = _taskStatusChange
+    val taskDeleteResponse: LiveData<Response<Unit>> = _taskDeleteResponse
 
     // Calculate task duration
     fun getTaskDurationString(task: Task): String {
@@ -231,8 +233,29 @@ class TaskDetailViewModel: ViewModel() {
         }
     }
 
+    // Delete task document in Firestore
+    fun deleteTask(taskId: String) {
+        _taskDeleteResponse.postValue(Response.Loading())
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                parentDocRef.collection("tasks").document(taskId).delete().await()
+
+                _taskDeleteResponse.postValue(Response.Success(Unit))
+
+            } catch (e: Exception) {
+                e.message?.let { _taskDeleteResponse.postValue(Response.Failure(it)) }
+            }
+        }
+    }
+
     // Set task status change LiveData value to null
     fun taskStatusChangeResponseHandled() {
         _taskStatusChange.value = null
+    }
+
+    // Set taskDeleteResponse LiveData value to null
+    fun taskDeleteResponseHandled() {
+        _taskDeleteResponse.value = null
     }
 }

@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.capstonehabitapp.R
@@ -93,8 +95,8 @@ class TaskDetailFragment : Fragment() {
                     if (isParent && task.status.toInt() == 0) {
                         binding.toolbarLayout.iconImage.visibility = show
                         binding.toolbarLayout.iconImage.setOnClickListener {
-                            // TODO: Create delete task actual functionality
-                            Log.d("TaskDetail", "Delete button clicked")
+                            // Display task delete confirmation dialog
+                            findNavController().navigate(R.id.taskDeleteConfirmationDialogFragment)
                         }
                     } else {
                         binding.toolbarLayout.iconImage.visibility = hide
@@ -107,7 +109,7 @@ class TaskDetailFragment : Fragment() {
             }
         }
 
-        // Observe task status change LiveData in ViewModel
+        // Observe task status change LiveData in SharedViewModel
         viewModel.taskStatusChange.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Response.Loading -> {}
@@ -137,6 +139,32 @@ class TaskDetailFragment : Fragment() {
             }
         }
 
+        // Observe taskDeleteResponse LiveData in SharedViewModel
+        // to determine whether the deletion query is successful or not
+        viewModel.taskDeleteResponse.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Response.Loading -> {}
+                is Response.Success -> {
+                    // Clear the LiveData so the code below will be executed only once
+                    viewModel.taskDeleteResponseHandled()
+
+                    // Set a one-time value result that allows TaskListFragment to know
+                    // if a task document has been deleted
+                    setFragmentResult("taskDelete", bundleOf("isTaskDeleted" to true))
+
+                    // Return to task list page
+                    findNavController().popBackStack()
+                }
+                is Response.Failure -> {
+                    // Clear the LiveData so the code below will be executed only once
+                    viewModel.taskDeleteResponseHandled()
+
+                    Log.e("TaskDetail", response.message)
+                    Toast.makeText(context, getString(R.string.request_failed), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         // Set back button onClickListener
         binding.toolbarLayout.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
@@ -159,6 +187,7 @@ class TaskDetailFragment : Fragment() {
             statusDataText.text = ""
             detailDataText.text = ""
 
+            toolbarLayout.iconImage.visibility = hide
             gradePointsText.visibility = hide
             gradePointsDataText.visibility = hide
             notesText.visibility = hide
