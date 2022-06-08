@@ -68,6 +68,9 @@
         <action
             android:id="@+id/action_parentHomeFragment_to_roleSelectionFragment"
             app:destination="@id/roleSelectionFragment" />
+        <action
+            android:id="@+id/action_parentHomeFragment_to_rankingFragment"
+            app:destination="@id/rankingFragment" />
     </fragment>
     <fragment
         android:id="@+id/childAccountSelectionFragment"
@@ -107,6 +110,9 @@
         <action
             android:id="@+id/action_childHomeFragment_to_levelUpDialogFragment"
             app:destination="@id/levelUpDialogFragment" />
+        <action
+            android:id="@+id/action_childHomeFragment_to_rankingFragment"
+            app:destination="@id/rankingFragment" />
     </fragment>
     <fragment
         android:id="@+id/taskCreationFragment"
@@ -290,4 +296,9 @@
             android:name="childNewLevelName"
             app:argType="string" />
     </dialog>
+    <fragment
+        android:id="@+id/rankingFragment"
+        android:name="com.example.capstonehabitapp.ui.RankingFragment"
+        android:label="RankingFragment"
+        tools:layout="@layout/fragment_ranking"/>
 </navigation>

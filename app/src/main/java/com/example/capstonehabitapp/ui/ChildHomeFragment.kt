@@ -149,6 +149,11 @@ class ChildHomeFragment: Fragment() {
             houseMenuCard.setOnClickListener {
                 findNavController().navigate(R.id.houseListFragment)
             }
+
+            // Set ranking menu card onClickListener
+            rankingMenuCard.setOnClickListener {
+                findNavController().navigate(R.id.rankingFragment)
+            }
         }
     }
 

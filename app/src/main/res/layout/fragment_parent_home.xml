@@ -81,11 +81,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/parent_avatar_image" />
 
             <Button
-                android:id="@+id/achievement_menu_card"
+                android:id="@+id/ranking_menu_card"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
-                android:text="@string/child_achievement"
+                android:text="@string/ranking"
                 android:textColor="@color/dark_green"
                 app:layout_constraintEnd_toStartOf="@+id/history_menu_card"
                 app:layout_constraintStart_toStartOf="parent"
@@ -99,7 +99,7 @@
                 android:text="@string/child_history"
                 android:textColor="@color/dark_green"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/achievement_menu_card"
+                app:layout_constraintStart_toEndOf="@+id/ranking_menu_card"
                 app:layout_constraintTop_toBottomOf="@+id/task_menu_card" />
 
             <TextView
@@ -109,7 +109,7 @@
                 android:text="@string/tasks_need_grading"
                 android:textColor="@color/dark_1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/achievement_menu_card" />
+                app:layout_constraintTop_toBottomOf="@+id/ranking_menu_card" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/essential_task_list_recycler_view"

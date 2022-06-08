@@ -111,6 +111,11 @@ class ParentHomeFragment: Fragment() {
                     .actionParentHomeFragmentToChildAccountSelectionFragment(true)
                 findNavController().navigate(action)
             }
+
+            // Set ranking menu card onClickListener
+            rankingMenuCard.setOnClickListener {
+                findNavController().navigate(R.id.rankingFragment)
+            }
         }
     }
 
