@@ -1,5 +1,6 @@
 package com.example.capstonehabitapp.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,8 +21,13 @@ class TaskCreationViewModel: ViewModel() {
     private val parentId = auth.currentUser!!.uid
     private val parentDocRef = db.collection("parents").document(parentId)
 
+    private var editedTaskId = ""
+
     private val _taskId: MutableLiveData<Response<String>> = MutableLiveData()
     val taskId: LiveData<Response<String>> = _taskId
+
+    // Method to set the ID of the task that is currently being edited
+    fun setEditedTaskId(id: String) { editedTaskId = id }
 
     // Get difficulty as integer
     fun getDifficultyInt(difficulty: String): Int {
@@ -64,6 +70,43 @@ class TaskCreationViewModel: ViewModel() {
                 val taskId = snapshot.id
 
                 _taskId.postValue(Response.Success(taskId))
+
+            } catch (e: Exception) {
+                e.message?.let { _taskId.postValue(Response.Failure(it)) }
+            }
+        }
+    }
+
+    // Add new task to Firestore and return its ID
+    fun updateTask(
+        title: String,
+        area: String,
+        difficulty: Int,
+        startTimeLimit: String,
+        finishTimeLimit: String,
+        detail: String) {
+
+        _taskId.postValue(Response.Loading())
+
+        val taskUpdate = hashMapOf<String, Any>(
+            "title" to title,
+            "area" to area,
+            "difficulty" to difficulty,
+            "startTimeLimit" to startTimeLimit,
+            "finishTimeLimit" to finishTimeLimit,
+            "detail" to detail
+        )
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                // Update task document in Firestore
+                parentDocRef
+                    .collection("tasks")
+                    .document(editedTaskId)
+                    .update(taskUpdate)
+                    .await()
+
+                _taskId.postValue(Response.Success(editedTaskId))
 
             } catch (e: Exception) {
                 e.message?.let { _taskId.postValue(Response.Failure(it)) }

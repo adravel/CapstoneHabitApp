@@ -105,6 +105,9 @@ class TaskCreationFragment : Fragment() {
                         startTimeLimitEditText.setText(task.startTimeLimit)
                         finishTimeLimitEditText.setText(task.finishTimeLimit)
                         detailEditText.setText(task.detail)
+
+                        // Set the task ID value in ViewModel
+                        taskCreationViewModel.setEditedTaskId(task.id)
                     }
                 }
             }
@@ -118,30 +121,64 @@ class TaskCreationFragment : Fragment() {
                 val finishTimeLimit = finishTimeLimitEditText.text.toString()
                 val detail = detailEditText.text.toString()
 
-                // Add new task data to Firestore
-                taskCreationViewModel.addTaskToFirebase(title, area, difficulty, startTimeLimit, finishTimeLimit, detail)
+                // Call the appropriate method depending on
+                // whether this fragment is used for
+                // creating or editing task
+                if (isForEditing == false) {
+                    // Add new task data to Firestore
+                    taskCreationViewModel.addTaskToFirebase(title, area, difficulty, startTimeLimit, finishTimeLimit, detail)
 
-                // Observe task ID data in ViewModel
-                taskCreationViewModel.taskId.observe(viewLifecycleOwner) { response ->
-                    when (response) {
-                        is Response.Loading -> {}
-                        is Response.Success -> {
-                            val taskId = response.data
+                    // Observe task ID data in ViewModel
+                    taskCreationViewModel.taskId.observe(viewLifecycleOwner) { response ->
+                        when (response) {
+                            is Response.Loading -> {}
+                            is Response.Success -> {
+                                val taskId = response.data
 
-                            Toast.makeText(context, getString(R.string.task_creation_success), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, getString(R.string.task_creation_success), Toast.LENGTH_SHORT).show()
 
-                            // Build navigation options to pop this fragment before navigating
-                            val navOptions = NavOptions.Builder()
-                                .setPopUpTo(R.id.taskCreationFragment, true)
-                                .build()
+                                // Build navigation options to pop this fragment before navigating
+                                val navOptions = NavOptions.Builder()
+                                    .setPopUpTo(R.id.taskCreationFragment, true)
+                                    .build()
 
-                            // Navigate to task detail page
-                            val action = TaskCreationFragmentDirections.actionTaskCreationFragmentToTaskDetailFragment(taskId)
-                            findNavController().navigate(action, navOptions)
+                                // Navigate to task detail page
+                                val action = TaskCreationFragmentDirections
+                                    .actionTaskCreationFragmentToTaskDetailFragment(taskId)
+                                findNavController().navigate(action, navOptions)
+                            }
+                            is Response.Failure -> {
+                                Log.e("TaskCreation", response.message)
+                                Toast.makeText(context, getString(R.string.task_creation_failed), Toast.LENGTH_SHORT).show()
+                            }
                         }
-                        is Response.Failure -> {
-                            Log.e("TaskCreation", response.message)
-                            Toast.makeText(context, getString(R.string.task_creation_failed), Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    // Update task data in Firestore
+                    taskCreationViewModel.updateTask(title, area, difficulty, startTimeLimit, finishTimeLimit, detail)
+
+                    // Observe task ID data in ViewModel
+                    taskCreationViewModel.taskId.observe(viewLifecycleOwner) { response ->
+                        when (response) {
+                            is Response.Loading -> {}
+                            is Response.Success -> {
+                                val taskId = response.data
+
+                                // Build navigation options to pop this fragment and
+                                // TaskDetailFragment before navigating
+                                val navOptions = NavOptions.Builder()
+                                    .setPopUpTo(R.id.taskDetailFragment, true)
+                                    .build()
+
+                                // Navigate to task detail page
+                                val action = TaskCreationFragmentDirections
+                                    .actionTaskCreationFragmentToTaskDetailFragment(taskId)
+                                findNavController().navigate(action, navOptions)
+                            }
+                            is Response.Failure -> {
+                                Log.e("TaskCreation", response.message)
+                                Toast.makeText(context, getString(R.string.request_failed), Toast.LENGTH_SHORT).show()
+                            }
                         }
                     }
                 }
