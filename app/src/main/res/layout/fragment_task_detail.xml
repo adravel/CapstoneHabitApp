@@ -229,4 +229,15 @@
         app:layout_constraintTop_toBottomOf="@+id/task_attributes_layout"
         tools:text="@string/button_label_start_task" />
 
+    <Button
+        android:id="@+id/edit_task_button"
+        style="@style/outline_button"
+        android:layout_width="0dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="@string/button_label_edit_task"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/change_task_status_button" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

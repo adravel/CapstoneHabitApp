@@ -44,7 +44,10 @@ class TaskDetailFragment : Fragment() {
         // Set toolbar title and menu icon
         binding.toolbarLayout.toolbar.title = getString(R.string.task_detail)
         binding.toolbarLayout.iconImage.setBackgroundResource(R.drawable.ic_delete)
+
+        // Hide delete menu icon and edit task button by default
         binding.toolbarLayout.iconImage.visibility = hide
+        binding.editTaskButton.visibility = hide
 
         // Initialize task ID using Safe Args provided by navigation component
         val args: TaskDetailFragmentArgs by navArgs()
@@ -91,15 +94,19 @@ class TaskDetailFragment : Fragment() {
                         }
                     }
 
-                    // Set delete menu icon visibility and onClickListener
+                    // Set delete menu icon and edit task button visibility and onClickListener
                     if (isParent && task.status.toInt() == 0) {
                         binding.toolbarLayout.iconImage.visibility = show
                         binding.toolbarLayout.iconImage.setOnClickListener {
                             // Display task delete confirmation dialog
                             findNavController().navigate(R.id.taskDeleteConfirmationDialogFragment)
                         }
-                    } else {
-                        binding.toolbarLayout.iconImage.visibility = hide
+
+                        binding.editTaskButton.visibility = show
+                        binding.editTaskButton.setOnClickListener {
+                            // TODO: Navigate to TaskCreationFragment with task ID as argument
+                            Log.d("EditTask", "Edit task button pressed.")
+                        }
                     }
                 }
                 is Response.Failure -> {
@@ -193,6 +200,7 @@ class TaskDetailFragment : Fragment() {
             notesText.visibility = hide
             notesDataText.visibility = hide
             changeTaskStatusButton.visibility = hide
+            editTaskButton.visibility = hide
         }
     }
 
