@@ -10,20 +10,27 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentTaskCreationBinding
 import com.example.capstonehabitapp.util.Response
+import com.example.capstonehabitapp.util.getTaskDifficultyString
 import com.example.capstonehabitapp.viewmodel.TaskCreationViewModel
+import com.example.capstonehabitapp.viewmodel.TaskDetailViewModel
 
 class TaskCreationFragment : Fragment() {
 
     private var _binding: FragmentTaskCreationBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: TaskCreationViewModel by viewModels()
+    private var isForEditing: Boolean? = null
+
+    private val taskCreationViewModel: TaskCreationViewModel by viewModels()
+    private val taskDetailViewModel: TaskDetailViewModel by activityViewModels()
 
     override fun onResume() {
         super.onResume()
@@ -43,6 +50,10 @@ class TaskCreationFragment : Fragment() {
 
         // Set toolbar title
         binding.toolbarLayout.toolbar.title = getString(R.string.create_task)
+
+        // Initialize isForEditing variable using Safe Args provided by navigation component
+        val args: TaskCreationFragmentArgs by navArgs()
+        isForEditing = args.isForEditing
 
         return binding.root
     }
@@ -79,20 +90,39 @@ class TaskCreationFragment : Fragment() {
                 findNavController().popBackStack()
             }
 
+            // Listen to task LiveData in SharedViewModel if this fragment is used for editing
+            if (isForEditing == true) {
+                taskDetailViewModel.task.observe(viewLifecycleOwner) { response ->
+                    if (response is Response.Success) {
+                        val task = response.data
+
+                        // Populate the EditTexts with task data from SharedViewModel
+                        titleEditText.setText(task.title)
+                        areaEditText.setText(task.area)
+                        difficultyAutoCompleteTextView.setText(
+                            getTaskDifficultyString(requireContext(), task.difficulty.toInt())
+                        )
+                        startTimeLimitEditText.setText(task.startTimeLimit)
+                        finishTimeLimitEditText.setText(task.finishTimeLimit)
+                        detailEditText.setText(task.detail)
+                    }
+                }
+            }
+
             // Set create task button onClickListener
             createTaskButton.setOnClickListener {
                 val title = titleEditText.text.toString()
                 val area = areaEditText.text.toString()
-                val difficulty = viewModel.getDifficultyInt(difficultyAutoCompleteTextView.text.toString())
+                val difficulty = taskCreationViewModel.getDifficultyInt(difficultyAutoCompleteTextView.text.toString())
                 val startTimeLimit = startTimeLimitEditText.text.toString()
                 val finishTimeLimit = finishTimeLimitEditText.text.toString()
                 val detail = detailEditText.text.toString()
 
                 // Add new task data to Firestore
-                viewModel.addTaskToFirebase(title, area, difficulty, startTimeLimit, finishTimeLimit, detail)
+                taskCreationViewModel.addTaskToFirebase(title, area, difficulty, startTimeLimit, finishTimeLimit, detail)
 
                 // Observe task ID data in ViewModel
-                viewModel.taskId.observe(viewLifecycleOwner) { response ->
+                taskCreationViewModel.taskId.observe(viewLifecycleOwner) { response ->
                     when (response) {
                         is Response.Loading -> {}
                         is Response.Success -> {

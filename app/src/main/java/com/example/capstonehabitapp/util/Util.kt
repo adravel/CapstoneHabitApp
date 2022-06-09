@@ -37,3 +37,14 @@ fun getLevelNameString(context: Context, level: Int): String {
     }
     return context.getString(stringResId)
 }
+
+// Get task difficulty String
+fun getTaskDifficultyString(context: Context, difficulty: Int): String {
+    val stringResId =  when (difficulty) {
+        0 -> R.string.task_difficulty_0
+        1 -> R.string.task_difficulty_1
+        2 -> R.string.task_difficulty_2
+        else -> R.string.task_difficulty_0
+    }
+    return context.getString(stringResId)
+}

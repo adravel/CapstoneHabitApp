@@ -18,6 +18,7 @@ import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentTaskDetailBinding
 import com.example.capstonehabitapp.model.Task
 import com.example.capstonehabitapp.util.Response
+import com.example.capstonehabitapp.util.getTaskDifficultyString
 import com.example.capstonehabitapp.viewmodel.TaskDetailViewModel
 
 class TaskDetailFragment : Fragment() {
@@ -104,8 +105,10 @@ class TaskDetailFragment : Fragment() {
 
                         binding.editTaskButton.visibility = show
                         binding.editTaskButton.setOnClickListener {
-                            // TODO: Navigate to TaskCreationFragment with task ID as argument
-                            Log.d("EditTask", "Edit task button pressed.")
+                            // Navigate to TaskCreationFragment with true argument
+                            val action = TaskDetailFragmentDirections
+                                .actionTaskDetailFragmentToTaskCreationFragment(true)
+                            findNavController().navigate(action)
                         }
                     }
                 }
@@ -209,12 +212,7 @@ class TaskDetailFragment : Fragment() {
         binding.apply {
             titleDataText.text = task.title
             areaDataText.text = task.area
-            difficultyDataText.text = when (task.difficulty.toInt()) {
-                0 -> getString(R.string.task_difficulty_0)
-                1 -> getString(R.string.task_difficulty_1)
-                2 -> getString(R.string.task_difficulty_2)
-                else -> getString(R.string.task_difficulty_0)
-            }
+            difficultyDataText.text = getTaskDifficultyString(requireContext(), task.difficulty.toInt())
             // TODO: Implement task repetition data display in ViewModel
             repetitionDataText.text = "NOT_YET_IMPLEMENTED"
             timeLimitDataText.text = getString(

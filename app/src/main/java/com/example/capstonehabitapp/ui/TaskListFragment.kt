@@ -95,7 +95,9 @@ class TaskListFragment : Fragment() {
         if (isParent) {
             // Set FAB OnClickListener
             binding.fab.setOnClickListener {
-                findNavController().navigate(R.id.taskCreationFragment)
+                // Navigate to TaskCreationFragment with false argument
+                val action = TaskListFragmentDirections.actionTaskListFragmentToTaskCreationFragment(false)
+                findNavController().navigate(action)
             }
         } else {
             // Hide the FAB if user is Child

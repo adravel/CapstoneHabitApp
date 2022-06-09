@@ -41,6 +41,9 @@
         <action
             android:id="@+id/action_taskDetailFragment_to_taskDeleteConfirmationDialogFragment"
             app:destination="@id/taskDeleteConfirmationDialogFragment" />
+        <action
+            android:id="@+id/action_taskDetailFragment_to_taskCreationFragment"
+            app:destination="@id/taskCreationFragment" />
     </fragment>
     <fragment
         android:id="@+id/roleSelectionFragment"
@@ -128,6 +131,9 @@
         <action
             android:id="@+id/action_taskCreationFragment_to_taskDetailFragment"
             app:destination="@id/taskDetailFragment" />
+        <argument
+            android:name="isForEditing"
+            app:argType="boolean" />
     </fragment>
     <dialog
         android:id="@+id/gradingMethodSelectionDialogFragment"
