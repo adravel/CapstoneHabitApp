@@ -142,6 +142,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/title_text"
                     app:layout_constraintTop_toTopOf="@id/title_text"
+                    android:layout_marginStart="10dp"
                     tools:text="@string/task_title_placeholder" />
 
                 <TextView
@@ -223,7 +224,8 @@
                     app:boxBackgroundColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/grade_points_text"
-                    app:layout_constraintTop_toTopOf="@+id/grade_points_text">
+                    app:layout_constraintTop_toTopOf="@+id/grade_points_text"
+                    android:layout_marginStart="10dp">
 
                     <AutoCompleteTextView
                         android:id="@+id/grade_auto_complete_text_view"
@@ -242,7 +244,8 @@
                     app:boxBackgroundColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/notes_text"
-                    app:layout_constraintTop_toTopOf="@+id/notes_text">
+                    app:layout_constraintTop_toTopOf="@+id/notes_text"
+                    android:layout_marginStart="10dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/notes_edit_text"

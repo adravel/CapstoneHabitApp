@@ -187,4 +187,5 @@
     <string name="choose_grade">Pilih nilai...</string>
     <string name="notes">Catatan tambahan untuk anak...</string>
     <string name="hint_task_creation">Isikan nama pekerjaan...</string>
+    <string name="hint_task_detail">Beri keterangan tambahan terkait pekerjaan</string>
 </resources>

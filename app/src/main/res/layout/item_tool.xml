@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="250dp"
     android:layout_margin="8dp"
     app:cardCornerRadius="10dp">
 
@@ -16,7 +16,7 @@
             android:id="@+id/asset_image"
             android:layout_width="0dp"
             android:layout_height="118dp"
-            android:src="@drawable/image_placeholder"
+            android:src="@drawable/tool_palu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -26,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="14dp"
             android:textColor="@color/dark_1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/asset_image"
@@ -36,9 +37,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:textColor="@color/dark_2"
             android:drawablePadding="8dp"
-            app:drawableStartCompat="@drawable/ic_placeholder"
+            app:drawableStartCompat="@drawable/ic_power"
             app:drawableTint="@color/green"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name_text"
@@ -49,9 +51,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:textColor="@color/dark_2"
             android:drawablePadding="8dp"
-            app:drawableStartCompat="@drawable/ic_placeholder"
+            app:drawableStartCompat="@drawable/ic_currency"
             app:drawableTint="@color/green"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/power_text"
@@ -62,7 +65,9 @@
             style="@style/text_button"
             android:layout_width="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/price_text"
+            android:layout_marginTop="4dp"
             tools:text="@string/button_label_sell"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

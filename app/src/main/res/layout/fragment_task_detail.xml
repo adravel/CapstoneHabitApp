@@ -134,6 +134,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/title_text"
             app:layout_constraintTop_toTopOf="@id/title_text"
+            android:layout_marginStart="10dp"
             tools:text="@string/task_title_placeholder" />
 
         <TextView

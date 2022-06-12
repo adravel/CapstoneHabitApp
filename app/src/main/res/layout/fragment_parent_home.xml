@@ -32,7 +32,7 @@
                 android:id="@+id/parent_avatar_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/image_placeholder"
+                android:src="@drawable/jendral_girl"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginStart="16dp"
@@ -61,54 +61,165 @@
                 app:layout_constraintTop_toBottomOf="@+id/greetings_text"
                 tools:text="Ibu Melati !" />
 
-            <Button
+            <androidx.cardview.widget.CardView
                 android:id="@+id/task_menu_card"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                android:text="@string/task"
-                android:textColor="@color/dark_green"
+                android:layout_width="156dp"
+                android:layout_height="156dp"
                 app:layout_constraintEnd_toStartOf="@+id/shop_menu_card"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/parent_avatar_image"
-                android:layout_marginTop="21dp"
-                android:layout_marginStart="16dp"/>
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="16dp"
+                app:cardCornerRadius="10dp"
+                android:clickable="true"
+                android:focusable="true">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <Button
+
+                    <ImageView
+                        android:id="@+id/task_menu_card_icon"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="12dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/menu_pekerjaan"/>
+
+                    <TextView
+                        android:id="@+id/task_menu_card_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/task"
+                        android:textColor="@color/dark_green"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/task_menu_card_icon"
+                        android:layout_marginTop="10dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:id="@+id/shop_menu_card"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                android:text="@string/shop"
-                android:textColor="@color/dark_green"
+                android:layout_width="156dp"
+                android:layout_height="156dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/task_menu_card"
                 app:layout_constraintTop_toTopOf="@id/task_menu_card"
-                android:layout_marginHorizontal="16dp"/>
+                android:layout_marginHorizontal="16dp"
+                app:cardCornerRadius="10dp"
+                android:clickable="true"
+                android:focusable="true">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <Button
+
+                    <ImageView
+                        android:id="@+id/shop_menu_card_icon"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="12dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/menu_toko"/>
+
+                    <TextView
+                        android:id="@+id/shop_menu_card_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/shop"
+                        android:textColor="@color/dark_green"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/shop_menu_card_icon"
+                        android:layout_marginTop="10dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:id="@+id/ranking_menu_card"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                android:text="@string/ranking"
-                android:textColor="@color/dark_green"
-                app:layout_constraintEnd_toStartOf="@+id/history_menu_card"
+                android:layout_width="156dp"
+                android:layout_height="156dp"
                 app:layout_constraintStart_toStartOf="@id/task_menu_card"
                 app:layout_constraintTop_toBottomOf="@+id/task_menu_card"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="32dp"
+                app:cardCornerRadius="10dp"
+                android:clickable="true"
+                android:focusable="true">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-            <Button
+
+                    <ImageView
+                        android:id="@+id/ranking_menu_icon"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="12dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/menu_capaian"/>
+
+                    <TextView
+                        android:id="@+id/ranking_menu_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ranking"
+                        android:textColor="@color/dark_green"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ranking_menu_icon"
+                        android:layout_marginTop="10dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:id="@+id/history_menu_card"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/white"
-                android:text="@string/child_history"
-                android:textColor="@color/dark_green"
+                android:layout_width="156dp"
+                android:layout_height="156dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ranking_menu_card"
                 app:layout_constraintTop_toTopOf="@id/ranking_menu_card"
-                android:layout_marginHorizontal="16dp"/>
+                android:layout_marginHorizontal="16dp"
+                app:cardCornerRadius="10dp"
+                android:clickable="true"
+                android:focusable="true">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <ImageView
+                        android:id="@+id/history_menu_icon"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="12dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:src="@drawable/menu_history"/>
+
+                    <TextView
+                        android:id="@+id/history_menu_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/history"
+                        android:textColor="@color/dark_green"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/history_menu_icon"
+                        android:layout_marginTop="10dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/tasks_need_grading_text"
