@@ -42,7 +42,8 @@
             android:text="@string/task_area"
             android:textColor="@color/dark_1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_data_text"/>
+            app:layout_constraintTop_toBottomOf="@id/title_data_text"
+            android:layout_marginTop="12dp"/>
 
         <TextView
             android:id="@+id/difficulty_text"
@@ -51,7 +52,8 @@
             android:text="@string/task_difficulty"
             android:textColor="@color/dark_1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/area_data_text"/>
+            app:layout_constraintTop_toBottomOf="@id/area_data_text"
+            android:layout_marginTop="12dp"/>
 
         <TextView
             android:id="@+id/repetition_text"
@@ -60,7 +62,8 @@
             android:text="@string/task_repetition"
             android:textColor="@color/dark_1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/difficulty_data_text"/>
+            app:layout_constraintTop_toBottomOf="@id/difficulty_data_text"
+            android:layout_marginTop="12dp"/>
 
         <TextView
             android:id="@+id/time_limit_text"
@@ -69,7 +72,8 @@
             android:text="@string/task_time_limit"
             android:textColor="@color/dark_1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/repetition_data_text"/>
+            app:layout_constraintTop_toBottomOf="@id/repetition_data_text"
+            android:layout_marginTop="12dp"/>
 
         <TextView
             android:id="@+id/duration_text"
@@ -78,7 +82,8 @@
             android:text="@string/task_duration"
             android:textColor="@color/dark_1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/time_limit_data_text"/>
+            app:layout_constraintTop_toBottomOf="@id/time_limit_data_text"
+            android:layout_marginTop="12dp"/>
 
         <TextView
             android:id="@+id/status_text"
@@ -87,7 +92,8 @@
             android:text="@string/task_status"
             android:textColor="@color/dark_1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/duration_data_text"/>
+            app:layout_constraintTop_toBottomOf="@id/duration_data_text"
+            android:layout_marginTop="12dp"/>
 
         <TextView
             android:id="@+id/detail_text"
@@ -96,7 +102,8 @@
             android:text="@string/task_detail"
             android:textColor="@color/dark_1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/status_data_text"/>
+            app:layout_constraintTop_toBottomOf="@id/status_data_text"
+            android:layout_marginTop="12dp"/>
 
         <TextView
             android:id="@+id/grade_points_text"
@@ -105,7 +112,8 @@
             android:text="@string/task_grade_points"
             android:textColor="@color/dark_1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detail_data_text"/>
+            app:layout_constraintTop_toBottomOf="@id/detail_data_text"
+            android:layout_marginTop="12dp"/>
 
         <TextView
             android:id="@+id/notes_text"
@@ -114,7 +122,8 @@
             android:text="@string/task_notes"
             android:textColor="@color/dark_1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/grade_points_data_text"/>
+            app:layout_constraintTop_toBottomOf="@id/grade_points_data_text"
+            android:layout_marginTop="12dp"/>
 
         <!-- Task attributes data text -->
         <TextView
@@ -124,7 +133,7 @@
             android:textColor="@color/dark_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/title_text"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@id/title_text"
             tools:text="@string/task_title_placeholder" />
 
         <TextView
@@ -134,7 +143,7 @@
             android:textColor="@color/dark_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/title_data_text"
-            app:layout_constraintTop_toBottomOf="@id/title_data_text"
+            app:layout_constraintTop_toTopOf="@id/area_text"
             tools:text="@string/task_area_placeholder" />
 
         <TextView
@@ -144,7 +153,7 @@
             android:textColor="@color/dark_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/title_data_text"
-            app:layout_constraintTop_toBottomOf="@id/area_data_text"
+            app:layout_constraintTop_toTopOf="@id/difficulty_text"
             tools:text="@string/task_difficulty_placeholder" />
 
         <TextView
@@ -154,7 +163,7 @@
             android:textColor="@color/dark_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/title_data_text"
-            app:layout_constraintTop_toBottomOf="@id/difficulty_data_text"
+            app:layout_constraintTop_toTopOf="@id/repetition_text"
             tools:text="@string/task_repetition_placeholder" />
 
         <TextView
@@ -165,7 +174,7 @@
             tools:text="@string/task_time_limit_placeholder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/title_data_text"
-            app:layout_constraintTop_toBottomOf="@id/repetition_data_text" />
+            app:layout_constraintTop_toTopOf="@id/time_limit_text" />
 
         <TextView
             android:id="@+id/duration_data_text"
@@ -174,7 +183,7 @@
             android:textColor="@color/dark_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/title_data_text"
-            app:layout_constraintTop_toBottomOf="@id/time_limit_data_text"
+            app:layout_constraintTop_toTopOf="@id/duration_text"
             tools:text="@string/task_duration_placeholder" />
 
         <TextView
@@ -184,7 +193,7 @@
             android:textColor="@color/dark_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/title_data_text"
-            app:layout_constraintTop_toBottomOf="@id/duration_data_text"
+            app:layout_constraintTop_toTopOf="@id/status_text"
             tools:text="@string/task_status_placeholder" />
 
         <TextView
@@ -194,7 +203,7 @@
             android:textColor="@color/dark_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/title_data_text"
-            app:layout_constraintTop_toBottomOf="@id/status_data_text"
+            app:layout_constraintTop_toTopOf="@id/detail_text"
             tools:text="@string/task_detail_placeholder" />
 
         <TextView
@@ -204,7 +213,7 @@
             android:textColor="@color/dark_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/title_data_text"
-            app:layout_constraintTop_toBottomOf="@id/detail_data_text"
+            app:layout_constraintTop_toTopOf="@id/grade_points_text"
             tools:text="@string/task_grade_points_placeholder" />
 
         <TextView
@@ -214,7 +223,7 @@
             android:textColor="@color/dark_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/title_data_text"
-            app:layout_constraintTop_toBottomOf="@id/grade_points_data_text"
+            app:layout_constraintTop_toTopOf="@id/notes_text"
             tools:text="@string/task_notes_placeholder" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -233,7 +242,7 @@
         android:id="@+id/edit_task_button"
         style="@style/outline_button"
         android:layout_width="0dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginHorizontal="20dp"
         android:text="@string/button_label_edit_task"
         app:layout_constraintEnd_toEndOf="parent"

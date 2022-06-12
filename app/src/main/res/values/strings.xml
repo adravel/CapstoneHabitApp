@@ -184,4 +184,7 @@
     <string name="reauthentication_failed">Password tidak valid</string>
     <!-- TextInputLayout Helper/Error Messages -->
     <string name="minimum_password_length_error">Password memerlukan minimal 6 karakter</string>
+    <string name="choose_grade">Pilih nilai...</string>
+    <string name="notes">Catatan tambahan untuk anak...</string>
+    <string name="hint_task_creation">Isikan nama pekerjaan...</string>
 </resources>

@@ -16,7 +16,8 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="97dp"/>
 
     <Button
         android:id="@+id/parent_role_card"
@@ -27,7 +28,9 @@
         android:textColor="@color/dark_green"
         app:layout_constraintEnd_toStartOf="@+id/child_role_card"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/choose_role_text" />
+        app:layout_constraintTop_toBottomOf="@+id/choose_role_text"
+        android:layout_marginTop="42dp"
+        android:layout_marginStart="16dp"/>
 
     <Button
         android:id="@+id/child_role_card"
@@ -38,7 +41,8 @@
         android:textColor="@color/dark_green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/parent_role_card"
-        app:layout_constraintTop_toBottomOf="@+id/choose_role_text" />
+        app:layout_constraintTop_toTopOf="@id/parent_role_card"
+        android:layout_marginHorizontal="16dp"/>
 
     <Button
         android:id="@+id/logout_button"
@@ -49,5 +53,6 @@
         android:textColor="@color/text_button_text_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

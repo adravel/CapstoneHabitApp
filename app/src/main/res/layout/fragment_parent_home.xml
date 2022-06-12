@@ -34,7 +34,9 @@
                 android:layout_height="70dp"
                 android:src="@drawable/image_placeholder"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="21dp"/>
 
             <TextView
                 android:id="@+id/greetings_text"
@@ -45,7 +47,8 @@
                 android:textAllCaps="true"
                 android:textSize="24sp"
                 app:layout_constraintStart_toEndOf="@+id/parent_avatar_image"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@id/parent_avatar_image"
+                android:layout_marginStart="16dp"/>
 
             <TextView
                 android:id="@+id/parent_name_text"
@@ -67,7 +70,9 @@
                 android:textColor="@color/dark_green"
                 app:layout_constraintEnd_toStartOf="@+id/shop_menu_card"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/parent_avatar_image" />
+                app:layout_constraintTop_toBottomOf="@+id/parent_avatar_image"
+                android:layout_marginTop="21dp"
+                android:layout_marginStart="16dp"/>
 
             <Button
                 android:id="@+id/shop_menu_card"
@@ -78,7 +83,8 @@
                 android:textColor="@color/dark_green"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/task_menu_card"
-                app:layout_constraintTop_toBottomOf="@+id/parent_avatar_image" />
+                app:layout_constraintTop_toTopOf="@id/task_menu_card"
+                android:layout_marginHorizontal="16dp"/>
 
             <Button
                 android:id="@+id/ranking_menu_card"
@@ -88,8 +94,9 @@
                 android:text="@string/ranking"
                 android:textColor="@color/dark_green"
                 app:layout_constraintEnd_toStartOf="@+id/history_menu_card"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/task_menu_card" />
+                app:layout_constraintStart_toStartOf="@id/task_menu_card"
+                app:layout_constraintTop_toBottomOf="@+id/task_menu_card"
+                android:layout_marginTop="16dp"/>
 
             <Button
                 android:id="@+id/history_menu_card"
@@ -100,7 +107,8 @@
                 android:textColor="@color/dark_green"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ranking_menu_card"
-                app:layout_constraintTop_toBottomOf="@+id/task_menu_card" />
+                app:layout_constraintTop_toTopOf="@id/ranking_menu_card"
+                android:layout_marginHorizontal="16dp"/>
 
             <TextView
                 android:id="@+id/tasks_need_grading_text"
@@ -109,7 +117,9 @@
                 android:text="@string/tasks_need_grading"
                 android:textColor="@color/dark_1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ranking_menu_card" />
+                app:layout_constraintTop_toBottomOf="@+id/ranking_menu_card"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="16dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/essential_task_list_recycler_view"
@@ -117,7 +127,9 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tasks_need_grading_text" />
+                app:layout_constraintTop_toBottomOf="@+id/tasks_need_grading_text"
+                android:layout_marginVertical="8dp"
+                android:layout_marginTop="14dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
