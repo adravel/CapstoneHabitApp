@@ -74,7 +74,7 @@ class TaskDetailFragment : Fragment() {
         // Observe task LiveData in SharedViewModel
         viewModel.task.observe(viewLifecycleOwner) { response ->
             when (response) {
-                is Response.Loading -> displayEmptyTask()
+                is Response.Loading -> displayEmptyTask(isParent)
                 is Response.Success -> {
                     val task = response.data
 
@@ -195,7 +195,7 @@ class TaskDetailFragment : Fragment() {
     }
 
     // Display empty task for when data is still being loaded
-    private fun displayEmptyTask() {
+    private fun displayEmptyTask(isForParent: Boolean) {
         binding.apply {
             titleDataText.text = ""
             areaDataText.text = ""
@@ -204,14 +204,18 @@ class TaskDetailFragment : Fragment() {
             timeLimitDataText.text = ""
             statusDataText.text = ""
             detailDataText.text = ""
+            gradePointsDataText.text = ""
+            notesDataText.text = ""
 
             toolbarLayout.iconImage.visibility = hide
-            gradePointsText.visibility = hide
-            gradePointsDataText.visibility = hide
-            notesText.visibility = hide
-            notesDataText.visibility = hide
             changeTaskStatusButton.visibility = hide
             editTaskButton.visibility = hide
+
+            val vis = if (isForParent) show else hide
+            gradePointsText.visibility = vis
+            gradePointsDataText.visibility = vis
+            notesText.visibility = vis
+            notesDataText.visibility = vis
         }
     }
 
