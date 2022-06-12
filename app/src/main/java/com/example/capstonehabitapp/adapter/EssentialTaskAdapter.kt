@@ -8,7 +8,7 @@ import com.example.capstonehabitapp.model.Task
 import com.example.capstonehabitapp.databinding.ItemEssentialTaskBinding
 import com.example.capstonehabitapp.ui.ChildHomeFragmentDirections
 import com.example.capstonehabitapp.ui.ParentHomeFragmentDirections
-import com.example.capstonehabitapp.util.getDateString
+import com.example.capstonehabitapp.util.convertTimestampToString
 
 class EssentialTaskAdapter(private val tasks: MutableList<Task>, private val isForParent: Boolean)
     : RecyclerView.Adapter<EssentialTaskAdapter.TaskViewHolder>() {
@@ -27,12 +27,12 @@ class EssentialTaskAdapter(private val tasks: MutableList<Task>, private val isF
             titleText.text = tasks[position].title
             infoText.text = if (isForParent) {
                 val timestamp = tasks[position].timeAskForGrading
-                val date = getDateString(timestamp!!)
+                val date = convertTimestampToString(timestamp!!, "dd MMM yyyy")
                 "$date - ${tasks[position].childName}"
             }
             else {
                 val timestamp = tasks[position].timeStartWorking
-                val date = getDateString(timestamp!!)
+                val date = convertTimestampToString(timestamp!!, "dd MMM yyyy")
                 "$date - ${tasks[position].area}"
             }
         }

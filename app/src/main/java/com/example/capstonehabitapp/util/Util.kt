@@ -9,9 +9,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 // Convert Firebase Timestamp to String
-fun getDateString(timestamp: Timestamp): String {
+fun convertTimestampToString(timestamp: Timestamp, format: String): String {
     return try {
-        val sdf = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
+        val sdf = SimpleDateFormat(format, Locale.ENGLISH)
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = timestamp.seconds * 1000
         sdf.format(calendar.time)
