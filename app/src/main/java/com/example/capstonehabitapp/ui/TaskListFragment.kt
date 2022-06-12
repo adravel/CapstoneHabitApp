@@ -78,6 +78,8 @@ class TaskListFragment : Fragment() {
                 is Response.Loading -> {}
                 is Response.Success -> {
                     val task = response.data
+
+                    // Update the RecyclerView
                     taskAdapter.updateList(task)
                 }
                 is Response.Failure -> {
@@ -92,6 +94,7 @@ class TaskListFragment : Fragment() {
             findNavController().popBackStack()
         }
 
+        // Display FAB and tasks count depending on the user's role
         if (isParent) {
             // Set FAB OnClickListener
             binding.fab.setOnClickListener {
@@ -99,9 +102,24 @@ class TaskListFragment : Fragment() {
                 val action = TaskListFragmentDirections.actionTaskListFragmentToTaskCreationFragment(false)
                 findNavController().navigate(action)
             }
+
+            // Hide the tasks count
+            binding.onGoingTaskCountText.visibility = View.GONE
+            binding.finishedTaskCountText.visibility = View.GONE
+            binding.failedTaskCountText.visibility = View.GONE
         } else {
             // Hide the FAB if user is Child
             binding.fab.visibility = View.GONE
+
+            // Observe tasksCount LiveData in ViewModel
+            // to know how many tasks are on going, finished, or failed to be completed
+            viewModel.tasksCount.observe(viewLifecycleOwner) {
+                val (onGoingTaskCount, finishedTaskCount, failedTaskCount) = it
+
+                binding.onGoingTaskCountText.text = onGoingTaskCount.toString()
+                binding.finishedTaskCountText.text = finishedTaskCount.toString()
+                binding.failedTaskCountText.text = failedTaskCount.toString()
+            }
         }
     }
 

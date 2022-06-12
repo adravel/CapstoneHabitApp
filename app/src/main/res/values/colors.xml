@@ -27,6 +27,7 @@
     <color name="state_error_light">#FF5C5C</color>
     <color name="state_error_subtle">#FF8080</color>
     <color name="state_success">#06C270</color>
+    <color name="state_success_dark">#05A660</color>
     <color name="state_warning_dark">#BB980A</color>
     <color name="state_info">#2597EA</color>
     <color name="state_info_dark">#2D6DCE</color>

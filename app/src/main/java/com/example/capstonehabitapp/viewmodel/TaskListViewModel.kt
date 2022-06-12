@@ -20,7 +20,9 @@ class TaskListViewModel: ViewModel() {
     private val parentDocRef = db.collection("parents").document(parentId)
 
     private val _tasks: MutableLiveData<Response<List<Task>>> = MutableLiveData()
+    private val _tasksCount: MutableLiveData<Triple<Int, Int, Int>> = MutableLiveData()
     val tasks: LiveData<Response<List<Task>>> = _tasks
+    val tasksCount: LiveData<Triple<Int, Int, Int>> = _tasksCount
 
     // Fetch tasks data from Firestore
     fun getTasksFromFirebase() {
@@ -34,13 +36,30 @@ class TaskListViewModel: ViewModel() {
                     .get()
                     .await()
 
-                // Convert each document into Task object and add them to task list
+                // Convert each document into Task object,
+                // add them to task list,
+                // and count the amount of on going, finished, and failed tasks
                 val tasks = mutableListOf<Task>()
+                var onGoingTaskCount = 0
+                var finishedTaskCount = 0
+                var failedTaskCount = 0
+
                 for(document in snapshot.documents) {
-                    document.toObject<Task>()?.let { tasks.add(it) }
+                    document.toObject<Task>()?.let {
+                        tasks.add(it)
+
+                        when (it.status.toInt()) {
+                            1 -> onGoingTaskCount++
+                            2, 3, 4 -> finishedTaskCount++
+                            5 -> failedTaskCount++
+                            else -> {}
+                        }
+                    }
                 }
+                val taskCount = Triple(onGoingTaskCount, finishedTaskCount, failedTaskCount)
 
                 _tasks.postValue(Response.Success(tasks))
+                _tasksCount.postValue(taskCount)
 
             } catch (e: Exception) {
                 e.message?.let { _tasks.postValue(Response.Failure(it)) }

@@ -14,6 +14,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/on_going_task_count_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="@color/state_info_dark"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_layout" />
+
+    <TextView
+        android:id="@+id/finished_task_count_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="@color/state_success_dark"
+        android:textSize="36sp"
+        app:layout_constraintStart_toEndOf="@+id/on_going_task_count_text"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_layout" />
+
+    <TextView
+        android:id="@+id/failed_task_count_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="@color/state_error_dark"
+        android:textSize="36sp"
+        app:layout_constraintStart_toEndOf="@+id/finished_task_count_text"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_layout" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/task_list_recycle_view"
         android:layout_width="0dp"
@@ -24,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/on_going_task_count_text" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
