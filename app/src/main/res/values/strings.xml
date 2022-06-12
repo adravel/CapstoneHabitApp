@@ -50,6 +50,7 @@
     <string name="task_status_3_for_parent">Meminta penilaian</string>
     <string name="task_status_3_for_parent_with_child_name">%1$s meminta penilaian</string>
     <string name="task_status_4">Sudah dinilai</string>
+    <string name="task_status_5">Gagal dikerjakan</string>
     <string name="task_grade_1">Kurang</string>
     <string name="task_grade_2">Baik</string>
     <string name="task_grade_3">Sangat Baik</string>
@@ -175,6 +176,7 @@
     <string name="task_start_success">Pekerjaan dimulai!</string>
     <string name="task_finish_success">Pekerjaan berhasil diselesaikan!</string>
     <string name="ask_for_grading_success">Permintaan penilaian berhasil dikirim!</string>
+    <string name="task_failed">Tugas gagal diselesaikan karena telah melewati batas waktu</string>
     <string name="request_failed">Permintaan gagal</string>
     <string name="tool_purchase_success">Alat berhasil dibeli!</string>
     <string name="not_enough_cash_failure">Dana tidak cukup untuk membeli alat</string>

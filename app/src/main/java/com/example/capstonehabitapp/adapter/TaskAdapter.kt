@@ -61,6 +61,10 @@ class TaskAdapter(private val tasks: MutableList<Task>, private val isForParent:
                     statusText.text = context.getString(R.string.task_status_4)
                     statusText.setTextColor(ContextCompat.getColor(context, R.color.state_success))
                 }
+                5 -> {
+                    statusText.text = context.getString(R.string.task_status_5)
+                    statusText.setTextColor(ContextCompat.getColor(context, R.color.state_error))
+                }
             }
         }
 

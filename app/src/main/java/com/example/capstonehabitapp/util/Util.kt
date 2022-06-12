@@ -21,6 +21,11 @@ fun convertTimestampToString(timestamp: Timestamp, format: String): String {
     }
 }
 
+// Get the current date and time data as Date
+fun getCurrentDateTime(): Date {
+    return Calendar.getInstance().time
+}
+
 // Get the name of the level in the form of a String
 fun getLevelNameString(context: Context, level: Int): String {
     val stringResId = when (level) {

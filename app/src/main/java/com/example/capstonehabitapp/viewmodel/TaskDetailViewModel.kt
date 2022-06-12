@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.capstonehabitapp.model.Task
-import com.example.capstonehabitapp.util.Response
+import com.example.capstonehabitapp.util.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
+import java.text.SimpleDateFormat
 
 class TaskDetailViewModel: ViewModel() {
     private val auth = Firebase.auth
@@ -28,6 +29,35 @@ class TaskDetailViewModel: ViewModel() {
     val task: LiveData<Response<Task>> = _task
     val taskStatusChange: LiveData<Response<Int>> = _taskStatusChange
     val taskDeleteResponse: LiveData<Response<Unit>> = _taskDeleteResponse
+
+    // Check whether task is finished within the time limit
+    fun isTimeLimitSurpassed(task: Task): Boolean {
+        // Check whether task has time limit
+        if (task.startTimeLimit != "" && task.finishTimeLimit != "") {
+            // Get the date child start working as String in "yyyy/MM/dd" format
+            val timeLimitDateString = convertTimestampToString(task.timeStartWorking!!, "yyyy/MM/dd")
+
+            // Get the finish time limit as String in "HH:mm" format
+            val timeLimitTimeString = task.finishTimeLimit
+
+            // Combine the time limit to obtain date and time as String
+            // in "yyyy/MM/dd HH:mm" format
+            val timeLimitDateTimeString = "$timeLimitDateString $timeLimitTimeString"
+
+            // Get the current Date
+            val currentDateTime = getCurrentDateTime()
+
+            // Parse the time limit String to Date
+            val sdf = SimpleDateFormat("yyyy/MM/dd HH:mm")
+            val timeLimitDateTime = sdf.parse(timeLimitDateTimeString)
+
+            // Check whether task time limit is surpassed and return the value
+            return currentDateTime > timeLimitDateTime
+        } else {
+            // Return false if task does not have time limit
+            return false
+        }
+    }
 
     // Calculate task duration
     fun getTaskDurationString(task: Task): String {
@@ -226,6 +256,27 @@ class TaskDetailViewModel: ViewModel() {
                 }.await()
 
                 _taskStatusChange.postValue(Response.Success(4))
+
+            } catch (e: Exception) {
+                e.message?.let { _taskStatusChange.postValue(Response.Failure(it)) }
+            }
+        }
+    }
+
+    // Update task status to 5
+    fun failTask(taskId: String) {
+        _taskStatusChange.postValue(Response.Loading())
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                // Update the status field in Firestore document
+                parentDocRef
+                    .collection("tasks")
+                    .document(taskId)
+                    .update("status", 5)
+                    .await()
+
+                _taskStatusChange.postValue(Response.Success(5))
 
             } catch (e: Exception) {
                 e.message?.let { _taskStatusChange.postValue(Response.Failure(it)) }
