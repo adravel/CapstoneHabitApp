@@ -9,6 +9,8 @@ import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.model.Task
 import com.example.capstonehabitapp.databinding.ItemTaskBinding
 import com.example.capstonehabitapp.ui.TaskListFragmentDirections
+import com.example.capstonehabitapp.util.getTaskDifficultyImageResId
+import com.example.capstonehabitapp.util.getTaskDifficultyString
 
 class TaskAdapter(private val tasks: MutableList<Task>, private val isForParent: Boolean)
     : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
@@ -34,6 +36,8 @@ class TaskAdapter(private val tasks: MutableList<Task>, private val isForParent:
                 tasks[position].startTimeLimit,
                 tasks[position].finishTimeLimit
             )
+
+            // Display status text
             when (tasks[position].status.toInt()) {
                 0 -> {
                     statusText.text = context.getString(R.string.task_status_0)
@@ -61,6 +65,20 @@ class TaskAdapter(private val tasks: MutableList<Task>, private val isForParent:
                     statusText.text = context.getString(R.string.task_status_4)
                     statusText.setTextColor(ContextCompat.getColor(context, R.color.state_success))
                 }
+                5 -> {
+                    statusText.text = context.getString(R.string.task_status_5)
+                    statusText.setTextColor(ContextCompat.getColor(context, R.color.state_error))
+                }
+            }
+
+            // Display difficulty image and text
+            val difficulty = tasks[position].difficulty.toInt()
+            difficultyImage.setImageResource(getTaskDifficultyImageResId(difficulty))
+            difficultyText.text = getTaskDifficultyString(context, difficulty)
+            when (difficulty) {
+                0 -> difficultyText.setTextColor(ContextCompat.getColor(context, R.color.state_success))
+                1 -> difficultyText.setTextColor(ContextCompat.getColor(context, R.color.state_info))
+                2 -> difficultyText.setTextColor(ContextCompat.getColor(context, R.color.state_error_dark))
             }
         }
 

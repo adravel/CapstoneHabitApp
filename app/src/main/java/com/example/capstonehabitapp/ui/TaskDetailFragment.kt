@@ -74,7 +74,7 @@ class TaskDetailFragment : Fragment() {
         // Observe task LiveData in SharedViewModel
         viewModel.task.observe(viewLifecycleOwner) { response ->
             when (response) {
-                is Response.Loading -> displayEmptyTask()
+                is Response.Loading -> displayEmptyTask(isParent)
                 is Response.Success -> {
                     val task = response.data
 
@@ -89,7 +89,14 @@ class TaskDetailFragment : Fragment() {
                         } else {
                             when (task.status.toInt()) {
                                 0 -> viewModel.startTask(taskId, childId, childName)
-                                1 -> viewModel.finishTask(taskId)
+                                1 -> {
+                                    // Finish or fail task depending on the time limit
+                                    if (viewModel.isTimeLimitSurpassed(task)) {
+                                        viewModel.failTask(taskId)
+                                    } else {
+                                        viewModel.finishTask(taskId)
+                                    }
+                                }
                                 2 -> findNavController().navigate(R.id.gradingMethodSelectionDialogFragment)
                             }
                         }
@@ -137,6 +144,7 @@ class TaskDetailFragment : Fragment() {
                         2 -> Toast.makeText(context, getString(R.string.task_finish_success), Toast.LENGTH_SHORT).show()
                         3 -> Toast.makeText(context, getString(R.string.ask_for_grading_success), Toast.LENGTH_SHORT).show()
                         4 -> findNavController().navigate(R.id.gradingSuccessDialogFragment)
+                        5 -> Toast.makeText(context, getString(R.string.task_failed), Toast.LENGTH_SHORT).show()
                     }
                 }
                 is Response.Failure -> {
@@ -187,7 +195,7 @@ class TaskDetailFragment : Fragment() {
     }
 
     // Display empty task for when data is still being loaded
-    private fun displayEmptyTask() {
+    private fun displayEmptyTask(isForParent: Boolean) {
         binding.apply {
             titleDataText.text = ""
             areaDataText.text = ""
@@ -196,14 +204,18 @@ class TaskDetailFragment : Fragment() {
             timeLimitDataText.text = ""
             statusDataText.text = ""
             detailDataText.text = ""
+            gradePointsDataText.text = ""
+            notesDataText.text = ""
 
             toolbarLayout.iconImage.visibility = hide
-            gradePointsText.visibility = hide
-            gradePointsDataText.visibility = hide
-            notesText.visibility = hide
-            notesDataText.visibility = hide
             changeTaskStatusButton.visibility = hide
             editTaskButton.visibility = hide
+
+            val vis = if (isForParent) show else hide
+            gradePointsText.visibility = vis
+            gradePointsDataText.visibility = vis
+            notesText.visibility = vis
+            notesDataText.visibility = vis
         }
     }
 
@@ -332,6 +344,25 @@ class TaskDetailFragment : Fragment() {
                         else -> "-"
                     }
                     notesDataText.text = task.notes
+
+                    changeTaskStatusButton.visibility = hide
+                }
+
+                // State: Task failed to be completed
+                5 -> {
+                    durationDataText.text = "-"
+                    statusDataText.text = getString(R.string.task_status_5)
+                    statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_error))
+
+                    if (isForParent) {
+                        gradePointsDataText.text = "-"
+                        notesDataText.text = "-"
+                    } else {
+                        gradePointsText.visibility = hide
+                        gradePointsDataText.visibility = hide
+                        notesText.visibility = hide
+                        notesDataText.visibility = hide
+                    }
 
                     changeTaskStatusButton.visibility = hide
                 }

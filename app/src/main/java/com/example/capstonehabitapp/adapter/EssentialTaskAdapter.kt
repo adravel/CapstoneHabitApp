@@ -8,7 +8,8 @@ import com.example.capstonehabitapp.model.Task
 import com.example.capstonehabitapp.databinding.ItemEssentialTaskBinding
 import com.example.capstonehabitapp.ui.ChildHomeFragmentDirections
 import com.example.capstonehabitapp.ui.ParentHomeFragmentDirections
-import com.example.capstonehabitapp.util.getDateString
+import com.example.capstonehabitapp.util.convertTimestampToString
+import com.example.capstonehabitapp.util.getTaskDifficultyImageResId
 
 class EssentialTaskAdapter(private val tasks: MutableList<Task>, private val isForParent: Boolean)
     : RecyclerView.Adapter<EssentialTaskAdapter.TaskViewHolder>() {
@@ -25,16 +26,21 @@ class EssentialTaskAdapter(private val tasks: MutableList<Task>, private val isF
         // Bind the data to RecyclerView item's Views
         holder.itemBinding.apply {
             titleText.text = tasks[position].title
+
+            // Set the task detail text depending on the user's role
             infoText.text = if (isForParent) {
                 val timestamp = tasks[position].timeAskForGrading
-                val date = getDateString(timestamp!!)
+                val date = convertTimestampToString(timestamp!!, "dd MMM yyyy")
                 "$date - ${tasks[position].childName}"
             }
             else {
                 val timestamp = tasks[position].timeStartWorking
-                val date = getDateString(timestamp!!)
+                val date = convertTimestampToString(timestamp!!, "dd MMM yyyy")
                 "$date - ${tasks[position].area}"
             }
+
+            // Display the difficulty image
+            difficultyImage.setImageResource(getTaskDifficultyImageResId(tasks[position].difficulty.toInt()))
         }
 
         // Set RecyclerView item OnClickListener to navigate to Task Detail screen
