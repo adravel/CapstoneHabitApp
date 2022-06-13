@@ -36,99 +36,109 @@
                 <!-- Task attributes texts -->
                 <TextView
                     android:id="@+id/title_text"
-                    android:layout_width="110dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/task_title"
                     android:textColor="@color/dark_1"
+                    style="@style/body_medium_2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
                     android:id="@+id/area_text"
-                    android:layout_width="110dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/task_area"
                     android:textColor="@color/dark_1"
+                    style="@style/body_medium_2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/title_data_text"
                     android:layout_marginTop="12dp"/>
 
                 <TextView
                     android:id="@+id/difficulty_text"
-                    android:layout_width="110dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/task_difficulty"
                     android:textColor="@color/dark_1"
+                    style="@style/body_medium_2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/area_data_text"
                     android:layout_marginTop="12dp"/>
 
                 <TextView
                     android:id="@+id/repetition_text"
-                    android:layout_width="110dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/task_repetition"
                     android:textColor="@color/dark_1"
+                    style="@style/body_medium_2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/difficulty_data_text"
                     android:layout_marginTop="12dp"/>
 
                 <TextView
                     android:id="@+id/time_limit_text"
-                    android:layout_width="110dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/task_time_limit"
                     android:textColor="@color/dark_1"
+                    style="@style/body_medium_2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/repetition_data_text"
                     android:layout_marginTop="12dp"/>
 
                 <TextView
                     android:id="@+id/duration_text"
-                    android:layout_width="110dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/task_duration"
                     android:textColor="@color/dark_1"
+                    style="@style/body_medium_2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/time_limit_data_text"
                     android:layout_marginTop="12dp"/>
 
                 <TextView
                     android:id="@+id/status_text"
-                    android:layout_width="110dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/task_status"
                     android:textColor="@color/dark_1"
+                    style="@style/body_medium_2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/duration_data_text"
                     android:layout_marginTop="12dp"/>
 
                 <TextView
                     android:id="@+id/detail_text"
-                    android:layout_width="110dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/task_detail"
                     android:textColor="@color/dark_1"
+                    style="@style/body_medium_2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/status_data_text"
                     android:layout_marginTop="12dp"/>
 
                 <TextView
                     android:id="@+id/grade_points_text"
-                    android:layout_width="110dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/task_grade_points"
                     android:textColor="@color/dark_1"
+                    style="@style/body_medium_2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/detail_data_text"
                     android:layout_marginTop="12dp"/>
 
                 <TextView
                     android:id="@+id/notes_text"
-                    android:layout_width="110dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/task_notes"
                     android:textColor="@color/dark_1"
+                    style="@style/body_medium_2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/grade_text_input_layout"
                     android:layout_marginTop="12dp"/>
@@ -139,6 +149,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/dark_1"
+                    style="@style/body_medium_3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/title_text"
                     app:layout_constraintTop_toTopOf="@id/title_text"
@@ -150,6 +161,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/dark_1"
+                    style="@style/body_medium_3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/title_data_text"
                     app:layout_constraintTop_toTopOf="@id/area_text"
@@ -160,6 +172,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/dark_1"
+                    style="@style/body_medium_3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/title_data_text"
                     app:layout_constraintTop_toTopOf="@id/difficulty_text"
@@ -170,6 +183,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/dark_1"
+                    style="@style/body_medium_3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/title_data_text"
                     app:layout_constraintTop_toTopOf="@id/repetition_text"
@@ -180,6 +194,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/dark_1"
+                    style="@style/body_medium_3"
                     tools:text="@string/task_time_limit_placeholder"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/title_data_text"
@@ -190,6 +205,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/dark_1"
+                    style="@style/body_medium_3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/title_data_text"
                     app:layout_constraintTop_toTopOf="@id/duration_text"
@@ -200,6 +216,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/dark_1"
+                    style="@style/body_medium_2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/title_data_text"
                     app:layout_constraintTop_toTopOf="@id/status_text"
@@ -210,6 +227,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/dark_1"
+                    style="@style/body_medium_3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/title_data_text"
                     app:layout_constraintTop_toTopOf="@id/detail_text"
@@ -223,16 +241,15 @@
                     app:hintEnabled="false"
                     app:boxBackgroundColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/grade_points_text"
-                    app:layout_constraintTop_toTopOf="@+id/grade_points_text"
-                    android:layout_marginStart="10dp">
+                    app:layout_constraintStart_toStartOf="@id/detail_data_text"
+                    app:layout_constraintTop_toTopOf="@+id/grade_points_text">
 
                     <AutoCompleteTextView
                         android:id="@+id/grade_auto_complete_text_view"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:inputType="none"
-                        android:hint="@string/choose_grade" />
+                        android:hint="@string/hint_choose_grade" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -243,9 +260,8 @@
                     app:hintEnabled="false"
                     app:boxBackgroundColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/notes_text"
-                    app:layout_constraintTop_toTopOf="@+id/notes_text"
-                    android:layout_marginStart="10dp">
+                    app:layout_constraintStart_toStartOf="@id/detail_data_text"
+                    app:layout_constraintTop_toTopOf="@+id/notes_text">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/notes_edit_text"
@@ -254,7 +270,7 @@
                         android:inputType="text|textMultiLine"
                         android:lines="5"
                         android:gravity="top"
-                        android:hint="@string/notes" />
+                        android:hint="@string/hint_notes" />
                 </com.google.android.material.textfield.TextInputLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 

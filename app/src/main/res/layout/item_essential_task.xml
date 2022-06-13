@@ -26,6 +26,7 @@
             app:layout_constraintEnd_toStartOf="@+id/difficulty_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            style="@style/body_large_2"
             tools:text="@string/task_title_placeholder" />
 
         <TextView
@@ -33,6 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_green"
+            style="@style/body_medium_3"
             app:layout_constraintEnd_toStartOf="@+id/difficulty_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_text"

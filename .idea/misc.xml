@@ -55,13 +55,13 @@
         <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_add_child.xml" value="0.25" />
         <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_big_icon_dialog.xml" value="0.21693840579710144" />
         <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_child_account_selection.xml" value="0.21693840579710144" />
-        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_child_home.xml" value="0.25" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_child_home.xml" value="0.5" />
         <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_grading_form.xml" value="0.33" />
         <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_house_detail.xml" value="0.25" />
         <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_house_list.xml" value="0.21693840579710144" />
         <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_level_up_dialog.xml" value="0.25" />
         <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_login.xml" value="0.22" />
-        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_one_button_dialog.xml" value="0.21693840579710144" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_one_button_dialog.xml" value="0.5" />
         <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_parent_account_verification.xml" value="0.33" />
         <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_parent_home.xml" value="0.21693840579710144" />
         <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_ranking.xml" value="0.25" />
@@ -77,7 +77,7 @@
         <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/item_child_rank.xml" value="0.25" />
         <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/item_dropdown.xml" value="0.21693840579710144" />
         <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/item_essential_task.xml" value="0.5" />
-        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/item_house.xml" value="0.5" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/item_house.xml" value="0.12907608695652173" />
         <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/item_task.xml" value="0.33" />
         <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/item_tool.xml" value="0.33" />
         <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/layout_home_toolbar.xml" value="0.21693840579710144" />
