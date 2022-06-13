@@ -9,6 +9,7 @@ import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.model.Task
 import com.example.capstonehabitapp.databinding.ItemTaskBinding
 import com.example.capstonehabitapp.ui.TaskListFragmentDirections
+import com.example.capstonehabitapp.util.getTaskDifficultyImageResId
 import com.example.capstonehabitapp.util.getTaskDifficultyString
 
 class TaskAdapter(private val tasks: MutableList<Task>, private val isForParent: Boolean)
@@ -70,8 +71,9 @@ class TaskAdapter(private val tasks: MutableList<Task>, private val isForParent:
                 }
             }
 
-            // Display difficulty text
+            // Display difficulty image and text
             val difficulty = tasks[position].difficulty.toInt()
+            difficultyImage.setImageResource(getTaskDifficultyImageResId(difficulty))
             difficultyText.text = getTaskDifficultyString(context, difficulty)
             when (difficulty) {
                 0 -> difficultyText.setTextColor(ContextCompat.getColor(context, R.color.state_success))

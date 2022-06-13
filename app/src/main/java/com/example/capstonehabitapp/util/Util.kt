@@ -2,6 +2,7 @@ package com.example.capstonehabitapp.util
 
 import android.content.Context
 import android.util.Log
+import androidx.annotation.IdRes
 import com.example.capstonehabitapp.R
 import com.google.firebase.Timestamp
 import java.lang.Exception
@@ -52,4 +53,14 @@ fun getTaskDifficultyString(context: Context, difficulty: Int): String {
         else -> R.string.task_difficulty_0
     }
     return context.getString(stringResId)
+}
+
+// Get resource ID of difficulty icon images
+fun getTaskDifficultyImageResId(difficulty: Int): Int {
+    return when (difficulty) {
+        0 -> R.drawable.img_difficulty_0
+        1 -> R.drawable.img_difficulty_1
+        2 -> R.drawable.img_difficulty_2
+        else -> R.drawable.img_difficulty_0
+    }
 }
