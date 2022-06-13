@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:minWidth="296dp">
 
@@ -12,7 +12,6 @@
         android:layout_width="260dp"
         android:layout_height="260dp"
         android:layout_marginTop="18dp"
-        android:scaleType="centerCrop"
         android:adjustViewBounds="true"
         android:src="@drawable/img_level_up"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,12 +25,14 @@
         android:layout_marginHorizontal="20dp"
         android:text="@string/level_up_message_title"
         android:textSize="20sp"
+        style="@style/header1"
         android:textColor="@color/green"
         android:textAlignment="center"
         android:textAllCaps="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/level_up_image" />
+        app:layout_constraintTop_toBottomOf="@+id/level_up_image"
+        android:layout_marginTop="18dp"/>
 
     <TextView
         android:id="@+id/description_text"
@@ -42,6 +43,7 @@
         android:textSize="16sp"
         android:textAlignment="center"
         android:textColor="#335849"
+        style="@style/body_medium_2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_text"

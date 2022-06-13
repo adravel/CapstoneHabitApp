@@ -70,6 +70,7 @@
     <string name="tasks_unfinished">Pekerjaan yang belum selesai</string>
     <string name="task_list">Daftar Pekerjaan</string>
     <string name="task_title">Nama Pekerjaan</string>
+    <string name="task_category">Kategori</string>
     <string name="task_area">Area Pengerjaan</string>
     <string name="task_difficulty">Kesulitan</string>
     <string name="task_repetition">Pengulangan</string>
@@ -157,6 +158,13 @@
     <string name="hint_user_password_register">Buat kata sandi untuk masuk…</string>
     <string name="hint_user_password_login">Isikan kata sandi akunmu…</string>
     <string name="hint_child_name">Nama anak…</string>
+    <string name="hint_task_creation">Isikan nama pekerjaan…</string>
+    <string name="hint_task_detail">Beri keterangan tambahan terkait pekerjaan</string>
+    <string name="hint_task_area">Beritahu area pekerjaannya…</string>
+    <string name="hint_choose_grade">Pilih nilai…</string>
+    <string name="hint_notes">Catatan tambahan untuk anak…</string>
+    <string name="hint_task_category">Isikan kategori pekerjaannya…</string>
+    <string name="hint_difficulty">Pilih salah satu…</string>
     <!-- Dialog Messages -->
     <string name="tool_sale_confirmation_message">Jual %1$s ke %2$s?</string>
     <string name="tool_sale_success_message">%1$s berhasil dijual.</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="normal_button" parent="Widget.MaterialComponents.Button">
+        <item name="fontFamily">@font/martel_sans_extrabold</item>
         <item name="android:layout_height">36dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
@@ -10,6 +11,7 @@
         <item name="cornerRadius">8dp</item>
     </style>
     <style name="outline_button" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="fontFamily">@font/martel_sans_extrabold</item>
         <item name="android:layout_height">36dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
@@ -20,11 +22,89 @@
         <item name="strokeColor">@color/outline_button_stroke_color</item>
     </style>
     <style name="text_button" parent="Widget.MaterialComponents.Button">
+        <item name="fontFamily">@font/martel_sans_extrabold</item>
         <item name="android:layout_height">36dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/text_button_text_color</item>
         <item name="android:background">@android:color/transparent</item>
+    </style>
+
+<!--    Header Font-->
+    <style name="header1">
+        <item name="fontFamily">@font/bubblegum_sans</item>
+<!--        <item name="android:lineHeight">31sp</item>-->
+        <item name="android:spacing">8sp</item>
+        <item name="android:letterSpacing">0.04</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+    <style name="header2">
+        <item name="fontFamily">@font/bubblegum_sans</item>
+        <!--        <item name="android:lineHeight">26sp</item>-->
+        <item name="android:spacing">8sp</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="header3">
+        <item name="fontFamily">@font/bubblegum_sans</item>
+        <!--        <item name="android:lineHeight">21sp</item>-->
+        <item name="android:spacing">8sp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="header4">
+        <item name="fontFamily">@font/bubblegum_sans</item>
+        <!--        <item name="android:lineHeight">18sp</item>-->
+        <item name="android:spacing">8sp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+<!--    Body Font-->
+    <style name="body_large_1">
+        <item name="fontFamily">@font/martel_sans</item>
+        <!--        <item name="android:lineHeight">27sp</item>-->
+        <item name="android:spacing">8sp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="body_large_2">
+        <item name="fontFamily">@font/martel_sans_bold</item>
+        <!--        <item name="android:lineHeight">27sp</item>-->
+        <item name="android:spacing">8sp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="body_large_3">
+        <item name="fontFamily">@font/martel_sans_bold</item>
+        <!--        <item name="android:lineHeight">27sp</item>-->
+        <item name="android:spacing">8sp</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="body_medium_1">
+        <item name="fontFamily">@font/martel_sans_extrabold</item>
+        <!--        <item name="android:lineHeight">18sp</item>-->
+        <item name="android:spacing">8sp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="body_medium_2">
+        <item name="fontFamily">@font/martel_sans_extrabold</item>
+        <!--        <item name="android:lineHeight">18sp</item>-->
+        <item name="android:spacing">8sp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="body_medium_3">
+        <item name="fontFamily">@font/martel_sans</item>
+        <!--        <item name="android:lineHeight">23sp</item>-->
+        <item name="android:spacing">8sp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="body_regular">
+        <item name="fontFamily">@font/martel_sans</item>
+        <!--        <item name="android:lineHeight">16sp</item>-->
+        <item name="android:spacing">8sp</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="body_small">
+        <item name="fontFamily">@font/martel_sans</item>
+        <!--        <item name="android:lineHeight">16sp</item>-->
+        <item name="android:spacing">13sp</item>
+        <item name="android:textSize">10sp</item>
     </style>
 </resources>

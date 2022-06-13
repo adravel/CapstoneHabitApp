@@ -8,7 +8,8 @@
     android:layout_height="?attr/actionBarSize"
     android:background="@color/white"
     app:navigationIcon="@drawable/ic_arrow_back"
-    tools:title="Title Text">
+    tools:title="Title Text"
+    app:titleTextAppearance="@style/header2">
 
     <ImageView
         android:id="@+id/icon_image"

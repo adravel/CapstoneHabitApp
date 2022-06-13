@@ -42,6 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/dark_2"
+                    style="@style/body_regular"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="Nama Rumah"/>
@@ -51,6 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/dark_2"
+                    style="@style/body_regular"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="HP : 200/1000"/>
@@ -74,11 +76,11 @@
 
         <ImageView
             android:id="@+id/house_image"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="29dp"
             android:layout_marginHorizontal="20dp"
-            android:src="@drawable/image_placeholder"
+            android:src="@drawable/rumah_adat_utuh"
             app:layout_constraintDimensionRatio="H,1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,10 +88,9 @@
 
         <ImageView
             android:id="@+id/fort_image"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginHorizontal="20dp"
-            android:background="@color/dark_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/benteng_utuh"
             app:layout_constraintDimensionRatio="H,2:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -126,8 +127,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/shop"
                 android:textColor="@color/dark_1"
+                style="@style/header2"
                 android:textAllCaps="true"
-                android:layout_marginTop="38dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginStart="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -137,6 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/state_info_dark"
+                style="@style/body_medium_2"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/shop_text"
@@ -147,6 +150,7 @@
                 android:id="@+id/tool_list_recycler_view"
                 android:layout_width="0dp"
                 android:layout_height="400dp"
+                android:layout_marginHorizontal="8dp"
                 android:paddingVertical="10dp"
                 android:paddingHorizontal="8dp"
                 android:clipToPadding="false"
