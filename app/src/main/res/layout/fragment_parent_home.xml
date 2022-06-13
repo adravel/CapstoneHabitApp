@@ -32,7 +32,7 @@
                 android:id="@+id/parent_avatar_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/jendral_girl"
+                android:src="@drawable/img_general_female"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginStart="16dp"
@@ -87,7 +87,7 @@
                         android:layout_marginTop="12dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:src="@drawable/menu_pekerjaan"/>
+                        android:src="@drawable/img_menu_task"/>
 
                     <TextView
                         android:id="@+id/task_menu_card_title"
@@ -128,7 +128,7 @@
                         android:layout_marginTop="12dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:src="@drawable/menu_toko"/>
+                        android:src="@drawable/img_menu_shop"/>
 
                     <TextView
                         android:id="@+id/shop_menu_card_title"
@@ -168,7 +168,7 @@
                         android:layout_marginTop="12dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:src="@drawable/menu_capaian"/>
+                        android:src="@drawable/img_menu_ranking"/>
 
                     <TextView
                         android:id="@+id/ranking_menu_title"
@@ -209,7 +209,7 @@
                         android:layout_marginTop="12dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:src="@drawable/menu_history"/>
+                        android:src="@drawable/img_menu_history"/>
 
                     <TextView
                         android:id="@+id/history_menu_title"

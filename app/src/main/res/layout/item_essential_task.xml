@@ -45,10 +45,10 @@
             android:id="@+id/difficulty_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/image_placeholder"
             app:layout_constraintDimensionRatio="H,1:1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/img_difficulty_easy" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

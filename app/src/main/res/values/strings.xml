@@ -12,7 +12,7 @@
     <string name="task_grade_points_placeholder">9</string>
     <string name="task_notes_placeholder">Sudah cukup bagus. Bagian x perlu dirapikan lalu ditata lagi bagian y supaya terlihat lebih rapi</string>
     <string name="child_name_placeholder">Alfa</string>
-    <string name="task_info_placeholder">17 April 2022 - Nama/Area Pengerjaan</string>
+    <string name="task_info_placeholder">17 April 2022 - Data</string>
     <string name="child_greetings_placeholder">Halo, %1$s !</string>
     <string name="child_level_placeholder">Level : %1$s</string>
     <string name="child_exp_placeholder">Exp : %1$d/50</string>
