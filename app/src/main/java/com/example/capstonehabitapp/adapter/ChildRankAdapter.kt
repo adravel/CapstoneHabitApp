@@ -35,6 +35,13 @@ class ChildRankAdapter(private val children: MutableList<Child>)
                 R.string.child_total_points_placeholder,
                 children[position].totalPoints.toInt()
             )
+
+            // Display badge image according to ranking
+            when (rankNumber) {
+                1 -> badgeImage.setImageResource(R.drawable.img_badge_gold)
+                2 -> badgeImage.setImageResource(R.drawable.img_badge_silver)
+                3 -> badgeImage.setImageResource(R.drawable.img_badge_bronze)
+            }
         }
     }
 
