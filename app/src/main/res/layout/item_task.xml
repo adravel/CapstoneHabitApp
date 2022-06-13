@@ -18,49 +18,71 @@
 
         <TextView
             android:id="@+id/title_text"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="@color/dark_1"
             android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/difficulty_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/task_title_placeholder" />
 
         <TextView
             android:id="@+id/area_text"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
             android:textColor="@color/green"
             android:textSize="16sp"
-            android:drawablePadding="8dp"
             app:drawableStartCompat="@drawable/ic_placeholder"
             app:drawableTint="@color/green"
+            app:layout_constraintEnd_toStartOf="@+id/difficulty_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title_text"
             tools:text="@string/task_area_placeholder" />
 
         <TextView
             android:id="@+id/time_limit_text"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
             android:textColor="@color/green"
             android:textSize="16sp"
-            android:drawablePadding="8dp"
             app:drawableStartCompat="@drawable/ic_placeholder"
             app:drawableTint="@color/green"
+            app:layout_constraintEnd_toStartOf="@+id/difficulty_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/area_text"
             tools:text="@string/task_time_limit_placeholder" />
 
         <TextView
             android:id="@+id/status_text"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textColor="@color/state_success"
             android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/difficulty_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/time_limit_text"
-            tools:text="@string/task_status_placeholder"/>
+            tools:text="@string/task_status_placeholder" />
+
+        <ImageView
+            android:id="@+id/difficulty_image"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:src="@drawable/image_placeholder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/difficulty_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            app:layout_constraintEnd_toEndOf="@+id/difficulty_image"
+            app:layout_constraintStart_toStartOf="@+id/difficulty_image"
+            app:layout_constraintTop_toBottomOf="@+id/difficulty_image"
+            tools:text="TEXT" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
 
