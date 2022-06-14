@@ -105,8 +105,8 @@ class ParentHomeFragment: Fragment() {
                 findNavController().navigate(R.id.taskListFragment)
             }
 
-            // Set shop menu card onClickListener
-            shopMenuCard.setOnClickListener {
+            // Set store menu card onClickListener
+            storeMenuCard.setOnClickListener {
                 val action = ParentHomeFragmentDirections
                     .actionParentHomeFragmentToChildAccountSelectionFragment(true)
                 findNavController().navigate(action)
