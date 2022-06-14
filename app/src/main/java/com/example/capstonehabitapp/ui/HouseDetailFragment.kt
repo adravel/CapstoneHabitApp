@@ -29,7 +29,7 @@ class HouseDetailFragment: Fragment() {
     private lateinit var houseId: String
     private lateinit var houseName: String
 
-    private lateinit var shopBottomSheetBehavior: BottomSheetBehavior<*>
+    private lateinit var storeBottomSheetBehavior: BottomSheetBehavior<*>
 
     private val viewModel: HouseDetailViewModel by activityViewModels()
 
@@ -49,7 +49,7 @@ class HouseDetailFragment: Fragment() {
         binding.toolbarLayout.toolbar.title = houseName
 
         // Initialize bottom sheet
-        shopBottomSheetBehavior = BottomSheetBehavior.from(binding.shopBottomSheetCard)
+        storeBottomSheetBehavior = BottomSheetBehavior.from(binding.shopBottomSheetCard)
 
         return binding.root
     }
@@ -160,7 +160,7 @@ class HouseDetailFragment: Fragment() {
         }
 
         // Set bottom sheet behavior to flip arrow icon when bottom sheet is expanded
-        shopBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+        storeBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
                     BottomSheetBehavior.STATE_EXPANDED -> binding.arrowIconImage.scaleY = -1F
@@ -174,10 +174,10 @@ class HouseDetailFragment: Fragment() {
 
         // Set arrow icon onClickListener to expand/collapse the bottom sheet
         binding.arrowIconImage.setOnClickListener {
-            if (shopBottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
-                shopBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            if (storeBottomSheetBehavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
+                storeBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             } else {
-                shopBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                storeBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             }
         }
     }
