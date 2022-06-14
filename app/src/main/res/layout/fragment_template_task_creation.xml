@@ -2,10 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".TemplateTaskCreation">
+    android:layout_height="match_parent">
 
     <include
         layout="@layout/layout_toolbar"
@@ -83,7 +81,7 @@
                         android:id="@+id/task_onetime_card_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/repetition_chooseday"
+                        android:text="@string/repetition_choose_day"
                         style="@style/body_small"
                         android:textColor="@color/state_error_dark"
                         app:layout_constraintStart_toStartOf="@id/task_onetime_card_title"
@@ -135,7 +133,7 @@
                         android:id="@+id/task_repeatedly_card_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/repetition_chooseday"
+                        android:text="@string/repetition_choose_day"
                         style="@style/body_small"
                         android:textColor="@color/state_error_dark"
                         app:layout_constraintStart_toStartOf="@id/task_repeatedly_card_title"

@@ -125,6 +125,35 @@
     <string name="parent_account_verification">Verifikasi Akun Orang Tua</string>
     <string name="input_password">Masukkan Password Akun</string>
     <string name="input_password_description">Masukkan password akun Anda. Jangan berikan password kepada anak untuk mencegah terjadinya penilaian mandiri oleh anak.</string>
+    <string name="template_task_category">Kategori Pekerjaan</string>
+    <string name="template_task_repetition">Pengulangan Pekerjaan</string>
+    <string name="onetime_repetition">Sekali</string>
+    <string name="repeated_repetition">Berulang</string>
+    <string name="repetition_choose_day">Pilih hari</string>
+    <string name="creativity">Kreativitas</string>
+    <string name="house_work">Tugas Rumah</string>
+    <string name="health">Kesehatan</string>
+    <string name="self_care">Perawatan Diri</string>
+    <string name="week_summary">Rangkuman Mingguan</string>
+    <string name="week1_content">Di Minggu pertama</string>
+    <string name="week2_content">Di Minggu kedua</string>
+    <string name="week3_content">Di Minggu ketiga</string>
+    <string name="week4_content">Di Minggu keempat</string>
+    <string name="task_finish">Pekerjaan Selesai</string>
+    <string name="see_all">Lihat Semua</string>
+    <string name="upload_photo_caption">Unggah hasil pekerjaanmu supaya \norang tuamu dapat melihat hasil kerjamu dan \nmenilai usahamu dengan baik 😉</string>
+    <string name="upload_photo_complete_caption">Hasil pekerjaanmu berhasil diunggah \ndan akan segera dikirimkan ke orang tuamu! \nSemangat mengerjakan pekerjaan lain dan \njangan lupa beristirahat, Prajurit! 😉</string>
+    <string name="monday">Senin</string>
+    <string name="tuesday">Selasa</string>
+    <string name="wednesday">Rabu</string>
+    <string name="thursday">Kamis</string>
+    <string name="friday">Jum\'at</string>
+    <string name="saturday">Sabtu</string>
+    <string name="sunday">Minggu</string>
+    <string name="choose_day">Pilih hari</string>
+    <string name="until">hingga</string>
+    <string name="choose">Pilih</string>
+    <string name="choose_child">Pilih Anak</string>
     <!-- Button Labels -->
     <string name="button_label_add_child">Tambah Anak</string>
     <string name="button_label_start_task">Kerjakan</string>
@@ -151,6 +180,8 @@
     <string name="button_label_get_bonus">Ambil Bonus</string>
     <string name="button_label_delete">Hapus</string>
     <string name="button_label_edit_task">Ubah Informasi</string>
+    <string name="button_label_upload_photo">Tekan untuk mengunggah foto</string>
+    <string name="button_label_create_task_manual">Buat Pekerjaan Sendiri</string>
     <!-- Hints -->
     <string name="hint_text">Type something</string>
     <string name="hint_time">00:00</string>
@@ -195,37 +226,4 @@
     <string name="reauthentication_failed">Password tidak valid</string>
     <!-- TextInputLayout Helper/Error Messages -->
     <string name="minimum_password_length_error">Password memerlukan minimal 6 karakter</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="template_task_category">Kategori Pekerjaan</string>
-    <string name="template_task_repetition">Pengulangan Pekerjaan</string>
-    <string name="onetime_repetition">Sekali</string>
-    <string name="repeated_repetition">Berulang</string>
-    <string name="repetition_chooseday">Pilih hari</string>
-    <string name="creativity">Kreativitas</string>
-    <string name="house_work">Tugas Rumah</string>
-    <string name="health">Kesehatan</string>
-    <string name="self_care">Perawatan Diri</string>
-    <string name="button_label_create_task_manual">Buat Pekerjaan Sendiri</string>
-    <string name="week_summary">Rangkuman Mingguan</string>
-    <string name="week1_content">Di Minggu pertama</string>
-    <string name="week2_content">Di Minggu kedua</string>
-    <string name="week3_content">Di Minggu ketiga</string>
-    <string name="week4_content">Di Minggu keempat</string>
-    <string name="task_finish">Pekerjaan Selesai</string>
-    <string name="see_all">Lihat Semua</string>
-    <string name="upload_photo_button">Tekan untuk mengunggah foto</string>
-    <string name="upload_photo_caption">Unggah hasil pekerjaanmu supaya \norang tuamu dapat melihat hasil kerjamu dan \nmenilai usahamu dengan baik 😉</string>
-    <string name="upload_photo_complete_caption">Hasil pekerjaanmu berhasil diunggah \ndan akan segera dikirimkan ke orang tuamu! \nSemangat mengerjakan pekerjaan lain dan \njangan lupa beristirahat, Prajurit! 😉</string>
-    <string name="monday">Senin</string>
-    <string name="tuesday">Selasa</string>
-    <string name="wednesday">Rabu</string>
-    <string name="thursday">Kamis</string>
-    <string name="friday">Jum'at</string>
-    <string name="saturday">Sabtu</string>
-    <string name="sunday">Minggu</string>
-    <string name="choose_day">Pilih hari</string>
-    <string name="until">hingga</string>
-    <string name="choose">Pilih</string>
-    <string name="choose_child">Pilih Anak</string>
 </resources>
