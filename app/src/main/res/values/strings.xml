@@ -14,6 +14,8 @@
     <string name="child_name_placeholder">Alfa</string>
     <string name="task_info_placeholder">17 April 2022 - Data</string>
     <string name="child_greetings_placeholder">Halo, %1$s !</string>
+    <string name="parent_male_greetings_placeholder">Halo,\nPak %1$s !</string>
+    <string name="parent_female_greetings_placeholder">Halo,\nBu %1$s !</string>
     <string name="child_level_placeholder">Level : %1$s</string>
     <string name="child_exp_placeholder">Exp : %1$d/50</string>
     <string name="house_hp_placeholder">HP : %1$d/%2$d</string>
@@ -92,7 +94,6 @@
     <string name="change_role">Ganti Role</string>
     <string name="choose_child_account">Pilih Akun Anak</string>
     <string name="help">Bantuan</string>
-    <string name="greetings">Halo,</string>
     <string name="store">Gudang</string>
     <string name="house">Rumah Adat</string>
     <string name="child_history">Riwayat Anak</string>

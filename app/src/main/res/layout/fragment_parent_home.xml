@@ -41,27 +41,16 @@
 
             <TextView
                 android:id="@+id/greetings_text"
+                style="@style/header1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/greetings"
-                android:textColor="@color/dark_1"
+                android:layout_marginStart="16dp"
                 android:textAllCaps="true"
-                style="@style/header1"
+                android:textColor="@color/dark_1"
+                app:layout_constraintBottom_toBottomOf="@+id/parent_avatar_image"
                 app:layout_constraintStart_toEndOf="@+id/parent_avatar_image"
                 app:layout_constraintTop_toTopOf="@id/parent_avatar_image"
-                android:layout_marginStart="16dp"/>
-
-            <TextView
-                android:id="@+id/parent_name_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textColor="@color/dark_1"
-                android:textAllCaps="true"
-                style="@style/header1"
-                app:layout_constraintStart_toStartOf="@+id/greetings_text"
-                app:layout_constraintTop_toBottomOf="@+id/greetings_text"
-                android:layout_marginTop="8dp"
-                tools:text="Ibu Melati !" />
+                tools:text="@string/parent_female_greetings_placeholder" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/task_menu_card"

@@ -73,10 +73,10 @@ class ParentHomeFragment: Fragment() {
 
                     // Display avatar image and name text according to the gender
                     if (isMale) {
-                        binding.parentNameText.text = "Pak $name !"
+                        binding.greetingsText.text = getString(R.string.parent_male_greetings_placeholder, name)
                         binding.parentAvatarImage.setImageResource(R.drawable.img_general_male)
                     } else {
-                        binding.parentNameText.text = "Ibu $name !"
+                        binding.greetingsText.text = getString(R.string.parent_female_greetings_placeholder, name)
                         binding.parentAvatarImage.setImageResource(R.drawable.img_general_female)
                     }
                 }
