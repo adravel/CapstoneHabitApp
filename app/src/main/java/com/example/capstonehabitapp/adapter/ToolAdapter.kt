@@ -33,19 +33,19 @@ class ToolAdapter(
         holder.itemBinding.apply {
             nameText.text = tools[position].name
             powerText.text = tools[position].power.toString()
-            priceText.text = tools[position].price.toString()
+            priceText.text = context.getString(R.string.tool_price_placeholder, tools[position].price.toInt())
 
             if (isForParent && childName != "") {
                 // Set button text and function for Parent in shop page
                 if (tools[position].isForSale) {
-                    sellButton.isEnabled = false
-                    sellButton.text = context.getString(R.string.button_label_sold)
+                    itemButton.isEnabled = false
+                    itemButton.text = context.getString(R.string.button_label_sent)
                 } else {
-                    sellButton.isEnabled = true
-                    sellButton.text = context.getString(R.string.button_label_sell)
+                    itemButton.isEnabled = true
+                    itemButton.text = context.getString(R.string.button_label_send)
                 }
 
-                sellButton.setOnClickListener { view ->
+                itemButton.setOnClickListener { view ->
                     // Display tool sale confirmation dialog
                     val action = ShopFragmentDirections.actionShopFragmentToToolSaleConfirmationDialogFragment(
                         tools[position].id,
@@ -57,9 +57,9 @@ class ToolAdapter(
                 }
             } else {
                 // Set button text and function for Child in house detail page
-                sellButton.text = context.getString(R.string.button_label_buy)
+                itemButton.text = context.getString(R.string.button_label_buy)
 
-                sellButton.setOnClickListener { view ->
+                itemButton.setOnClickListener { view ->
                     // Display tool purchase confirmation dialog
                     val action = HouseDetailFragmentDirections
                         .actionHouseDetailFragmentToToolPurchaseConfirmationDialogFragment(

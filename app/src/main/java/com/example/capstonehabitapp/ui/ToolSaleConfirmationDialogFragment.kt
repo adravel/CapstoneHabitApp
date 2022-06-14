@@ -46,7 +46,7 @@ class ToolSaleConfirmationDialogFragment: DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.messageText.text = getString(R.string.tool_sale_confirmation_message, toolName, childName)
-        binding.positiveButton.text = getString(R.string.button_label_sell)
+        binding.positiveButton.text = getString(R.string.button_label_send)
         binding.negativeButton.text = getString(R.string.button_label_cancel)
 
         // Set button onClickListener for selling item

@@ -20,6 +20,7 @@
     <string name="child_cash_placeholder">Dana : Rp %1$d</string>
     <string name="child_total_points_placeholder">%1$d pt</string>
     <string name="child_congrats_placeholder">%1$s hebat!</string>
+    <string name="tool_price_placeholder">Rp %1$d</string>
     <!-- Lorem Ipsum -->
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <!-- Misc -->
@@ -165,8 +166,8 @@
     <string name="button_label_grade_by_parent">Kirim Permintaan Penilaian</string>
     <string name="button_label_open_task_photo">Lihat Foto Pekerjaan</string>
     <string name="button_label_buy">Beli</string>
-    <string name="button_label_sell">Kirim</string>
-    <string name="button_label_sold">Terkirim</string>
+    <string name="button_label_send">Kirim</string>
+    <string name="button_label_sent">Terkirim</string>
     <string name="button_label_yes">Ya</string>
     <string name="button_label_no">Tidak</string>
     <string name="button_label_ok">Oke</string>
