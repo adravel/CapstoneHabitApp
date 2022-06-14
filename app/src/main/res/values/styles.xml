@@ -77,6 +77,12 @@
         <item name="android:spacing">8sp</item>
         <item name="android:textSize">20sp</item>
     </style>
+    <style name="body_large_4">
+        <item name="fontFamily">@font/martel_sans_extrabold</item>
+        <!--        <item name="android:lineHeight">27sp</item>-->
+        <item name="android:spacing">8sp</item>
+        <item name="android:textSize">18sp</item>
+    </style>
     <style name="body_medium_1">
         <item name="fontFamily">@font/martel_sans_extrabold</item>
         <!--        <item name="android:lineHeight">18sp</item>-->

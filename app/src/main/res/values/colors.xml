@@ -10,6 +10,7 @@
     <!-- Main color -->
     <color name="green">#146356</color>
     <color name="dark_green">#103A33</color>
+    <color name="light_green">#A3DA8D</color>
     <color name="subtle_green">#D4F4C8</color>
     <!-- Secondary color -->
     <color name="dark_cream">#9C794D</color>
