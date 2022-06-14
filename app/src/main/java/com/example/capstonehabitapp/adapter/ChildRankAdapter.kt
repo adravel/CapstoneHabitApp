@@ -42,6 +42,13 @@ class ChildRankAdapter(private val children: MutableList<Child>)
                 2 -> badgeImage.setImageResource(R.drawable.img_badge_silver)
                 3 -> badgeImage.setImageResource(R.drawable.img_badge_bronze)
             }
+
+            // Display avatar image according to gender
+            if (children[position].isMale) {
+                avatarImage.setImageResource(R.drawable.img_soldier_male)
+            } else {
+                avatarImage.setImageResource(R.drawable.img_soldier_female)
+            }
         }
     }
 

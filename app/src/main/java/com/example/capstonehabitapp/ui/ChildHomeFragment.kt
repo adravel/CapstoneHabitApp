@@ -105,6 +105,13 @@ class ChildHomeFragment: Fragment() {
                         levelText.text = getString(R.string.child_level_placeholder, levelName)
                         expText.text = getString(R.string.child_exp_placeholder, progress)
                         expProgressBar.progress = progress
+
+                        // Display avatar image according to gender
+                        if (child.isMale) {
+                            childAvatarImage.setImageResource(R.drawable.img_soldier_male)
+                        } else {
+                            childAvatarImage.setImageResource(R.drawable.img_soldier_female)
+                        }
                     }
 
                     // Display level up dialog if hasLeveledUp field value is true

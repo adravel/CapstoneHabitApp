@@ -32,11 +32,12 @@
                 android:id="@+id/parent_avatar_image"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/img_general_female"
+                android:src="@drawable/img_placeholder"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="21dp"/>
+                android:layout_marginTop="21dp"
+                tools:src="@drawable/img_soldier_female"/>
 
             <TextView
                 android:id="@+id/greetings_text"

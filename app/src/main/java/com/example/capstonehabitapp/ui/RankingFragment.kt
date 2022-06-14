@@ -108,6 +108,13 @@ class RankingFragment : Fragment() {
             nameText.text = child.name
             levelNameText.text = getLevelNameString(requireContext(), child.level.toInt())
             totalPointsText.text = getString(R.string.child_total_points_placeholder, child.totalPoints.toInt())
+
+            // Display avatar image according to gender
+            if (child.isMale) {
+                avatarImage.setImageResource(R.drawable.img_soldier_male)
+            } else {
+                avatarImage.setImageResource(R.drawable.img_soldier_female)
+            }
         }
     }
 }

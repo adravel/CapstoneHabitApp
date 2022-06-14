@@ -21,28 +21,26 @@ class ParentHomeViewModel: ViewModel() {
     private val parentId = auth.currentUser!!.uid
     private val parentDocRef = db.collection("parents").document(parentId)
 
-    private val _parentName: MutableLiveData<Response<String>> = MutableLiveData()
+    private val _parent: MutableLiveData<Response<Pair<String, Boolean>>> = MutableLiveData()
     private val _essentialTasks: MutableLiveData<Response<List<Task>>> = MutableLiveData()
-    val parentName: LiveData<Response<String>> = _parentName
+    val parent: LiveData<Response<Pair<String, Boolean>>> = _parent
     val essentialTasks: LiveData<Response<List<Task>>> = _essentialTasks
 
     // Fetch parent data from Firestore
     fun getParentFromFirebase() {
-        _parentName.postValue(Response.Loading())
+        _parent.postValue(Response.Loading())
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 // Call Firestore get() method to query the data
                 val snapshot = parentDocRef.get().await()
-                val name = snapshot.getString("name")
-                val isMale = snapshot.getBoolean("isMale")
+                val name = snapshot.getString("name")!!
+                val isMale = snapshot.getBoolean("isMale")!!
 
-                val nameWithTitle = if (isMale!!) "Pak $name" else "Ibu $name"
-
-                _parentName.postValue(Response.Success(nameWithTitle))
+                _parent.postValue(Response.Success(Pair(name, isMale)))
 
             } catch (e: Exception) {
-                e.message?.let { _parentName.postValue(Response.Failure(it)) }
+                e.message?.let { _parent.postValue(Response.Failure(it)) }
             }
         }
     }

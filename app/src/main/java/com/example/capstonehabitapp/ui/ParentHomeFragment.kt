@@ -64,13 +64,21 @@ class ParentHomeFragment: Fragment() {
         viewModel.getParentFromFirebase()
         viewModel.getEssentialTasksForParentFromFirebase()
 
-        // Observe parent name LiveData in ViewModel
-        viewModel.parentName.observe(viewLifecycleOwner) { response ->
+        // Observe parent LiveData in ViewModel
+        viewModel.parent.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Response.Loading -> {}
                 is Response.Success -> {
-                    val parentName = response.data
-                    binding.parentNameText.text = "$parentName !"
+                    val (name, isMale) = response.data
+
+                    // Display avatar image and name text according to the gender
+                    if (isMale) {
+                        binding.parentNameText.text = "Pak $name !"
+                        binding.parentAvatarImage.setImageResource(R.drawable.img_general_male)
+                    } else {
+                        binding.parentNameText.text = "Ibu $name !"
+                        binding.parentAvatarImage.setImageResource(R.drawable.img_general_female)
+                    }
                 }
                 is Response.Failure -> {
                     Log.e("ParentHome", response.message)

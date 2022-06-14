@@ -53,7 +53,8 @@
             android:src="@drawable/img_placeholder"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/grey_background"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/img_soldier_male"/>
 
         <TextView
             android:id="@+id/name_text"
