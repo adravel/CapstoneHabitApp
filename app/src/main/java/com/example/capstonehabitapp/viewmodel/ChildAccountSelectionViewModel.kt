@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.example.capstonehabitapp.model.Child
 import com.example.capstonehabitapp.util.Response
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -30,9 +31,11 @@ class ChildAccountSelectionViewModel: ViewModel() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                // Call Firestore get() method to query the data
+                // Call Firestore get() method to query a list of children data
+                // sorted by the oldest created account
                 val snapshot = parentDocRef
                     .collection("children")
+                    .orderBy("timeCreated", Query.Direction.ASCENDING)
                     .get()
                     .await()
 
