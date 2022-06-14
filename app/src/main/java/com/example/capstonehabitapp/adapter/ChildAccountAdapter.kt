@@ -38,8 +38,8 @@ class ChildAccountAdapter(private val children: MutableList<Child>, private val 
             val childName = children[position].name
 
             if (isForParent) {
-                // Navigate to shop page
-                val action = ChildAccountSelectionFragmentDirections.actionChildAccountSelectionFragmentToShopFragment(
+                // Navigate to store page
+                val action = ChildAccountSelectionFragmentDirections.actionChildAccountSelectionFragmentToStoreFragment(
                     childId,
                     childName
                 )

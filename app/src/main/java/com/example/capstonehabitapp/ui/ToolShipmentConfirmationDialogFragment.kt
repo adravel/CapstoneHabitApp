@@ -8,9 +8,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentTwoButtonsDialogBinding
-import com.example.capstonehabitapp.viewmodel.ShopViewModel
+import com.example.capstonehabitapp.viewmodel.StoreViewModel
 
-class ToolSaleConfirmationDialogFragment: DialogFragment() {
+class ToolShipmentConfirmationDialogFragment: DialogFragment() {
 
     private var _binding: FragmentTwoButtonsDialogBinding? = null
     private val binding get() = _binding!!
@@ -20,7 +20,7 @@ class ToolSaleConfirmationDialogFragment: DialogFragment() {
     private lateinit var childId: String
     private lateinit var childName: String
 
-    private val viewModel: ShopViewModel by activityViewModels()
+    private val viewModel: StoreViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +33,7 @@ class ToolSaleConfirmationDialogFragment: DialogFragment() {
         dialog!!.window?.setBackgroundDrawableResource(R.drawable.rounded_corner)
 
         // Initialize tool and child data using Safe Args provided by navigation component
-        val args: ToolSaleConfirmationDialogFragmentArgs by navArgs()
+        val args: ToolShipmentConfirmationDialogFragmentArgs by navArgs()
         toolId = args.toolId
         toolName = args.toolName
         childId = args.childId
@@ -45,13 +45,13 @@ class ToolSaleConfirmationDialogFragment: DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.messageText.text = getString(R.string.tool_sale_confirmation_message, toolName, childName)
+        binding.messageText.text = getString(R.string.tool_shipment_confirmation_message, toolName, childName)
         binding.positiveButton.text = getString(R.string.button_label_send)
         binding.negativeButton.text = getString(R.string.button_label_cancel)
 
-        // Set button onClickListener for selling item
+        // Set button onClickListener for sending tool item
         binding.positiveButton.setOnClickListener {
-            // Sell this tool
+            // Send this tool
             viewModel.setToolForSale(childId, toolId, toolName)
 
             // Dismiss this dialog

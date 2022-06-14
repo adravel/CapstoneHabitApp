@@ -200,8 +200,8 @@
     <string name="hint_task_category">Isikan kategori pekerjaannya…</string>
     <string name="hint_difficulty">Pilih salah satu…</string>
     <!-- Dialog Messages -->
-    <string name="tool_sale_confirmation_message">Jual %1$s ke %2$s?</string>
-    <string name="tool_sale_success_message">%1$s berhasil dijual.</string>
+    <string name="tool_shipment_confirmation_message">Kirim %1$s ke %2$s?</string>
+    <string name="tool_shipment_success_message">%1$s berhasil dikirim.</string>
     <string name="tool_purchase_confirmation_message">Gunakan %1$s untuk menyerang benteng?</string>
     <string name="grading_method_selection_message">Apakah kamu sedang bersama orang tua mu sekarang?</string>
     <string name="house_rescue_confirmation_message">Selamatkan rumah %1$s?</string>

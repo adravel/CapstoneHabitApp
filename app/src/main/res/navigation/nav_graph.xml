@@ -90,8 +90,8 @@
             android:id="@+id/action_childAccountSelectionFragment_to_childHomeFragment"
             app:destination="@id/childHomeFragment" />
         <action
-            android:id="@+id/action_childAccountSelectionFragment_to_shopFragment"
-            app:destination="@id/shopFragment" />
+            android:id="@+id/action_childAccountSelectionFragment_to_storeFragment"
+            app:destination="@id/storeFragment" />
         <argument
             android:name="isForParent"
             app:argType="boolean" />
@@ -149,13 +149,13 @@
         android:label="fragment_grading_form"
         tools:layout="@layout/fragment_grading_form" />
     <fragment
-        android:id="@+id/shopFragment"
-        android:name="com.example.capstonehabitapp.ui.ShopFragment"
-        android:label="ShopFragment"
-        tools:layout="@layout/fragment_shop" >
+        android:id="@+id/storeFragment"
+        android:name="com.example.capstonehabitapp.ui.StoreFragment"
+        android:label="StoreFragment"
+        tools:layout="@layout/fragment_store" >
         <action
-            android:id="@+id/action_shopFragment_to_toolSaleConfirmationDialogFragment"
-            app:destination="@id/toolSaleConfirmationDialogFragment" />
+            android:id="@+id/action_storeFragment_to_toolShipmentConfirmationDialogFragment"
+            app:destination="@id/toolShipmentConfirmationDialogFragment" />
         <argument
             android:name="childId"
             app:argType="string" />
@@ -163,13 +163,13 @@
             android:name="childName"
             app:argType="string" />
         <action
-            android:id="@+id/action_shopFragment_to_toolSaleSuccessDialogFragment"
-            app:destination="@id/toolSaleSuccessDialogFragment" />
+            android:id="@+id/action_storeFragment_to_toolShipmentSuccessDialogFragment"
+            app:destination="@id/toolShipmentSuccessDialogFragment" />
     </fragment>
     <dialog
-        android:id="@+id/toolSaleConfirmationDialogFragment"
-        android:name="com.example.capstonehabitapp.ui.ToolSaleConfirmationDialogFragment"
-        android:label="ToolSaleConfirmationDialogFragment" >
+        android:id="@+id/toolShipmentConfirmationDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.ToolShipmentConfirmationDialogFragment"
+        android:label="ToolShipmentConfirmationDialogFragment" >
         <argument
             android:name="toolId"
             app:argType="string" />
@@ -184,9 +184,9 @@
             app:argType="string" />
     </dialog>
     <dialog
-        android:id="@+id/toolSaleSuccessDialogFragment"
-        android:name="com.example.capstonehabitapp.ui.ToolSaleSuccessDialogFragment"
-        android:label="ToolSaleSuccessDialogFragment" >
+        android:id="@+id/toolShipmentSuccessDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.ToolShipmentSuccessDialogFragment"
+        android:label="ToolShipmentSuccessDialogFragment" >
         <argument
             android:name="toolName"
             app:argType="string" />

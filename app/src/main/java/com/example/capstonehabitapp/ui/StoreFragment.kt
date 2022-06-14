@@ -13,13 +13,13 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.adapter.ToolAdapter
-import com.example.capstonehabitapp.databinding.FragmentShopBinding
+import com.example.capstonehabitapp.databinding.FragmentStoreBinding
 import com.example.capstonehabitapp.util.Response
-import com.example.capstonehabitapp.viewmodel.ShopViewModel
+import com.example.capstonehabitapp.viewmodel.StoreViewModel
 
-class ShopFragment: Fragment() {
+class StoreFragment: Fragment() {
 
-    private var _binding: FragmentShopBinding? = null
+    private var _binding: FragmentStoreBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var toolAdapter: ToolAdapter
@@ -27,20 +27,20 @@ class ShopFragment: Fragment() {
     private lateinit var childId: String
     private lateinit var childName: String
 
-    private val viewModel: ShopViewModel by activityViewModels()
+    private val viewModel: StoreViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate layout for this fragment
-        _binding = FragmentShopBinding.inflate(inflater, container, false)
+        _binding = FragmentStoreBinding.inflate(inflater, container, false)
 
         // Set toolbar title
         binding.toolbarLayout.toolbar.title = getString(R.string.pick_tools)
 
         // Initialize tool name and child name using Safe Args provided by navigation component
-        val args: ShopFragmentArgs by navArgs()
+        val args: StoreFragmentArgs by navArgs()
         childId = args.childId
         childName = args.childName
 
@@ -76,7 +76,7 @@ class ShopFragment: Fragment() {
         }
 
         // Observe toolName LiveData in ViewModel
-        // This value determines whether tool sale query is successful or not
+        // This value determines whether tool shipment query is successful or not
         viewModel.toolName.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Response.Loading -> {}
@@ -86,11 +86,11 @@ class ShopFragment: Fragment() {
 
                     val toolName = response.data
 
-                    // Fetch tools data again to update the sale status
+                    // Fetch tools data again to update the shipment status
                     viewModel.getToolsFromFirebase(childId)
 
-                    // Show tool sale success dialog
-                    val action = ShopFragmentDirections.actionShopFragmentToToolSaleSuccessDialogFragment(toolName)
+                    // Show tool shipment success dialog
+                    val action = StoreFragmentDirections.actionStoreFragmentToToolShipmentSuccessDialogFragment(toolName)
                     findNavController().navigate(action)
                 }
                 is Response.Failure -> {

@@ -8,7 +8,7 @@ import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.ItemToolBinding
 import com.example.capstonehabitapp.model.Tool
 import com.example.capstonehabitapp.ui.HouseDetailFragmentDirections
-import com.example.capstonehabitapp.ui.ShopFragmentDirections
+import com.example.capstonehabitapp.ui.StoreFragmentDirections
 
 class ToolAdapter(
     private val tools: MutableList<Tool>,
@@ -46,8 +46,8 @@ class ToolAdapter(
                 }
 
                 itemButton.setOnClickListener { view ->
-                    // Display tool sale confirmation dialog
-                    val action = ShopFragmentDirections.actionShopFragmentToToolSaleConfirmationDialogFragment(
+                    // Display tool shipment confirmation dialog
+                    val action = StoreFragmentDirections.actionStoreFragmentToToolShipmentConfirmationDialogFragment(
                         tools[position].id,
                         tools[position].name,
                         childId,

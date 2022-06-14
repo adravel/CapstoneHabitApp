@@ -10,7 +10,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentOneButtonDialogBinding
 
-class ToolSaleSuccessDialogFragment: DialogFragment() {
+class ToolShipmentSuccessDialogFragment: DialogFragment() {
 
     private var _binding: FragmentOneButtonDialogBinding? = null
     private val binding get() = _binding!!
@@ -28,7 +28,7 @@ class ToolSaleSuccessDialogFragment: DialogFragment() {
         dialog!!.window?.setBackgroundDrawableResource(R.drawable.rounded_corner)
 
         // Initialize tool and child data using Safe Args provided by navigation component
-        val args: ToolSaleSuccessDialogFragmentArgs by navArgs()
+        val args: ToolShipmentSuccessDialogFragmentArgs by navArgs()
         toolName = args.toolName
 
         return binding.root
@@ -37,7 +37,7 @@ class ToolSaleSuccessDialogFragment: DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.messageText.text = getString(R.string.tool_sale_success_message, toolName)
+        binding.messageText.text = getString(R.string.tool_shipment_success_message, toolName)
         binding.button.text = getString(R.string.button_label_ok)
 
         // Set button onClickListener
