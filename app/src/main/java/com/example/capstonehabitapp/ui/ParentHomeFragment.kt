@@ -124,6 +124,11 @@ class ParentHomeFragment: Fragment() {
             rankingMenuCard.setOnClickListener {
                 findNavController().navigate(R.id.rankingFragment)
             }
+
+            // Set history menu card onClickListener
+            historyMenuCard.setOnClickListener {
+                findNavController().navigate(R.id.historyFragment)
+            }
         }
     }
 

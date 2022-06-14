@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.capstonehabitapp.adapter.EssentialTaskAdapter
 import com.example.capstonehabitapp.R
+import com.example.capstonehabitapp.adapter.EssentialTaskAdapter
 import com.example.capstonehabitapp.databinding.FragmentChildHomeBinding
 import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.util.getLevelNameString
@@ -60,7 +60,7 @@ class ChildHomeFragment: Fragment() {
             layoutManager = LinearLayoutManager(context)
         }
 
-        // Retrieve child ID and level from shared preference
+        // Retrieve child ID from shared preference
         val sharedPref = requireActivity().getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
         val childId = sharedPref.getString(getString(R.string.role_pref_child_id_key), "")!!
 
@@ -149,6 +149,11 @@ class ChildHomeFragment: Fragment() {
             // Set ranking menu card onClickListener
             rankingMenuCard.setOnClickListener {
                 findNavController().navigate(R.id.rankingFragment)
+            }
+
+            // Set history menu card onClickListener
+            historyMenuCard.setOnClickListener {
+                findNavController().navigate(R.id.historyFragment)
             }
         }
     }

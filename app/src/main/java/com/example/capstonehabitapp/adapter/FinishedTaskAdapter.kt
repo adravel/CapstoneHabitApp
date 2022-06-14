@@ -6,13 +6,12 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstonehabitapp.model.Task
 import com.example.capstonehabitapp.databinding.ItemEssentialTaskBinding
-import com.example.capstonehabitapp.ui.ChildHomeFragmentDirections
-import com.example.capstonehabitapp.ui.ParentHomeFragmentDirections
+import com.example.capstonehabitapp.ui.HistoryFragmentDirections
 import com.example.capstonehabitapp.util.convertTimestampToString
 import com.example.capstonehabitapp.util.getTaskDifficultyImageResId
 
-class EssentialTaskAdapter(private val tasks: MutableList<Task>, private val isForParent: Boolean)
-    : RecyclerView.Adapter<EssentialTaskAdapter.TaskViewHolder>() {
+class FinishedTaskAdapter(private val tasks: MutableList<Task>)
+    : RecyclerView.Adapter<FinishedTaskAdapter.TaskViewHolder>() {
 
     inner class TaskViewHolder(val itemBinding: ItemEssentialTaskBinding): RecyclerView.ViewHolder(itemBinding.root)
 
@@ -27,17 +26,10 @@ class EssentialTaskAdapter(private val tasks: MutableList<Task>, private val isF
         holder.itemBinding.apply {
             titleText.text = tasks[position].title
 
-            // Set the task info text depending on the user's role
-            infoText.text = if (isForParent) {
-                val timestamp = tasks[position].timeAskForGrading
-                val date = convertTimestampToString(timestamp!!, "dd MMM yyyy")
-                "$date - ${tasks[position].childName}"
-            }
-            else {
-                val timestamp = tasks[position].timeStartWorking
-                val date = convertTimestampToString(timestamp!!, "dd MMM yyyy")
-                "$date - ${tasks[position].area}"
-            }
+            // Set the task info text
+            val timestamp = tasks[position].timeFinishWorking
+            val date = convertTimestampToString(timestamp!!, "dd MMM yyyy")
+            infoText.text = "$date - ${tasks[position].childName}"
 
             // Display the difficulty image
             difficultyImage.setImageResource(getTaskDifficultyImageResId(tasks[position].difficulty.toInt()))
@@ -45,10 +37,7 @@ class EssentialTaskAdapter(private val tasks: MutableList<Task>, private val isF
 
         // Set RecyclerView item OnClickListener to navigate to Task Detail screen
         holder.itemView.setOnClickListener { view ->
-            val action = if (isForParent)
-                ParentHomeFragmentDirections.actionParentHomeFragmentToTaskDetailFragment(tasks[position].id)
-            else
-                ChildHomeFragmentDirections.actionChildHomeFragmentToTaskDetailFragment(tasks[position].id)
+            val action = HistoryFragmentDirections.actionHistoryFragmentToTaskDetailFragment(tasks[position].id)
             view.findNavController().navigate(action)
         }
     }

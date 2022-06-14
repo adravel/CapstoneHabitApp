@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <include
-        layout="@layout/layout_toolbar"
+        layout="@layout/layout_toolbar_with_dropdown"
         android:id="@+id/toolbar_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -46,45 +46,46 @@
                     android:padding="12dp">
 
                     <ImageView
-                        android:id="@+id/parent_avatar_image"
+                        android:id="@+id/month_summary_avatar_image"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:src="@drawable/img_soldier_male"
+                        android:src="@drawable/img_placeholder"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        tools:src="@drawable/img_soldier_male"/>
 
                     <TextView
-                        android:id="@+id/congratulation_text"
+                        android:id="@+id/month_summary_congrats_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/dark_1"
                         style="@style/body_large_4"
-                        app:layout_constraintStart_toEndOf="@+id/parent_avatar_image"
+                        app:layout_constraintStart_toEndOf="@+id/month_summary_avatar_image"
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_marginStart="18dp"
                         android:layout_marginTop="2dp"
-                        tools:text="@string/child_congrats_placeholder"
+                        tools:text="@string/history_congrats_placeholder"
                         android:textAllCaps="true"/>
 
                     <TextView
-                        android:id="@+id/month_summary_card_text"
+                        android:id="@+id/month_summary_description_text"
                         android:layout_width="260dp"
                         android:layout_height="wrap_content"
                         android:textColor="@color/dark_1"
                         style="@style/body_medium_1"
-                        app:layout_constraintStart_toStartOf="@+id/congratulation_text"
-                        app:layout_constraintTop_toBottomOf="@+id/congratulation_text"
-                        tools:text="Berhasil menyelesaikan xx pekerjaan di bulan ini !" />
+                        app:layout_constraintStart_toStartOf="@+id/month_summary_congrats_text"
+                        app:layout_constraintTop_toBottomOf="@+id/month_summary_congrats_text"
+                        tools:text="@string/history_description_placeholder" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/week_summary_title"
+                android:id="@+id/weekly_summary_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/week_summary"
+                android:text="@string/weekly_summary"
                 android:textColor="@color/dark_1"
                 style="@style/body_medium_2"
                 app:layout_constraintStart_toStartOf="parent"
@@ -93,14 +94,15 @@
                 android:layout_marginStart="16dp"/>
 
             <HorizontalScrollView
-                android:id="@+id/weekly_summary_view"
+                android:id="@+id/weekly_summary_scroll_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:fillViewport="true"
+                android:scrollbarThumbHorizontal="@android:color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/week_summary_title"
-                android:layout_marginTop="12dp">
+                app:layout_constraintTop_toBottomOf="@id/weekly_summary_text">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
@@ -332,22 +334,20 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 android:layout_marginBottom="12dp"
                                 android:layout_marginHorizontal="16dp"/>
-
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.cardview.widget.CardView>
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </HorizontalScrollView>
 
             <TextView
-                android:id="@+id/task_finish_title"
+                android:id="@+id/finished_tasks_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/task_finish"
+                android:text="@string/finished_tasks"
                 android:textColor="@color/dark_1"
                 style="@style/body_medium_2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/weekly_summary_view"
+                app:layout_constraintTop_toBottomOf="@id/weekly_summary_scroll_view"
                 android:layout_marginTop="30dp"
                 android:layout_marginStart="16dp"/>
 
@@ -357,16 +357,16 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/task_finish_title"
+                app:layout_constraintTop_toBottomOf="@+id/finished_tasks_text"
                 android:layout_marginTop="14dp"/>
 
             <Button
                 android:id="@+id/see_all_button"
                 style="@style/outline_button"
                 android:layout_width="0dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginHorizontal="20dp"
-                android:text="@string/see_all"
+                android:layout_margin="20dp"
+                android:text="@string/button_label_see_all"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/finished_task_list_recycler_view" />

@@ -21,7 +21,8 @@
     <string name="house_hp_placeholder">HP : %1$d/%2$d</string>
     <string name="child_cash_placeholder">Dana : Rp %1$d</string>
     <string name="child_total_points_placeholder">%1$d pt</string>
-    <string name="child_congrats_placeholder">%1$s hebat!</string>
+    <string name="history_congrats_placeholder">%1$s hebat!</string>
+    <string name="history_description_placeholder">Berhasil menyelesaikan %1$d pekerjaan di bulan ini !</string>
     <string name="tool_price_placeholder">Rp %1$d</string>
     <!-- Lorem Ipsum -->
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
@@ -136,13 +137,12 @@
     <string name="house_work">Tugas Rumah</string>
     <string name="health">Kesehatan</string>
     <string name="self_care">Perawatan Diri</string>
-    <string name="week_summary">Rangkuman Mingguan</string>
+    <string name="weekly_summary">Rangkuman Mingguan</string>
     <string name="week1_content">Di Minggu pertama</string>
     <string name="week2_content">Di Minggu kedua</string>
     <string name="week3_content">Di Minggu ketiga</string>
     <string name="week4_content">Di Minggu keempat</string>
-    <string name="task_finish">Pekerjaan Selesai</string>
-    <string name="see_all">Lihat Semua</string>
+    <string name="finished_tasks">Pekerjaan Selesai</string>
     <string name="upload_photo_caption">Unggah hasil pekerjaanmu supaya \norang tuamu dapat melihat hasil kerjamu dan \nmenilai usahamu dengan baik 😉</string>
     <string name="upload_photo_complete_caption">Hasil pekerjaanmu berhasil diunggah \ndan akan segera dikirimkan ke orang tuamu! \nSemangat mengerjakan pekerjaan lain dan \njangan lupa beristirahat, Prajurit! 😉</string>
     <string name="monday">Senin</string>
@@ -188,6 +188,7 @@
     <string name="button_label_edit_task">Ubah Informasi</string>
     <string name="button_label_upload_photo">Tekan untuk mengunggah foto</string>
     <string name="button_label_create_task_manual">Buat Pekerjaan Sendiri</string>
+    <string name="button_label_see_all">Lihat Semua</string>
     <!-- Hints -->
     <string name="hint_text">Type something</string>
     <string name="hint_time">00:00</string>

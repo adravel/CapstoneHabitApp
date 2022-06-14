@@ -80,6 +80,9 @@
         <action
             android:id="@+id/action_parentHomeFragment_to_rankingFragment"
             app:destination="@id/rankingFragment" />
+        <action
+            android:id="@+id/action_parentHomeFragment_to_history"
+            app:destination="@id/historyFragment" />
     </fragment>
     <fragment
         android:id="@+id/childAccountSelectionFragment"
@@ -122,6 +125,9 @@
         <action
             android:id="@+id/action_childHomeFragment_to_rankingFragment"
             app:destination="@id/rankingFragment" />
+        <action
+            android:id="@+id/action_childHomeFragment_to_history"
+            app:destination="@id/historyFragment" />
     </fragment>
     <fragment
         android:id="@+id/taskCreationFragment"
@@ -321,4 +327,13 @@
         android:id="@+id/taskDeleteSuccessDialogFragment"
         android:name="com.example.capstonehabitapp.ui.TaskDeleteSuccessDialogFragment"
         android:label="TaskDeleteSuccessDialogFragment" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.capstonehabitapp.ui.HistoryFragment"
+        android:label="HistoryFragment"
+        tools:layout="@layout/fragment_history">
+        <action
+            android:id="@+id/action_historyFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
+    </fragment>
 </navigation>
