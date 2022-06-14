@@ -109,6 +109,13 @@ class RankingFragment : Fragment() {
             levelNameText.text = getLevelNameString(requireContext(), child.level.toInt())
             totalPointsText.text = getString(R.string.child_total_points_placeholder, child.totalPoints.toInt())
 
+            // Display medal image according to ranking
+            when (rankNumber) {
+                1 -> medalImage.setImageResource(R.drawable.img_medal_gold)
+                2 -> medalImage.setImageResource(R.drawable.img_medal_silver)
+                3 -> medalImage.setImageResource(R.drawable.img_medal_bronze)
+            }
+
             // Display avatar image according to gender
             if (child.isMale) {
                 avatarImage.setImageResource(R.drawable.img_soldier_male)
