@@ -52,7 +52,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:text="0"
+                        android:text="@string/zero"
                         android:textColor="@color/state_info_dark"
                         android:textSize="36sp" />
 
@@ -90,7 +90,7 @@
                         android:id="@+id/finished_task_count_data_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="0"
+                        android:text="@string/zero"
                         android:textAlignment="center"
                         android:textColor="@color/state_success_dark"
                         android:textSize="36sp" />
@@ -129,7 +129,7 @@
                         android:id="@+id/failed_task_count_data_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="0"
+                        android:text="@string/zero"
                         android:textAlignment="center"
                         android:textColor="@color/state_error_dark"
                         android:textSize="36sp" />

@@ -159,6 +159,7 @@
     <string name="task_count_on_going">Sedang\ndikerjakan</string>
     <string name="task_count_finished">Selesai\ndikerjakan</string>
     <string name="task_count_failed">Gagal\ndikerjakan</string>
+    <string name="zero">0</string>
     <!-- Button Labels -->
     <string name="button_label_add_child">Tambah Anak</string>
     <string name="button_label_start_task">Kerjakan</string>
