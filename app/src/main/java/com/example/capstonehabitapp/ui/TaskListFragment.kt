@@ -103,10 +103,10 @@ class TaskListFragment : Fragment() {
                 findNavController().navigate(action)
             }
 
-            // Hide the tasks count
-            binding.onGoingTaskCountText.visibility = View.GONE
-            binding.finishedTaskCountText.visibility = View.GONE
-            binding.failedTaskCountText.visibility = View.GONE
+            // Hide the tasks count cards
+            binding.onGoingTaskCountCard.visibility = View.GONE
+            binding.finishedTaskCountCard.visibility = View.GONE
+            binding.failedTaskCountCard.visibility = View.GONE
         } else {
             // Hide the FAB if user is Child
             binding.fab.visibility = View.GONE
@@ -116,9 +116,9 @@ class TaskListFragment : Fragment() {
             viewModel.tasksCount.observe(viewLifecycleOwner) {
                 val (onGoingTaskCount, finishedTaskCount, failedTaskCount) = it
 
-                binding.onGoingTaskCountText.text = onGoingTaskCount.toString()
-                binding.finishedTaskCountText.text = finishedTaskCount.toString()
-                binding.failedTaskCountText.text = failedTaskCount.toString()
+                binding.onGoingTaskCountDataText.text = onGoingTaskCount.toString()
+                binding.finishedTaskCountDataText.text = finishedTaskCount.toString()
+                binding.failedTaskCountDataText.text = failedTaskCount.toString()
             }
         }
     }

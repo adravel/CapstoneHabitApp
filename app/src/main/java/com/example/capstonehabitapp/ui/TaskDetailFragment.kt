@@ -144,7 +144,7 @@ class TaskDetailFragment : Fragment() {
                         2 -> Toast.makeText(context, getString(R.string.task_finish_success), Toast.LENGTH_SHORT).show()
                         3 -> Toast.makeText(context, getString(R.string.ask_for_grading_success), Toast.LENGTH_SHORT).show()
                         4 -> findNavController().navigate(R.id.gradingSuccessDialogFragment)
-                        5 -> Toast.makeText(context, getString(R.string.task_failed), Toast.LENGTH_SHORT).show()
+                        5 -> Toast.makeText(context, getString(R.string.task_finish_failure), Toast.LENGTH_SHORT).show()
                     }
                 }
                 is Response.Failure -> {

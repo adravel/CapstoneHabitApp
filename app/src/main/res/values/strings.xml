@@ -155,6 +155,9 @@
     <string name="until">hingga</string>
     <string name="choose">Pilih</string>
     <string name="choose_child">Pilih Anak</string>
+    <string name="task_count_on_going">Sedang\ndikerjakan</string>
+    <string name="task_count_finished">Selesai\ndikerjakan</string>
+    <string name="task_count_failed">Gagal\ndikerjakan</string>
     <!-- Button Labels -->
     <string name="button_label_add_child">Tambah Anak</string>
     <string name="button_label_start_task">Kerjakan</string>
@@ -217,7 +220,7 @@
     <string name="task_start_success">Pekerjaan dimulai!</string>
     <string name="task_finish_success">Pekerjaan berhasil diselesaikan!</string>
     <string name="ask_for_grading_success">Permintaan penilaian berhasil dikirim!</string>
-    <string name="task_failed">Tugas gagal diselesaikan karena telah melewati batas waktu</string>
+    <string name="task_finish_failure">Tugas gagal diselesaikan karena telah melewati batas waktu</string>
     <string name="request_failed">Permintaan gagal</string>
     <string name="tool_purchase_success">Alat berhasil dibeli!</string>
     <string name="not_enough_cash_failure">Dana tidak cukup untuk membeli alat</string>
