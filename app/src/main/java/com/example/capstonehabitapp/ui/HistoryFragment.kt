@@ -2,18 +2,20 @@ package com.example.capstonehabitapp.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.adapter.FinishedTaskAdapter
 import com.example.capstonehabitapp.databinding.FragmentHistoryBinding
-import com.example.capstonehabitapp.model.Task
 import com.example.capstonehabitapp.util.Response
-import com.google.firebase.Timestamp
+import com.example.capstonehabitapp.viewmodel.HistoryViewModel
 
 class HistoryFragment: Fragment() {
 
@@ -22,7 +24,7 @@ class HistoryFragment: Fragment() {
 
     private lateinit var finishedTaskAdapter: FinishedTaskAdapter
 
-    // private val viewModel: HistoryViewModel by viewModels()
+    private val viewModel: HistoryViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,45 +44,51 @@ class HistoryFragment: Fragment() {
 
         // TODO: Delete this
         // Dummies
-        val tasks = mutableListOf(
-            Task(
-                title = "A",
-                timeFinishWorking = Timestamp(1560523991, 86000000),
-                childName = "Lorem",
-                difficulty = 0
-            ),
-            Task(
-                title = "B",
-                timeFinishWorking = Timestamp(1569523991, 86000000),
-                childName = "Ipsum",
-                difficulty = 1
-            ),
-            Task(
-                title = "C",
-                timeFinishWorking = Timestamp(1520523991, 86000000),
-                childName = "Dolor",
-                difficulty = 2
-            )
-        )
         val childName = "Lorem"
         val finishedTaskCount = 12
         val isMale = true
 
         // Set the adapter and layoutManager for finished task list RecyclerView
-        finishedTaskAdapter = FinishedTaskAdapter(tasks)
+        // and show only the latest 3 finished tasks
+        finishedTaskAdapter = FinishedTaskAdapter(mutableListOf(), false)
         binding.finishedTaskListRecyclerView.apply {
             adapter = finishedTaskAdapter
             layoutManager = LinearLayoutManager(context)
         }
 
-        // Retrieve child ID and level from shared preference
+        // TODO: For Parent, retrieve child ID from toolbar dropdown menu selection
+        // Retrieve child ID from shared preference
         val sharedPref = requireActivity().getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
         val isParent = sharedPref.getBoolean(getString(R.string.role_pref_is_parent_key), false)
         val childId = sharedPref.getString(getString(R.string.role_pref_child_id_key), "")!!
 
+        // Fetch the data from Firestore
+        viewModel.getFinishedTasksFromFirebase(childId)
+
+        // Observe finishedTasks LiveData in ActivityViewModel
+        viewModel.finishedTasks.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Response.Loading -> {}
+                is Response.Success -> {
+                    val tasks = response.data
+
+                    // Update the RecyclerView
+                    finishedTaskAdapter.updateList(tasks)
+                }
+                is Response.Failure -> {
+                    Log.e("History", response.message)
+                    Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         // TODO: Retrieve these from LiveData
         // Display child month summary data
-        binding.monthSummaryCongratsText.text = getString(R.string.history_congrats_placeholder, childName)
+        binding.monthSummaryCongratsText.text = if (isParent) {
+            getString(R.string.history_congrats_placeholder, childName)
+        } else {
+            getString(R.string.history_congrats)
+        }
         binding.monthSummaryDescriptionText.text = getString(R.string.history_description_placeholder, finishedTaskCount)
         if (isMale) {
             binding.monthSummaryAvatarImage.setImageResource(R.drawable.img_soldier_male)
@@ -91,6 +99,11 @@ class HistoryFragment: Fragment() {
         // Set back button onClickListener
         binding.toolbarLayout.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
+        }
+
+        // Set see all finished task list button onClickListener
+        binding.seeAllButton.setOnClickListener {
+            findNavController().navigate(R.id.finishedTaskListFragment)
         }
     }
 

@@ -335,5 +335,17 @@
         <action
             android:id="@+id/action_historyFragment_to_taskDetailFragment"
             app:destination="@id/taskDetailFragment" />
+        <action
+            android:id="@+id/action_historyFragment_to_finishedTaskListFragment"
+            app:destination="@id/finishedTaskListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/finishedTaskListFragment"
+        android:name="com.example.capstonehabitapp.ui.FinishedTaskListFragment"
+        android:label="FinishedTaskListFragment"
+        tools:layout="@layout/fragment_finished_task_list">
+        <action
+            android:id="@+id/action_finishedTaskListFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
     </fragment>
 </navigation>

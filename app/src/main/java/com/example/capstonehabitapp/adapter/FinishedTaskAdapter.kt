@@ -4,13 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.capstonehabitapp.model.Task
 import com.example.capstonehabitapp.databinding.ItemEssentialTaskBinding
+import com.example.capstonehabitapp.model.Task
+import com.example.capstonehabitapp.ui.FinishedTaskListFragmentDirections
 import com.example.capstonehabitapp.ui.HistoryFragmentDirections
 import com.example.capstonehabitapp.util.convertTimestampToString
 import com.example.capstonehabitapp.util.getTaskDifficultyImageResId
 
-class FinishedTaskAdapter(private val tasks: MutableList<Task>)
+class FinishedTaskAdapter(private val tasks: MutableList<Task>, private val showAllItems: Boolean)
     : RecyclerView.Adapter<FinishedTaskAdapter.TaskViewHolder>() {
 
     inner class TaskViewHolder(val itemBinding: ItemEssentialTaskBinding): RecyclerView.ViewHolder(itemBinding.root)
@@ -37,13 +38,21 @@ class FinishedTaskAdapter(private val tasks: MutableList<Task>)
 
         // Set RecyclerView item OnClickListener to navigate to Task Detail screen
         holder.itemView.setOnClickListener { view ->
-            val action = HistoryFragmentDirections.actionHistoryFragmentToTaskDetailFragment(tasks[position].id)
+            val action = if (showAllItems) {
+                // Navigate from finished task list page to task detail page
+                FinishedTaskListFragmentDirections.actionFinishedTaskListFragmentToTaskDetailFragment(tasks[position].id)
+            } else {
+                // Navigate from history page to task detail page
+                HistoryFragmentDirections.actionHistoryFragmentToTaskDetailFragment(tasks[position].id)
+            }
             view.findNavController().navigate(action)
         }
     }
 
     override fun getItemCount(): Int {
-        return tasks.size
+        // Set RecyclerView to show only the first 3 task items if showAllItems is set to false
+        val itemCount = 3
+        return if (!showAllItems && tasks.size > itemCount) itemCount else tasks.size
     }
 
     fun updateList(newList: List<Task>) {
