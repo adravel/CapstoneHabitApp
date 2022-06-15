@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.example.capstonehabitapp.model.Task
 import com.example.capstonehabitapp.util.Response
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -24,7 +25,8 @@ class TaskListViewModel: ViewModel() {
     val tasks: LiveData<Response<List<Task>>> = _tasks
     val tasksCount: LiveData<Triple<Int, Int, Int>> = _tasksCount
 
-    // Fetch tasks data from Firestore
+    // Fetch all tasks data from Firestore for this parent
+    // ordered by the latest task created
     fun getTasksFromFirebase() {
         _tasks.postValue(Response.Loading())
 
@@ -33,6 +35,7 @@ class TaskListViewModel: ViewModel() {
                 // Call Firestore get() method to query the data
                 val snapshot = parentDocRef
                     .collection("tasks")
+                    .orderBy("timeCreated", Query.Direction.DESCENDING)
                     .get()
                     .await()
 
