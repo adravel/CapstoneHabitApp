@@ -26,6 +26,18 @@ fun getCurrentDateTime(): Date {
     return Calendar.getInstance().time
 }
 
+// Get a Triple of Integer of day, month, and year from a given Date
+fun getDayMonthYearFromDate(date: Date): Triple<Int, Int, Int> {
+    val calendar = Calendar.getInstance()
+    calendar.time = date
+
+    val day = calendar.get(Calendar.DAY_OF_MONTH)
+    val month = calendar.get(Calendar.MONTH) + 1
+    val year = calendar.get(Calendar.YEAR)
+
+    return Triple(day, month, year)
+}
+
 // Get the name of the level in the form of a String
 fun getLevelNameString(context: Context, level: Int): String {
     val stringResId = when (level) {

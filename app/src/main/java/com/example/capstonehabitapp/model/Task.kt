@@ -2,7 +2,6 @@ package com.example.capstonehabitapp.model
 
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentId
-import java.util.*
 
 data class Task(
     @DocumentId
