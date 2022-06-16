@@ -361,5 +361,23 @@
         <action
             android:id="@+id/action_taskCreationTemplateCategoryFragment_to_taskCreationManualFragment"
             app:destination="@id/taskCreationManualFragment" />
+        <action
+            android:id="@+id/action_taskCreationTemplateCategoryFragment_to_taskCreationTemplateTaskFragment"
+            app:destination="@id/taskCreationTemplateTaskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskCreationTemplateTaskFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.TaskCreationTemplateTaskFragment"
+        android:label="TaskCreationTemplateTaskFragment"
+        tools:layout="@layout/fragment_task_creation_template_task">
+        <argument
+            android:name="templateTaskCategoryIndex"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_taskCreationTemplateTaskFragment_to_taskCreationManualFragment"
+            app:destination="@id/taskCreationManualFragment" />
+        <action
+            android:id="@+id/action_taskCreationTemplateTaskFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
     </fragment>
 </navigation>

@@ -30,9 +30,24 @@ class TaskCreationTemplateCategoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Set all category cards onCLickListener
+        val categoryCards = listOf(
+            binding.creativityCategoryCard,
+            binding.houseworkCategoryCard,
+            binding.healthCategoryCard,
+            binding.selfCareCategoryCard
+        )
+        for ((index, categoryCard) in categoryCards.withIndex()) {
+            categoryCard.setOnClickListener {
+                // Navigate to taskCreationTemplateTask with the index of category as the argument
+                val action = TaskCreationTemplateCategoryFragmentDirections
+                    .actionTaskCreationTemplateCategoryFragmentToTaskCreationTemplateTaskFragment(index)
+                findNavController().navigate(action)
+            }
+        }
+
         // Set create task manual button onClickListener
         binding.createTaskManualButton.setOnClickListener {
-
             // Navigate to TaskCreationManualFragment with false argument
             val action = TaskCreationTemplateCategoryFragmentDirections
                 .actionTaskCreationTemplateCategoryFragmentToTaskCreationManualFragment(false)
