@@ -130,6 +130,7 @@ class GradingFormFragment: Fragment() {
     private fun displayTaskData(task: Task) {
         binding.apply {
             titleDataText.text = task.title
+            categoryDataText.text = task.category
             areaDataText.text = task.area
             difficultyDataText.text = when (task.difficulty.toInt()) {
                 0 -> getString(R.string.task_difficulty_0)

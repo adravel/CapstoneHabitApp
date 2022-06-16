@@ -1,6 +1,5 @@
 package com.example.capstonehabitapp.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -42,6 +41,7 @@ class TaskCreationViewModel: ViewModel() {
     // Add new task to Firestore and return its ID
     fun addTaskToFirebase(
         title: String,
+        category: String,
         area: String,
         difficulty: Int,
         startTimeLimit: String,
@@ -52,6 +52,7 @@ class TaskCreationViewModel: ViewModel() {
 
         val newTask = hashMapOf(
             "title" to title,
+            "category" to category,
             "area" to area,
             "difficulty" to difficulty,
             "startTimeLimit" to startTimeLimit,

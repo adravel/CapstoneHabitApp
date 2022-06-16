@@ -198,6 +198,7 @@ class TaskDetailFragment : Fragment() {
     private fun displayEmptyTask(isForParent: Boolean) {
         binding.apply {
             titleDataText.text = ""
+            categoryDataText.text = ""
             areaDataText.text = ""
             difficultyDataText.text = ""
             repetitionDataText.text = ""
@@ -223,6 +224,7 @@ class TaskDetailFragment : Fragment() {
     private fun displayTaskData(task: Task, isForParent: Boolean) {
         binding.apply {
             titleDataText.text = task.title
+            categoryDataText.text = task.category
             areaDataText.text = task.area
             difficultyDataText.text = getTaskDifficultyString(requireContext(), task.difficulty.toInt())
             // TODO: Implement task repetition data display in ViewModel

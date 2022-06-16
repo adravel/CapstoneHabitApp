@@ -2,6 +2,7 @@
     <string name="app_name">Capstone Habit App</string>
     <!-- Data Placeholders -->
     <string name="task_title_placeholder">Merapikan tempat tidur</string>
+    <string name="task_category_placeholder">Tugas Rumah</string>
     <string name="task_area_placeholder">Kamar Tidur</string>
     <string name="task_difficulty_placeholder">Mudah</string>
     <string name="task_repetition_placeholder">Senin, Selasa, Jumat</string>

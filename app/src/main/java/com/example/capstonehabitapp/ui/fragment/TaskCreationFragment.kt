@@ -98,6 +98,7 @@ class TaskCreationFragment : Fragment() {
 
                         // Populate the EditTexts with task data from SharedViewModel
                         titleEditText.setText(task.title)
+                        categoryEditText.setText(task.category)
                         areaEditText.setText(task.area)
                         difficultyAutoCompleteTextView.setText(
                             getTaskDifficultyString(requireContext(), task.difficulty.toInt())
@@ -115,6 +116,7 @@ class TaskCreationFragment : Fragment() {
             // Set create task button onClickListener
             createTaskButton.setOnClickListener {
                 val title = titleEditText.text.toString()
+                val category = categoryEditText.text.toString()
                 val area = areaEditText.text.toString()
                 val difficulty = taskCreationViewModel.getDifficultyInt(difficultyAutoCompleteTextView.text.toString())
                 val startTimeLimit = startTimeLimitEditText.text.toString()
@@ -126,7 +128,15 @@ class TaskCreationFragment : Fragment() {
                 // creating or editing task
                 if (isForEditing == false) {
                     // Add new task data to Firestore
-                    taskCreationViewModel.addTaskToFirebase(title, area, difficulty, startTimeLimit, finishTimeLimit, detail)
+                    taskCreationViewModel.addTaskToFirebase(
+                        title,
+                        category,
+                        area,
+                        difficulty,
+                        startTimeLimit,
+                        finishTimeLimit,
+                        detail
+                    )
 
                     // Observe task ID data in ViewModel
                     taskCreationViewModel.taskId.observe(viewLifecycleOwner) { response ->
