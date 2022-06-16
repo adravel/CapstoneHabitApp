@@ -7,6 +7,7 @@ import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.util.getCurrentDateTime
 import com.example.capstonehabitapp.util.getDayMonthYearFromDate
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -22,11 +23,18 @@ class HistoryViewModel: ViewModel() {
     private val parentId = auth.currentUser!!.uid
     private val parentDocRef = db.collection("parents").document(parentId)
 
+    // Set the default selected child index as the index of the first item on the list
+    // So the view will display the oldest child account created data
+    // as the default if the user has not selected any child
+    var selectedChildIndex = 0
+
     private val _finishedTasks: MutableLiveData<Response<List<Task>>> = MutableLiveData()
     private val _weeklyTaskCounts: MutableLiveData<List<Int>> = MutableLiveData()
+    private val _children: MutableLiveData<Response<List<Child>>> = MutableLiveData()
     private val _child: MutableLiveData<Response<Child>> = MutableLiveData()
     val finishedTasks: LiveData<Response<List<Task>>> = _finishedTasks
     val weeklyTaskCounts: LiveData<List<Int>> = _weeklyTaskCounts
+    val children: LiveData<Response<List<Child>>> = _children
     val child: LiveData<Response<Child>> = _child
 
     // Fetch tasks data from Firestore for a specific child
@@ -86,6 +94,34 @@ class HistoryViewModel: ViewModel() {
 
             } catch (e: Exception) {
                 e.message?.let { _finishedTasks.postValue(Response.Failure(it)) }
+            }
+        }
+    }
+
+    // Fetch children data from Firestore
+    fun getChildrenFromFirebase() {
+        _children.postValue(Response.Loading())
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                // Call Firestore get() method to query a list of children data
+                // sorted by the oldest created account
+                val snapshot = parentDocRef
+                    .collection("children")
+                    .orderBy("timeCreated", Query.Direction.ASCENDING)
+                    .get()
+                    .await()
+
+                // Convert each document into Child object and add them to child list
+                val children = mutableListOf<Child>()
+                for (document in snapshot.documents) {
+                    document.toObject<Child>()?.let { children.add(it) }
+                }
+
+                _children.postValue(Response.Success(children))
+
+            } catch (e: Exception) {
+                e.message?.let { _children.postValue(Response.Failure(it)) }
             }
         }
     }

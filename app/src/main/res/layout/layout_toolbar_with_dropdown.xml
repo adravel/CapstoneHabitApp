@@ -11,22 +11,16 @@
     tools:title="Title Text"
     app:titleTextAppearance="@style/header2">
 
-    <ImageView
-        android:id="@+id/dropdown_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_dropdown"
-        android:layout_gravity="end"
-        android:layout_marginEnd="16dp"/>
-
     <Button
         android:id="@+id/choose_child_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
         android:text="@string/choose_child"
         android:textAllCaps="true"
+        android:textColor="@color/dark_1"
         style="@style/text_button"
-        android:textColor="@color/dark_1"/>
+        android:drawableEnd="@drawable/ic_dropdown"/>
 
 </androidx.appcompat.widget.Toolbar>
