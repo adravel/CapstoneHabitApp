@@ -149,12 +149,12 @@ class TaskCreationManualFragment : Fragment() {
 
                                 // Build navigation options to pop this fragment before navigating
                                 val navOptions = NavOptions.Builder()
-                                    .setPopUpTo(R.id.taskCreationFragment, true)
+                                    .setPopUpTo(R.id.taskCreationManualFragment, true)
                                     .build()
 
                                 // Navigate to task detail page
                                 val action = TaskCreationManualFragmentDirections
-                                    .actionTaskCreationFragmentToTaskDetailFragment(taskId)
+                                    .actionTaskCreationManualFragmentToTaskDetailFragment(taskId)
                                 findNavController().navigate(action, navOptions)
                             }
                             is Response.Failure -> {
@@ -182,7 +182,7 @@ class TaskCreationManualFragment : Fragment() {
 
                                 // Navigate to task detail page
                                 val action = TaskCreationManualFragmentDirections
-                                    .actionTaskCreationFragmentToTaskDetailFragment(taskId)
+                                    .actionTaskCreationManualFragmentToTaskDetailFragment(taskId)
                                 findNavController().navigate(action, navOptions)
                             }
                             is Response.Failure -> {

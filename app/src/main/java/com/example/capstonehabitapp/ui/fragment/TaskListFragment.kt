@@ -98,9 +98,8 @@ class TaskListFragment : Fragment() {
         if (isParent) {
             // Set FAB OnClickListener
             binding.fab.setOnClickListener {
-                // Navigate to TaskCreationFragment with false argument
-                val action = TaskListFragmentDirections.actionTaskListFragmentToTaskCreationFragment(false)
-                findNavController().navigate(action)
+                // Navigate to TaskCreationTemplateCategoryFragment
+                findNavController().navigate(R.id.taskCreationTemplateCategoryFragment)
             }
 
             // Hide the tasks count cards

@@ -15,11 +15,11 @@
             android:id="@+id/action_taskListFragment_to_taskDetailFragment"
             app:destination="@id/taskDetailFragment" />
         <action
-            android:id="@+id/action_taskListFragment_to_taskCreationFragment"
-            app:destination="@id/taskCreationFragment" />
-        <action
             android:id="@+id/action_taskListFragment_to_taskDeleteSuccessDialogFragment"
             app:destination="@id/taskDeleteSuccessDialogFragment" />
+        <action
+            android:id="@+id/action_taskListFragment_to_taskCreationTemplateCategoryFragment"
+            app:destination="@id/taskCreationTemplateCategoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/taskDetailFragment"
@@ -42,8 +42,8 @@
             android:id="@+id/action_taskDetailFragment_to_taskDeleteConfirmationDialogFragment"
             app:destination="@id/taskDeleteConfirmationDialogFragment" />
         <action
-            android:id="@+id/action_taskDetailFragment_to_taskCreationFragment"
-            app:destination="@id/taskCreationFragment" />
+            android:id="@+id/action_taskDetailFragment_to_taskCreationManualFragment"
+            app:destination="@id/taskCreationManualFragment" />
     </fragment>
     <fragment
         android:id="@+id/roleSelectionFragment"
@@ -130,12 +130,12 @@
             app:destination="@id/historyFragment" />
     </fragment>
     <fragment
-        android:id="@+id/taskCreationFragment"
+        android:id="@+id/taskCreationManualFragment"
         android:name="com.example.capstonehabitapp.ui.fragment.TaskCreationManualFragment"
-        android:label="fragment_task_creation"
+        android:label="fragment_task_creation_manual"
         tools:layout="@layout/fragment_task_creation_manual" >
         <action
-            android:id="@+id/action_taskCreationFragment_to_taskDetailFragment"
+            android:id="@+id/action_taskCreationManualFragment_to_taskDetailFragment"
             app:destination="@id/taskDetailFragment" />
         <argument
             android:name="isForEditing"
@@ -352,5 +352,14 @@
         <action
             android:id="@+id/action_finishedTaskListFragment_to_taskDetailFragment"
             app:destination="@id/taskDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskCreationTemplateCategoryFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.TaskCreationTemplateCategoryFragment"
+        android:label="TaskCreationTemplateCategoryFragment"
+        tools:layout="@layout/fragment_task_creation_template_category">
+        <action
+            android:id="@+id/action_taskCreationTemplateCategoryFragment_to_taskCreationManualFragment"
+            app:destination="@id/taskCreationManualFragment" />
     </fragment>
 </navigation>

@@ -112,9 +112,9 @@ class TaskDetailFragment : Fragment() {
 
                         binding.editTaskButton.visibility = show
                         binding.editTaskButton.setOnClickListener {
-                            // Navigate to TaskCreationFragment with true argument
+                            // Navigate to TaskCreationTemplateManualFragment with true argument
                             val action = TaskDetailFragmentDirections
-                                .actionTaskDetailFragmentToTaskCreationFragment(true)
+                                .actionTaskDetailFragmentToTaskCreationManualFragment(true)
                             findNavController().navigate(action)
                         }
                     }
