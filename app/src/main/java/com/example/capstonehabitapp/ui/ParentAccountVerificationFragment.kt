@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentParentAccountVerificationBinding
 import com.example.capstonehabitapp.util.Response
@@ -21,6 +22,8 @@ class ParentAccountVerificationFragment: Fragment() {
 
     private var _binding: FragmentParentAccountVerificationBinding? = null
     private val binding get() = _binding!!
+
+    private var isForGrading: Boolean? = null
 
     private val viewModel: ParentAccountVerificationViewModel by viewModels()
 
@@ -33,6 +36,10 @@ class ParentAccountVerificationFragment: Fragment() {
 
         // Set toolbar title
         binding.toolbarLayout.toolbar.title = getString(R.string.parent_account_verification)
+
+        // Initialize isForGrading variable using Safe Args provided by navigation component
+        val args: ParentAccountVerificationFragmentArgs by navArgs()
+        isForGrading = args.isForGrading
 
         return binding.root
     }
@@ -72,15 +79,22 @@ class ParentAccountVerificationFragment: Fragment() {
             when (response) {
                 is Response.Loading -> {}
                 is Response.Success -> {
-                    // Build navigation options to pop this fragment before navigating
-                    val navOptions = NavOptions.Builder()
-                        .setPopUpTo(R.id.parentAccountVerificationFragment, true)
-                        .build()
+                    // Choose navigation direction depending on isForGrading value
+                    if (isForGrading!!) {
+                        // Build navigation options to pop this fragment before navigating
+                        val navOptions = NavOptions.Builder()
+                            .setPopUpTo(R.id.parentAccountVerificationFragment, true)
+                            .build()
 
-                    // Navigate to grading form page
-                    val action = ParentAccountVerificationFragmentDirections
-                        .actionParentAccountVerificationFragmentToGradingFormFragment()
-                    findNavController().navigate(action, navOptions)
+                        // Navigate to grading form page
+                        val action = ParentAccountVerificationFragmentDirections
+                            .actionParentAccountVerificationFragmentToGradingFormFragment()
+                        findNavController().navigate(action, navOptions)
+                    } else {
+                        // Navigate to parent home page
+                        findNavController().navigate(R.id.parentHomeFragment)
+                    }
+
                 }
                 is Response.Failure -> {
                     Log.e("Reauthentication", response.message)

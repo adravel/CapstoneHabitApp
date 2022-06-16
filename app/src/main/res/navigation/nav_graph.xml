@@ -51,14 +51,14 @@
         android:label="fragment_role_selection"
         tools:layout="@layout/fragment_role_selection" >
         <action
-            android:id="@+id/action_roleSelectionFragment_to_parentHomeFragment"
-            app:destination="@id/parentHomeFragment" />
-        <action
             android:id="@+id/action_roleSelectionFragment_to_childAccountSelectionFragment"
             app:destination="@id/childAccountSelectionFragment" />
         <action
             android:id="@+id/action_roleSelectionFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment" />
+        <action
+            android:id="@+id/action_roleSelectionFragment_to_parentAccountVerificationFragment"
+            app:destination="@id/parentAccountVerificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/parentHomeFragment"
@@ -295,6 +295,11 @@
         <action
             android:id="@+id/action_parentAccountVerificationFragment_to_gradingFormFragment"
             app:destination="@id/gradingFormFragment" />
+        <argument android:name="isForGrading"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_parentAccountVerificationFragment_to_parentHomeFragment"
+            app:destination="@id/parentHomeFragment" />
     </fragment>
     <dialog
         android:id="@+id/gradingSuccessDialogFragment"
