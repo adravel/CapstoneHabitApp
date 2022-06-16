@@ -16,15 +16,15 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.capstonehabitapp.R
-import com.example.capstonehabitapp.databinding.FragmentTaskCreationBinding
+import com.example.capstonehabitapp.databinding.FragmentTaskCreationManualBinding
 import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.util.getTaskDifficultyString
 import com.example.capstonehabitapp.viewmodel.TaskCreationViewModel
 import com.example.capstonehabitapp.viewmodel.TaskDetailViewModel
 
-class TaskCreationFragment : Fragment() {
+class TaskCreationManualFragment : Fragment() {
 
-    private var _binding: FragmentTaskCreationBinding? = null
+    private var _binding: FragmentTaskCreationManualBinding? = null
     private val binding get() = _binding!!
 
     private var isForEditing: Boolean? = null
@@ -46,13 +46,13 @@ class TaskCreationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate layout for this fragment
-        _binding = FragmentTaskCreationBinding.inflate(inflater, container, false)
+        _binding = FragmentTaskCreationManualBinding.inflate(inflater, container, false)
 
         // Set toolbar title
         binding.toolbarLayout.toolbar.title = getString(R.string.create_task)
 
         // Initialize isForEditing variable using Safe Args provided by navigation component
-        val args: TaskCreationFragmentArgs by navArgs()
+        val args: TaskCreationManualFragmentArgs by navArgs()
         isForEditing = args.isForEditing
 
         return binding.root
@@ -153,7 +153,7 @@ class TaskCreationFragment : Fragment() {
                                     .build()
 
                                 // Navigate to task detail page
-                                val action = TaskCreationFragmentDirections
+                                val action = TaskCreationManualFragmentDirections
                                     .actionTaskCreationFragmentToTaskDetailFragment(taskId)
                                 findNavController().navigate(action, navOptions)
                             }
@@ -181,7 +181,7 @@ class TaskCreationFragment : Fragment() {
                                     .build()
 
                                 // Navigate to task detail page
-                                val action = TaskCreationFragmentDirections
+                                val action = TaskCreationManualFragmentDirections
                                     .actionTaskCreationFragmentToTaskDetailFragment(taskId)
                                 findNavController().navigate(action, navOptions)
                             }

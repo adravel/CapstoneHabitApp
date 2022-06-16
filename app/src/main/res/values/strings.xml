@@ -169,6 +169,7 @@
     <string name="task_count_failed">Gagal\ndikerjakan</string>
     <string name="zero">0</string>
     <string name="history_congrats">Kamu hebat!</string>
+    <string name="choose_category">Pilih Kategori</string>
     <!-- Button Labels -->
     <string name="button_label_add_child">Tambah Anak</string>
     <string name="button_label_start_task">Kerjakan</string>

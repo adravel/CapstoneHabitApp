@@ -131,9 +131,9 @@
     </fragment>
     <fragment
         android:id="@+id/taskCreationFragment"
-        android:name="com.example.capstonehabitapp.ui.fragment.TaskCreationFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.TaskCreationManualFragment"
         android:label="fragment_task_creation"
-        tools:layout="@layout/fragment_task_creation" >
+        tools:layout="@layout/fragment_task_creation_manual" >
         <action
             android:id="@+id/action_taskCreationFragment_to_taskDetailFragment"
             app:destination="@id/taskDetailFragment" />
