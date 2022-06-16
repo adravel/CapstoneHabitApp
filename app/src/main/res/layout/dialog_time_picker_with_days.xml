@@ -30,7 +30,7 @@
             android:id="@+id/day_1_check_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/monday"
+            android:text="@string/day_1"
             style="@style/body_medium_3"
             android:padding="10dp"
             />
@@ -39,7 +39,7 @@
             android:id="@+id/day_2_check_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/tuesday"
+            android:text="@string/day_2"
             style="@style/body_medium_3"
             android:padding="10dp"
             />
@@ -48,7 +48,7 @@
             android:id="@+id/day_3_check_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/wednesday"
+            android:text="@string/day_3"
             style="@style/body_medium_3"
             android:padding="10dp"
             />
@@ -57,7 +57,7 @@
             android:id="@+id/day_4_check_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/thursday"
+            android:text="@string/day_4"
             style="@style/body_medium_3"
             android:padding="10dp"
             />
@@ -66,7 +66,7 @@
             android:id="@+id/day_5_check_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/friday"
+            android:text="@string/day_5"
             style="@style/body_medium_3"
             android:padding="10dp"
             />
@@ -75,7 +75,7 @@
             android:id="@+id/day_6_check_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/saturday"
+            android:text="@string/day_6"
             style="@style/body_medium_3"
             android:padding="10dp"
             />
@@ -84,7 +84,7 @@
             android:id="@+id/day_7_check_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/sunday"
+            android:text="@string/day_7"
             style="@style/body_medium_3"
             android:padding="10dp"
             />
