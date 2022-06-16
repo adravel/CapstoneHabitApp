@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.capstonehabitapp.model.Child
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.ItemChildAccountBinding
-import com.example.capstonehabitapp.ui.ChildAccountSelectionFragmentDirections
+import com.example.capstonehabitapp.ui.fragment.ChildAccountSelectionFragmentDirections
 
 class ChildAccountAdapter(private val children: MutableList<Child>, private val isForParent: Boolean)
     : RecyclerView.Adapter<ChildAccountAdapter.ChildAccountViewHolder>() {

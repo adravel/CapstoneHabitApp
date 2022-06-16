@@ -1,4 +1,4 @@
-package com.example.capstonehabitapp.ui
+package com.example.capstonehabitapp.ui.dialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,11 +8,11 @@ import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.capstonehabitapp.R
-import com.example.capstonehabitapp.databinding.FragmentOneButtonDialogBinding
+import com.example.capstonehabitapp.databinding.DialogOneButtonBinding
 
 class ToolShipmentSuccessDialogFragment: DialogFragment() {
 
-    private var _binding: FragmentOneButtonDialogBinding? = null
+    private var _binding: DialogOneButtonBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var toolName: String
@@ -22,7 +22,7 @@ class ToolShipmentSuccessDialogFragment: DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate layout for this fragment
-        _binding = FragmentOneButtonDialogBinding.inflate(inflater, container, false)
+        _binding = DialogOneButtonBinding.inflate(inflater, container, false)
 
         // Set rounded corner background for this dialog
         dialog!!.window?.setBackgroundDrawableResource(R.drawable.rounded_corner)

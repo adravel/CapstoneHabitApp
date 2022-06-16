@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.model.Task
 import com.example.capstonehabitapp.databinding.ItemTaskBinding
-import com.example.capstonehabitapp.ui.TaskListFragmentDirections
+import com.example.capstonehabitapp.ui.fragment.TaskListFragmentDirections
 import com.example.capstonehabitapp.util.getTaskDifficultyImageResId
 import com.example.capstonehabitapp.util.getTaskDifficultyString
 

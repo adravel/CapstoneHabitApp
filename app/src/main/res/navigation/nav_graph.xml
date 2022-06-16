@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/taskListFragment"
-        android:name="com.example.capstonehabitapp.ui.TaskListFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.TaskListFragment"
         android:label="fragment_task_list"
         tools:layout="@layout/fragment_task_list" >
         <action
@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/taskDetailFragment"
-        android:name="com.example.capstonehabitapp.ui.TaskDetailFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.TaskDetailFragment"
         android:label="fragment_task_detail"
         tools:layout="@layout/fragment_task_detail" >
         <argument
@@ -47,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/roleSelectionFragment"
-        android:name="com.example.capstonehabitapp.ui.RoleSelectionFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.RoleSelectionFragment"
         android:label="fragment_role_selection"
         tools:layout="@layout/fragment_role_selection" >
         <action
@@ -62,7 +62,7 @@
     </fragment>
     <fragment
         android:id="@+id/parentHomeFragment"
-        android:name="com.example.capstonehabitapp.ui.ParentHomeFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.ParentHomeFragment"
         android:label="fragment_parent_home"
         tools:layout="@layout/fragment_parent_home" >
         <action
@@ -86,7 +86,7 @@
     </fragment>
     <fragment
         android:id="@+id/childAccountSelectionFragment"
-        android:name="com.example.capstonehabitapp.ui.ChildAccountSelectionFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.ChildAccountSelectionFragment"
         android:label="fragment_child_account_selection"
         tools:layout="@layout/fragment_child_account_selection" >
         <action
@@ -104,7 +104,7 @@
     </fragment>
     <fragment
         android:id="@+id/childHomeFragment"
-        android:name="com.example.capstonehabitapp.ui.ChildHomeFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.ChildHomeFragment"
         android:label="fragment_child_home"
         tools:layout="@layout/fragment_child_home" >
         <action
@@ -131,7 +131,7 @@
     </fragment>
     <fragment
         android:id="@+id/taskCreationFragment"
-        android:name="com.example.capstonehabitapp.ui.TaskCreationFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.TaskCreationFragment"
         android:label="fragment_task_creation"
         tools:layout="@layout/fragment_task_creation" >
         <action
@@ -143,7 +143,7 @@
     </fragment>
     <dialog
         android:id="@+id/gradingMethodSelectionDialogFragment"
-        android:name="com.example.capstonehabitapp.ui.GradingMethodSelectionDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.dialog.GradingMethodSelectionDialogFragment"
         android:label="GradingMethodSelectionDialogFragment" >
         <action
             android:id="@+id/action_gradingMethodSelectionDialogFragment_to_parentAccountVerificationFragment"
@@ -151,12 +151,12 @@
     </dialog>
     <fragment
         android:id="@+id/gradingFormFragment"
-        android:name="com.example.capstonehabitapp.ui.GradingFormFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.GradingFormFragment"
         android:label="fragment_grading_form"
         tools:layout="@layout/fragment_grading_form" />
     <fragment
         android:id="@+id/storeFragment"
-        android:name="com.example.capstonehabitapp.ui.StoreFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.StoreFragment"
         android:label="StoreFragment"
         tools:layout="@layout/fragment_store" >
         <action
@@ -174,7 +174,7 @@
     </fragment>
     <dialog
         android:id="@+id/toolShipmentConfirmationDialogFragment"
-        android:name="com.example.capstonehabitapp.ui.ToolShipmentConfirmationDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.dialog.ToolShipmentConfirmationDialogFragment"
         android:label="ToolShipmentConfirmationDialogFragment" >
         <argument
             android:name="toolId"
@@ -191,7 +191,7 @@
     </dialog>
     <dialog
         android:id="@+id/toolShipmentSuccessDialogFragment"
-        android:name="com.example.capstonehabitapp.ui.ToolShipmentSuccessDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.dialog.ToolShipmentSuccessDialogFragment"
         android:label="ToolShipmentSuccessDialogFragment" >
         <argument
             android:name="toolName"
@@ -199,7 +199,7 @@
     </dialog>
     <fragment
         android:id="@+id/houseListFragment"
-        android:name="com.example.capstonehabitapp.ui.HouseListFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.HouseListFragment"
         android:label="HouseListFragment"
         tools:layout="@layout/fragment_house_list">
         <action
@@ -208,7 +208,7 @@
     </fragment>
     <dialog
         android:id="@+id/houseRescueConfirmationDialogFragment"
-        android:name="com.example.capstonehabitapp.ui.HouseRescueConfirmationDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.dialog.HouseRescueConfirmationDialogFragment"
         android:label="HouseRescueConfirmationDialogFragment" >
         <argument
             android:name="houseId"
@@ -222,7 +222,7 @@
     </dialog>
     <fragment
         android:id="@+id/houseDetailFragment"
-        android:name="com.example.capstonehabitapp.ui.HouseDetailFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.HouseDetailFragment"
         android:label="HouseDetailFragment"
         tools:layout="@layout/fragment_house_detail">
         <argument
@@ -237,7 +237,7 @@
     </fragment>
     <dialog
         android:id="@+id/toolPurchaseConfirmationDialogFragment"
-        android:name="com.example.capstonehabitapp.ui.ToolPurchaseConfirmationDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.dialog.ToolPurchaseConfirmationDialogFragment"
         android:label="ToolPurchaseConfirmationDialogFragment" >
         <argument
             android:name="toolId"
@@ -248,7 +248,7 @@
     </dialog>
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.example.capstonehabitapp.ui.WelcomeFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.WelcomeFragment"
         android:label="WelcomeFragment"
         tools:layout="@layout/fragment_welcome" >
         <action
@@ -260,7 +260,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.capstonehabitapp.ui.RegisterFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.RegisterFragment"
         android:label="RegisterFragment"
         tools:layout="@layout/fragment_register" >
         <action
@@ -272,7 +272,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.capstonehabitapp.ui.LoginFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login" >
         <action
@@ -284,12 +284,12 @@
     </fragment>
     <fragment
         android:id="@+id/addChildFragment"
-        android:name="com.example.capstonehabitapp.ui.AddChildFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.AddChildFragment"
         android:label="AddChildFragment"
         tools:layout="@layout/fragment_add_child"/>
     <fragment
         android:id="@+id/parentAccountVerificationFragment"
-        android:name="com.example.capstonehabitapp.ui.ParentAccountVerificationFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.ParentAccountVerificationFragment"
         android:label="ParentAccountVerificationFragment"
         tools:layout="@layout/fragment_parent_account_verification">
         <action
@@ -303,11 +303,11 @@
     </fragment>
     <dialog
         android:id="@+id/gradingSuccessDialogFragment"
-        android:name="com.example.capstonehabitapp.ui.GradingSuccessDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.dialog.GradingSuccessDialogFragment"
         android:label="GradingSuccessDialogFragment" />
     <dialog
         android:id="@+id/levelUpDialogFragment"
-        android:name="com.example.capstonehabitapp.ui.LevelUpDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.dialog.LevelUpDialogFragment"
         android:label="LevelUpDialogFragment" >
         <argument
             android:name="childId"
@@ -321,20 +321,20 @@
     </dialog>
     <fragment
         android:id="@+id/rankingFragment"
-        android:name="com.example.capstonehabitapp.ui.RankingFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.RankingFragment"
         android:label="RankingFragment"
         tools:layout="@layout/fragment_ranking"/>
     <dialog
         android:id="@+id/taskDeleteConfirmationDialogFragment"
-        android:name="com.example.capstonehabitapp.ui.TaskDeleteConfirmationDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.dialog.TaskDeleteConfirmationDialogFragment"
         android:label="TaskDeleteConfirmationDialogFragment" />
     <dialog
         android:id="@+id/taskDeleteSuccessDialogFragment"
-        android:name="com.example.capstonehabitapp.ui.TaskDeleteSuccessDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.dialog.TaskDeleteSuccessDialogFragment"
         android:label="TaskDeleteSuccessDialogFragment" />
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.example.capstonehabitapp.ui.HistoryFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.HistoryFragment"
         android:label="HistoryFragment"
         tools:layout="@layout/fragment_history">
         <action
@@ -346,7 +346,7 @@
     </fragment>
     <fragment
         android:id="@+id/finishedTaskListFragment"
-        android:name="com.example.capstonehabitapp.ui.FinishedTaskListFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.FinishedTaskListFragment"
         android:label="FinishedTaskListFragment"
         tools:layout="@layout/fragment_finished_task_list">
         <action

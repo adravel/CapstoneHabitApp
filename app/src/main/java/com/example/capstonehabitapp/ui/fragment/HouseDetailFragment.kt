@@ -1,4 +1,4 @@
-package com.example.capstonehabitapp.ui
+package com.example.capstonehabitapp.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.adapter.ToolAdapter
 import com.example.capstonehabitapp.databinding.FragmentHouseDetailBinding
+import com.example.capstonehabitapp.ui.dialog.HouseRescueConfirmationDialogFragmentArgs
 import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.viewmodel.HouseDetailViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior

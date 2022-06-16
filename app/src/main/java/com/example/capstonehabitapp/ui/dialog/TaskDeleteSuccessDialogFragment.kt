@@ -1,4 +1,4 @@
-package com.example.capstonehabitapp.ui
+package com.example.capstonehabitapp.ui.dialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.capstonehabitapp.R
-import com.example.capstonehabitapp.databinding.FragmentBigIconDialogBinding
+import com.example.capstonehabitapp.databinding.DialogBigIconBinding
 
 class TaskDeleteSuccessDialogFragment: DialogFragment() {
 
-    private var _binding: FragmentBigIconDialogBinding? = null
+    private var _binding: DialogBigIconBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -18,7 +18,7 @@ class TaskDeleteSuccessDialogFragment: DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate layout for this fragment
-        _binding = FragmentBigIconDialogBinding.inflate(inflater, container, false)
+        _binding = DialogBigIconBinding.inflate(inflater, container, false)
 
         // Set rounded corner background for this dialog
         dialog!!.window?.setBackgroundDrawableResource(R.drawable.rounded_corner)

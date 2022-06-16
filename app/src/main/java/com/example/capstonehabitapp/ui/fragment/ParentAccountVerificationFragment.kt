@@ -1,4 +1,4 @@
-package com.example.capstonehabitapp.ui
+package com.example.capstonehabitapp.ui.fragment
 
 import android.os.Bundle
 import android.text.Editable

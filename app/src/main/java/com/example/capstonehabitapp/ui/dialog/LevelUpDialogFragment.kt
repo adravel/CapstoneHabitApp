@@ -1,4 +1,4 @@
-package com.example.capstonehabitapp.ui
+package com.example.capstonehabitapp.ui.dialog
 
 import android.os.Bundle
 import android.util.Log
@@ -11,13 +11,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.capstonehabitapp.R
-import com.example.capstonehabitapp.databinding.FragmentLevelUpDialogBinding
+import com.example.capstonehabitapp.databinding.DialogLevelUpBinding
 import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.viewmodel.LevelUpViewModel
 
 class LevelUpDialogFragment: DialogFragment() {
 
-    private var _binding: FragmentLevelUpDialogBinding? = null
+    private var _binding: DialogLevelUpBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var childId: String
@@ -31,7 +31,7 @@ class LevelUpDialogFragment: DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate layout for this fragment
-        _binding = FragmentLevelUpDialogBinding.inflate(inflater, container, false)
+        _binding = DialogLevelUpBinding.inflate(inflater, container, false)
 
         // Set rounded corner background for this dialog
         dialog!!.window?.setBackgroundDrawableResource(R.drawable.rounded_corner)

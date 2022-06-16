@@ -1,4 +1,4 @@
-package com.example.capstonehabitapp.ui
+package com.example.capstonehabitapp.ui.dialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,10 +8,10 @@ import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.capstonehabitapp.R
-import com.example.capstonehabitapp.databinding.FragmentTwoButtonsDialogBinding
+import com.example.capstonehabitapp.databinding.DialogTwoButtonsBinding
 
 class HouseRescueConfirmationDialogFragment: DialogFragment() {
-    private var _binding: FragmentTwoButtonsDialogBinding? = null
+    private var _binding: DialogTwoButtonsBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var houseId: String
@@ -22,7 +22,7 @@ class HouseRescueConfirmationDialogFragment: DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate layout for this fragment
-        _binding = FragmentTwoButtonsDialogBinding.inflate(inflater, container, false)
+        _binding = DialogTwoButtonsBinding.inflate(inflater, container, false)
 
         // Set rounded corner background for this dialog
         dialog!!.window?.setBackgroundDrawableResource(R.drawable.rounded_corner)

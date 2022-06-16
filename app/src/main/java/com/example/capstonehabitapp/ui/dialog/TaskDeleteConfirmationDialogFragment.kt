@@ -1,4 +1,4 @@
-package com.example.capstonehabitapp.ui
+package com.example.capstonehabitapp.ui.dialog
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,14 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.capstonehabitapp.R
-import com.example.capstonehabitapp.databinding.FragmentBigIconDialogBinding
+import com.example.capstonehabitapp.databinding.DialogTwoButtonsBinding
 import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.viewmodel.TaskDetailViewModel
 
-class GradingSuccessDialogFragment: DialogFragment() {
+class TaskDeleteConfirmationDialogFragment: DialogFragment() {
 
-    private var _binding: FragmentBigIconDialogBinding? = null
+    private var _binding: DialogTwoButtonsBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: TaskDetailViewModel by activityViewModels()
@@ -23,7 +24,7 @@ class GradingSuccessDialogFragment: DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate layout for this fragment
-        _binding = FragmentBigIconDialogBinding.inflate(inflater, container, false)
+        _binding = DialogTwoButtonsBinding.inflate(inflater, container, false)
 
         // Set rounded corner background for this dialog
         dialog!!.window?.setBackgroundDrawableResource(R.drawable.rounded_corner)
@@ -34,20 +35,28 @@ class GradingSuccessDialogFragment: DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Observe task LiveData in SharedViewModel
+        binding.messageText.text = getString(R.string.task_delete_confirmation_message)
+        binding.positiveButton.text = getString(R.string.button_label_delete)
+        binding.negativeButton.text = getString(R.string.button_label_cancel)
+
         viewModel.task.observe(viewLifecycleOwner) { response ->
             if (response is Response.Success) {
                 val task = response.data
 
-                // Get the grading data from the LiveData
-                val childName = task.childName
-                val difficulty = task.difficulty.toInt()
-                val grade = task.grade.toInt()
-                val gradePoints = viewModel.getGradePoints(difficulty, grade)
+                // Set button onClickListener for deleting the task
+                binding.positiveButton.setOnClickListener {
+                    // Call the method for deleting the task
+                    viewModel.deleteTask(task.id)
 
-                // Bind the data to the Views
-                binding.bigIconImage.setBackgroundResource(R.drawable.ic_big_add)
-                binding.messageText.text = getString(R.string.grading_success_message, childName, gradePoints)
+                    // Dismiss this dialog
+                    findNavController().popBackStack()
+                }
+
+                // Set button onClickListener for canceling action
+                binding.negativeButton.setOnClickListener {
+                    // Dismiss this dialog
+                    findNavController().popBackStack()
+                }
             }
         }
     }

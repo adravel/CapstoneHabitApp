@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.ItemToolBinding
 import com.example.capstonehabitapp.model.Tool
-import com.example.capstonehabitapp.ui.HouseDetailFragmentDirections
-import com.example.capstonehabitapp.ui.StoreFragmentDirections
+import com.example.capstonehabitapp.ui.fragment.HouseDetailFragmentDirections
+import com.example.capstonehabitapp.ui.fragment.StoreFragmentDirections
 
 class ToolAdapter(
     private val tools: MutableList<Tool>,

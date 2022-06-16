@@ -6,8 +6,8 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.capstonehabitapp.databinding.ItemEssentialTaskBinding
 import com.example.capstonehabitapp.model.Task
-import com.example.capstonehabitapp.ui.FinishedTaskListFragmentDirections
-import com.example.capstonehabitapp.ui.HistoryFragmentDirections
+import com.example.capstonehabitapp.ui.fragment.FinishedTaskListFragmentDirections
+import com.example.capstonehabitapp.ui.fragment.HistoryFragmentDirections
 import com.example.capstonehabitapp.util.convertTimestampToString
 import com.example.capstonehabitapp.util.getTaskDifficultyImageResId
 

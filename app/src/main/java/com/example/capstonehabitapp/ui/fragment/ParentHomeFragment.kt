@@ -1,4 +1,4 @@
-package com.example.capstonehabitapp.ui
+package com.example.capstonehabitapp.ui.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle

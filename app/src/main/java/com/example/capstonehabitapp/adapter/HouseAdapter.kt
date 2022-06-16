@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.ItemHouseBinding
 import com.example.capstonehabitapp.model.House
-import com.example.capstonehabitapp.ui.HouseListFragmentDirections
+import com.example.capstonehabitapp.ui.fragment.HouseListFragmentDirections
 
 class HouseAdapter(private val houses: MutableList<House>): RecyclerView.Adapter<HouseAdapter.HouseViewHolder>() {
 
