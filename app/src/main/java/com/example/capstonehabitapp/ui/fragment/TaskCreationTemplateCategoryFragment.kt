@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -33,6 +34,51 @@ class TaskCreationTemplateCategoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Observe timeLimit LiveData in ViewModel
+        viewModel.timeLimit.observe(viewLifecycleOwner) {
+            val (startTimeLimit, finishTimeLimit) = it
+
+            // Change oneTimeTaskCard appearance and behavior
+            // depending on whether time limit is set
+            if (startTimeLimit.isNotEmpty() && finishTimeLimit.isNotEmpty()) {
+                // Time limit is set
+                // Change card background color to subtle green
+                binding.oneTimeTaskCard.setCardBackgroundColor(
+                    ContextCompat.getColor(requireContext(), R.color.subtle_green)
+                )
+
+                // Change description text appearance
+                binding.oneTimeTaskCardDescriptionText.text = "$startTimeLimit - $finishTimeLimit"
+                binding.oneTimeTaskCardDescriptionText.setTextColor(
+                    ContextCompat.getColor(requireContext(), R.color.green)
+                )
+
+                // Set the card card onCLickListener
+                binding.oneTimeTaskCard.setOnClickListener {
+                    // Unset the time limit
+                    viewModel.setTimeLimit("", "")
+                }
+            } else {
+                // Time limit is not set
+                // Change card background color to white
+                binding.oneTimeTaskCard.setCardBackgroundColor(
+                    ContextCompat.getColor(requireContext(), R.color.white)
+                )
+
+                // Change description text appearance
+                binding.oneTimeTaskCardDescriptionText.text = getString(R.string.choose_time)
+                binding.oneTimeTaskCardDescriptionText.setTextColor(
+                    ContextCompat.getColor(requireContext(), R.color.state_error_dark)
+                )
+
+                // Set task repetition card onCLickListener
+                binding.oneTimeTaskCard.setOnClickListener {
+                    // Display time picker dialog
+                    findNavController().navigate(R.id.timePickerDialogFragment)
+                }
+            }
+        }
 
         // Set all category cards onCLickListener
         val categoryCards = listOf(

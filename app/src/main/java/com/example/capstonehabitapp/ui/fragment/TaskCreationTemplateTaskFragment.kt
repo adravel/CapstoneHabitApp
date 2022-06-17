@@ -51,15 +51,20 @@ class TaskCreationTemplateTaskFragment : Fragment() {
             titleText.text = templateTask.title
             infoText.text = "${templateTask.area} - $difficultyString"
             difficultyImage.setImageResource(getTaskDifficultyImageResId(difficultyInt))
+        }
+
+        // Observe timeLimit LiveData in SharedViewModel
+        viewModel.timeLimit.observe(viewLifecycleOwner) {
+            val (startTimeLimit, finishTimeLimit) = it
 
             // Set template task card onCLickListener
-            card.setOnClickListener {
+            binding.templateTaskCardLayout.card.setOnClickListener {
                 // Add the template task to Firestore
-                viewModel.addTaskToFirebase(templateTask)
+                viewModel.addTaskToFirebase(templateTask, startTimeLimit, finishTimeLimit)
             }
         }
 
-        // Observe task ID data in ViewModel
+        // Observe task ID LiveData in SharedViewModel
         viewModel.taskId.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Response.Loading -> {}

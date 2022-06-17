@@ -24,7 +24,9 @@ class TaskCreationTemplateViewModel: ViewModel() {
     private var selectedTemplateTaskCategory = ""
 
     private val _taskId: MutableLiveData<Response<String>> = MutableLiveData()
+    private val _timeLimit: MutableLiveData<Pair<String, String>> = MutableLiveData(Pair("", ""))
     val taskId: LiveData<Response<String>> = _taskId
+    val timeLimit: LiveData<Pair<String, String>> = _timeLimit
 
     // Method for accessing selected template task
     fun setTemplateTaskCategory(category: String) { selectedTemplateTaskCategory = category }
@@ -34,8 +36,13 @@ class TaskCreationTemplateViewModel: ViewModel() {
         return templateTasks[index]
     }
 
+    // Set time limit data
+    fun setTimeLimit(startTimeLimit: String, finishTimeLimit: String) {
+        _timeLimit.postValue(Pair(startTimeLimit, finishTimeLimit))
+    }
+
     // Add new task to Firestore and return its ID
-    fun addTaskToFirebase(task: Task) {
+    fun addTaskToFirebase(task: Task, startTimeLimit: String, finishTimeLimit: String) {
         _taskId.postValue(Response.Loading())
 
         val newTask = hashMapOf(
@@ -43,10 +50,10 @@ class TaskCreationTemplateViewModel: ViewModel() {
             "category" to task.category,
             "area" to task.area,
             "difficulty" to task.difficulty,
-            "startTimeLimit" to task.startTimeLimit,
-            "finishTimeLimit" to task.finishTimeLimit,
             "detail" to task.detail,
             "status" to 0,
+            "startTimeLimit" to startTimeLimit,
+            "finishTimeLimit" to finishTimeLimit,
             "timeCreated" to FieldValue.serverTimestamp()
         )
 
@@ -59,6 +66,9 @@ class TaskCreationTemplateViewModel: ViewModel() {
                 val taskId = snapshot.id
 
                 _taskId.postValue(Response.Success(taskId))
+
+                // Clear time limit data
+                _timeLimit.postValue(Pair("",""))
 
             } catch (e: Exception) {
                 e.message?.let { _taskId.postValue(Response.Failure(it)) }

@@ -364,6 +364,9 @@
         <action
             android:id="@+id/action_taskCreationTemplateCategoryFragment_to_taskCreationTemplateTaskFragment"
             app:destination="@id/taskCreationTemplateTaskFragment" />
+        <action
+            android:id="@+id/action_taskCreationTemplateCategoryFragment_to_timePickerDialogFragment"
+            app:destination="@id/timePickerDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/taskCreationTemplateTaskFragment"
@@ -377,4 +380,8 @@
             android:id="@+id/action_taskCreationTemplateTaskFragment_to_taskDetailFragment"
             app:destination="@id/taskDetailFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/timePickerDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.dialog.TimePickerDialogFragment"
+        android:label="TimePickerDialogFragment" />
 </navigation>
