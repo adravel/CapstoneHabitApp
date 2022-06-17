@@ -19,7 +19,7 @@ import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentTaskCreationManualBinding
 import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.util.getTaskDifficultyString
-import com.example.capstonehabitapp.viewmodel.TaskCreationViewModel
+import com.example.capstonehabitapp.viewmodel.TaskCreationManualViewModel
 import com.example.capstonehabitapp.viewmodel.TaskDetailViewModel
 
 class TaskCreationManualFragment : Fragment() {
@@ -29,7 +29,7 @@ class TaskCreationManualFragment : Fragment() {
 
     private var isForEditing: Boolean? = null
 
-    private val taskCreationViewModel: TaskCreationViewModel by viewModels()
+    private val taskCreationManualViewModel: TaskCreationManualViewModel by viewModels()
     private val taskDetailViewModel: TaskDetailViewModel by activityViewModels()
 
     override fun onResume() {
@@ -108,7 +108,7 @@ class TaskCreationManualFragment : Fragment() {
                         detailEditText.setText(task.detail)
 
                         // Set the task ID value in ViewModel
-                        taskCreationViewModel.setEditedTaskId(task.id)
+                        taskCreationManualViewModel.setEditedTaskId(task.id)
                     }
                 }
             }
@@ -118,7 +118,7 @@ class TaskCreationManualFragment : Fragment() {
                 val title = titleEditText.text.toString()
                 val category = categoryEditText.text.toString()
                 val area = areaEditText.text.toString()
-                val difficulty = taskCreationViewModel.getDifficultyInt(difficultyAutoCompleteTextView.text.toString())
+                val difficulty = taskCreationManualViewModel.getDifficultyInt(difficultyAutoCompleteTextView.text.toString())
                 val startTimeLimit = startTimeLimitEditText.text.toString()
                 val finishTimeLimit = finishTimeLimitEditText.text.toString()
                 val detail = detailEditText.text.toString()
@@ -128,7 +128,7 @@ class TaskCreationManualFragment : Fragment() {
                 // creating or editing task
                 if (isForEditing == false) {
                     // Add new task data to Firestore
-                    taskCreationViewModel.addTaskToFirebase(
+                    taskCreationManualViewModel.addTaskToFirebase(
                         title,
                         category,
                         area,
@@ -139,7 +139,7 @@ class TaskCreationManualFragment : Fragment() {
                     )
 
                     // Observe task ID data in ViewModel
-                    taskCreationViewModel.taskId.observe(viewLifecycleOwner) { response ->
+                    taskCreationManualViewModel.taskId.observe(viewLifecycleOwner) { response ->
                         when (response) {
                             is Response.Loading -> {}
                             is Response.Success -> {
@@ -147,9 +147,9 @@ class TaskCreationManualFragment : Fragment() {
 
                                 Toast.makeText(context, getString(R.string.task_creation_success), Toast.LENGTH_SHORT).show()
 
-                                // Build navigation options to pop this fragment before navigating
+                                // Build navigation options to pop into taskListFragment before navigating
                                 val navOptions = NavOptions.Builder()
-                                    .setPopUpTo(R.id.taskCreationManualFragment, true)
+                                    .setPopUpTo(R.id.taskListFragment, false)
                                     .build()
 
                                 // Navigate to task detail page
@@ -165,10 +165,10 @@ class TaskCreationManualFragment : Fragment() {
                     }
                 } else {
                     // Update task data in Firestore
-                    taskCreationViewModel.updateTask(title, area, difficulty, startTimeLimit, finishTimeLimit, detail)
+                    taskCreationManualViewModel.updateTask(title, area, difficulty, startTimeLimit, finishTimeLimit, detail)
 
                     // Observe task ID data in ViewModel
-                    taskCreationViewModel.taskId.observe(viewLifecycleOwner) { response ->
+                    taskCreationManualViewModel.taskId.observe(viewLifecycleOwner) { response ->
                         when (response) {
                             is Response.Loading -> {}
                             is Response.Success -> {

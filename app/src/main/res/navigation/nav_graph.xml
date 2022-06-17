@@ -370,9 +370,6 @@
         android:name="com.example.capstonehabitapp.ui.fragment.TaskCreationTemplateTaskFragment"
         android:label="TaskCreationTemplateTaskFragment"
         tools:layout="@layout/fragment_task_creation_template_task">
-        <argument
-            android:name="templateTaskCategoryIndex"
-            app:argType="integer" />
         <action
             android:id="@+id/action_taskCreationTemplateTaskFragment_to_taskCreationManualFragment"
             app:destination="@id/taskCreationManualFragment" />

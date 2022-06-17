@@ -5,14 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentTaskCreationTemplateCategoryBinding
+import com.example.capstonehabitapp.viewmodel.TaskCreationTemplateViewModel
 
 class TaskCreationTemplateCategoryFragment : Fragment() {
 
     private var _binding: FragmentTaskCreationTemplateCategoryBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: TaskCreationTemplateViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,12 +41,13 @@ class TaskCreationTemplateCategoryFragment : Fragment() {
             binding.healthCategoryCard,
             binding.selfCareCategoryCard
         )
-        for ((index, categoryCard) in categoryCards.withIndex()) {
+        for (categoryCard in categoryCards) {
             categoryCard.setOnClickListener {
-                // Navigate to taskCreationTemplateTask with the index of category as the argument
-                val action = TaskCreationTemplateCategoryFragmentDirections
-                    .actionTaskCreationTemplateCategoryFragmentToTaskCreationTemplateTaskFragment(index)
-                findNavController().navigate(action)
+                // Set the selected template task category as the String obtained from CardView's Tag
+                viewModel.setTemplateTaskCategory(categoryCard.tag.toString())
+
+                // Navigate to taskCreationTemplateTask
+                findNavController().navigate(R.id.taskCreationTemplateTaskFragment)
             }
         }
 

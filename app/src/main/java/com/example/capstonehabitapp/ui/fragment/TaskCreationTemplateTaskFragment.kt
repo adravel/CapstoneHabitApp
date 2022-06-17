@@ -1,23 +1,28 @@
 package com.example.capstonehabitapp.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentTaskCreationTemplateTaskBinding
-import com.example.capstonehabitapp.model.Task
+import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.util.getTaskDifficultyImageResId
+import com.example.capstonehabitapp.util.getTaskDifficultyString
+import com.example.capstonehabitapp.viewmodel.TaskCreationTemplateViewModel
 
 class TaskCreationTemplateTaskFragment : Fragment() {
 
     private var _binding: FragmentTaskCreationTemplateTaskBinding? = null
     private val binding get() = _binding!!
 
-    private var templateTaskCategoryIndex: Int? = null
+    private val viewModel: TaskCreationTemplateViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,27 +34,61 @@ class TaskCreationTemplateTaskFragment : Fragment() {
         // Set toolbar title
         binding.toolbarLayout.toolbar.title = getString(R.string.choose_task)
 
-        // Initialize task category using Safe Args provided by navigation component
-        val args: TaskCreationTemplateTaskFragmentArgs by navArgs()
-        templateTaskCategoryIndex = args.templateTaskCategoryIndex
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Load template task data
-        val templateTask = when (templateTaskCategoryIndex!!) {
-            0 -> templateTaskCreativity
-            1 -> templateTaskHousework
-            2 -> templateTaskHealth
-            else -> templateTaskSelfCare
-        }
-        binding.templateTaskCard.apply {
+        // Load template task data from SharedViewModel
+        val templateTask = viewModel.getTemplateTask()
+
+        // Display template task data
+        binding.templateTaskCardLayout.apply {
+            val difficultyInt = templateTask.difficulty.toInt()
+            val difficultyString = getTaskDifficultyString(requireContext(), difficultyInt)
+
             titleText.text = templateTask.title
-            infoText.text = templateTask.area
-            difficultyImage.setImageResource(getTaskDifficultyImageResId(templateTask.difficulty.toInt()))
+            infoText.text = "${templateTask.area} - $difficultyString"
+            difficultyImage.setImageResource(getTaskDifficultyImageResId(difficultyInt))
+
+            // Set template task card onCLickListener
+            card.setOnClickListener {
+                // Add the template task to Firestore
+                viewModel.addTaskToFirebase(templateTask)
+            }
+        }
+
+        // Observe task ID data in ViewModel
+        viewModel.taskId.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Response.Loading -> {}
+                is Response.Success -> {
+                    // Clear the LiveData so the code below will be executed only once
+                    viewModel.taskIdResponseHandled()
+
+                    val taskId = response.data
+
+                    Toast.makeText(context, getString(R.string.task_creation_success), Toast.LENGTH_SHORT).show()
+
+                    // Build navigation options to pop into taskListFragment before navigating
+                    val navOptions = NavOptions.Builder()
+                        .setPopUpTo(R.id.taskListFragment, false)
+                        .build()
+
+                    // Navigate to task detail page
+                    val action = TaskCreationTemplateTaskFragmentDirections
+                        .actionTaskCreationTemplateTaskFragmentToTaskDetailFragment(taskId)
+                    findNavController().navigate(action, navOptions)
+                }
+                is Response.Failure -> {
+                    // Clear the LiveData so the code below will be executed only once
+                    viewModel.taskIdResponseHandled()
+
+                    Log.e("TaskCreation", response.message)
+                    Toast.makeText(context, getString(R.string.task_creation_failed), Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         // Set create task manual button onClickListener
@@ -70,30 +109,4 @@ class TaskCreationTemplateTaskFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-    // TODO: Store these val in ViewModel
-    private val templateTaskCreativity = Task(
-        title = "Mengerjakan PR",
-        category = "Kreativitas",
-        area = "Ruang Belajar",
-        difficulty = 1
-    )
-    private val templateTaskHousework = Task(
-        title = "Menyapu Kamar",
-        category = "Tugas Rumah",
-        area = "Kamar",
-        difficulty = 1
-    )
-    private val templateTaskHealth = Task(
-        title = "Makan",
-        category = "Kesehatan",
-        area = "Ruang Makan",
-        difficulty = 0
-    )
-    private val templateTaskSelfCare = Task(
-        title = "Mandi",
-        category = "Perawatan Diri",
-        area = "Kamar Mandi",
-        difficulty = 0
-    )
 }

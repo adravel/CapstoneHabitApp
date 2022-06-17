@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 
-class TaskCreationViewModel: ViewModel() {
+class TaskCreationManualViewModel: ViewModel() {
     private val auth = Firebase.auth
     private val db = Firebase.firestore
     private val parentId = auth.currentUser!!.uid

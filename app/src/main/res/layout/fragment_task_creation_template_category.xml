@@ -148,6 +148,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/creativity_category_card"
+                android:tag="@string/template_task_category_creativity"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="16dp"
@@ -179,7 +180,7 @@
                         android:id="@+id/creativity_category_card_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/task_category_creativity"
+                        android:text="@string/template_task_category_creativity"
                         style="@style/body_large_2"
                         android:textColor="@color/dark_green"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -191,6 +192,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/housework_category_card"
+                android:tag="@string/template_task_category_housework"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginEnd="16dp"
@@ -220,7 +222,7 @@
                         android:id="@+id/housework_category_card_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/task_category_housework"
+                        android:text="@string/template_task_category_housework"
                         style="@style/body_large_2"
                         android:textColor="@color/dark_green"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -232,6 +234,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/health_category_card"
+                android:tag="@string/template_task_category_health"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="16dp"
@@ -264,7 +267,7 @@
                         style="@style/body_large_2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/task_category_health"
+                        android:text="@string/template_task_category_health"
                         android:textColor="@color/dark_green"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -276,6 +279,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/self_care_category_card"
+                android:tag="@string/template_task_category_self_care"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginEnd="16dp"
@@ -305,7 +309,7 @@
                         android:id="@+id/self_care_category_card_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/task_category_self_care"
+                        android:text="@string/template_task_category_self_care"
                         style="@style/body_large_2"
                         android:textColor="@color/dark_green"
                         app:layout_constraintEnd_toEndOf="parent"
