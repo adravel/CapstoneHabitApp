@@ -3,6 +3,7 @@ package com.example.capstonehabitapp.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.capstonehabitapp.model.Task
 import com.example.capstonehabitapp.util.Response
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
@@ -39,25 +40,17 @@ class TaskCreationManualViewModel: ViewModel() {
     }
 
     // Add new task to Firestore and return its ID
-    fun addTaskToFirebase(
-        title: String,
-        category: String,
-        area: String,
-        difficulty: Int,
-        startTimeLimit: String,
-        finishTimeLimit: String,
-        detail: String) {
-
+    fun addTaskToFirebase(task: Task) {
         _taskId.postValue(Response.Loading())
 
         val newTask = hashMapOf(
-            "title" to title,
-            "category" to category,
-            "area" to area,
-            "difficulty" to difficulty,
-            "startTimeLimit" to startTimeLimit,
-            "finishTimeLimit" to finishTimeLimit,
-            "detail" to detail,
+            "title" to task.title,
+            "category" to task.category,
+            "area" to task.area,
+            "difficulty" to task.difficulty,
+            "startTimeLimit" to task.startTimeLimit,
+            "finishTimeLimit" to task.finishTimeLimit,
+            "detail" to task.detail,
             "status" to 0,
             "timeCreated" to FieldValue.serverTimestamp()
         )
@@ -79,23 +72,17 @@ class TaskCreationManualViewModel: ViewModel() {
     }
 
     // Add new task to Firestore and return its ID
-    fun updateTask(
-        title: String,
-        area: String,
-        difficulty: Int,
-        startTimeLimit: String,
-        finishTimeLimit: String,
-        detail: String) {
-
+    fun updateTask(task: Task) {
         _taskId.postValue(Response.Loading())
 
         val taskUpdate = hashMapOf<String, Any>(
-            "title" to title,
-            "area" to area,
-            "difficulty" to difficulty,
-            "startTimeLimit" to startTimeLimit,
-            "finishTimeLimit" to finishTimeLimit,
-            "detail" to detail
+            "title" to task.title,
+            "category" to task.category,
+            "area" to task.area,
+            "difficulty" to task.difficulty,
+            "startTimeLimit" to task.startTimeLimit,
+            "finishTimeLimit" to task.finishTimeLimit,
+            "detail" to task.detail,
         )
 
         CoroutineScope(Dispatchers.IO).launch {

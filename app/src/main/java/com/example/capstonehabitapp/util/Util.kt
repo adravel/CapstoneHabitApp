@@ -26,6 +26,23 @@ fun getCurrentDateTime(): Date {
     return Calendar.getInstance().time
 }
 
+// Check if the input String is a valid time in HH:mm format
+// Return true if valid
+fun validateTimeStringFormat(time: String): Boolean {
+    val regex = Regex("^([01][0-9]|2[0-3]):[0-5][0-9]$")
+    return time.matches(regex)
+}
+
+// Compare two time String, assuming both are valid time in HH:mm format
+// Return true if the second parameter is after the first parameter
+fun validateTimeLimit(startTimeLimit: String, finishTimeLimit: String): Boolean {
+    val sdf = SimpleDateFormat("HH:mm")
+    val start = sdf.parse(startTimeLimit)
+    val finish = sdf.parse(finishTimeLimit)
+
+    return finish > start
+}
+
 // Get a Triple of Integer of day, month, and year from a given Date
 fun getDayMonthYearFromDate(date: Date): Triple<Int, Int, Int> {
     val calendar = Calendar.getInstance()

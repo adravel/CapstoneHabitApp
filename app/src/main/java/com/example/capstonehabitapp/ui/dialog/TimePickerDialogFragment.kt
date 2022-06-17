@@ -6,11 +6,14 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.DialogTimePickerBinding
+import com.example.capstonehabitapp.util.validateTimeLimit
+import com.example.capstonehabitapp.util.validateTimeStringFormat
 import com.example.capstonehabitapp.viewmodel.TaskCreationTemplateViewModel
 
 class TimePickerDialogFragment: DialogFragment() {
@@ -62,11 +65,27 @@ class TimePickerDialogFragment: DialogFragment() {
                 val startTimeLimit = startTimeLimitEditText.text.toString()
                 val finishTimeLimit = finishTimeLimitEditText.text.toString()
 
-                // Store time limit data in SharedViewModel
-                viewModel.setTimeLimit(startTimeLimit, finishTimeLimit)
+                // Check if both time limit String inputs are valid time format
+                if (validateTimeStringFormat(startTimeLimit) &&
+                    validateTimeStringFormat(finishTimeLimit)
+                ) {
+                    // Both time limit String inputs are valid time format
+                    // Check if the finish time limit is after the start time limit
+                    if (validateTimeLimit(startTimeLimit, finishTimeLimit)) {
+                        // Finish time limit is after the start time limit
+                        // Store time limit data in SharedViewModel
+                        viewModel.setTimeLimit(startTimeLimit, finishTimeLimit)
 
-                // Dismiss this dialog
-                findNavController().popBackStack()
+                        // Dismiss this dialog
+                        findNavController().popBackStack()
+                    } else {
+                        // Finish time limit is before the start time limit
+                        Toast.makeText(context, getString(R.string.time_limit_invalid), Toast.LENGTH_LONG).show()
+                    }
+                } else {
+                    // At least one time limit is not a valid time format
+                    Toast.makeText(context, getString(R.string.time_format_invalid), Toast.LENGTH_LONG).show()
+                }
             }
 
             // Set cancel button onClickListener for canceling action
