@@ -137,12 +137,12 @@ class TaskDetailFragment : Fragment() {
                     // Fetch task data to update the Views
                     viewModel.getTaskFromFirebase(taskId)
 
-                    // Display a toast when task status changes
+                    // Display a toast or dialog when task status changes
                     // i.e. when the button is clicked and the function is executed successfully
                     when (response.data) {
                         1 -> Toast.makeText(context, getString(R.string.task_start_success), Toast.LENGTH_SHORT).show()
                         2 -> Toast.makeText(context, getString(R.string.task_finish_success), Toast.LENGTH_SHORT).show()
-                        3 -> Toast.makeText(context, getString(R.string.ask_for_grading_success), Toast.LENGTH_SHORT).show()
+                        3 -> findNavController().navigate(R.id.askForGradingSuccessDialogFragment)
                         4 -> findNavController().navigate(R.id.gradingSuccessDialogFragment)
                         5 -> Toast.makeText(context, getString(R.string.task_finish_failure), Toast.LENGTH_SHORT).show()
                     }

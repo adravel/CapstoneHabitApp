@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_taskDetailFragment_to_taskCreationManualFragment"
             app:destination="@id/taskCreationManualFragment" />
+        <action
+            android:id="@+id/action_taskDetailFragment_to_askForGradingSuccessDialogFragment"
+            app:destination="@id/askForGradingSuccessDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/roleSelectionFragment"
@@ -392,4 +395,8 @@
         android:name="com.example.capstonehabitapp.ui.fragment.UploadPhotoFragment"
         android:label="UploadPhotoFragment"
         tools:layout="@layout/fragment_upload_photo"/>
+    <dialog
+        android:id="@+id/askForGradingSuccessDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.dialog.AskForGradingSuccessDialogFragment"
+        android:label="AskForGradingSuccessDialogFragment" />
 </navigation>

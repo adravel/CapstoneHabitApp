@@ -1,5 +1,7 @@
 package com.example.capstonehabitapp.viewmodel
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,10 +12,12 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.io.ByteArrayOutputStream
 import java.lang.Exception
 import java.text.SimpleDateFormat
 
@@ -22,13 +26,16 @@ class TaskDetailViewModel: ViewModel() {
     private val db = Firebase.firestore
     private val parentId = auth.currentUser!!.uid
     private val parentDocRef = db.collection("parents").document(parentId)
+    private val storageRef = Firebase.storage.reference
 
     private val _task: MutableLiveData<Response<Task>> = MutableLiveData()
     private val _taskStatusChange: MutableLiveData<Response<Int>> = MutableLiveData()
     private val _taskDeleteResponse: MutableLiveData<Response<Unit>> = MutableLiveData()
+    private val _taskPhoto: MutableLiveData<Response<Bitmap>> = MutableLiveData()
     val task: LiveData<Response<Task>> = _task
     val taskStatusChange: LiveData<Response<Int>> = _taskStatusChange
     val taskDeleteResponse: LiveData<Response<Unit>> = _taskDeleteResponse
+    val taskPhoto: LiveData<Response<Bitmap>> = _taskPhoto
 
     // Check whether task is finished within the time limit
     fun isTimeLimitSurpassed(task: Task): Boolean {
@@ -103,7 +110,33 @@ class TaskDetailViewModel: ViewModel() {
         return gradePoints
     }
 
-    // Fetch task data from Firebase
+    // Fetch task photo image from Cloud Storage
+    fun getTaskPhotoFromStorage(taskId: String) {
+        // Check if task photo has been successfully fetched
+        val response = _taskPhoto.value
+        if (response !is Response.Success) {
+            // Task photo has not been successfully fetched
+            _taskPhoto.postValue(Response.Loading())
+
+            val photoStorageRef = storageRef.child(parentId).child(taskId)
+
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    // Download image with maximum size 1 MB
+                    val maxDownloadSize = 1L * 1024 * 1024
+                    val bytes = photoStorageRef.getBytes(maxDownloadSize).await()
+                    val imageBitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+
+                    _taskPhoto.postValue(Response.Success(imageBitmap))
+
+                } catch (e: Exception) {
+                    e.message?.let { _taskPhoto.postValue(Response.Failure(it)) }
+                }
+            }
+        }
+    }
+
+    // Fetch task data from Firestore
     fun getTaskFromFirebase(taskId: String) {
         _task.postValue(Response.Loading())
 
@@ -181,9 +214,9 @@ class TaskDetailViewModel: ViewModel() {
         }
     }
 
-    // TODO: Add writing photo image data to Storage
     // Update task status to 3
-    fun askForGrading(taskId: String) {
+    // and upload photo to Cloud Storage
+    fun askForGrading(taskId: String, bitmap: Bitmap) {
         _taskStatusChange.postValue(Response.Loading())
 
         val updates = hashMapOf(
@@ -191,19 +224,42 @@ class TaskDetailViewModel: ViewModel() {
             "timeAskForGrading" to FieldValue.serverTimestamp()
         )
 
+        val photoStorageRef = storageRef.child(parentId).child(taskId)
+
+        var storageWriteSuccess = false
+        var dbWriteSuccess = false
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
+                // Convert photo bitmap into ByteArray
+                val baos = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val data = baos.toByteArray()
+
+                // Upload photo to Cloud Storage
+                // in path of "parentId/taskId"
+                photoStorageRef.putBytes(data).await()
+                storageWriteSuccess = true
+
                 // Update the necessary field in Firestore document
                 parentDocRef
                     .collection("tasks")
                     .document(taskId)
                     .update(updates)
                     .await()
+                dbWriteSuccess = true
 
                 _taskStatusChange.postValue(Response.Success(3))
 
             } catch (e: Exception) {
                 e.message?.let { _taskStatusChange.postValue(Response.Failure(it)) }
+
+                // Delete the saved photo from Cloud Storage
+                // if the query to upload photo to Cloud Storage is successful
+                // but the query to update task document in Firestore is not
+                if (storageWriteSuccess && !dbWriteSuccess) {
+                    photoStorageRef.delete()
+                }
             }
         }
     }
@@ -309,5 +365,10 @@ class TaskDetailViewModel: ViewModel() {
     // Set taskDeleteResponse LiveData value to null
     fun taskDeleteResponseHandled() {
         _taskDeleteResponse.value = null
+    }
+
+    // Set taskPhoto LiveData value to null
+    fun clearTaskPhoto() {
+        _taskPhoto.value = null
     }
 }

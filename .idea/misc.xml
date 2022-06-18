@@ -17,6 +17,12 @@
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/rounded_corner.xml" value="0.1445" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/card_task.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/dialog_big_icon.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/dialog_level_up.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/dialog_one_button.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/dialog_time_picker.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/dialog_time_picker_with_days.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/dialog_two_buttons.xml" value="0.25416666666666665" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_add_child.xml" value="0.25416666666666665" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_ask_for_grading_dialog.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_big_icon_dialog.xml" value="0.2" />
@@ -24,7 +30,7 @@
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_child_home.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_child_selection.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_finished_task_list.xml" value="0.25416666666666665" />
-        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_grading_form.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_grading_form.xml" value="0.25416666666666665" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_grading_method_selection_dialog.xml" value="0.20863616930312098" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_history.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_history_2.xml" value="0.253125" />
@@ -40,7 +46,11 @@
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_shop.xml" value="0.20863616930312098" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_store.xml" value="0.25416666666666665" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_task_creation.xml" value="0.264" />
-        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_task_detail.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_task_creation_from_template.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_task_creation_manual.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_task_creation_template_category.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_task_creation_template_task.xml" value="0.253125" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_task_detail.xml" value="0.25416666666666665" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_task_list.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_template_task_creation.xml" value="0.25416666666666665" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_test.xml" value="0.264" />
@@ -63,6 +73,7 @@
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/layout_shop_bottom_sheet.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/layout_toolbar.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/layout_toolbar_with_dropdown.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/layout_toolbar_with_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/task_list_fragment.xml" value="0.2223731884057971" />
         <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/drawable/image_placeholder.xml" value="0.144" />
         <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/font/martel_sans.xml" value="0.20364583333333333" />

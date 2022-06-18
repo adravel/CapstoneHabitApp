@@ -45,6 +45,9 @@ class GradingFormFragment: Fragment() {
         // Set toolbar title
         binding.toolbarLayout.toolbar.title = getString(R.string.grading_form)
 
+        // Hide task photo pop up by default
+        binding.popupCard.visibility = View.GONE
+
         return binding.root
     }
 
@@ -52,6 +55,11 @@ class GradingFormFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
+            // Set close button onClickListener to hide task photo pop up
+            closeButton.setOnClickListener {
+                binding.popupCard.visibility = View.GONE
+            }
+
             // Disable grade task button by default
             gradeTaskButton.isEnabled = false
 
@@ -76,6 +84,24 @@ class GradingFormFragment: Fragment() {
                     // Display task data in finished state
                     displayTaskData(task)
 
+                    // Set open photo button behavior depending on task grading method
+                    if (task.timeAskForGrading == null) {
+                        // Task is being graded directly
+                        // Disable button
+                        openPhotoButton.isEnabled = false
+                    } else {
+                        // Task is being graded remotely
+                        // Set button onClickListener
+                        openPhotoButton.isEnabled = true
+                        openPhotoButton.setOnClickListener {
+                            // Fetch task photo image data
+                            viewModel.getTaskPhotoFromStorage(task.id)
+
+                            // Display task photo pop up
+                            popupCard.visibility = View.VISIBLE
+                        }
+                    }
+
                     // Set grade task button OnClickListener
                     gradeTaskButton.setOnClickListener {
                         // Get grade data in the form of integer
@@ -98,12 +124,32 @@ class GradingFormFragment: Fragment() {
                 }
             }
 
+            // Observe taskPhoto LiveData in ViewModel
+            viewModel.taskPhoto.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is Response.Loading -> {}
+                    is Response.Success -> {
+                        val imageBitmap = response.data
+
+                        // Load photo image data
+                        photoImage.setImageBitmap(imageBitmap)
+                    }
+                    is Response.Failure -> {
+                        Log.e("GradingForm", response.message)
+                        Toast.makeText(context, getString(R.string.request_failed), Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
             // Observe taskStatusChange LiveData in ViewModel
             // This value determines whether the grading transaction is successful or not
             viewModel.taskStatusChange.observe(viewLifecycleOwner) { response ->
                 when (response) {
                     is Response.Loading -> {}
                     is Response.Success -> {
+                        // Clear task photo LiveData in ViewModel
+                        viewModel.clearTaskPhoto()
+
                         // Return to task detail page
                         findNavController().popBackStack()
                     }
@@ -113,11 +159,14 @@ class GradingFormFragment: Fragment() {
                     }
                 }
             }
-        }
 
-        // Set back button onClickListener
-        binding.toolbarLayout.toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
+            // Set back button onClickListener
+            toolbarLayout.toolbar.setNavigationOnClickListener {
+                // Clear task photo LiveData in ViewModel
+                viewModel.clearTaskPhoto()
+
+                findNavController().popBackStack()
+            }
         }
     }
 

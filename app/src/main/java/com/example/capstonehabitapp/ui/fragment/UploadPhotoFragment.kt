@@ -12,11 +12,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.FragmentUploadPhotoBinding
+import com.example.capstonehabitapp.util.Response
+import com.example.capstonehabitapp.viewmodel.TaskDetailViewModel
 
 private const val CAMERA_PERMISSION_CODE = 1
 private const val CAMERA_REQUEST_CODE = 2
@@ -25,6 +29,8 @@ class UploadPhotoFragment : Fragment() {
 
     private var _binding: FragmentUploadPhotoBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: TaskDetailViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,6 +76,22 @@ class UploadPhotoFragment : Fragment() {
         binding.toolbarLayout.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
+
+        // Observe taskStatusChange LiveData in SharedViewModel
+        // This value determines whether whether ask for grading query is successful or not
+        viewModel.taskStatusChange.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is Response.Loading -> {}
+                is Response.Success -> {
+                    // Return to task detail page
+                    findNavController().popBackStack()
+                }
+                is Response.Failure -> {
+                    Log.e("UploadPhoto", response.message)
+                    Toast.makeText(context, getString(R.string.request_failed), Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -107,10 +129,16 @@ class UploadPhotoFragment : Fragment() {
             binding.uploadPhotoCardButton.visibility = View.GONE
             binding.askForGradingButton.visibility = View.VISIBLE
 
-            // Set askForGradingButton onClickListener
-            binding.askForGradingButton.setOnClickListener {
-                // TODO: Call the method in TaskDetailViewModel to ask for grading
-                Log.d("UploadPhoto", "Asking for grading..")
+            // Retrieve task LiveData value in SharedViewModel
+            val response = viewModel.task.value
+            if (response is Response.Success) {
+                val task = response.data
+
+                // Set askForGradingButton onClickListener
+                binding.askForGradingButton.setOnClickListener {
+                    // Call the method to ask for grading
+                    viewModel.askForGrading(task.id, photoImage)
+                }
             }
         }
     }

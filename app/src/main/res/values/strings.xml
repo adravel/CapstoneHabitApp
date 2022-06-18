@@ -223,6 +223,7 @@
     <string name="tool_purchase_confirmation_message">Gunakan %1$s untuk menyerang benteng?</string>
     <string name="grading_method_selection_message">Apakah kamu sedang bersama orang tua mu sekarang?</string>
     <string name="house_rescue_confirmation_message">Selamatkan rumah %1$s?</string>
+    <string name="ask_for_grading_success_message">Hasil pekerjaan berhasil terkirim!</string>
     <string name="grading_success_message">Hebat! %1$s mendapatkan %2$d Poin!</string>
     <string name="level_up_message_title">Kerja bagus, prajurit!</string>
     <string name="level_up_message_description">Kamu berhasil naik peringkat menjadi %1$s! Kamu mendapat bonus dana Rp %2$d!</string>
@@ -234,7 +235,6 @@
     <string name="task_creation_failed">Gagal membuat pekerjaan</string>
     <string name="task_start_success">Pekerjaan dimulai!</string>
     <string name="task_finish_success">Pekerjaan berhasil diselesaikan!</string>
-    <string name="ask_for_grading_success">Permintaan penilaian berhasil dikirim!</string>
     <string name="task_finish_failure">Tugas gagal diselesaikan karena telah melewati batas waktu</string>
     <string name="request_failed">Permintaan gagal</string>
     <string name="tool_purchase_success">Alat berhasil dibeli!</string>
