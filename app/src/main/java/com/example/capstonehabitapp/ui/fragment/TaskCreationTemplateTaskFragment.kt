@@ -44,7 +44,7 @@ class TaskCreationTemplateTaskFragment : Fragment() {
         val templateTask = viewModel.getTemplateTask()
 
         // Display template task data
-        binding.templateTaskCardLayout.apply {
+        binding.templateTaskCard.apply {
             val difficultyInt = templateTask.difficulty.toInt()
             val difficultyString = getTaskDifficultyString(requireContext(), difficultyInt)
 
@@ -58,7 +58,7 @@ class TaskCreationTemplateTaskFragment : Fragment() {
             val (startTimeLimit, finishTimeLimit) = it
 
             // Set template task card onCLickListener
-            binding.templateTaskCardLayout.card.setOnClickListener {
+            binding.templateTaskCard.root.setOnClickListener {
                 // Add the template task to Firestore
                 viewModel.addTaskToFirebase(templateTask, startTimeLimit, finishTimeLimit)
             }

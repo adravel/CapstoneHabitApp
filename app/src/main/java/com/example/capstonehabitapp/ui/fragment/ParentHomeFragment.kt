@@ -103,6 +103,12 @@ class ParentHomeFragment: Fragment() {
         }
 
         binding.apply {
+            // Display menu cards icon image
+            taskMenuCardIcon.setImageResource(R.drawable.img_menu_task)
+            storeMenuCardIcon.setImageResource(R.drawable.img_menu_store)
+            rankingMenuCardIcon.setImageResource(R.drawable.img_menu_ranking)
+            historyMenuCardIcon.setImageResource(R.drawable.img_menu_history)
+
             // Set change role button onClickListener
             toolbarLayout.changeRoleButton.setOnClickListener {
                 findNavController().navigate(R.id.roleSelectionFragment)

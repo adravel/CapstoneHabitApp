@@ -13,13 +13,36 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/asset_image"
+            android:id="@+id/house_image"
             android:layout_width="0dp"
-            android:layout_height="118dp"
-            android:background="@drawable/img_game_house_intact"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="H, 156:118"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/img_game_house_intact" />
+
+        <ImageView
+            android:id="@+id/lock_background_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha="0.6"
+            android:background="#231717"
+            app:layout_constraintEnd_toEndOf="@id/house_image"
+            app:layout_constraintStart_toStartOf="@id/house_image"
+            app:layout_constraintTop_toTopOf="@id/house_image"
+            app:layout_constraintBottom_toBottomOf="@id/house_image" />
+
+        <ImageView
+            android:id="@+id/lock_icon_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/house_image"
+            app:layout_constraintStart_toStartOf="@id/house_image"
+            app:layout_constraintTop_toTopOf="@id/house_image"
+            app:layout_constraintBottom_toBottomOf="@id/house_image"
+            tools:src="@drawable/img_lock"/>
 
         <TextView
             android:id="@+id/name_text"
@@ -31,7 +54,7 @@
             android:textColor="@color/dark_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/asset_image"
+            app:layout_constraintTop_toBottomOf="@+id/house_image"
             tools:text="Nama Rumah" />
 
         <TextView

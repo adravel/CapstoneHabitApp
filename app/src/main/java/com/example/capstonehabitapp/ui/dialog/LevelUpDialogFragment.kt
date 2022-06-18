@@ -55,7 +55,8 @@ class LevelUpDialogFragment: DialogFragment() {
         // Calculate the bonus cash that will be obtained
         val bonus = viewModel.getBonus(childNewLevel)
 
-        // Display the dialog message description text
+        // Display the dialog message image and description text
+        binding.levelUpImage.setImageResource(R.drawable.img_level_up)
         binding.descriptionText.text = getString(R.string.level_up_message_description, childNewLevelName, bonus)
 
         // Set button onCLickListener

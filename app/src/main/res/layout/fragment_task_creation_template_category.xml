@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <include
@@ -57,10 +57,10 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginStart="12dp"
-                        android:src="@drawable/img_template_task_one_time"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/img_template_task_one_time" />
 
                     <TextView
                         android:id="@+id/one_time_task_card_title_text"
@@ -107,10 +107,10 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginStart="12dp"
-                        android:src="@drawable/img_template_task_repeated"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/img_template_task_repeated" />
 
                     <TextView
                         android:id="@+id/repeated_task_card_title_text"
@@ -176,7 +176,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toTopOf="@id/creativity_category_card_title"
-                        android:src="@drawable/img_category_creativity"/>
+                        tools:src="@drawable/img_category_creativity"/>
 
                     <TextView
                         android:id="@+id/creativity_category_card_title"
@@ -218,7 +218,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toTopOf="@id/housework_category_card_title"
-                        android:src="@drawable/img_category_housework"/>
+                        tools:src="@drawable/img_category_housework"/>
 
                     <TextView
                         android:id="@+id/housework_category_card_title"
@@ -258,11 +258,11 @@
                         android:id="@+id/health_category_card_image"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/img_category_health"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toTopOf="@id/health_category_card_title"/>
+                        app:layout_constraintBottom_toTopOf="@id/health_category_card_title"
+                        tools:src="@drawable/img_category_health" />
 
                     <TextView
                         android:id="@+id/health_category_card_title"
@@ -305,7 +305,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toTopOf="@id/self_care_category_card_title"
-                        android:src="@drawable/img_category_self_care"/>
+                        tools:src="@drawable/img_category_self_care"/>
 
                     <TextView
                         android:id="@+id/self_care_category_card_title"

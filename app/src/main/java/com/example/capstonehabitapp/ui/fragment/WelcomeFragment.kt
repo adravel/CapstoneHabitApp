@@ -40,6 +40,9 @@ class WelcomeFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Display illustration image
+        binding.illustrationImage.setImageResource(R.drawable.img_welcome)
+
         // Set register button onCLickListener to navigate to register page
         binding.registerButton.setOnClickListener {
             findNavController().navigate(R.id.registerFragment)

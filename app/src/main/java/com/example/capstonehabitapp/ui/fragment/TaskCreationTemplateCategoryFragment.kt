@@ -97,6 +97,14 @@ class TaskCreationTemplateCategoryFragment : Fragment() {
             }
         }
 
+        // Display cards icon image
+        binding.oneTimeTaskCardImage.setImageResource(R.drawable.img_template_task_one_time)
+        binding.repeatedTaskCardImage.setImageResource(R.drawable.img_template_task_repeated)
+        binding.creativityCategoryCardImage.setImageResource(R.drawable.img_category_creativity)
+        binding.houseworkCategoryCardImage.setImageResource(R.drawable.img_category_housework)
+        binding.healthCategoryCardImage.setImageResource(R.drawable.img_category_health)
+        binding.selfCareCategoryCardImage.setImageResource(R.drawable.img_category_self_care)
+
         // Set create task manual button onClickListener
         binding.createTaskManualButton.setOnClickListener {
             // Navigate to TaskCreationManualFragment with false argument

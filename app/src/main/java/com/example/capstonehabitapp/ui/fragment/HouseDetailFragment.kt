@@ -58,6 +58,12 @@ class HouseDetailFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // TODO: Change house detail images depending on House state
+        // Display images
+        binding.houseImage.setImageResource(R.drawable.img_game_house_intact)
+        binding.fortImage.setImageResource(R.drawable.img_game_fort_intact)
+        binding.dirtImage.setImageResource(R.drawable.img_game_dirt_1)
+
         // Retrieve child ID from shared preference
         val sharedPref = requireActivity().getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
         val childId = sharedPref.getString(getString(R.string.role_pref_child_id_key), "")!!

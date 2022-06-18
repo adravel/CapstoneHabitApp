@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/template_task_card_layout"
+        android:id="@+id/template_task_card"
         layout="@layout/item_essential_task"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -34,5 +34,5 @@
         android:text="@string/button_label_create_task_manual"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/template_task_card_layout" />
+        app:layout_constraintTop_toBottomOf="@id/template_task_card" />
 </androidx.constraintlayout.widget.ConstraintLayout>

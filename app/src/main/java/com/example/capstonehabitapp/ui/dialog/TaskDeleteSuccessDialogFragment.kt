@@ -30,7 +30,7 @@ class TaskDeleteSuccessDialogFragment: DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Bind the data to the Views
-        binding.bigIconImage.setBackgroundResource(R.drawable.ic_big_done)
+        binding.bigIconImage.setImageResource(R.drawable.ic_big_done)
         binding.messageText.text = getString(R.string.task_delete_success_message)
     }
 

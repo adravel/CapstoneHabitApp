@@ -34,6 +34,10 @@ class RoleSelectionFragment: Fragment() {
         val sharedPref = requireActivity().getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
 
+        // Display role cards icon image
+        binding.parentRoleCardIcon.setImageResource(R.drawable.img_general_male)
+        binding.childRoleCardIcon.setImageResource(R.drawable.img_soldier_male)
+
         // Set Parent card onClickListener
         binding.parentRoleCard.setOnClickListener {
             // Save Parent as role preference

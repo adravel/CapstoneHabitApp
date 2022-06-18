@@ -35,6 +35,10 @@ class ToolAdapter(
             powerText.text = tools[position].power.toString()
             priceText.text = context.getString(R.string.tool_price_placeholder, tools[position].price.toInt())
 
+            // TODO: Change tool image depending on Tool type
+            // Display tool image
+            toolImage.setImageResource(R.drawable.img_tool_hammer)
+
             if (isForParent && childName != "") {
                 // Set button text and function for Parent in shop page
                 if (tools[position].isForSale) {

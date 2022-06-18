@@ -46,7 +46,7 @@ class GradingSuccessDialogFragment: DialogFragment() {
                 val gradePoints = viewModel.getGradePoints(difficulty, grade)
 
                 // Bind the data to the Views
-                binding.bigIconImage.setBackgroundResource(R.drawable.ic_big_add)
+                binding.bigIconImage.setImageResource(R.drawable.ic_big_add)
                 binding.messageText.text = getString(R.string.grading_success_message, childName, gradePoints)
             }
         }
