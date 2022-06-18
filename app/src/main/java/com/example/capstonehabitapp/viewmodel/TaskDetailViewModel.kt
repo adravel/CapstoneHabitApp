@@ -181,6 +181,7 @@ class TaskDetailViewModel: ViewModel() {
         }
     }
 
+    // TODO: Add writing photo image data to Storage
     // Update task status to 3
     fun askForGrading(taskId: String) {
         _taskStatusChange.postValue(Response.Loading())

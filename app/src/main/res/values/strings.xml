@@ -143,8 +143,9 @@
     <string name="week3_content">Di Minggu ketiga</string>
     <string name="week4_content">Di Minggu keempat</string>
     <string name="finished_tasks">Pekerjaan Selesai</string>
-    <string name="upload_photo_caption">Unggah hasil pekerjaanmu supaya \norang tuamu dapat melihat hasil kerjamu dan \nmenilai usahamu dengan baik 😉</string>
-    <string name="upload_photo_complete_caption">Hasil pekerjaanmu berhasil diunggah \ndan akan segera dikirimkan ke orang tuamu! \nSemangat mengerjakan pekerjaan lain dan \njangan lupa beristirahat, Prajurit! 😉</string>
+    <string name="upload_photo">Unggah Hasil Pekerjaan</string>
+    <string name="upload_photo_description">Unggah hasil pekerjaanmu supaya \norang tuamu dapat melihat hasil kerjamu dan \nmenilai usahamu dengan baik 😉</string>
+    <string name="upload_photo_complete_description">Hasil pekerjaanmu berhasil diunggah \ndan akan segera dikirimkan ke orang tuamu! \nSemangat mengerjakan pekerjaan lain dan \njangan lupa beristirahat, Prajurit! 😉</string>
     <string name="day_1">Senin</string>
     <string name="day_2">Selasa</string>
     <string name="day_3">Rabu</string>

@@ -148,6 +148,9 @@
         <action
             android:id="@+id/action_gradingMethodSelectionDialogFragment_to_parentAccountVerificationFragment"
             app:destination="@id/parentAccountVerificationFragment" />
+        <action
+            android:id="@+id/action_gradingMethodSelectionDialogFragment_to_uploadPhotoFragment"
+            app:destination="@id/uploadPhotoFragment" />
     </dialog>
     <fragment
         android:id="@+id/gradingFormFragment"
@@ -384,4 +387,9 @@
         android:id="@+id/timePickerDialogFragment"
         android:name="com.example.capstonehabitapp.ui.dialog.TimePickerDialogFragment"
         android:label="TimePickerDialogFragment" />
+    <fragment
+        android:id="@+id/uploadPhotoFragment"
+        android:name="com.example.capstonehabitapp.ui.fragment.UploadPhotoFragment"
+        android:label="UploadPhotoFragment"
+        tools:layout="@layout/fragment_upload_photo"/>
 </navigation>

@@ -5,19 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.DialogTwoButtonsBinding
-import com.example.capstonehabitapp.util.Response
-import com.example.capstonehabitapp.viewmodel.TaskDetailViewModel
 
 class GradingMethodSelectionDialogFragment: DialogFragment() {
 
     private var _binding: DialogTwoButtonsBinding? = null
     private val binding get() = _binding!!
-
-    private val viewModel: TaskDetailViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,29 +34,20 @@ class GradingMethodSelectionDialogFragment: DialogFragment() {
         binding.positiveButton.text = getString(R.string.button_label_yes)
         binding.negativeButton.text = getString(R.string.button_label_no)
 
-        viewModel.task.observe(viewLifecycleOwner) { response ->
-            if (response is Response.Success) {
-                val task = response.data
+        // Set button onClickListener for selecting direct grading method
+        binding.positiveButton.setOnClickListener {
+            // Navigate to parent account verification page
+            val action = GradingMethodSelectionDialogFragmentDirections
+                .actionGradingMethodSelectionDialogFragmentToParentAccountVerificationFragment(
+                    true
+                )
+            findNavController().navigate(action)
+        }
 
-                // Set button onClickListener for selecting direct grading method
-                binding.positiveButton.setOnClickListener {
-                    // Navigate to parent account verification page
-                    val action = GradingMethodSelectionDialogFragmentDirections
-                        .actionGradingMethodSelectionDialogFragmentToParentAccountVerificationFragment(
-                            true
-                        )
-                    findNavController().navigate(action)
-                }
-
-                // Set button onClickListener for selecting remote grading method
-                binding.negativeButton.setOnClickListener {
-                    // Ask parent for grading
-                    viewModel.askForGrading(task.id)
-
-                    // Dismiss this dialog
-                    findNavController().popBackStack()
-                }
-            }
+        // Set button onClickListener for selecting remote grading method
+        binding.negativeButton.setOnClickListener {
+            // Navigate to uploadPhotoFragment
+            findNavController().navigate(R.id.uploadPhotoFragment)
         }
     }
 
