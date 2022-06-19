@@ -117,7 +117,7 @@ class HouseDetailViewModel: ViewModel() {
 
     // Use tool to destroy the fort
     // This function subtracts tool price from child cash
-    // and tool power from house hp
+    // and tool power from house HP
     fun purchaseTool(toolId: String) {
         _toolPurchaseResponse.postValue(Response.Loading())
 
@@ -132,15 +132,20 @@ class HouseDetailViewModel: ViewModel() {
                     val houseSnapshot = transaction.get(houseDocRef)
                     val toolSnapshot = transaction.get(toolDocRef)
 
+                    // Obtain tool price and power data
+                    val toolStaticData = toolSnapshot.toObject<Tool>()!!.getToolStaticData()!!
+                    val toolPrice = toolStaticData.price
+                    val toolPower = toolStaticData.power
+
                     // Calculate new value of cash after subtraction
-                    val cash = childSnapshot.getLong("cash")!! - toolSnapshot.getLong("price")!!
+                    val cash = childSnapshot.getLong("cash")!!.toInt() - toolPrice
                     if (cash < 0) {
                         _toolPurchaseResponse.postValue(Response.Failure("cash"))
                         return@runTransaction
                     }
 
-                    // Calculate value of health points data after subtraction
-                    val hp = houseSnapshot.getLong("hp")!! - toolSnapshot.getLong("power")!!
+                    // Calculate value of HP data after subtraction
+                    val hp = houseSnapshot.getLong("hp")!!.toInt() - toolPower
 
                     // Update child and house documents
                     transaction.update(childDocRef, "cash", cash)

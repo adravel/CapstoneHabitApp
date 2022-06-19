@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.ItemToolBinding
 import com.example.capstonehabitapp.model.Tool
@@ -31,17 +32,19 @@ class ToolAdapter(
 
         // Bind the data to RecyclerView item's Views
         holder.itemBinding.apply {
-            nameText.text = tools[position].name
-            powerText.text = tools[position].power.toString()
-            priceText.text = context.getString(R.string.tool_price_placeholder, tools[position].price.toInt())
+            val tool = tools[position]
+            val toolStaticData = tool.getToolStaticData()!!
 
-            // TODO: Change tool image depending on Tool type
-            // Display tool image
-            toolImage.setImageResource(R.drawable.img_tool_hammer)
+            nameText.text = toolStaticData.name
+            powerText.text = toolStaticData.power.toString()
+            priceText.text = context.getString(R.string.tool_price_placeholder, toolStaticData.price)
+            Glide.with(context)
+                .load(toolStaticData.imageResId)
+                .into(toolImage)
 
             if (isForParent && childName != "") {
                 // Set button text and function for Parent in shop page
-                if (tools[position].isForSale) {
+                if (tool.isForSale) {
                     itemButton.isEnabled = false
                     itemButton.text = context.getString(R.string.button_label_sent)
                 } else {
@@ -52,8 +55,8 @@ class ToolAdapter(
                 itemButton.setOnClickListener { view ->
                     // Display tool shipment confirmation dialog
                     val action = StoreFragmentDirections.actionStoreFragmentToToolShipmentConfirmationDialogFragment(
-                        tools[position].id,
-                        tools[position].name,
+                        tool.id,
+                        toolStaticData.name,
                         childId,
                         childName
                     )
@@ -67,8 +70,8 @@ class ToolAdapter(
                     // Display tool purchase confirmation dialog
                     val action = HouseDetailFragmentDirections
                         .actionHouseDetailFragmentToToolPurchaseConfirmationDialogFragment(
-                            tools[position].id,
-                            tools[position].name
+                            tool.id,
+                            toolStaticData.name
                         )
                     view.findNavController().navigate(action)
                 }

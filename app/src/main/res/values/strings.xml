@@ -32,7 +32,7 @@
     <string name="role_pref_is_parent_key">isParent</string>
     <string name="role_pref_child_id_key">selectedChildId</string>
     <string name="role_pref_child_name_key">selectedChildName</string>
-    <!-- Game Component States -->
+    <!-- Game Components -->
     <string name="level_1_name">Prajurit</string>
     <string name="level_2_name">Kopral</string>
     <string name="level_3_name">Sersan</string>

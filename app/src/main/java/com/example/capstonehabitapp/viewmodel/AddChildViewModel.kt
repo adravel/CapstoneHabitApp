@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.capstonehabitapp.model.House
-import com.example.capstonehabitapp.model.Tool
 import com.example.capstonehabitapp.util.Response
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
@@ -53,8 +52,12 @@ class AddChildViewModel: ViewModel() {
                         batch.set(newHouseDocRef, newHouse)
                     }
 
-                    // Add the tool documents
-                    for (newTool in newTools) {
+                    // Add all 4 tool documents
+                    for (index in 0..3) {
+                        val newTool = hashMapOf(
+                            "type" to index,
+                            "isForSale" to false
+                        )
                         val newToolDocRef = newChildDocRef.collection("tools").document()
                         batch.set(newToolDocRef, newTool)
                     }
@@ -90,30 +93,6 @@ class AddChildViewModel: ViewModel() {
             "Sumatra",
             "",
             250,
-            ""
-        )
-    )
-
-    // List of tool data to be added to Firestore when creating a new child document
-    private val newTools = listOf(
-        Tool(
-            "",
-            1,
-            true,
-            false,
-            "Meriam",
-            7,
-            150,
-            ""
-        ),
-        Tool(
-            "",
-            2,
-            true,
-            false,
-            "Bom",
-            10,
-            200,
             ""
         )
     )
