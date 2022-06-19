@@ -37,25 +37,35 @@ class HouseAdapter(private val houses: MutableList<House>): RecyclerView.Adapter
                 .into(houseImage)
 
             // Check if house is still locked (House status is 0)
-            if (house.status.toInt() == 0) {
-                // Disable button if house has not been unlocked
-                rescueButton.isEnabled = false
-                rescueButton.text = context.getString(R.string.button_label_locked)
+            val houseStatus = house.status.toInt()
+            if (houseStatus == 0) {
+                // House has not been unlocked
+                // Disable button
+                button.isEnabled = false
+                button.text = context.getString(R.string.button_label_locked)
 
                 // Overlay house image with icon
                 lockIconImage.setImageResource(R.drawable.img_lock)
                 lockBackgroundImage.visibility = View.VISIBLE
             } else {
-                // Enable button if house is unlocked
-                rescueButton.isEnabled = true
-                rescueButton.text = context.getString(R.string.button_label_rescue)
+                // House is unlocked
+                // Enable button if house
+                button.isEnabled = true
+
+                // Set button text depending on House status
+                if (houseStatus == 1) {
+                    button.text = context.getString(R.string.button_label_rescue)
+                } else if (houseStatus == 2){
+                    button.text = context.getString(R.string.button_label_take_care)
+                }
+
 
                 // Hide lock images
                 lockIconImage.visibility = View.GONE
                 lockBackgroundImage.visibility = View.GONE
             }
 
-            rescueButton.setOnClickListener { view ->
+            button.setOnClickListener { view ->
                 // Display house rescue confirmation dialog
                 val action = HouseListFragmentDirections.actionHouseListFragmentToHouseRescueConfirmationDialogFragment(
                     house.id,

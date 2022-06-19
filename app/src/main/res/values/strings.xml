@@ -202,6 +202,7 @@
     <string name="button_label_create_task_manual">Buat Pekerjaan Sendiri</string>
     <string name="button_label_see_all">Lihat Semua</string>
     <string name="button_label_rescue">Selamatkan</string>
+    <string name="button_label_take_care">Rawat</string>
     <string name="button_label_house_rescue">Selamatkan Rumah Adat</string>
     <string name="button_label_house_care">Rawat Rumah Adat</string>
     <!-- Hints -->

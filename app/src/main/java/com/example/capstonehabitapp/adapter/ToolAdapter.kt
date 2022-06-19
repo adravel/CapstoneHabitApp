@@ -15,7 +15,7 @@ class ToolAdapter(
     private val tools: MutableList<Tool>,
     private val isForParent: Boolean,
     private val childId: String,
-    private val childName: String = "")
+    private val childName: String? = null)
     : RecyclerView.Adapter<ToolAdapter.ToolViewHolder>() {
 
     inner class ToolViewHolder(val itemBinding: ItemToolBinding): RecyclerView.ViewHolder(itemBinding.root)
@@ -42,8 +42,16 @@ class ToolAdapter(
                 .load(toolStaticData.imageResId)
                 .into(toolImage)
 
-            if (isForParent && childName != "") {
-                // Set button text and function for Parent in shop page
+            // Change tool power icon depending on the tool category
+            if (toolStaticData.isCrushingTool) {
+                powerText.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_power, 0, 0, 0)
+            } else {
+                powerText.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_clean, 0, 0, 0)
+            }
+
+            // Change button data depending on user's role
+            if (isForParent && childName != null) {
+                // Set button text and function for Parent in store page
                 if (tool.isForSale) {
                     itemButton.isEnabled = false
                     itemButton.text = context.getString(R.string.button_label_sent)
