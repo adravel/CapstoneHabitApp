@@ -143,7 +143,7 @@ class HouseDetailViewModel: ViewModel() {
                     val toolPrice = toolStaticData.price
                     val toolPower = toolStaticData.power
 
-                    // Set tool type Int value to return
+                    // Set tool type Int value
                     toolType = tool.type.toInt()
 
                     // Calculate new value of cash after subtraction
@@ -159,6 +159,8 @@ class HouseDetailViewModel: ViewModel() {
                     // Check the status of House and
                     // calculate value of HP/CP data after subtraction/addition
                     val houseStatus = houseSnapshot.getLong("status")!!.toInt()
+                    val houseRepairCount = houseSnapshot.getLong("repairCount")!!.toInt()
+                    val houseCleanCount = houseSnapshot.getLong("cleanCount")!!.toInt()
                     if (houseStatus == 1) {
                         // User is destroying the fort
                         // Calculate HP
@@ -172,12 +174,30 @@ class HouseDetailViewModel: ViewModel() {
 
                         // Update HP field in house document
                         transaction.update(houseDocRef, "hp", hp)
+
                     } else if (houseStatus == 2) {
                         // User is taking care of the house
                         // Calculate CP
                         val cp = houseSnapshot.getLong("cp")!!.toInt() + toolPower
 
-                        // TODO: Set tools usage count data
+                        // Handle tools usage count data
+                        if (toolType == 2) {
+                            // Tool is "Broom"
+                            if (houseCleanCount < 2) {
+                                transaction.update(houseDocRef, "cleanCount", houseCleanCount + 1)
+                            } else {
+                                _toolPurchaseResponse.postValue(Response.Failure("MAX_CLEAN_COUNT_REACHED"))
+                                return@runTransaction
+                            }
+                        } else if (toolType == 3) {
+                            // Tool is "Hammer"
+                            if (houseRepairCount < 8) {
+                                transaction.update(houseDocRef, "repairCount", houseRepairCount + 1)
+                            } else {
+                                _toolPurchaseResponse.postValue(Response.Failure("MAX_REPAIR_COUNT_REACHED"))
+                                return@runTransaction
+                            }
+                        }
 
                         // Update CP field in house document
                         transaction.update(houseDocRef, "cp", cp)

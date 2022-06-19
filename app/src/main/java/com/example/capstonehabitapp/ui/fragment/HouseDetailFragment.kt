@@ -103,6 +103,16 @@ class HouseDetailFragment: Fragment() {
                     // Display asset images and progress card data
                     displayHouseData(this, house)
 
+                    // Get tool list data
+                    val toolResponse = viewModel.tools.value
+                    if (toolResponse is Response.Success) {
+                        val tools = toolResponse.data
+                        val houseStatus = house.status.toInt()
+
+                        // Display tool list depending on House status
+                        toolAdapter.updateList(tools, houseStatus)
+                    }
+
                     // Display house rescue intro dialog if house status is 1,
                     // HP is still full, and the dialog has not been displayed yet
                     if (house.status.toInt() == 1
@@ -136,7 +146,15 @@ class HouseDetailFragment: Fragment() {
                 is Response.Loading -> {}
                 is Response.Success -> {
                     val tools = response.data
-                    toolAdapter.updateList(tools)
+
+                    // Get house data
+                    val houseResponse = viewModel.house.value
+                    if (houseResponse is Response.Success) {
+                        val houseStatus = houseResponse.data.status.toInt()
+
+                        // Display tool list depending on House status
+                        toolAdapter.updateList(tools, houseStatus)
+                    }
                 }
                 is Response.Failure -> {
                     Log.e("HouseDetail", response.message)
@@ -179,11 +197,16 @@ class HouseDetailFragment: Fragment() {
                 }
                 is Response.Failure -> {
                     // Show error message as a toast
-                    if (response.message == "NOT_ENOUGH_CASH_ERROR") {
-                        Toast.makeText(context, getString(R.string.not_enough_cash_failure), Toast.LENGTH_LONG).show()
-                    } else {
-                        Log.e("HouseDetail", response.message)
-                        Toast.makeText(context, getString(R.string.request_failed), Toast.LENGTH_SHORT).show()                    }
+                    val message = when (response.message) {
+                        "NOT_ENOUGH_CASH_ERROR" -> R.string.not_enough_cash_failure
+                        "MAX_CLEAN_COUNT_REACHED" -> R.string.max_clean_count_reached
+                        "MAX_REPAIR_COUNT_REACHED" -> R.string.max_repair_count_reached
+                        else -> {
+                            Log.e("HouseDetail", response.message)
+                            R.string.request_failed
+                        }
+                    }
+                    Toast.makeText(context, getString(message), Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -259,7 +282,6 @@ class HouseDetailFragment: Fragment() {
                     // Clear dirt imageView
                     Glide.with(fragment).clear(dirtImage)
                 }
-                // TODO: Handle asset display when taking care of the house
                 // User is taking care of the house
                 2 -> {
                     // Display CP data
@@ -271,11 +293,25 @@ class HouseDetailFragment: Fragment() {
                     houseProgressBar.setIndicatorColor(ContextCompat.getColor(requireContext(), R.color.green))
                     houseProgressBar.trackColor = Color.parseColor("#ECFFF6")
 
-                    // TODO: Handle asset display depending on status
                     // Display asset images
-                    // House is damaged, 2 dirt
-                    Glide.with(fragment).load(houseStaticData.houseDamagedImageResId).into(houseImage)
-                    Glide.with(fragment).load(R.drawable.img_game_dirt_both).into(dirtImage)
+                    // Display dirt image depending on how many times "Broom" tool has been used
+                    when (house.cleanCount.toInt()) {
+                        // 2 dirt
+                        0 -> Glide.with(fragment).load(R.drawable.img_game_dirt_both).into(dirtImage)
+                        // 1 dirt
+                        1 -> Glide.with(fragment).load(R.drawable.img_game_dirt_grass).into(dirtImage)
+                        // No dirt
+                        2 -> Glide.with(fragment).clear(dirtImage)
+                    }
+
+                    // Display house image depending on how many times "Hammer" tool has been used
+                    if (house.repairCount.toInt() < 8) {
+                        // House is still damaged
+                        Glide.with(fragment).load(houseStaticData.houseDamagedImageResId).into(houseImage)
+                    } else {
+                        // House if intact
+                        Glide.with(fragment).load(houseStaticData.houseIntactImageResId).into(houseImage)
+                    }
 
                     // Clear fort imageView
                     Glide.with(fragment).clear(fortImage)

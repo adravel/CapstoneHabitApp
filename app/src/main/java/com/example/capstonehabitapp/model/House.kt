@@ -9,7 +9,9 @@ class House(
     val type: Long = 0,
     val status: Long = 0,
     val hp: Long = 0,
-    val cp: Long = 0
+    val cp: Long = 0,
+    val repairCount: Long = 0,
+    val cleanCount: Long = 0
 ) {
     // Get tool data depending on its type
     fun getHouseStaticData() = mapOf(

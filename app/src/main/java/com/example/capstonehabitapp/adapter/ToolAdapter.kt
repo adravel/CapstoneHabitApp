@@ -15,8 +15,8 @@ class ToolAdapter(
     private val tools: MutableList<Tool>,
     private val isForParent: Boolean,
     private val childId: String,
-    private val childName: String? = null)
-    : RecyclerView.Adapter<ToolAdapter.ToolViewHolder>() {
+    private val childName: String? = null
+) : RecyclerView.Adapter<ToolAdapter.ToolViewHolder>() {
 
     inner class ToolViewHolder(val itemBinding: ItemToolBinding): RecyclerView.ViewHolder(itemBinding.root)
 
@@ -91,9 +91,20 @@ class ToolAdapter(
         return tools.size
     }
 
-    fun updateList(newList: List<Tool>) {
+    fun updateList(newList: List<Tool>, houseStatus: Int? = null) {
         tools.clear()
-        tools.addAll(newList)
+        if (houseStatus == null) {
+            // Display all tools if House status data is not provided
+            tools.addAll(newList)
+        } else {
+            for (tool in newList) {
+                // Filter tools depending on House status
+                val isCrushingTool = tool.getToolStaticData()!!.isCrushingTool
+                if ((houseStatus == 1 && isCrushingTool)
+                    || (houseStatus == 2 && !isCrushingTool)
+                ) tools.add(tool)
+            }
+        }
         notifyDataSetChanged()
     }
 }

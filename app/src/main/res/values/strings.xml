@@ -235,8 +235,8 @@
     <string name="task_delete_success_message">Pekerjaan berhasil dihapus</string>
     <string name="house_rescue_intro_message_title">RUMAH ADAT BANGSAL KENCONO JOGJA</string>
     <string name="house_rescue_intro_message_description">Rumah adat berbentuk joglo ini merupakan salah satu kebudayaan Yogyakarta yang dibangun oleh Sultan Hamengku Buwono I tahun 1756 di kompleks keraton Yogyakarta. Saat ini Bangsal Kencono sedang dijajah oleh penjajah. Ayo kita rebut kembali Bangsal Kencono dari tangan penjajah!</string>
-    <string name="house_care_intro_message_title">Selamat, Rumah Adat Joglo berhasil diselamatkan!</string>
-    <string name="house_care_intro_message_description">Wah tapi ada reruntuhan tembok yang merusak rumah nih :(\nYuk perbaiki dan rawat kembali rumah adat joglo supaya rumahmu kembali ke kondisi terbaiknya ;)</string>
+    <string name="house_care_intro_message_title">Selamat, Rumah Adat Bangsal Kencono berhasil diselamatkan!</string>
+    <string name="house_care_intro_message_description">Wah tapi ada reruntuhan tembok yang merusak rumah nih :(\nYuk perbaiki dan rawat kembali rumah adat Bangsal Kencono supaya rumahmu kembali ke kondisi terbaiknya ;)</string>
     <!-- Toast Messages -->
     <string name="data_fetch_failed">Pengambilan data gagal</string>
     <string name="task_creation_success">Pekerjaan berhasil dibuat!</string>
@@ -254,6 +254,8 @@
     <string name="time_format_invalid">Input tenggat waktu tidak sesuai format</string>
     <string name="time_limit_invalid">Tenggat waktu selesai harus setelah tenggat waktu mulai</string>
     <string name="time_limit_state_error">Form tenggat waktu harus terisi atau kosong keduanya</string>
+    <string name="max_clean_count_reached">Rumah sudah berhasil dibersihkan!</string>
+    <string name="max_repair_count_reached">Rumah sudah berhasil diperbaiki!</string>
     <!-- TextInputLayout Helper/Error Messages -->
     <string name="minimum_password_length_error">Password memerlukan minimal 6 karakter</string>
 </resources>
