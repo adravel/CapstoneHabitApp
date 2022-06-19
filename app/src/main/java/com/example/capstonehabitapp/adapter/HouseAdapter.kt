@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.databinding.ItemHouseBinding
 import com.example.capstonehabitapp.model.House
@@ -26,14 +27,17 @@ class HouseAdapter(private val houses: MutableList<House>): RecyclerView.Adapter
 
         // Bind the data to RecyclerView item's Views
         holder.itemBinding.apply {
-            nameText.text = houses[position].name
-            islandText.text = houses[position].island
+            val house = houses[position]
+            val houseStaticData = house.getHouseStaticData()!!
 
-            // TODO: Change house image depending on the House type
-            // Display house image
-            houseImage.setImageResource(R.drawable.img_game_house_intact)
+            nameText.text = houseStaticData.name
+            islandText.text = houseStaticData.island
+            Glide.with(context)
+                .load(houseStaticData.imageResId)
+                .into(houseImage)
 
-            if (houses[position].status.toInt() == 0) {
+            // Check if house is still locked (House status is 0)
+            if (house.status.toInt() == 0) {
                 // Disable button if house has not been unlocked
                 rescueButton.isEnabled = false
                 rescueButton.text = context.getString(R.string.button_label_locked)
@@ -54,8 +58,8 @@ class HouseAdapter(private val houses: MutableList<House>): RecyclerView.Adapter
             rescueButton.setOnClickListener { view ->
                 // Display house rescue confirmation dialog
                 val action = HouseListFragmentDirections.actionHouseListFragmentToHouseRescueConfirmationDialogFragment(
-                    houses[position].id,
-                    houses[position].name
+                    house.id,
+                    houseStaticData.name
                 )
                 view.findNavController().navigate(action)
             }

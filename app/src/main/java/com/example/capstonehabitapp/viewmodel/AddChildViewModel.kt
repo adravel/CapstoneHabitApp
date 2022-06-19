@@ -31,6 +31,7 @@ class AddChildViewModel: ViewModel() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 db.runBatch { batch ->
+                    // Create a new child document
                     val newChild = hashMapOf(
                         "name" to name,
                         "isMale" to isMale,
@@ -41,16 +42,21 @@ class AddChildViewModel: ViewModel() {
                         "badge" to 0,
                         "timeCreated" to FieldValue.serverTimestamp()
                     )
-
-                    // Create a new child document
                     val newChildDocRef = parentDocRef.collection("children").document()
                     batch.set(newChildDocRef, newChild)
 
-                    // Add the house documents
-                    for (newHouse in newHouses) {
-                        val newHouseDocRef = newChildDocRef.collection("houses").document()
-                        batch.set(newHouseDocRef, newHouse)
-                    }
+                    // Add "Bangsal Kencono" house document (House type is 0)
+                    val houseStaticData = House(type = 0).getHouseStaticData()!!
+                    val houseHp = houseStaticData.maxHp
+                    val houseCp = houseStaticData.maxCP
+                    val newHouse = hashMapOf(
+                        "type" to 0,
+                        "status" to 1,
+                        "hp" to houseHp,
+                        "cp" to houseCp
+                    )
+                    val newHouseDocRef = newChildDocRef.collection("houses").document()
+                    batch.set(newHouseDocRef, newHouse)
 
                     // Add all 4 tool documents
                     for (index in 0..3) {
@@ -70,30 +76,4 @@ class AddChildViewModel: ViewModel() {
             }
         }
     }
-
-    // List of house data to be added to Firestore when creating a new child document
-    private val newHouses = listOf(
-        House(
-            "",
-            1,
-            1,
-            150,
-            "Bangsal Kencono",
-            "Jawa",
-            "",
-            150,
-            ""
-        ),
-        House(
-            "",
-            2,
-            0,
-            250,
-            "Bubung Lima",
-            "Sumatra",
-            "",
-            250,
-            ""
-        )
-    )
 }
