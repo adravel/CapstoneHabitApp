@@ -92,15 +92,36 @@ class HouseDetailFragment: Fragment() {
         viewModel.getToolsForSaleFromFirebase()
         viewModel.getChildCashFromFirestore()
 
-        // Observe house LiveData in ViewModel
+        // Observe house LiveData in SharedViewModel
         viewModel.house.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Response.Loading -> {}
                 is Response.Success -> {
                     val house = response.data
+                    val houseStaticData = house.getHouseStaticData()!!
 
                     // Display asset images and progress card data
                     displayHouseData(this, house)
+
+                    // Display house rescue intro dialog if house status is 1,
+                    // HP is still full, and the dialog has not been displayed yet
+                    if (house.status.toInt() == 1
+                        && house.hp.toInt() == houseStaticData.maxHp
+                        && viewModel.showHouseRescueIntroDialog
+                    ) {
+                        viewModel.showHouseRescueIntroDialog = false
+                        findNavController().navigate(R.id.houseRescueIntroDialogFragment)
+                    }
+
+                    // Display house care intro dialog if house status 2,
+                    // CP is still 0, and the dialog has not been displayed yet
+                    if (house.status.toInt() == 2
+                        && house.cp.toInt() == 0
+                        && viewModel.showHouseCareIntroDialog
+                    ) {
+                        viewModel.showHouseCareIntroDialog = false
+                        findNavController().navigate(R.id.houseCareIntroDialogFragment)
+                    }
                 }
                 is Response.Failure -> {
                     Log.e("HouseDetail", response.message)
@@ -109,7 +130,7 @@ class HouseDetailFragment: Fragment() {
             }
         }
 
-        // Observe tools LiveData in ViewModel
+        // Observe tools LiveData in SharedViewModel
         viewModel.tools.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Response.Loading -> {}
@@ -124,7 +145,7 @@ class HouseDetailFragment: Fragment() {
             }
         }
 
-        // Observe child cash LiveData in ViewModel
+        // Observe child cash LiveData in SharedViewModel
         viewModel.childCash.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Response.Loading -> {}
@@ -139,7 +160,7 @@ class HouseDetailFragment: Fragment() {
             }
         }
 
-        // Observe toolPurchaseResponse LiveData in ViewModel
+        // Observe toolPurchaseResponse LiveData in SharedViewModel
         // to determine whether tool purchase transaction is successful or not
         viewModel.toolPurchaseResponse.observe(viewLifecycleOwner) { response ->
             when (response) {
@@ -152,12 +173,9 @@ class HouseDetailFragment: Fragment() {
                     storeBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
                     // Play GIF depending on the tool type
+                    // and update house and child cash data when animation has finished playing
                     val toolType = response.data
                     playToolAnimation(this, toolType)
-
-                    // Fetch the data to update the Views
-                    viewModel.getHouseFromFirebase()
-                    viewModel.getChildCashFromFirestore()
                 }
                 is Response.Failure -> {
                     // Show error message as a toast
@@ -206,8 +224,6 @@ class HouseDetailFragment: Fragment() {
     /// Display asset images and progress card data
     private fun displayHouseData(fragment: Fragment, house: House) {
         val houseStaticData = house.getHouseStaticData()!!
-        val hp = house.hp.toInt()
-        val maxHp = houseStaticData.maxHp
 
         binding.apply {
             // Display house name data in the card
@@ -216,9 +232,11 @@ class HouseDetailFragment: Fragment() {
             // Change house, fort, and dirt asset images
             // and display HP/CP data depending on House status
             when (house.status.toInt()) {
-                // Destroying the fort
+                // User is destroying the fort
                 1 -> {
                     // Display HP data
+                    val hp = house.hp.toInt()
+                    val maxHp = houseStaticData.maxHp
                     houseProgressText.text = getString(R.string.house_hp_placeholder, hp, maxHp)
                     houseProgressBar.max = maxHp
                     houseProgressBar.progress = hp
@@ -228,19 +246,40 @@ class HouseDetailFragment: Fragment() {
                     // Display asset images
                     if (hp >= maxHp * 0.75) {
                         // HP is more than or equal to 75% of Max HP
-                        // Fort is still intact, house is damaged, no dirt
-                        Glide.with(fragment).load(R.drawable.img_game_house_damaged).into(houseImage)
+                        // House is damaged, fort is still intact
+                        Glide.with(fragment).load(houseStaticData.houseDamagedImageResId).into(houseImage)
                         Glide.with(fragment).load(R.drawable.img_game_fort_intact).into(fortImage)
                     } else {
                         // HP is less than 75% of Max HP
-                        // Fort and house is damaged, no dirt
-                        Glide.with(fragment).load(R.drawable.img_game_house_damaged).into(houseImage)
+                        // House and fort is damaged
+                        Glide.with(fragment).load(houseStaticData.houseDamagedImageResId).into(houseImage)
                         Glide.with(fragment).load(R.drawable.img_game_fort_damaged).into(fortImage)
                     }
+
+                    // Clear dirt imageView
+                    Glide.with(fragment).clear(dirtImage)
                 }
                 // TODO: Handle asset display when taking care of the house
-                // TODO: Handle House status changes
-                2 -> Unit
+                // User is taking care of the house
+                2 -> {
+                    // Display CP data
+                    val cp = house.cp.toInt()
+                    val maxCp = houseStaticData.maxCP
+                    houseProgressText.text = getString(R.string.house_cp_placeholder, cp, maxCp)
+                    houseProgressBar.max = maxCp
+                    houseProgressBar.progress = cp
+                    houseProgressBar.setIndicatorColor(ContextCompat.getColor(requireContext(), R.color.green))
+                    houseProgressBar.trackColor = Color.parseColor("#ECFFF6")
+
+                    // TODO: Handle asset display depending on status
+                    // Display asset images
+                    // House is damaged, 2 dirt
+                    Glide.with(fragment).load(houseStaticData.houseDamagedImageResId).into(houseImage)
+                    Glide.with(fragment).load(R.drawable.img_game_dirt_both).into(dirtImage)
+
+                    // Clear fort imageView
+                    Glide.with(fragment).clear(fortImage)
+                }
             }
         }
     }
@@ -280,11 +319,17 @@ class HouseDetailFragment: Fragment() {
                 ): Boolean {
                     // Play GIF only once
                     resource?.setLoopCount(1)
+
+                    // Set listener to know when the animation is complete
                     resource?.registerAnimationCallback(object : Animatable2Compat.AnimationCallback() {
                         override fun onAnimationEnd(drawable: Drawable?) {
                             super.onAnimationEnd(drawable)
 
-                            // Clear the ImageView when animation completes
+                            // Fetch the data to update the Views
+                            viewModel.getHouseFromFirebase()
+                            viewModel.getChildCashFromFirestore()
+
+                            // Clear the ImageView
                             Glide.with(fragment).clear(imageView)
                         }
                     })

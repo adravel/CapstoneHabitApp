@@ -25,6 +25,9 @@ class HouseDetailViewModel: ViewModel() {
     private var childId = ""
     private var houseId = ""
 
+    var showHouseRescueIntroDialog = true
+    var showHouseCareIntroDialog = true
+
     private val _house: MutableLiveData<Response<House>> = MutableLiveData()
     private val _tools: MutableLiveData<Response<List<Tool>>> = MutableLiveData()
     private val _childCash: MutableLiveData<Response<Int>> = MutableLiveData()
@@ -115,9 +118,9 @@ class HouseDetailViewModel: ViewModel() {
         }
     }
 
-    // Use tool to destroy the fort
-    // This function subtracts tool price from child cash
-    // and tool power from house HP
+    // Use tool to destroy the fort or take card of the house
+    // Calculates child cash and house CP/HP
+    // Change house status if the requirement is fulfilled
     fun purchaseTool(toolId: String) {
         _toolPurchaseResponse.postValue(Response.Loading())
 
@@ -150,12 +153,35 @@ class HouseDetailViewModel: ViewModel() {
                         return@runTransaction
                     }
 
-                    // Calculate value of HP data after subtraction
-                    val hp = houseSnapshot.getLong("hp")!!.toInt() - toolPower
-
-                    // Update child and house documents
+                    // Update child document
                     transaction.update(childDocRef, "cash", cash)
-                    transaction.update(houseDocRef, "hp", hp)
+
+                    // Check the status of House and
+                    // calculate value of HP/CP data after subtraction/addition
+                    val houseStatus = houseSnapshot.getLong("status")!!.toInt()
+                    if (houseStatus == 1) {
+                        // User is destroying the fort
+                        // Calculate HP
+                        var hp = houseSnapshot.getLong("hp")!!.toInt() - toolPower
+
+                        // Update house status if HP becomes less than or equal to 0
+                        if (hp <= 0) {
+                            hp = 0
+                            transaction.update(houseDocRef, "status", 2)
+                        }
+
+                        // Update HP field in house document
+                        transaction.update(houseDocRef, "hp", hp)
+                    } else if (houseStatus == 2) {
+                        // User is taking care of the house
+                        // Calculate CP
+                        val cp = houseSnapshot.getLong("cp")!!.toInt() + toolPower
+
+                        // TODO: Set tools usage count data
+
+                        // Update CP field in house document
+                        transaction.update(houseDocRef, "cp", cp)
+                    }
                 }.await()
 
                 // Check if there is any failure in completing transaction

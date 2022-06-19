@@ -240,6 +240,12 @@
         <action
             android:id="@+id/action_houseDetailFragment_to_toolPurchaseConfirmationDialogFragment"
             app:destination="@id/toolPurchaseConfirmationDialogFragment" />
+        <action
+            android:id="@+id/action_houseDetailFragment_to_houseRescueIntroDialogFragment"
+            app:destination="@id/houseRescueIntroDialogFragment" />
+        <action
+            android:id="@+id/action_houseDetailFragment_to_houseCareIntroDialogFragment"
+            app:destination="@id/houseCareIntroDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/toolPurchaseConfirmationDialogFragment"
@@ -399,4 +405,12 @@
         android:id="@+id/askForGradingSuccessDialogFragment"
         android:name="com.example.capstonehabitapp.ui.dialog.AskForGradingSuccessDialogFragment"
         android:label="AskForGradingSuccessDialogFragment" />
+    <dialog
+        android:id="@+id/houseRescueIntroDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.dialog.HouseRescueIntroDialogFragment"
+        android:label="HouseRescueIntroDialogFragment" />
+    <dialog
+        android:id="@+id/houseCareIntroDialogFragment"
+        android:name="com.example.capstonehabitapp.ui.dialog.HouseCareIntroDialogFragment"
+        android:label="HouseCareIntroDialogFragment" />
 </navigation>

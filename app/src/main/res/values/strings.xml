@@ -190,7 +190,6 @@
     <string name="button_label_no">Tidak</string>
     <string name="button_label_ok">Oke</string>
     <string name="button_label_cancel">Batal</string>
-    <string name="button_label_rescue">Selamatkan</string>
     <string name="button_label_locked">Terkunci</string>
     <string name="button_label_use">Gunakan</string>
     <string name="button_label_register">Daftar Menjadi Prajurit</string>
@@ -202,6 +201,9 @@
     <string name="button_label_upload_photo">Tekan untuk mengunggah foto</string>
     <string name="button_label_create_task_manual">Buat Pekerjaan Sendiri</string>
     <string name="button_label_see_all">Lihat Semua</string>
+    <string name="button_label_rescue">Selamatkan</string>
+    <string name="button_label_house_rescue">Selamatkan Rumah Adat</string>
+    <string name="button_label_house_care">Rawat Rumah Adat</string>
     <!-- Hints -->
     <string name="hint_text">Type something</string>
     <string name="hint_time">00:00</string>
@@ -230,6 +232,10 @@
     <string name="level_up_message_description">Kamu berhasil naik peringkat menjadi %1$s! Kamu mendapat bonus dana Rp %2$d!</string>
     <string name="task_delete_confirmation_message">Apa Anda yakin ingin menghapus pekerjaan ini?</string>
     <string name="task_delete_success_message">Pekerjaan berhasil dihapus</string>
+    <string name="house_rescue_intro_message_title">RUMAH ADAT BANGSAL KENCONO JOGJA</string>
+    <string name="house_rescue_intro_message_description">Rumah adat berbentuk joglo ini merupakan salah satu kebudayaan Yogyakarta yang dibangun oleh Sultan Hamengku Buwono I tahun 1756 di kompleks keraton Yogyakarta. Saat ini Bangsal Kencono sedang dijajah oleh penjajah. Ayo kita rebut kembali Bangsal Kencono dari tangan penjajah!</string>
+    <string name="house_care_intro_message_title">Selamat, Rumah Adat Joglo berhasil diselamatkan!</string>
+    <string name="house_care_intro_message_description">Wah tapi ada reruntuhan tembok yang merusak rumah nih :(\nYuk perbaiki dan rawat kembali rumah adat joglo supaya rumahmu kembali ke kondisi terbaiknya ;)</string>
     <!-- Toast Messages -->
     <string name="data_fetch_failed">Pengambilan data gagal</string>
     <string name="task_creation_success">Pekerjaan berhasil dibuat!</string>

@@ -11,13 +11,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.capstonehabitapp.R
-import com.example.capstonehabitapp.databinding.DialogLevelUpBinding
+import com.example.capstonehabitapp.databinding.DialogDetailBinding
 import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.viewmodel.LevelUpViewModel
 
 class LevelUpDialogFragment: DialogFragment() {
 
-    private var _binding: DialogLevelUpBinding? = null
+    private var _binding: DialogDetailBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var childId: String
@@ -31,7 +31,7 @@ class LevelUpDialogFragment: DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate layout for this fragment
-        _binding = DialogLevelUpBinding.inflate(inflater, container, false)
+        _binding = DialogDetailBinding.inflate(inflater, container, false)
 
         // Set rounded corner background for this dialog
         dialog!!.window?.setBackgroundDrawableResource(R.drawable.rounded_corner)
@@ -55,12 +55,14 @@ class LevelUpDialogFragment: DialogFragment() {
         // Calculate the bonus cash that will be obtained
         val bonus = viewModel.getBonus(childNewLevel)
 
-        // Display the dialog message image and description text
-        binding.levelUpImage.setImageResource(R.drawable.img_level_up)
+        // Display the dialog image and texts
+        binding.image.setImageResource(R.drawable.img_level_up)
+        binding.titleText.text = getString(R.string.level_up_message_title)
         binding.descriptionText.text = getString(R.string.level_up_message_description, childNewLevelName, bonus)
+        binding.button.text = getString(R.string.button_label_get_bonus)
 
         // Set button onCLickListener
-        binding.getBonusButton.setOnClickListener {
+        binding.button.setOnClickListener {
             // Add the bonus to child cash data in Firestore
             viewModel.updateChildCashWithBonus(childId, bonus)
         }

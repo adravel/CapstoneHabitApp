@@ -46,6 +46,7 @@ class AddChildViewModel: ViewModel() {
                     batch.set(newChildDocRef, newChild)
 
                     // Add "Bangsal Kencono" house document (House type is 0)
+                    // TODO: Add tools usage count data
                     val houseStaticData = House(type = 0).getHouseStaticData()!!
                     val houseHp = houseStaticData.maxHp
                     val newHouse = hashMapOf(
