@@ -33,7 +33,7 @@ class HouseAdapter(private val houses: MutableList<House>): RecyclerView.Adapter
             nameText.text = houseStaticData.name
             islandText.text = houseStaticData.island
             Glide.with(context)
-                .load(houseStaticData.imageResId)
+                .load(houseStaticData.houseIntactImageResId)
                 .into(houseImage)
 
             // Check if house is still locked (House status is 0)

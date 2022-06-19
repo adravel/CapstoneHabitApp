@@ -13,7 +13,15 @@ class House(
 ) {
     // Get tool data depending on its type
     fun getHouseStaticData() = mapOf(
-        0 to HouseStaticData("Bangsal Kencono", "Jawa", "", 240, 600, R.drawable.img_game_house_intact)
+        0 to HouseStaticData(
+            "Bangsal Kencono",
+            "Jawa",
+            "",
+            240,
+            600,
+            R.drawable.img_game_house_intact,
+            R.drawable.img_game_house_damaged
+        )
     )[type.toInt()]
 }
 
@@ -23,5 +31,6 @@ data class HouseStaticData(
     val description: String,
     val maxHp: Int,
     val maxCP: Int,
-    @DrawableRes val imageResId: Int,
+    @DrawableRes val houseIntactImageResId: Int,
+    @DrawableRes val houseDamagedImageResId: Int
 )

@@ -20,6 +20,7 @@
     <string name="child_level_placeholder">Level : %1$s</string>
     <string name="child_exp_placeholder">Exp : %1$d/50</string>
     <string name="house_hp_placeholder">HP : %1$d/%2$d</string>
+    <string name="house_cp_placeholder">CP : %1$d/%2$d</string>
     <string name="child_cash_placeholder">Dana : Rp %1$d</string>
     <string name="child_total_points_placeholder">%1$d pt</string>
     <string name="history_congrats_placeholder">%1$s hebat!</string>

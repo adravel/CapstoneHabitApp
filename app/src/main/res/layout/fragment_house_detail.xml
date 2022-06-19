@@ -48,7 +48,7 @@
                     tools:text="Nama Rumah"/>
 
                 <TextView
-                    android:id="@+id/house_hp_text"
+                    android:id="@+id/house_progress_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/dark_2"
@@ -57,20 +57,21 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="HP : 200/1000"/>
 
-                <ProgressBar
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:id="@+id/house_hp_progress_bar"
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/house_progress_bar"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:progressTint="@color/state_error"
-                    android:progressBackgroundTint="#F8E0D1"
+                    android:layout_marginVertical="4dp"
+                    app:indicatorColor="@color/state_error"
+                    app:trackColor="#F8E0D1"
+                    app:trackThickness="12dp"
+                    app:trackCornerRadius="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/house_name_text"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    tools:max="1000"
-                    tools:progress="200" />
+                    tools:max="100"
+                    tools:progress="40" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -104,7 +105,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/house_image"
-            tools:src="@drawable/img_game_dirt_5"/>
+            tools:src="@drawable/img_game_dirt_both"/>
+
+        <ImageView
+            android:id="@+id/center_gif_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:src="@drawable/gif_hammer"
+            app:layout_constraintDimensionRatio="H, 1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/house_image" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
@@ -174,4 +185,21 @@
                 tools:listitem="@layout/item_tool" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="2dp">
+
+        <ImageView
+            android:id="@+id/front_gif_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/gif_cannon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

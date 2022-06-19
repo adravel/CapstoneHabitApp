@@ -1,20 +1,34 @@
 package com.example.capstonehabitapp.ui.fragment
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.vectordrawable.graphics.drawable.Animatable2Compat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.gif.GifDrawable
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.example.capstonehabitapp.R
 import com.example.capstonehabitapp.adapter.ToolAdapter
 import com.example.capstonehabitapp.databinding.FragmentHouseDetailBinding
+import com.example.capstonehabitapp.model.House
+import com.example.capstonehabitapp.model.Tool
 import com.example.capstonehabitapp.ui.dialog.HouseRescueConfirmationDialogFragmentArgs
 import com.example.capstonehabitapp.util.Response
 import com.example.capstonehabitapp.viewmodel.HouseDetailViewModel
@@ -84,19 +98,9 @@ class HouseDetailFragment: Fragment() {
                 is Response.Loading -> {}
                 is Response.Success -> {
                     val house = response.data
-                    val houseStaticData = house.getHouseStaticData()!!
 
-                    binding.apply {
-                        houseNameText.text = houseStaticData.name
-                        houseHpText.text = getString(R.string.house_hp_placeholder, house.hp, houseStaticData.maxHp)
-                        houseHpProgressBar.max = houseStaticData.maxHp
-                        houseHpProgressBar.progress = house.hp.toInt()
-
-                        // TODO: Display asset images depending on House status
-                        binding.houseImage.setImageResource(R.drawable.img_game_house_intact)
-                        binding.fortImage.setImageResource(R.drawable.img_game_fort_intact)
-                        // binding.dirtImage.setImageResource(R.drawable.img_game_dirt_1)
-                    }
+                    // Display asset images and progress card data
+                    displayHouseData(this, house)
                 }
                 is Response.Failure -> {
                     Log.e("HouseDetail", response.message)
@@ -144,7 +148,12 @@ class HouseDetailFragment: Fragment() {
                     // Clear the LiveData so the code below will be executed only once
                     viewModel.toolPurchaseResultResponseHandled()
 
-                    Toast.makeText(context, getString(R.string.tool_purchase_success), Toast.LENGTH_SHORT).show()
+                    // Collapse bottom sheet
+                    storeBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+
+                    // Play GIF depending on the tool type
+                    val toolType = response.data
+                    playToolAnimation(this, toolType)
 
                     // Fetch the data to update the Views
                     viewModel.getHouseFromFirebase()
@@ -152,7 +161,7 @@ class HouseDetailFragment: Fragment() {
                 }
                 is Response.Failure -> {
                     // Show error message as a toast
-                    if (response.message == "cash") {
+                    if (response.message == "NOT_ENOUGH_CASH_ERROR") {
                         Toast.makeText(context, getString(R.string.not_enough_cash_failure), Toast.LENGTH_LONG).show()
                     } else {
                         Log.e("HouseDetail", response.message)
@@ -192,5 +201,96 @@ class HouseDetailFragment: Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    /// Display asset images and progress card data
+    private fun displayHouseData(fragment: Fragment, house: House) {
+        val houseStaticData = house.getHouseStaticData()!!
+        val hp = house.hp.toInt()
+        val maxHp = houseStaticData.maxHp
+
+        binding.apply {
+            // Display house name data in the card
+            houseNameText.text = houseStaticData.name
+
+            // Change house, fort, and dirt asset images
+            // and display HP/CP data depending on House status
+            when (house.status.toInt()) {
+                // Destroying the fort
+                1 -> {
+                    // Display HP data
+                    houseProgressText.text = getString(R.string.house_hp_placeholder, hp, maxHp)
+                    houseProgressBar.max = maxHp
+                    houseProgressBar.progress = hp
+                    houseProgressBar.setIndicatorColor(ContextCompat.getColor(requireContext(), R.color.state_error))
+                    houseProgressBar.trackColor = Color.parseColor("#F8E0D1")
+
+                    // Display asset images
+                    if (hp >= maxHp * 0.75) {
+                        // HP is more than or equal to 75% of Max HP
+                        // Fort is still intact, house is damaged, no dirt
+                        Glide.with(fragment).load(R.drawable.img_game_house_damaged).into(houseImage)
+                        Glide.with(fragment).load(R.drawable.img_game_fort_intact).into(fortImage)
+                    } else {
+                        // HP is less than 75% of Max HP
+                        // Fort and house is damaged, no dirt
+                        Glide.with(fragment).load(R.drawable.img_game_house_damaged).into(houseImage)
+                        Glide.with(fragment).load(R.drawable.img_game_fort_damaged).into(fortImage)
+                    }
+                }
+                // TODO: Handle asset display when taking care of the house
+                // TODO: Handle House status changes
+                2 -> Unit
+            }
+        }
+    }
+
+    // Play tool animation GIF
+    private fun playToolAnimation(fragment: Fragment, toolType: Int) {
+        val toolStaticData = Tool(type = toolType.toLong()).getToolStaticData()!!
+
+        // Initialize the animation drawable resource ID and its target imageView
+        val animationResId = toolStaticData.animationResId
+        val imageView = if (toolStaticData.isCrushingTool) {
+            binding.frontGifImage
+        } else {
+            binding.centerGifImage
+        }
+
+        Glide.with(fragment)
+            .asGif()
+            .load(animationResId)
+            .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
+            .listener(object : RequestListener<GifDrawable>{
+                override fun onLoadFailed(
+                    e: GlideException?,
+                    model: Any?,
+                    target: Target<GifDrawable>?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: GifDrawable?,
+                    model: Any?,
+                    target: Target<GifDrawable>?,
+                    dataSource: DataSource?,
+                    isFirstResource: Boolean
+                ): Boolean {
+                    // Play GIF only once
+                    resource?.setLoopCount(1)
+                    resource?.registerAnimationCallback(object : Animatable2Compat.AnimationCallback() {
+                        override fun onAnimationEnd(drawable: Drawable?) {
+                            super.onAnimationEnd(drawable)
+
+                            // Clear the ImageView when animation completes
+                            Glide.with(fragment).clear(imageView)
+                        }
+                    })
+                    return false
+                }
+            })
+            .into(imageView)
     }
 }

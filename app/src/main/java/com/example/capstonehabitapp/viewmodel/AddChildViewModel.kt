@@ -48,12 +48,11 @@ class AddChildViewModel: ViewModel() {
                     // Add "Bangsal Kencono" house document (House type is 0)
                     val houseStaticData = House(type = 0).getHouseStaticData()!!
                     val houseHp = houseStaticData.maxHp
-                    val houseCp = houseStaticData.maxCP
                     val newHouse = hashMapOf(
                         "type" to 0,
                         "status" to 1,
                         "hp" to houseHp,
-                        "cp" to houseCp
+                        "cp" to 0
                     )
                     val newHouseDocRef = newChildDocRef.collection("houses").document()
                     batch.set(newHouseDocRef, newHouse)

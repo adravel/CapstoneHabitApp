@@ -11,10 +11,10 @@ class Tool(
 ) {
     // Get tool data depending on its type
     fun getToolStaticData() = mapOf(
-        0 to ToolStaticData("Meriam", 70, 70, R.drawable.img_tool_cannon, true),
-        1 to ToolStaticData("Bom", 60, 60, R.drawable.img_tool_bomb, true),
-        2 to ToolStaticData("Sapu", 20, 20, R.drawable.img_tool_broom, false),
-        3 to ToolStaticData("Palu", 70, 60, R.drawable.img_tool_hammer, false)
+        0 to ToolStaticData("Meriam", 70, 70, true, R.drawable.img_tool_cannon, R.drawable.gif_cannon),
+        1 to ToolStaticData("Bom", 60, 60, true, R.drawable.img_tool_bomb, R.drawable.gif_bomb),
+        2 to ToolStaticData("Sapu", 20, 20, false, R.drawable.img_tool_broom, R.drawable.gif_broom),
+        3 to ToolStaticData("Palu", 70, 60, false, R.drawable.img_tool_hammer, R.drawable.gif_hammer)
     )[type.toInt()]
 }
 
@@ -22,6 +22,7 @@ data class ToolStaticData(
     val name: String,
     val power: Int,
     val price: Int,
+    val isCrushingTool: Boolean,
     @DrawableRes val imageResId: Int,
-    val isCrushingTool: Boolean
+    @DrawableRes val animationResId: Int
 )

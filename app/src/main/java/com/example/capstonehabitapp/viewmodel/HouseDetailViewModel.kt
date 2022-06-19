@@ -28,11 +28,11 @@ class HouseDetailViewModel: ViewModel() {
     private val _house: MutableLiveData<Response<House>> = MutableLiveData()
     private val _tools: MutableLiveData<Response<List<Tool>>> = MutableLiveData()
     private val _childCash: MutableLiveData<Response<Int>> = MutableLiveData()
-    private val _toolPurchaseResponse: MutableLiveData<Response<Unit>> = MutableLiveData()
+    private val _toolPurchaseResponse: MutableLiveData<Response<Int>> = MutableLiveData()
     val house: LiveData<Response<House>> = _house
     val tools: LiveData<Response<List<Tool>>> = _tools
     val childCash: LiveData<Response<Int>> = _childCash
-    val toolPurchaseResponse: LiveData<Response<Unit>> = _toolPurchaseResponse
+    val toolPurchaseResponse: LiveData<Response<Int>> = _toolPurchaseResponse
 
     // Functions to set document IDs
     fun setChildId(id: String) { childId = id }
@@ -125,6 +125,8 @@ class HouseDetailViewModel: ViewModel() {
         val houseDocRef = childDocRef.collection("houses").document(houseId)
         val toolDocRef = childDocRef.collection("tools").document(toolId)
 
+        var toolType = 0
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 db.runTransaction { transaction ->
@@ -133,14 +135,18 @@ class HouseDetailViewModel: ViewModel() {
                     val toolSnapshot = transaction.get(toolDocRef)
 
                     // Obtain tool price and power data
-                    val toolStaticData = toolSnapshot.toObject<Tool>()!!.getToolStaticData()!!
+                    val tool = toolSnapshot.toObject<Tool>()!!
+                    val toolStaticData = tool.getToolStaticData()!!
                     val toolPrice = toolStaticData.price
                     val toolPower = toolStaticData.power
+
+                    // Set tool type Int value to return
+                    toolType = tool.type.toInt()
 
                     // Calculate new value of cash after subtraction
                     val cash = childSnapshot.getLong("cash")!!.toInt() - toolPrice
                     if (cash < 0) {
-                        _toolPurchaseResponse.postValue(Response.Failure("cash"))
+                        _toolPurchaseResponse.postValue(Response.Failure("NOT_ENOUGH_CASH_ERROR"))
                         return@runTransaction
                     }
 
@@ -156,7 +162,7 @@ class HouseDetailViewModel: ViewModel() {
                 if (_toolPurchaseResponse.value is Response.Failure) {
                     return@launch
                 } else {
-                    _toolPurchaseResponse.postValue(Response.Success(Unit))
+                    _toolPurchaseResponse.postValue(Response.Success(toolType))
                 }
 
             } catch (e: Exception) {
