@@ -139,7 +139,9 @@ class ChildHomeFragment: Fragment() {
 
             // Set change role button onClickListener
             toolbarLayout.changeRoleButton.setOnClickListener {
-                findNavController().navigate(R.id.roleSelectionFragment)
+                val action = ChildHomeFragmentDirections
+                    .actionChildHomeFragmentToParentAccountVerificationFragment(false)
+                findNavController().navigate(action)
             }
 
             // Set task menu card onClickListener

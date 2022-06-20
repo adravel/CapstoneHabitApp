@@ -59,9 +59,6 @@
         <action
             android:id="@+id/action_roleSelectionFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment" />
-        <action
-            android:id="@+id/action_roleSelectionFragment_to_parentAccountVerificationFragment"
-            app:destination="@id/parentAccountVerificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/parentHomeFragment"
@@ -120,9 +117,6 @@
             android:id="@+id/action_childHomeFragment_to_houseListFragment"
             app:destination="@id/houseListFragment" />
         <action
-            android:id="@+id/action_childHomeFragment_to_roleSelectionFragment"
-            app:destination="@id/roleSelectionFragment" />
-        <action
             android:id="@+id/action_childHomeFragment_to_levelUpDialogFragment"
             app:destination="@id/levelUpDialogFragment" />
         <action
@@ -131,6 +125,9 @@
         <action
             android:id="@+id/action_childHomeFragment_to_history"
             app:destination="@id/historyFragment" />
+        <action
+            android:id="@+id/action_childHomeFragment_to_parentAccountVerificationFragment"
+            app:destination="@id/parentAccountVerificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/taskCreationManualFragment"
@@ -310,8 +307,8 @@
         <argument android:name="isForGrading"
             app:argType="boolean" />
         <action
-            android:id="@+id/action_parentAccountVerificationFragment_to_parentHomeFragment"
-            app:destination="@id/parentHomeFragment" />
+            android:id="@+id/action_parentAccountVerificationFragment_to_roleSelectionFragment"
+            app:destination="@id/roleSelectionFragment" />
     </fragment>
     <dialog
         android:id="@+id/gradingSuccessDialogFragment"

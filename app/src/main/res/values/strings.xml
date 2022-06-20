@@ -94,7 +94,6 @@
     <string name="parent">Orang Tua</string>
     <string name="child">Anak</string>
     <string name="choose_role">Pilih Role</string>
-    <string name="change_role">Ganti Role</string>
     <string name="choose_child_account">Pilih Akun Anak</string>
     <string name="help">Bantuan</string>
     <string name="store">Gudang</string>
@@ -205,6 +204,7 @@
     <string name="button_label_take_care">Rawat</string>
     <string name="button_label_house_rescue">Selamatkan Rumah Adat</string>
     <string name="button_label_house_care">Rawat Rumah Adat</string>
+    <string name="button_label_change_role">Ganti Role</string>
     <!-- Hints -->
     <string name="hint_text">Type something</string>
     <string name="hint_time">00:00</string>

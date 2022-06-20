@@ -53,10 +53,8 @@ class RoleSelectionFragment: Fragment() {
                     .apply()
             }
 
-            // Navigate to parent account verification page before accessing parent home page
-            val action = RoleSelectionFragmentDirections
-                .actionRoleSelectionFragmentToParentAccountVerificationFragment(false)
-            findNavController().navigate(action)
+            // Navigate to parent home page
+            findNavController().navigate(R.id.parentHomeFragment)
         }
 
         // Set Child card onClickListener

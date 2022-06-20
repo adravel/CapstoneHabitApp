@@ -49,7 +49,7 @@ class ParentAccountVerificationFragment: Fragment() {
 
         binding.apply {
             // Disable register button by default
-            gradeTaskButton.isEnabled = false
+            button.isEnabled = false
 
             // Set textChangedListener for the EditTexts
             passwordEditText.addTextChangedListener(object : TextWatcher {
@@ -57,19 +57,26 @@ class ParentAccountVerificationFragment: Fragment() {
                     val passwordText = passwordEditText.text.toString().trim()
 
                     // Enable button if the EditText is not empty
-                    gradeTaskButton.isEnabled = passwordText.isNotEmpty()
+                    button.isEnabled = passwordText.isNotEmpty()
                 }
 
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
                 override fun afterTextChanged(p0: Editable?) {}
             })
 
-            // Set grade task button onCLickListener
-            gradeTaskButton.setOnClickListener {
+            // Set button onCLickListener
+            button.setOnClickListener {
                 val password = passwordEditText.text.toString()
 
                 // Call the method to reauthenticate the user
                 viewModel.reauthenticateUser(password)
+            }
+
+            // Set button text
+            button.text = if (isForGrading!!) {
+                getString(R.string.button_label_grade_task)
+            } else {
+                getString(R.string.button_label_change_role)
             }
         }
 
@@ -91,8 +98,8 @@ class ParentAccountVerificationFragment: Fragment() {
                             .actionParentAccountVerificationFragmentToGradingFormFragment()
                         findNavController().navigate(action, navOptions)
                     } else {
-                        // Navigate to parent home page
-                        findNavController().navigate(R.id.parentHomeFragment)
+                        // Navigate to role selection page
+                        findNavController().navigate(R.id.roleSelectionFragment)
                     }
 
                 }
