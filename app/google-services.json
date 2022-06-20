@@ -33,6 +33,35 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506754367256:android:6598c16032c421f8d9e86d",
+        "android_client_info": {
+          "package_name": "com.fortfighter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "506754367256-dlthocvp5sq7cshsc207fju2qlpqgf7t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCl5xC0BIJ2rq3SFeaNHRse26kgi1KB1X4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "506754367256-dlthocvp5sq7cshsc207fju2qlpqgf7t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

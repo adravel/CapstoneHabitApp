@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.capstonehabitapp">
+    package="com.fortfighter">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
@@ -17,7 +17,7 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         tools:targetApi="s">
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.fortfighter.ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

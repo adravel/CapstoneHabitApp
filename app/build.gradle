@@ -9,7 +9,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.example.capstonehabitapp"
+        applicationId "com.fortfighter"
         minSdk 22
         targetSdk 31
         versionCode 1
@@ -42,7 +42,7 @@ android {
         disable 'ContentDescription'
     }
 
-    namespace 'com.example.capstonehabitapp'
+    namespace 'com.fortfighter'
 }
 
 dependencies {
