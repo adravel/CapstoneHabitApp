@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Capstone Habit App</string>
+    <string name="app_name">Fort Fighter</string>
     <!-- Data Placeholders -->
     <string name="task_title_placeholder">Merapikan tempat tidur</string>
     <string name="task_category_placeholder">Tugas Rumah</string>
