@@ -25,19 +25,34 @@ class TaskListViewModel: ViewModel() {
     val tasks: LiveData<Response<List<Task>>> = _tasks
     val tasksCount: LiveData<Triple<Int, Int, Int>> = _tasksCount
 
-    // Fetch all tasks data from Firestore for this parent
+    // Fetch all tasks data from Firestore
+    // within this parent document
     // ordered by the latest task created
-    fun getTasksFromFirebase() {
+    // and filter the tasks by child ID
+    // if the ID value is not null
+    fun getTasksFromFirebase(childId: String?) {
         _tasks.postValue(Response.Loading())
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 // Call Firestore get() method to query the data
-                val snapshot = parentDocRef
-                    .collection("tasks")
-                    .orderBy("timeCreated", Query.Direction.DESCENDING)
-                    .get()
-                    .await()
+                val snapshot = if (childId == null) {
+                    // Get all tasks data
+                    parentDocRef
+                        .collection("tasks")
+                        .orderBy("timeCreated", Query.Direction.DESCENDING)
+                        .get()
+                        .await()
+                } else {
+                    // Get all tasks where the childId field value
+                    // is equal to the given child ID parameter or null
+                    parentDocRef
+                        .collection("tasks")
+                        .whereIn("childId", listOf(childId, ""))
+                        .orderBy("timeCreated", Query.Direction.DESCENDING)
+                        .get()
+                        .await()
+                }
 
                 // Convert each document into Task object,
                 // add them to task list,

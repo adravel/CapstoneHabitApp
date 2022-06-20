@@ -61,6 +61,7 @@ class TaskListFragment : Fragment() {
         // Check the user's role from shared preference
         val sharedPref = requireActivity().getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
         val isParent = sharedPref.getBoolean(getString(R.string.role_pref_is_parent_key), true)
+        val childId = sharedPref.getString(getString(R.string.role_pref_child_id_key), null)
 
         // Set the adapter and layoutManager for task list RecyclerView
         taskAdapter = TaskAdapter(mutableListOf(), isParent)
@@ -70,7 +71,7 @@ class TaskListFragment : Fragment() {
         }
 
         // Fetch tasks data from Firestore
-        viewModel.getTasksFromFirebase()
+        viewModel.getTasksFromFirebase(childId)
 
         // Observe tasks LiveData in ViewModel
         viewModel.tasks.observe(viewLifecycleOwner) { response ->

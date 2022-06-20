@@ -54,6 +54,7 @@ class TaskCreationTemplateViewModel: ViewModel() {
             "status" to 0,
             "startTimeLimit" to startTimeLimit,
             "finishTimeLimit" to finishTimeLimit,
+            "childId" to "",
             "timeCreated" to FieldValue.serverTimestamp()
         )
 

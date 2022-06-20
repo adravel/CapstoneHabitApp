@@ -52,6 +52,7 @@ class TaskCreationManualViewModel: ViewModel() {
             "finishTimeLimit" to task.finishTimeLimit,
             "detail" to task.detail,
             "status" to 0,
+            "childId" to "",
             "timeCreated" to FieldValue.serverTimestamp()
         )
 
