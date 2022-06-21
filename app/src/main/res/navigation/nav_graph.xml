@@ -246,6 +246,12 @@
         <action
             android:id="@+id/action_houseDetailFragment_to_houseCareIntroDialogFragment"
             app:destination="@id/houseCareIntroDialogFragment" />
+        <action
+            android:id="@+id/action_houseDetailFragment_to_houseInfoFragment"
+            app:destination="@id/houseInfoFragment" />
+        <action
+            android:id="@+id/action_houseDetailFragment_to_houseCareSuccessDialogFragment"
+            app:destination="@id/houseCareSuccessDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/toolPurchaseConfirmationDialogFragment"
@@ -257,6 +263,9 @@
         <argument
             android:name="toolName"
             app:argType="string" />
+        <argument
+            android:name="toolType"
+            app:argType="integer"/>
     </dialog>
     <fragment
         android:id="@+id/welcomeFragment"
@@ -413,4 +422,13 @@
         android:id="@+id/houseCareIntroDialogFragment"
         android:name="com.fortfighter.ui.dialog.HouseCareIntroDialogFragment"
         android:label="HouseCareIntroDialogFragment" />
+    <fragment
+        android:id="@+id/houseInfoFragment"
+        android:name="com.fortfighter.ui.fragment.HouseInfoFragment"
+        android:label="HouseInfoFragment"
+        tools:layout="@layout/fragment_house_info"/>
+    <dialog
+        android:id="@+id/houseCareSuccessDialogFragment"
+        android:name="com.fortfighter.ui.dialog.HouseCareSuccessDialogFragment"
+        android:label="HouseCareSuccessDialogFragment" />
 </navigation>

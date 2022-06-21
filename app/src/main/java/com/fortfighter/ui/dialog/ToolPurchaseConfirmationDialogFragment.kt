@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.fortfighter.R
 import com.fortfighter.databinding.DialogTwoButtonsBinding
+import com.fortfighter.util.Response
 import com.fortfighter.viewmodel.HouseDetailViewModel
 
 class ToolPurchaseConfirmationDialogFragment: DialogFragment() {
@@ -19,6 +20,7 @@ class ToolPurchaseConfirmationDialogFragment: DialogFragment() {
 
     private lateinit var toolId: String
     private lateinit var toolName: String
+    private var toolType: Int? = null
 
     private val viewModel: HouseDetailViewModel by activityViewModels()
 
@@ -36,6 +38,7 @@ class ToolPurchaseConfirmationDialogFragment: DialogFragment() {
         val args: ToolPurchaseConfirmationDialogFragmentArgs by navArgs()
         toolId = args.toolId
         toolName = args.toolName
+        toolType = args.toolType
 
         return binding.root
     }
@@ -43,7 +46,26 @@ class ToolPurchaseConfirmationDialogFragment: DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.messageText.text = getString(R.string.tool_purchase_confirmation_message, toolName)
+        // Get house data from SharedViewModel
+        val response = viewModel.house.value
+        if (response is Response.Success) {
+            val house = response.data
+
+            // Display the dialog message text depending on House type
+            when (house.status.toInt()) {
+                1 -> binding.messageText.text = getString(R.string.tool_purchase_confirmation_message_1, toolName)
+                2 -> binding.messageText.text = getString(
+                    if (toolType == 2) {
+                        R.string.tool_purchase_confirmation_message_2_clean
+                    } else {
+                        R.string.tool_purchase_confirmation_message_2_repair
+                    },
+                    toolName
+                )
+            }
+        }
+
+        // Display dialog buttons texts
         binding.positiveButton.text = getString(R.string.button_label_use)
         binding.negativeButton.text = getString(R.string.button_label_no)
 

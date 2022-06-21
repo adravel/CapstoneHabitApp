@@ -26,6 +26,7 @@
     <string name="history_congrats_placeholder">%1$s hebat!</string>
     <string name="history_description_placeholder">Berhasil menyelesaikan %1$d pekerjaan di bulan ini !</string>
     <string name="tool_price_placeholder">Rp %1$d</string>
+    <string name="house_info_toolbar_title_placeholder">Tentang %1$s</string>
     <!-- Lorem Ipsum -->
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <!-- Misc -->
@@ -226,7 +227,9 @@
     <!-- Dialog Messages -->
     <string name="tool_shipment_confirmation_message">Kirim %1$s ke %2$s?</string>
     <string name="tool_shipment_success_message">%1$s berhasil dikirim.</string>
-    <string name="tool_purchase_confirmation_message">Gunakan %1$s untuk menyerang benteng?</string>
+    <string name="tool_purchase_confirmation_message_1">Gunakan %1$s untuk menyerang benteng?</string>
+    <string name="tool_purchase_confirmation_message_2_clean">Gunakan %1$s untuk membersihkan rumah?</string>
+    <string name="tool_purchase_confirmation_message_2_repair">Gunakan %1$s untuk memperbaiki rumah?</string>
     <string name="grading_method_selection_message">Apakah kamu sedang bersama orang tua mu sekarang?</string>
     <string name="house_selection_confirmation_message_1">Selamatkan rumah %1$s?</string>
     <string name="house_selection_confirmation_message_2">Rawat rumah %1$s?</string>
@@ -237,10 +240,12 @@
     <string name="level_up_message_description">Kamu berhasil naik peringkat menjadi %1$s! Kamu mendapat bonus dana Rp %2$d!</string>
     <string name="task_delete_confirmation_message">Apa Anda yakin ingin menghapus pekerjaan ini?</string>
     <string name="task_delete_success_message">Pekerjaan berhasil dihapus</string>
-    <string name="house_rescue_intro_message_title">RUMAH ADAT BANGSAL KENCONO JOGJA</string>
-    <string name="house_rescue_intro_message_description">Rumah adat berbentuk joglo ini merupakan salah satu kebudayaan Yogyakarta yang dibangun oleh Sultan Hamengku Buwono I tahun 1756 di kompleks keraton Yogyakarta. Saat ini Bangsal Kencono sedang dijajah oleh penjajah. Ayo kita rebut kembali Bangsal Kencono dari tangan penjajah!</string>
-    <string name="house_care_intro_message_title">Selamat, Rumah Adat Bangsal Kencono berhasil diselamatkan!</string>
-    <string name="house_care_intro_message_description">Wah tapi ada reruntuhan tembok yang merusak rumah nih :(\nYuk perbaiki dan rawat kembali rumah adat Bangsal Kencono supaya rumahmu kembali ke kondisi terbaiknya ;)</string>
+    <string name="house_rescue_intro_message_title">Rumah %1$s</string>
+    <string name="house_rescue_intro_message_description">%1$s Saat ini %2$s sedang dijajah oleh penjajah. Ayo kita rebut kembali %2$s dari tangan penjajah!</string>
+    <string name="house_care_intro_message_title">Selamat, rumah adat %1$s berhasil diselamatkan!</string>
+    <string name="house_care_intro_message_description">Wah tapi ada reruntuhan tembok yang merusak rumah nih :(\nYuk perbaiki dan rawat kembali rumah adat %1$s supaya rumahmu kembali ke kondisi terbaiknya ;)</string>
+    <string name="house_care_success_message_title">Yay! Rumah Adat %1$s sudah sempurna kembali!</string>
+    <string name="house_care_success_message_description">Terima kasih Prajurit, karena sudah berusaha merawat rumah adat kita! Kami tunggu bantuanmu untuk menyelamatkan rumah berikutnya!</string>
     <!-- Toast Messages -->
     <string name="data_fetch_failed">Pengambilan data gagal</string>
     <string name="task_creation_success">Pekerjaan berhasil dibuat!</string>

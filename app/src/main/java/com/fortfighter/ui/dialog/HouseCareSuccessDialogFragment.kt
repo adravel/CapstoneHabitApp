@@ -12,7 +12,7 @@ import com.fortfighter.databinding.DialogDetailBinding
 import com.fortfighter.util.Response
 import com.fortfighter.viewmodel.HouseDetailViewModel
 
-class HouseCareIntroDialogFragment: DialogFragment() {
+class HouseCareSuccessDialogFragment: DialogFragment() {
 
     private var _binding: DialogDetailBinding? = null
     private val binding get() = _binding!!
@@ -46,16 +46,16 @@ class HouseCareIntroDialogFragment: DialogFragment() {
             val houseStaticData = house.getHouseStaticData()!!
 
             // Display the dialog image and texts depending on House type
-            binding.image.setImageResource(houseStaticData.houseDamagedImageResId)
-            binding.titleText.text = getString(R.string.house_care_intro_message_title, houseStaticData.name)
-            binding.descriptionText.text = getString(R.string.house_care_intro_message_description, houseStaticData.name)
+            binding.image.setImageResource(houseStaticData.houseIntactImageResId)
+            binding.titleText.text = getString(R.string.house_care_success_message_title, houseStaticData.name)
+            binding.descriptionText.text = getString(R.string.house_care_success_message_description)
         }
-        binding.button.text = getString(R.string.button_label_house_care)
+        binding.button.text = getString(R.string.button_label_house_select)
 
         // Set button onCLickListener
         binding.button.setOnClickListener {
-            // Dismiss this dialog
-            findNavController().popBackStack()
+            // Pop into house list page
+            findNavController().popBackStack(R.id.houseListFragment, false)
         }
     }
 

@@ -25,8 +25,10 @@ class HouseDetailViewModel: ViewModel() {
     private var childId = ""
     private var houseId = ""
 
+    // Flags for showing dialog
     var showHouseRescueIntroDialog = true
     var showHouseCareIntroDialog = true
+    var showHouseCareSuccessDialog = true
 
     private val _house: MutableLiveData<Response<House>> = MutableLiveData()
     private val _tools: MutableLiveData<Response<List<Tool>>> = MutableLiveData()
@@ -158,49 +160,61 @@ class HouseDetailViewModel: ViewModel() {
 
                     // Check the status of House and
                     // calculate value of HP/CP data after subtraction/addition
-                    val houseStatus = houseSnapshot.getLong("status")!!.toInt()
-                    val houseRepairCount = houseSnapshot.getLong("repairCount")!!.toInt()
-                    val houseCleanCount = houseSnapshot.getLong("cleanCount")!!.toInt()
-                    if (houseStatus == 1) {
+                    val house = houseSnapshot.toObject<House>()!!
+                    val houseStatus = house.status.toInt()
+                    val houseRepairCount = house.repairCount.toInt()
+                    val houseCleanCount = house.cleanCount.toInt()
+
+                    when (houseStatus) {
                         // User is destroying the fort
-                        // Calculate HP
-                        var hp = houseSnapshot.getLong("hp")!!.toInt() - toolPower
+                        1 -> {
+                            // Calculate HP
+                            var hp = house.hp.toInt() - toolPower
 
-                        // Update house status if HP becomes less than or equal to 0
-                        if (hp <= 0) {
-                            hp = 0
-                            transaction.update(houseDocRef, "status", 2)
+                            // Update house status if HP becomes less than or equal to 0
+                            if (hp <= 0) {
+                                hp = 0
+                                transaction.update(houseDocRef, "status", 2)
+                            }
+
+                            // Update HP field in house document
+                            transaction.update(houseDocRef, "hp", hp)
                         }
-
-                        // Update HP field in house document
-                        transaction.update(houseDocRef, "hp", hp)
-
-                    } else if (houseStatus == 2) {
                         // User is taking care of the house
-                        // Calculate CP
-                        val cp = houseSnapshot.getLong("cp")!!.toInt() + toolPower
+                        2 -> {
+                            // User is taking care of the house
+                            // Handle tools usage count data
+                            if (toolType == 2) {
+                                // Tool is "Broom"
+                                if (houseCleanCount < 2) {
+                                    transaction.update(houseDocRef, "cleanCount", houseCleanCount + 1)
+                                } else {
+                                    _toolPurchaseResponse.postValue(Response.Failure("MAX_CLEAN_COUNT_REACHED"))
+                                    return@runTransaction
+                                }
+                            } else if (toolType == 3) {
+                                // Tool is "Hammer"
+                                if (houseRepairCount < 8) {
+                                    transaction.update(houseDocRef, "repairCount", houseRepairCount + 1)
+                                } else {
+                                    _toolPurchaseResponse.postValue(Response.Failure("MAX_REPAIR_COUNT_REACHED"))
+                                    return@runTransaction
+                                }
+                            }
 
-                        // Handle tools usage count data
-                        if (toolType == 2) {
-                            // Tool is "Broom"
-                            if (houseCleanCount < 2) {
-                                transaction.update(houseDocRef, "cleanCount", houseCleanCount + 1)
-                            } else {
-                                _toolPurchaseResponse.postValue(Response.Failure("MAX_CLEAN_COUNT_REACHED"))
-                                return@runTransaction
+                            // Calculate CP
+                            var cp = house.cp.toInt() + toolPower
+                            val maxCP = house.getHouseStaticData()!!.maxCP
+
+                            // Update house status if CP becomes more than or equal to Max CP
+                            if (cp >= maxCP) {
+                                 cp = maxCP
+                                transaction.update(houseDocRef, "status", 3)
                             }
-                        } else if (toolType == 3) {
-                            // Tool is "Hammer"
-                            if (houseRepairCount < 8) {
-                                transaction.update(houseDocRef, "repairCount", houseRepairCount + 1)
-                            } else {
-                                _toolPurchaseResponse.postValue(Response.Failure("MAX_REPAIR_COUNT_REACHED"))
-                                return@runTransaction
-                            }
+
+                            // Update CP field in house document
+                            transaction.update(houseDocRef, "cp", cp)
                         }
-
-                        // Update CP field in house document
-                        transaction.update(houseDocRef, "cp", cp)
                     }
                 }.await()
 

@@ -5,14 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.fortfighter.R
 import com.fortfighter.databinding.DialogDetailBinding
+import com.fortfighter.util.Response
+import com.fortfighter.viewmodel.HouseDetailViewModel
 
 class HouseRescueIntroDialogFragment: DialogFragment() {
 
     private var _binding: DialogDetailBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: HouseDetailViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,10 +39,24 @@ class HouseRescueIntroDialogFragment: DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Display the dialog image and texts
-        binding.image.setImageResource(R.drawable.img_game_house_intact)
-        binding.titleText.text = getString(R.string.house_rescue_intro_message_title)
-        binding.descriptionText.text = getString(R.string.house_rescue_intro_message_description)
+        // Get house data from SharedViewModel
+        val response = viewModel.house.value
+        if (response is Response.Success) {
+            val house = response.data
+            val houseStaticData = house.getHouseStaticData()!!
+
+            // Display the dialog image and texts depending on House type
+            binding.image.setImageResource(houseStaticData.houseIntactImageResId)
+            binding.titleText.text = getString(
+                R.string.house_rescue_intro_message_title,
+                houseStaticData.nameLong
+            )
+            binding.descriptionText.text = getString(
+                R.string.house_rescue_intro_message_description,
+                houseStaticData.descriptionShort,
+                houseStaticData.name
+            )
+        }
         binding.button.text = getString(R.string.button_label_house_rescue)
 
         // Set button onCLickListener

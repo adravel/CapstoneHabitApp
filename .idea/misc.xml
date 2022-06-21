@@ -15,6 +15,7 @@
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/image_placeholder.xml" value="0.168" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/img_placeholder.xml" value="0.1645" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/rounded_corner.xml" value="0.1445" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout-v26/fragment_house_info.xml" value="0.25416666666666665" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/card_task.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/dialog_big_icon.xml" value="0.25416666666666665" />
@@ -36,6 +37,7 @@
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_history.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_history_2.xml" value="0.253125" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_house_detail.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_house_info.xml" value="0.253125" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_house_list.xml" value="0.25416666666666665" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_login.xml" value="0.264" />
         <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_one_button_dialog.xml" value="0.264" />

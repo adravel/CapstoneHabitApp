@@ -21,7 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/img_game_house_intact" />
+            tools:src="@drawable/img_game_house_0_intact" />
 
         <ImageView
             android:id="@+id/lock_background_image"

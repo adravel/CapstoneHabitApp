@@ -59,8 +59,10 @@ class HouseDetailFragment: Fragment() {
         houseId = args.houseId
         houseName = args.houseName
 
-        // Set toolbar title
+        // Set toolbar title and menu icon
         binding.toolbarLayout.toolbar.title = houseName
+        binding.toolbarLayout.iconImage.setImageResource(R.drawable.ic_info)
+        binding.toolbarLayout.iconImage.visibility = View.GONE
 
         // Initialize bottom sheet
         storeBottomSheetBehavior = BottomSheetBehavior.from(binding.shopBottomSheetCard)
@@ -122,7 +124,7 @@ class HouseDetailFragment: Fragment() {
                         findNavController().navigate(R.id.houseRescueIntroDialogFragment)
                     }
 
-                    // Display house care intro dialog if house status 2,
+                    // Display house care intro dialog if house status is 2,
                     // CP is still 0, and the dialog has not been displayed yet
                     if (house.status.toInt() == 2
                         && house.cp.toInt() == 0
@@ -131,6 +133,16 @@ class HouseDetailFragment: Fragment() {
                         viewModel.showHouseCareIntroDialog = false
                         findNavController().navigate(R.id.houseCareIntroDialogFragment)
                     }
+
+                    // Display house care success dialog if status is 3
+                    // and the dialog has not been displayed yet
+                    if (house.status.toInt() == 3
+                        && viewModel.showHouseCareSuccessDialog
+                    ) {
+                        viewModel.showHouseCareSuccessDialog = false
+                        findNavController().navigate(R.id.houseCareSuccessDialogFragment)
+                    }
+
                 }
                 is Response.Failure -> {
                     Log.e("HouseDetail", response.message)
@@ -210,6 +222,12 @@ class HouseDetailFragment: Fragment() {
             }
         }
 
+        // Set toolbar menu icon onClickListener
+        binding.toolbarLayout.iconImage.setOnClickListener {
+            // Navigate to house info page
+            findNavController().navigate(R.id.houseInfoFragment)
+        }
+
         // Set back button onClickListener
         binding.toolbarLayout.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
@@ -265,6 +283,9 @@ class HouseDetailFragment: Fragment() {
                     houseProgressBar.setIndicatorColor(ContextCompat.getColor(requireContext(), R.color.state_error))
                     houseProgressBar.trackColor = Color.parseColor("#F8E0D1")
 
+                    // Hide toolbar menu icon
+                    toolbarLayout.iconImage.visibility = View.GONE
+
                     // Display asset images
                     if (hp >= maxHp * 0.75) {
                         // HP is more than or equal to 75% of Max HP
@@ -281,7 +302,8 @@ class HouseDetailFragment: Fragment() {
                     // Clear dirt imageView
                     Glide.with(fragment).clear(dirtImage)
                 }
-                // User is taking care of the house
+                // User is taking care of or
+                // has successfully taking care of the house
                 2 -> {
                     // Display CP data
                     val cp = house.cp.toInt()
@@ -291,6 +313,9 @@ class HouseDetailFragment: Fragment() {
                     houseProgressBar.progress = cp
                     houseProgressBar.setIndicatorColor(ContextCompat.getColor(requireContext(), R.color.green))
                     houseProgressBar.trackColor = Color.parseColor("#ECFFF6")
+
+                    // Show toolbar menu icon
+                    toolbarLayout.iconImage.visibility = View.VISIBLE
 
                     // Display asset images
                     // Display dirt image depending on how many times "Broom" tool has been used
@@ -314,6 +339,27 @@ class HouseDetailFragment: Fragment() {
 
                     // Clear fort imageView
                     Glide.with(fragment).clear(fortImage)
+                }
+                3 -> {
+                    // Display CP data
+                    val maxCp = houseStaticData.maxCP
+                    houseProgressText.text = getString(R.string.house_cp_placeholder, maxCp, maxCp)
+                    houseProgressBar.max = maxCp
+                    houseProgressBar.progress = maxCp
+                    houseProgressBar.setIndicatorColor(ContextCompat.getColor(requireContext(), R.color.green))
+                    houseProgressBar.trackColor = Color.parseColor("#ECFFF6")
+
+                    // Show toolbar menu icon
+                    toolbarLayout.iconImage.visibility = View.VISIBLE
+
+                    // Display asset images
+                    // House is intact, fort and dirt is gone
+                    Glide.with(fragment).load(houseStaticData.houseIntactImageResId).into(houseImage)
+                    Glide.with(fragment).clear(fortImage)
+                    Glide.with(fragment).clear(dirtImage)
+
+                    // Hide bottom sheet
+                    shopBottomSheetCard.visibility = View.GONE
                 }
             }
         }
