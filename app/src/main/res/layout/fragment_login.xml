@@ -14,7 +14,7 @@
             android:id="@+id/title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/register_page_title"
+            android:text="@string/login_page_title"
             android:textColor="@color/dark_1"
             style="@style/header1"
             android:textAlignment="center"

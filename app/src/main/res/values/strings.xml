@@ -107,12 +107,12 @@
     <string name="ask_parent_for_grading">Meminta penilaian ke orang tua</string>
     <string name="pick_tools">Pilih Alat</string>
     <string name="pick_houses">Pilih Rumah Adat</string>
-    <string name="welcome_page_title">Selamat datang prajurit</string>
-    <string name="welcome_page_description">Selamatkan rumah adat dari\nserangan penjajah!</string>
-    <string name="register_page_title">Selamat datang kadet!</string>
+    <string name="welcome_page_title">Selamat datang pahlawan</string>
+    <string name="welcome_page_description">Gabung dan selamatkan rumah adat\ndari serangan penjajah!</string>
+    <string name="register_page_title">Selamat datang pahlawan!</string>
     <string name="register_page_description">Daftarkan dirimu menjadi prajurit terbaik\nuntuk menyelamatkan rumah adat kita\ndari serangan penjajah!</string>
-    <string name="login_page_title">Selamat datang\nkembali prajurit!</string>
-    <string name="login_page_description">Isikan identitas prajuritmu terlebih dahulu,\nsupaya tidak ada penyusup di kamp kita!</string>
+    <string name="login_page_title">Selamat datang\nkembali pahlawan!</string>
+    <string name="login_page_description">Isikan identitasmu terlebih dahulu,\nsupaya tidak ada penyusup di kamp kita!</string>
     <string name="name">Nama</string>
     <string name="email">Email</string>
     <string name="password">Kata sandi</string>
@@ -120,7 +120,7 @@
     <string name="father">Ayah</string>
     <string name="mother">Ibu</string>
     <string name="register_instead">Belum pernah mendaftar? Daftar di sini</string>
-    <string name="login_instead">Sudah menjadi prajurit? Masuk di sini</string>
+    <string name="login_instead">Sudah menjadi anggota? Masuk di sini</string>
     <string name="input_child_name">Masukkan Nama Anak</string>
     <string name="input_child_gender">Jenis Kelamin Anak</string>
     <string name="male">Laki-laki</string>
@@ -191,7 +191,7 @@
     <string name="button_label_cancel">Batal</string>
     <string name="button_label_locked">Terkunci</string>
     <string name="button_label_use">Gunakan</string>
-    <string name="button_label_register">Daftar Menjadi Prajurit</string>
+    <string name="button_label_register">Daftar Menjadi Anggota</string>
     <string name="button_label_login">Masuk ke Kamp</string>
     <string name="button_label_logout">Keluar</string>
     <string name="button_label_get_bonus">Ambil Bonus</string>
@@ -229,7 +229,7 @@
     <string name="house_rescue_confirmation_message">Selamatkan rumah %1$s?</string>
     <string name="ask_for_grading_success_message">Hasil pekerjaan berhasil terkirim!</string>
     <string name="grading_success_message">Hebat! %1$s mendapatkan %2$d Poin!</string>
-    <string name="level_up_message_title">Kerja bagus, prajurit!</string>
+    <string name="level_up_message_title">Kerja bagus, Prajurit!</string>
     <string name="level_up_message_description">Kamu berhasil naik peringkat menjadi %1$s! Kamu mendapat bonus dana Rp %2$d!</string>
     <string name="task_delete_confirmation_message">Apa Anda yakin ingin menghapus pekerjaan ini?</string>
     <string name="task_delete_success_message">Pekerjaan berhasil dihapus</string>
