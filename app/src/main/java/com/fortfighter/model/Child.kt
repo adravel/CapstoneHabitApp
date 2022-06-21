@@ -11,8 +11,11 @@ data class Child(
     var isMale: Boolean = true,
     var totalPoints: Long = 0,
     var cash: Long = 0,
-    var level: Long = 0,
+    var level: Long = 1,
     var hasLeveledUp: Boolean = false,
-    var badge: Long = 0,
+    var didWorkToday: Boolean = false,
+    @field:JvmField
+    var isPunished: Boolean = false,
+    var currentHouseId: String = "",
     var timeCreated: Timestamp? = null
 )

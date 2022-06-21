@@ -91,7 +91,7 @@ class HouseDetailFragment: Fragment() {
         // Fetch house detail, tool list, and child cash data from Firestore
         viewModel.getHouseFromFirebase()
         viewModel.getToolsForSaleFromFirebase()
-        viewModel.getChildCashFromFirestore()
+        viewModel.getChildFromFirestore()
 
         // Observe house LiveData in SharedViewModel
         viewModel.house.observe(viewLifecycleOwner) { response ->
@@ -145,7 +145,7 @@ class HouseDetailFragment: Fragment() {
 
                 }
                 is Response.Failure -> {
-                    Log.e("HouseDetail", response.message)
+                    Log.e("HouseDetailHouse", response.message)
                     Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
                 }
             }
@@ -168,22 +168,35 @@ class HouseDetailFragment: Fragment() {
                     }
                 }
                 is Response.Failure -> {
-                    Log.e("HouseDetail", response.message)
+                    Log.e("HouseDetailTools", response.message)
                     Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
                 }
             }
         }
 
-        // Observe child cash LiveData in SharedViewModel
-        viewModel.childCash.observe(viewLifecycleOwner) { response ->
+        // Observe child LiveData in SharedViewModel
+        viewModel.child.observe(viewLifecycleOwner) { response ->
             when (response) {
                 is Response.Loading -> {}
                 is Response.Success -> {
-                    val cash = response.data
-                    binding.cashText.text = getString(R.string.child_cash_placeholder, cash)
+                    val child = response.data
+
+                    // Display child cash data
+                    binding.cashText.text = getString(R.string.child_cash_placeholder, child.cash.toInt())
+
+                    // Display punishment dialog if Child isPunished value is true,
+                    // this house ID is the same as Child currentHouseId,
+                    // and the dialog has not been displayed yet
+                    if (child.isPunished
+                        && houseId == child.currentHouseId
+                        && viewModel.showPunishmentDialog
+                    ) {
+                        viewModel.showPunishmentDialog = false
+                        findNavController().navigate(R.id.punishmentDialogFragment)
+                    }
                 }
                 is Response.Failure -> {
-                    Log.e("HouseDetail", response.message)
+                    Log.e("HouseDetailChild", response.message)
                     Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
                 }
             }
@@ -213,7 +226,7 @@ class HouseDetailFragment: Fragment() {
                         "MAX_CLEAN_COUNT_REACHED" -> R.string.max_clean_count_reached
                         "MAX_REPAIR_COUNT_REACHED" -> R.string.max_repair_count_reached
                         else -> {
-                            Log.e("HouseDetail", response.message)
+                            Log.e("HouseDetailToolPurchase", response.message)
                             R.string.request_failed
                         }
                     }
@@ -416,7 +429,7 @@ class HouseDetailFragment: Fragment() {
 
                             // Fetch the data to update the Views
                             viewModel.getHouseFromFirebase()
-                            viewModel.getChildCashFromFirestore()
+                            viewModel.getChildFromFirestore()
 
                             // Clear the ImageView
                             Glide.with(fragment).clear(imageView)

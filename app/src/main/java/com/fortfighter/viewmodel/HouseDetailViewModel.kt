@@ -3,6 +3,7 @@ package com.fortfighter.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.fortfighter.model.Child
 import com.fortfighter.model.House
 import com.fortfighter.model.Tool
 import com.fortfighter.util.Response
@@ -29,15 +30,18 @@ class HouseDetailViewModel: ViewModel() {
     var showHouseRescueIntroDialog = true
     var showHouseCareIntroDialog = true
     var showHouseCareSuccessDialog = true
+    var showPunishmentDialog = true
 
     private val _house: MutableLiveData<Response<House>> = MutableLiveData()
     private val _tools: MutableLiveData<Response<List<Tool>>> = MutableLiveData()
-    private val _childCash: MutableLiveData<Response<Int>> = MutableLiveData()
+    private val _child: MutableLiveData<Response<Child>> = MutableLiveData()
     private val _toolPurchaseResponse: MutableLiveData<Response<Int>> = MutableLiveData()
+    private val _punishmentAcceptResponse: MutableLiveData<Response<Unit>> = MutableLiveData()
     val house: LiveData<Response<House>> = _house
     val tools: LiveData<Response<List<Tool>>> = _tools
-    val childCash: LiveData<Response<Int>> = _childCash
+    val child: LiveData<Response<Child>> = _child
     val toolPurchaseResponse: LiveData<Response<Int>> = _toolPurchaseResponse
+    val punishmentAcceptResponse: LiveData<Response<Unit>> = _punishmentAcceptResponse
 
     // Functions to set document IDs
     fun setChildId(id: String) { childId = id }
@@ -97,9 +101,9 @@ class HouseDetailViewModel: ViewModel() {
         }
     }
 
-    // Fetch cash data in child document from Firestore
-    fun getChildCashFromFirestore() {
-        _childCash.postValue(Response.Loading())
+    // Fetch child data in child document from Firestore
+    fun getChildFromFirestore() {
+        _child.postValue(Response.Loading())
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -108,14 +112,12 @@ class HouseDetailViewModel: ViewModel() {
                     .document(childId)
                     .get()
                     .await()
+                val child = snapshot.toObject<Child>()!!
 
-                // Get cash data from the document snapshot
-                val cash = snapshot.getLong("cash")!!.toInt()
-
-                _childCash.postValue(Response.Success(cash))
+                _child.postValue(Response.Success(child))
 
             } catch (e: Exception) {
-                e.message?.let { _childCash.postValue(Response.Failure(it)) }
+                e.message?.let { _child.postValue(Response.Failure(it)) }
             }
         }
     }
@@ -149,14 +151,23 @@ class HouseDetailViewModel: ViewModel() {
                     toolType = tool.type.toInt()
 
                     // Calculate new value of cash after subtraction
-                    val cash = childSnapshot.getLong("cash")!!.toInt() - toolPrice
+                    val child = childSnapshot.toObject<Child>()!!
+                    val cash = child.cash.toInt() - toolPrice
                     if (cash < 0) {
                         _toolPurchaseResponse.postValue(Response.Failure("NOT_ENOUGH_CASH_ERROR"))
                         return@runTransaction
                     }
 
-                    // Update child document
+                    // Update cash field in child document
                     transaction.update(childDocRef, "cash", cash)
+
+                    // Update the ID of the House that
+                    // the child is currently working on
+                    // in the child document to determine
+                    // the targeted House for punishment
+                    if (child.currentHouseId != houseId) {
+                        transaction.update(childDocRef, "currentHouseId", houseId)
+                    }
 
                     // Check the status of House and
                     // calculate value of HP/CP data after subtraction/addition
@@ -164,7 +175,6 @@ class HouseDetailViewModel: ViewModel() {
                     val houseStatus = house.status.toInt()
                     val houseRepairCount = house.repairCount.toInt()
                     val houseCleanCount = house.cleanCount.toInt()
-
                     when (houseStatus) {
                         // User is destroying the fort
                         1 -> {
@@ -227,6 +237,28 @@ class HouseDetailViewModel: ViewModel() {
 
             } catch (e: Exception) {
                 e.message?.let { _toolPurchaseResponse.postValue(Response.Failure(it)) }
+            }
+        }
+    }
+
+    // Update isPunished field to false in child document in Firestore
+    // The user has acknowledged the punishment so the dialog fragment
+    // will not be displayed again
+    fun acceptPunishment() {
+        _punishmentAcceptResponse.postValue(Response.Loading())
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                parentDocRef
+                    .collection("children")
+                    .document(childId)
+                    .update("isPunished", false)
+                    .await()
+
+                _punishmentAcceptResponse.postValue(Response.Success(Unit))
+
+            } catch (e: Exception) {
+                e.message?.let { _punishmentAcceptResponse.postValue(Response.Failure(it)) }
             }
         }
     }

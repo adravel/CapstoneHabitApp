@@ -164,21 +164,25 @@ class TaskDetailViewModel: ViewModel() {
     fun startTask(taskId: String, childId: String, childName: String) {
         _taskStatusChange.postValue(Response.Loading())
 
-        val updates = hashMapOf(
+        val taskUpdates = hashMapOf(
             "status" to 1,
             "childId" to childId,
             "childName" to childName,
             "timeStartWorking" to FieldValue.serverTimestamp()
         )
 
+        val taskDocRef = parentDocRef.collection("tasks").document(taskId)
+        val childDocRef = parentDocRef.collection("children").document(childId)
+
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                // Update the necessary field in Firestore document
-                parentDocRef
-                    .collection("tasks")
-                    .document(taskId)
-                    .update(updates)
-                    .await()
+                db.runBatch { batch ->
+                    // Update the necessary field in task document
+                    batch.update(taskDocRef, taskUpdates)
+
+                    // Update didWorkToday field in child document
+                    batch.update(childDocRef, "didWorkToday", true)
+                }.await()
 
                 _taskStatusChange.postValue(Response.Success(1))
 

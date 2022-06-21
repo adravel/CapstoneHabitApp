@@ -252,6 +252,9 @@
         <action
             android:id="@+id/action_houseDetailFragment_to_houseCareSuccessDialogFragment"
             app:destination="@id/houseCareSuccessDialogFragment" />
+        <action
+            android:id="@+id/action_houseDetailFragment_to_punishmentDialogFragment"
+            app:destination="@id/punishmentDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/toolPurchaseConfirmationDialogFragment"
@@ -431,4 +434,8 @@
         android:id="@+id/houseCareSuccessDialogFragment"
         android:name="com.fortfighter.ui.dialog.HouseCareSuccessDialogFragment"
         android:label="HouseCareSuccessDialogFragment" />
+    <dialog
+        android:id="@+id/punishmentDialogFragment"
+        android:name="com.fortfighter.ui.dialog.PunishmentDialogFragment"
+        android:label="PunishmentDialogFragment" />
 </navigation>

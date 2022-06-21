@@ -246,6 +246,10 @@
     <string name="house_care_intro_message_description">Wah tapi ada reruntuhan tembok yang merusak rumah nih :(\nYuk perbaiki dan rawat kembali rumah adat %1$s supaya rumahmu kembali ke kondisi terbaiknya ;)</string>
     <string name="house_care_success_message_title">Yay! Rumah Adat %1$s sudah sempurna kembali!</string>
     <string name="house_care_success_message_description">Terima kasih Prajurit, karena sudah berusaha merawat rumah adat kita! Kami tunggu bantuanmu untuk menyelamatkan rumah berikutnya!</string>
+    <string name="punishment_message_1_title">Oh tidak!!!\nPenjajah memperbaiki benteng</string>
+    <string name="punishment_message_1_description">Prajurit! Ini gawat! Karena kamu absen terlalu lama, penjajah berhasil memperbaiki benteng mereka! Ayo kita hancurkan kembali benteng mereka dan rebut kembali %1$s!</string>
+    <string name="punishment_message_2_title">OH TIDAK!!!\nRumahmu menjadi kotor lagi</string>
+    <string name="punishment_message_2_description">Prajurit! Ini gawat! Karena kamu absen terlalu lama, rumah adat menjadi kotor dan rusak! Ayo kita rawat kembali rumah adat kita!</string>
     <!-- Toast Messages -->
     <string name="data_fetch_failed">Pengambilan data gagal</string>
     <string name="task_creation_success">Pekerjaan berhasil dibuat!</string>
