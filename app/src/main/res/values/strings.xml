@@ -199,11 +199,13 @@
     <string name="button_label_edit_task">Ubah Informasi</string>
     <string name="button_label_upload_photo">Tekan untuk mengunggah foto</string>
     <string name="button_label_create_task_manual">Buat Pekerjaan Sendiri</string>
+    <string name="button_label_see">Lihat</string>
     <string name="button_label_see_all">Lihat Semua</string>
     <string name="button_label_rescue">Selamatkan</string>
     <string name="button_label_take_care">Rawat</string>
     <string name="button_label_house_rescue">Selamatkan Rumah Adat</string>
     <string name="button_label_house_care">Rawat Rumah Adat</string>
+    <string name="button_label_house_select">Pilih Rumah Adat</string>
     <string name="button_label_change_role">Ganti Role</string>
     <!-- Hints -->
     <string name="hint_text">Type something</string>
@@ -226,7 +228,9 @@
     <string name="tool_shipment_success_message">%1$s berhasil dikirim.</string>
     <string name="tool_purchase_confirmation_message">Gunakan %1$s untuk menyerang benteng?</string>
     <string name="grading_method_selection_message">Apakah kamu sedang bersama orang tua mu sekarang?</string>
-    <string name="house_rescue_confirmation_message">Selamatkan rumah %1$s?</string>
+    <string name="house_selection_confirmation_message_1">Selamatkan rumah %1$s?</string>
+    <string name="house_selection_confirmation_message_2">Rawat rumah %1$s?</string>
+    <string name="house_selection_confirmation_message_3">Lihat rumah %1$s?</string>
     <string name="ask_for_grading_success_message">Hasil pekerjaan berhasil terkirim!</string>
     <string name="grading_success_message">Hebat! %1$s mendapatkan %2$d Poin!</string>
     <string name="level_up_message_title">Kerja bagus, Prajurit!</string>

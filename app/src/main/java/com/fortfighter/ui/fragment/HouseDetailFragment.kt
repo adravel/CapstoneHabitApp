@@ -29,7 +29,6 @@ import com.fortfighter.adapter.ToolAdapter
 import com.fortfighter.databinding.FragmentHouseDetailBinding
 import com.fortfighter.model.House
 import com.fortfighter.model.Tool
-import com.fortfighter.ui.dialog.HouseRescueConfirmationDialogFragmentArgs
 import com.fortfighter.util.Response
 import com.fortfighter.viewmodel.HouseDetailViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -56,7 +55,7 @@ class HouseDetailFragment: Fragment() {
         _binding = FragmentHouseDetailBinding.inflate(inflater, container, false)
 
         // Initialize house data using Safe Args provided by navigation component
-        val args: HouseRescueConfirmationDialogFragmentArgs by navArgs()
+        val args: HouseDetailFragmentArgs by navArgs()
         houseId = args.houseId
         houseName = args.houseName
 

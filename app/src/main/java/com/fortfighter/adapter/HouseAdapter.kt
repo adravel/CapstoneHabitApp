@@ -53,12 +53,12 @@ class HouseAdapter(private val houses: MutableList<House>): RecyclerView.Adapter
                 button.isEnabled = true
 
                 // Set button text depending on House status
-                if (houseStatus == 1) {
-                    button.text = context.getString(R.string.button_label_rescue)
-                } else if (houseStatus == 2){
-                    button.text = context.getString(R.string.button_label_take_care)
-                }
-
+                button.text = context.getString(
+                    when (houseStatus) {
+                        1 -> R.string.button_label_rescue
+                        2 -> R.string.button_label_take_care
+                        else -> R.string.button_label_see
+                })
 
                 // Hide lock images
                 lockIconImage.visibility = View.GONE
@@ -67,10 +67,12 @@ class HouseAdapter(private val houses: MutableList<House>): RecyclerView.Adapter
 
             button.setOnClickListener { view ->
                 // Display house rescue confirmation dialog
-                val action = HouseListFragmentDirections.actionHouseListFragmentToHouseRescueConfirmationDialogFragment(
-                    house.id,
-                    houseStaticData.name
-                )
+                val action = HouseListFragmentDirections
+                    .actionHouseListFragmentToHouseSelectionConfirmationDialogFragment(
+                        house.id,
+                        houseStaticData.name,
+                        houseStatus
+                    )
                 view.findNavController().navigate(action)
             }
         }

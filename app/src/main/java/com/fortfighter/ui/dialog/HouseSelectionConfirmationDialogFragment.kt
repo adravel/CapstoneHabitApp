@@ -10,12 +10,13 @@ import androidx.navigation.fragment.navArgs
 import com.fortfighter.R
 import com.fortfighter.databinding.DialogTwoButtonsBinding
 
-class HouseRescueConfirmationDialogFragment: DialogFragment() {
+class HouseSelectionConfirmationDialogFragment: DialogFragment() {
     private var _binding: DialogTwoButtonsBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var houseId: String
     private lateinit var houseName: String
+    private var houseStatus: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,9 +29,10 @@ class HouseRescueConfirmationDialogFragment: DialogFragment() {
         dialog!!.window?.setBackgroundDrawableResource(R.drawable.rounded_corner)
 
         // Initialize house data using Safe Args provided by navigation component
-        val args: HouseRescueConfirmationDialogFragmentArgs by navArgs()
+        val args: HouseSelectionConfirmationDialogFragmentArgs by navArgs()
         houseId = args.houseId
         houseName = args.houseName
+        houseStatus = args.houseStatus
 
         return binding.root
     }
@@ -38,15 +40,28 @@ class HouseRescueConfirmationDialogFragment: DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.messageText.text = getString(R.string.house_rescue_confirmation_message, houseName)
-        binding.positiveButton.text = getString(R.string.button_label_rescue)
+        binding.messageText.text = getString(
+            when (houseStatus!!) {
+                1 -> R.string.house_selection_confirmation_message_1
+                2 -> R.string.house_selection_confirmation_message_2
+                else -> R.string.house_selection_confirmation_message_3
+            },
+            houseName
+        )
+        binding.positiveButton.text = getString(
+            when (houseStatus!!) {
+                1 -> R.string.button_label_rescue
+                2 -> R.string.button_label_take_care
+                else -> R.string.button_label_see
+            },
+        )
         binding.negativeButton.text = getString(R.string.button_label_no)
 
         // Set button onClickListener for rescuing the house
         binding.positiveButton.setOnClickListener {
             // Navigate to house detail page
-            val action = HouseRescueConfirmationDialogFragmentDirections
-                .actionHouseRescueConfirmationDialogFragmentToHouseDetailFragment(
+            val action = HouseSelectionConfirmationDialogFragmentDirections
+                .actionHouseSelectionConfirmationDialogFragmentToHouseDetailFragment(
                     houseId,
                     houseName
                 )

@@ -206,21 +206,24 @@
         android:label="HouseListFragment"
         tools:layout="@layout/fragment_house_list">
         <action
-            android:id="@+id/action_houseListFragment_to_houseRescueConfirmationDialogFragment"
-            app:destination="@id/houseRescueConfirmationDialogFragment" />
+            android:id="@+id/action_houseListFragment_to_houseSelectionConfirmationDialogFragment"
+            app:destination="@id/houseSelectionConfirmationDialogFragment" />
     </fragment>
     <dialog
-        android:id="@+id/houseRescueConfirmationDialogFragment"
-        android:name="com.fortfighter.ui.dialog.HouseRescueConfirmationDialogFragment"
-        android:label="HouseRescueConfirmationDialogFragment" >
+        android:id="@+id/houseSelectionConfirmationDialogFragment"
+        android:name="com.fortfighter.ui.dialog.HouseSelectionConfirmationDialogFragment"
+        android:label="HouseSelectionConfirmationDialogFragment" >
         <argument
             android:name="houseId"
             app:argType="string" />
         <argument
             android:name="houseName"
             app:argType="string" />
+        <argument
+            android:name="houseStatus"
+            app:argType="integer"/>
         <action
-            android:id="@+id/action_houseRescueConfirmationDialogFragment_to_houseDetailFragment"
+            android:id="@+id/action_houseSelectionConfirmationDialogFragment_to_houseDetailFragment"
             app:destination="@id/houseDetailFragment" />
     </dialog>
     <fragment
