@@ -31,8 +31,8 @@ class PunishmentDialogFragment: DialogFragment() {
         dialog!!.window?.setBackgroundDrawableResource(R.drawable.rounded_corner)
 
         // Prevent the dialog from being dismissed
-        // when user click outside the dialog or pressed the back button
-        dialog!!.setCancelable(false)
+        // when user click outside the dialog
+        dialog!!.setCanceledOnTouchOutside(false)
 
         return binding.root
     }
