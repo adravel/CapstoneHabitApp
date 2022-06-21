@@ -198,7 +198,7 @@
     <string name="button_label_get_bonus">Ambil Bonus</string>
     <string name="button_label_delete">Hapus</string>
     <string name="button_label_edit_task">Ubah Informasi</string>
-    <string name="button_label_upload_photo">Tekan untuk mengunggah foto</string>
+    <string name="button_label_take_photo">Tekan untuk mengambil foto</string>
     <string name="button_label_create_task_manual">Buat Pekerjaan Sendiri</string>
     <string name="button_label_see">Lihat</string>
     <string name="button_label_see_all">Lihat Semua</string>

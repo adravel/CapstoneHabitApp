@@ -52,7 +52,7 @@ class UploadPhotoFragment : Fragment() {
         binding.askForGradingButton.visibility = View.GONE
 
         // Set upload photo button onClickListener
-        binding.uploadPhotoCardButton.setOnClickListener {
+        binding.photoCardButton.setOnClickListener {
             // Check if app has been granted permission to use camera
             if (ContextCompat.checkSelfPermission(
                     requireContext(),
@@ -123,10 +123,10 @@ class UploadPhotoFragment : Fragment() {
             val photoImage = data!!.extras!!.get("data") as Bitmap
 
             // Change views appearance when a photo has been taken
-            binding.photoImage.setImageBitmap(photoImage)
+            binding.photoCardImage.setImageBitmap(photoImage)
             binding.descriptionText.text = getString(R.string.upload_photo_complete_description)
-            binding.uploadPhotoCardIcon.visibility = View.GONE
-            binding.uploadPhotoCardButton.visibility = View.GONE
+            binding.photoCardIcon.visibility = View.GONE
+            binding.photoCardButton.visibility = View.GONE
             binding.askForGradingButton.visibility = View.VISIBLE
 
             // Retrieve task LiveData value in SharedViewModel
