@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.fortfighter.R
 import com.fortfighter.adapter.ChildRankAdapter
 import com.fortfighter.databinding.FragmentRankingBinding
@@ -110,18 +111,26 @@ class RankingFragment : Fragment() {
             totalPointsText.text = getString(R.string.child_total_points_placeholder, child.totalPoints.toInt())
 
             // Display medal image according to ranking
-            when (rankNumber) {
-                1 -> medalImage.setImageResource(R.drawable.img_medal_gold)
-                2 -> medalImage.setImageResource(R.drawable.img_medal_silver)
-                3 -> medalImage.setImageResource(R.drawable.img_medal_bronze)
+            val medalImageResId = when (rankNumber) {
+                1 -> R.drawable.img_medal_gold
+                2 -> R.drawable.img_medal_silver
+                3 -> R.drawable.img_medal_bronze
+                else -> null
+            }
+            if (medalImageResId != null) {
+                Glide.with(this@RankingFragment)
+                    .load(medalImageResId)
+                    .into(medalImage)
             }
 
             // Display avatar image according to gender
-            if (child.isMale) {
-                avatarImage.setImageResource(R.drawable.img_soldier_male)
-            } else {
-                avatarImage.setImageResource(R.drawable.img_soldier_female)
-            }
+            Glide.with(this@RankingFragment)
+                .load(if (child.isMale) {
+                    R.drawable.img_soldier_male
+                } else {
+                    R.drawable.img_soldier_female
+                })
+                .into(avatarImage)
         }
     }
 }

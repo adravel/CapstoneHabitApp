@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.fortfighter.R
 import com.fortfighter.adapter.EssentialTaskAdapter
 import com.fortfighter.databinding.FragmentParentHomeBinding
@@ -74,10 +75,14 @@ class ParentHomeFragment: Fragment() {
                     // Display avatar image and name text according to the gender
                     if (isMale) {
                         binding.greetingsText.text = getString(R.string.parent_male_greetings_placeholder, name)
-                        binding.parentAvatarImage.setImageResource(R.drawable.img_general_male)
+                        Glide.with(this)
+                            .load(R.drawable.img_general_male)
+                            .into(binding.parentAvatarImage)
                     } else {
                         binding.greetingsText.text = getString(R.string.parent_female_greetings_placeholder, name)
-                        binding.parentAvatarImage.setImageResource(R.drawable.img_general_female)
+                        Glide.with(this)
+                            .load(R.drawable.img_general_female)
+                            .into(binding.parentAvatarImage)
                     }
                 }
                 is Response.Failure -> {
@@ -104,10 +109,12 @@ class ParentHomeFragment: Fragment() {
 
         binding.apply {
             // Display menu cards icon image
-            taskMenuCardIcon.setImageResource(R.drawable.img_menu_task)
-            storeMenuCardIcon.setImageResource(R.drawable.img_menu_store)
-            rankingMenuCardIcon.setImageResource(R.drawable.img_menu_ranking)
-            historyMenuCardIcon.setImageResource(R.drawable.img_menu_history)
+            Glide.with(this@ParentHomeFragment).apply {
+                this.load(R.drawable.img_menu_task).into(taskMenuCardIcon)
+                this.load(R.drawable.img_menu_store).into(storeMenuCardIcon)
+                this.load(R.drawable.img_menu_ranking).into(rankingMenuCardIcon)
+                this.load(R.drawable.img_menu_history).into(historyMenuCardIcon)
+            }
 
             // Set change role button onClickListener
             toolbarLayout.changeRoleButton.setOnClickListener {

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.fortfighter.R
 import com.fortfighter.databinding.FragmentTaskCreationTemplateTaskBinding
 import com.fortfighter.util.Response
@@ -50,7 +51,9 @@ class TaskCreationTemplateTaskFragment : Fragment() {
 
             titleText.text = templateTask.title
             infoText.text = "${templateTask.area} - $difficultyString"
-            difficultyImage.setImageResource(getTaskDifficultyImageResId(difficultyInt))
+            Glide.with(this@TaskCreationTemplateTaskFragment)
+                .load(getTaskDifficultyImageResId(difficultyInt))
+                .into(this.difficultyImage)
         }
 
         // Observe timeLimit LiveData in SharedViewModel

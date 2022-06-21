@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.fortfighter.R
 import com.fortfighter.adapter.EssentialTaskAdapter
 import com.fortfighter.databinding.FragmentChildHomeBinding
@@ -107,11 +108,13 @@ class ChildHomeFragment: Fragment() {
                         expProgressBar.progress = progress
 
                         // Display avatar image according to gender
-                        if (child.isMale) {
-                            childAvatarImage.setImageResource(R.drawable.img_soldier_male)
-                        } else {
-                            childAvatarImage.setImageResource(R.drawable.img_soldier_female)
-                        }
+                        Glide.with(this@ChildHomeFragment)
+                            .load(if (child.isMale) {
+                                R.drawable.img_soldier_male
+                            } else {
+                                R.drawable.img_soldier_female
+                            })
+                            .into(childAvatarImage)
                     }
 
                     // Display level up dialog if hasLeveledUp field value is true
@@ -132,10 +135,12 @@ class ChildHomeFragment: Fragment() {
 
         binding.apply {
             // Display menu cards icon image
-            taskMenuCardIcon.setImageResource(R.drawable.img_menu_task)
-            houseMenuCardIcon.setImageResource(R.drawable.img_menu_house)
-            rankingMenuCardIcon.setImageResource(R.drawable.img_menu_ranking)
-            historyMenuCardIcon.setImageResource(R.drawable.img_menu_history)
+            Glide.with(this@ChildHomeFragment).apply {
+                this.load(R.drawable.img_menu_task).into(taskMenuCardIcon)
+                this.load(R.drawable.img_menu_house).into(houseMenuCardIcon)
+                this.load(R.drawable.img_menu_ranking).into(rankingMenuCardIcon)
+                this.load(R.drawable.img_menu_history).into(historyMenuCardIcon)
+            }
 
             // Set change role button onClickListener
             toolbarLayout.changeRoleButton.setOnClickListener {

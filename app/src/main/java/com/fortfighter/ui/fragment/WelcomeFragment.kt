@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.fortfighter.R
 import com.fortfighter.databinding.FragmentWelcomeBinding
 
@@ -41,7 +42,7 @@ class WelcomeFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Display illustration image
-        binding.illustrationImage.setImageResource(R.drawable.img_welcome)
+        Glide.with(this).load(R.drawable.img_welcome).into(binding.illustrationImage)
 
         // Set register button onCLickListener to navigate to register page
         binding.registerButton.setOnClickListener {

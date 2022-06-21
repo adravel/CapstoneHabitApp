@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.fortfighter.R
 import com.fortfighter.databinding.DialogDetailBinding
 import com.fortfighter.util.Response
@@ -46,7 +47,9 @@ class HouseRescueIntroDialogFragment: DialogFragment() {
             val houseStaticData = house.getHouseStaticData()!!
 
             // Display the dialog image and texts depending on House type
-            binding.image.setImageResource(houseStaticData.houseIntactImageResId)
+            Glide.with(this)
+                .load(houseStaticData.houseIntactImageResId)
+                .into(binding.image)
             binding.titleText.text = getString(
                 R.string.house_rescue_intro_message_title,
                 houseStaticData.nameLong

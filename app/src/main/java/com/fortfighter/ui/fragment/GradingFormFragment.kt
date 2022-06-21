@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.fortfighter.R
 import com.fortfighter.databinding.FragmentGradingFormBinding
 import com.fortfighter.model.Task
@@ -132,7 +133,10 @@ class GradingFormFragment: Fragment() {
                         val imageBitmap = response.data
 
                         // Load photo image data
-                        photoImage.setImageBitmap(imageBitmap)
+                        Glide.with(this@GradingFormFragment)
+                            .load(imageBitmap)
+                            .placeholder(R.color.black)
+                            .into(photoImage)
                     }
                     is Response.Failure -> {
                         Log.e("GradingForm", response.message)
@@ -188,7 +192,7 @@ class GradingFormFragment: Fragment() {
                 else -> getString(R.string.task_difficulty_0)
             }
             // TODO: Implement task repetition data display in ViewModel
-            repetitionDataText.text = "NOT_YET_IMPLEMENTED"
+            repetitionDataText.text = "-"
             timeLimitDataText.text = getString(
                 R.string.task_time_limit_placeholder,
                 task.startTimeLimit,

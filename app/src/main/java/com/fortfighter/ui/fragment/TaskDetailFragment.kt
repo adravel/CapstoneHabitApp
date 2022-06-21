@@ -228,7 +228,7 @@ class TaskDetailFragment : Fragment() {
             areaDataText.text = task.area
             difficultyDataText.text = getTaskDifficultyString(requireContext(), task.difficulty.toInt())
             // TODO: Implement task repetition data display in ViewModel
-            repetitionDataText.text = "NOT_YET_IMPLEMENTED"
+            repetitionDataText.text = "-"
             timeLimitDataText.text = getString(
                 R.string.task_time_limit_placeholder,
                 task.startTimeLimit,

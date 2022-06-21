@@ -17,6 +17,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.fortfighter.R
 import com.fortfighter.databinding.FragmentUploadPhotoBinding
 import com.fortfighter.util.Response
@@ -123,7 +124,7 @@ class UploadPhotoFragment : Fragment() {
             val photoImage = data!!.extras!!.get("data") as Bitmap
 
             // Change views appearance when a photo has been taken
-            binding.photoCardImage.setImageBitmap(photoImage)
+            Glide.with(this).load(photoImage).into(binding.photoCardImage)
             binding.descriptionText.text = getString(R.string.upload_photo_complete_description)
             binding.photoCardIcon.visibility = View.GONE
             binding.photoCardButton.visibility = View.GONE

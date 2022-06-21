@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.fortfighter.R
 import com.fortfighter.databinding.FragmentRoleSelectionBinding
 import com.google.firebase.auth.ktx.auth
@@ -34,9 +35,13 @@ class RoleSelectionFragment: Fragment() {
         val sharedPref = requireActivity().getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
 
-        // Display role cards icon image
-        binding.parentRoleCardIcon.setImageResource(R.drawable.img_general_male)
-        binding.childRoleCardIcon.setImageResource(R.drawable.img_soldier_male)
+        // Display role cards icon images
+        Glide.with(this)
+            .load(R.drawable.img_general_male)
+            .into(binding.parentRoleCardIcon)
+        Glide.with(this)
+            .load(R.drawable.img_general_female)
+            .into(binding.childRoleCardIcon)
 
         // Set Parent card onClickListener
         binding.parentRoleCard.setOnClickListener {

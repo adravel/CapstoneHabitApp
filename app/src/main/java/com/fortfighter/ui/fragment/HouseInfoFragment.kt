@@ -46,7 +46,7 @@ class HouseInfoFragment: Fragment() {
             )
 
             // Display the image and texts depending on House type
-            Glide.with(view).load(houseStaticData.infoImageResId).into(binding.image)
+            Glide.with(this).load(houseStaticData.infoImageResId).into(binding.image)
             binding.nameText.text = houseStaticData.name
             binding.descriptionText.text = houseStaticData.descriptionLong
         }

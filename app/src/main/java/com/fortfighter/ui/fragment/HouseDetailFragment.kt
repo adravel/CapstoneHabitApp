@@ -102,7 +102,7 @@ class HouseDetailFragment: Fragment() {
                     val houseStaticData = house.getHouseStaticData()!!
 
                     // Display asset images and progress card data
-                    displayHouseData(this, house)
+                    displayHouseData(house)
 
                     // Get tool list data
                     val toolResponse = viewModel.tools.value
@@ -204,7 +204,7 @@ class HouseDetailFragment: Fragment() {
                     // Play GIF depending on the tool type
                     // and update house and child cash data when animation has finished playing
                     val toolType = response.data
-                    playToolAnimation(this, toolType)
+                    playToolAnimation(toolType)
                 }
                 is Response.Failure -> {
                     // Show error message as a toast
@@ -262,8 +262,9 @@ class HouseDetailFragment: Fragment() {
     }
 
     /// Display asset images and progress card data
-    private fun displayHouseData(fragment: Fragment, house: House) {
+    private fun displayHouseData(house: House) {
         val houseStaticData = house.getHouseStaticData()!!
+        val fragment = this
 
         binding.apply {
             // Display house name data in the card
@@ -287,20 +288,22 @@ class HouseDetailFragment: Fragment() {
                     toolbarLayout.iconImage.visibility = View.GONE
 
                     // Display asset images
-                    if (hp >= maxHp * 0.75) {
-                        // HP is more than or equal to 75% of Max HP
-                        // House is damaged, fort is still intact
-                        Glide.with(fragment).load(houseStaticData.houseDamagedImageResId).into(houseImage)
-                        Glide.with(fragment).load(R.drawable.img_game_fort_intact).into(fortImage)
-                    } else {
-                        // HP is less than 75% of Max HP
-                        // House and fort is damaged
-                        Glide.with(fragment).load(houseStaticData.houseDamagedImageResId).into(houseImage)
-                        Glide.with(fragment).load(R.drawable.img_game_fort_damaged).into(fortImage)
-                    }
+                    Glide.with(fragment).apply {
+                        if (hp >= maxHp * 0.75) {
+                            // HP is more than or equal to 75% of Max HP
+                            // House is damaged, fort is still intact
+                            load(houseStaticData.houseDamagedImageResId).into(houseImage)
+                            load(R.drawable.img_game_fort_intact).into(fortImage)
+                        } else {
+                            // HP is less than 75% of Max HP
+                            // House and fort is damaged
+                            load(houseStaticData.houseDamagedImageResId).into(houseImage)
+                            load(R.drawable.img_game_fort_damaged).into(fortImage)
+                        }
 
-                    // Clear dirt imageView
-                    Glide.with(fragment).clear(dirtImage)
+                        // Clear dirt imageView
+                        clear(dirtImage)
+                    }
                 }
                 // User is taking care of or
                 // has successfully taking care of the house
@@ -318,27 +321,29 @@ class HouseDetailFragment: Fragment() {
                     toolbarLayout.iconImage.visibility = View.VISIBLE
 
                     // Display asset images
-                    // Display dirt image depending on how many times "Broom" tool has been used
-                    when (house.cleanCount.toInt()) {
-                        // 2 dirt
-                        0 -> Glide.with(fragment).load(R.drawable.img_game_dirt_both).into(dirtImage)
-                        // 1 dirt
-                        1 -> Glide.with(fragment).load(R.drawable.img_game_dirt_grass).into(dirtImage)
-                        // No dirt
-                        2 -> Glide.with(fragment).clear(dirtImage)
-                    }
+                    Glide.with(fragment).apply {
+                        // Display dirt image depending on how many times "Broom" tool has been used
+                        when (house.cleanCount.toInt()) {
+                            // 2 dirt
+                            0 -> load(R.drawable.img_game_dirt_both).into(dirtImage)
+                            // 1 dirt
+                            1 -> load(R.drawable.img_game_dirt_grass).into(dirtImage)
+                            // No dirt
+                            2 -> clear(dirtImage)
+                        }
 
-                    // Display house image depending on how many times "Hammer" tool has been used
-                    if (house.repairCount.toInt() < 8) {
-                        // House is still damaged
-                        Glide.with(fragment).load(houseStaticData.houseDamagedImageResId).into(houseImage)
-                    } else {
-                        // House if intact
-                        Glide.with(fragment).load(houseStaticData.houseIntactImageResId).into(houseImage)
-                    }
+                        // Display house image depending on how many times "Hammer" tool has been used
+                        if (house.repairCount.toInt() < 8) {
+                            // House is still damaged
+                            load(houseStaticData.houseDamagedImageResId).into(houseImage)
+                        } else {
+                            // House if intact
+                            load(houseStaticData.houseIntactImageResId).into(houseImage)
+                        }
 
-                    // Clear fort imageView
-                    Glide.with(fragment).clear(fortImage)
+                        // Clear fort imageView
+                        clear(fortImage)
+                    }
                 }
                 3 -> {
                     // Display CP data
@@ -354,9 +359,11 @@ class HouseDetailFragment: Fragment() {
 
                     // Display asset images
                     // House is intact, fort and dirt is gone
-                    Glide.with(fragment).load(houseStaticData.houseIntactImageResId).into(houseImage)
-                    Glide.with(fragment).clear(fortImage)
-                    Glide.with(fragment).clear(dirtImage)
+                    Glide.with(fragment).apply {
+                        load(houseStaticData.houseIntactImageResId).into(houseImage)
+                        clear(fortImage)
+                        clear(dirtImage)
+                    }
 
                     // Hide bottom sheet
                     shopBottomSheetCard.visibility = View.GONE
@@ -366,8 +373,9 @@ class HouseDetailFragment: Fragment() {
     }
 
     // Play tool animation GIF
-    private fun playToolAnimation(fragment: Fragment, toolType: Int) {
+    private fun playToolAnimation(toolType: Int) {
         val toolStaticData = Tool(type = toolType.toLong()).getToolStaticData()!!
+        val fragment = this
 
         // Initialize the animation drawable resource ID and its target imageView
         val animationResId = toolStaticData.animationResId

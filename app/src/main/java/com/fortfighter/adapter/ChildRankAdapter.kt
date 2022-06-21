@@ -3,6 +3,7 @@ package com.fortfighter.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.fortfighter.R
 import com.fortfighter.model.Child
 import com.fortfighter.databinding.ItemChildRankBinding
@@ -37,18 +38,26 @@ class ChildRankAdapter(private val children: MutableList<Child>)
             )
 
             // Display medal image according to ranking
-            when (rankNumber) {
-                1 -> medalImage.setImageResource(R.drawable.img_medal_gold)
-                2 -> medalImage.setImageResource(R.drawable.img_medal_silver)
-                3 -> medalImage.setImageResource(R.drawable.img_medal_bronze)
+            val medalImageResId = when (rankNumber) {
+                1 -> R.drawable.img_medal_gold
+                2 -> R.drawable.img_medal_silver
+                3 -> R.drawable.img_medal_bronze
+                else -> null
+            }
+            if (medalImageResId != null) {
+                Glide.with(context)
+                    .load(medalImageResId)
+                    .into(medalImage)
             }
 
             // Display avatar image according to gender
-            if (children[position].isMale) {
-                avatarImage.setImageResource(R.drawable.img_soldier_male)
-            } else {
-                avatarImage.setImageResource(R.drawable.img_soldier_female)
-            }
+            Glide.with(context)
+                .load(if (children[position].isMale) {
+                    R.drawable.img_soldier_male
+                } else {
+                    R.drawable.img_soldier_female
+                })
+                .into(avatarImage)
         }
     }
 

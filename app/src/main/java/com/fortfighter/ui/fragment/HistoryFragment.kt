@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.fortfighter.R
 import com.fortfighter.adapter.FinishedTaskAdapter
 import com.fortfighter.databinding.FragmentHistoryBinding
@@ -203,12 +204,14 @@ class HistoryFragment: Fragment() {
 
     // Method for displaying month summary card child avatar image and congratulation text data
     private fun displayMonthSummaryCardChildData(child: Child, isForParent: Boolean) {
-        // Display child avatar image
-        if (child.isMale) {
-            binding.monthSummaryAvatarImage.setImageResource(R.drawable.img_soldier_male)
-        } else {
-            binding.monthSummaryAvatarImage.setImageResource(R.drawable.img_soldier_female)
-        }
+        // Display avatar image according to gender
+        Glide.with(this)
+            .load(if (child.isMale) {
+                R.drawable.img_soldier_male
+            } else {
+                R.drawable.img_soldier_female
+            })
+            .into(binding.monthSummaryAvatarImage)
 
         // Display congratulation text
         if (isForParent) {

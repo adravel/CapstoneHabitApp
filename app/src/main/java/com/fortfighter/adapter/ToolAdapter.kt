@@ -38,6 +38,8 @@ class ToolAdapter(
             nameText.text = toolStaticData.name
             powerText.text = toolStaticData.power.toString()
             priceText.text = context.getString(R.string.tool_price_placeholder, toolStaticData.price)
+
+            // Display tool image
             Glide.with(context)
                 .load(toolStaticData.imageResId)
                 .into(toolImage)

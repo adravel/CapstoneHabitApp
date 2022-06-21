@@ -10,6 +10,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.fortfighter.R
 import com.fortfighter.databinding.DialogDetailBinding
 import com.fortfighter.util.Response
@@ -56,7 +57,9 @@ class LevelUpDialogFragment: DialogFragment() {
         val bonus = viewModel.getBonus(childNewLevel)
 
         // Display the dialog image and texts
-        binding.image.setImageResource(R.drawable.img_level_up)
+        Glide.with(this)
+            .load(R.drawable.img_level_up)
+            .into(binding.image)
         binding.titleText.text = getString(R.string.level_up_message_title)
         binding.descriptionText.text = getString(R.string.level_up_message_description, childNewLevelName, bonus)
         binding.button.text = getString(R.string.button_label_get_bonus)

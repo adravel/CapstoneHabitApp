@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.fortfighter.model.Task
 import com.fortfighter.databinding.ItemEssentialTaskBinding
 import com.fortfighter.ui.fragment.ChildHomeFragmentDirections
@@ -23,6 +24,9 @@ class EssentialTaskAdapter(private val tasks: MutableList<Task>, private val isF
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
+        // Get ViewHolder's ItemView context
+        val context = holder.itemView.context
+
         // Bind the data to RecyclerView item's Views
         holder.itemBinding.apply {
             titleText.text = tasks[position].title
@@ -40,7 +44,9 @@ class EssentialTaskAdapter(private val tasks: MutableList<Task>, private val isF
             }
 
             // Display the difficulty image
-            difficultyImage.setImageResource(getTaskDifficultyImageResId(tasks[position].difficulty.toInt()))
+            Glide.with(context)
+                .load(getTaskDifficultyImageResId(tasks[position].difficulty.toInt()))
+                .into(difficultyImage)
         }
 
         // Set RecyclerView item OnClickListener to navigate to Task Detail screen

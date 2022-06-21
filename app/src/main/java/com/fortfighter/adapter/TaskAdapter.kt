@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.fortfighter.R
 import com.fortfighter.model.Task
 import com.fortfighter.databinding.ItemTaskBinding
@@ -71,9 +72,13 @@ class TaskAdapter(private val tasks: MutableList<Task>, private val isForParent:
                 }
             }
 
-            // Display difficulty image and text
+            // Display difficulty image
             val difficulty = tasks[position].difficulty.toInt()
-            difficultyImage.setImageResource(getTaskDifficultyImageResId(difficulty))
+            Glide.with(context)
+                .load(getTaskDifficultyImageResId(difficulty))
+                .into(difficultyImage)
+
+            // Display difficulty text
             difficultyText.text = getTaskDifficultyString(context, difficulty)
             when (difficulty) {
                 0 -> difficultyText.setTextColor(ContextCompat.getColor(context, R.color.state_success))

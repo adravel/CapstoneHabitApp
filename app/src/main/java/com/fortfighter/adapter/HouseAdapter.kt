@@ -32,6 +32,8 @@ class HouseAdapter(private val houses: MutableList<House>): RecyclerView.Adapter
 
             nameText.text = houseStaticData.name
             islandText.text = houseStaticData.island
+
+            // Load house image
             Glide.with(context)
                 .load(houseStaticData.houseIntactImageResId)
                 .into(houseImage)
