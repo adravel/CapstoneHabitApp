@@ -32,7 +32,7 @@ class TaskCreationTemplateTaskFragment : Fragment() {
         _binding = FragmentTaskCreationTemplateTaskBinding.inflate(inflater, container, false)
 
         // Set toolbar title
-        binding.toolbarLayout.toolbar.title = getString(R.string.choose_task)
+        binding.toolbarLayout.toolbar.title = getString(R.string.select_task)
 
         return binding.root
     }

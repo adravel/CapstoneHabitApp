@@ -93,7 +93,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="14dp"
-        android:text="@string/choose"
+        android:text="@string/select"
         android:textColor="@color/light_3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

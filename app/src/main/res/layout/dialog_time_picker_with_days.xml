@@ -9,7 +9,7 @@
         android:id="@+id/day_picker_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/choose_day"
+        android:text="@string/select_day"
         style="@style/body_medium_2"
         android:textColor="@color/dark_1"
         app:layout_constraintTop_toTopOf="parent"
@@ -184,7 +184,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="12dp"
-        android:text="@string/choose"
+        android:text="@string/select"
         android:textColor="@color/light_3"/>
 
     <Button

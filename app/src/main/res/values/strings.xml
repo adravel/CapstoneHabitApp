@@ -94,8 +94,8 @@
     <string name="grading_form">Form Penilaian</string>
     <string name="parent">Orang Tua</string>
     <string name="child">Anak</string>
-    <string name="choose_role">Pilih Role</string>
-    <string name="choose_child_account">Pilih Akun Anak</string>
+    <string name="select_role">Pilih Role</string>
+    <string name="select_child_account">Pilih Akun Anak</string>
     <string name="help">Bantuan</string>
     <string name="store">Gudang</string>
     <string name="house">Rumah Adat</string>
@@ -161,18 +161,18 @@
     <string name="day_short_5">Ju</string>
     <string name="day_short_6">Sb</string>
     <string name="day_short_7">Mi</string>
-    <string name="choose_day">Pilih hari</string>
-    <string name="choose_time">Pilih waktu</string>
+    <string name="select_day">Pilih hari</string>
+    <string name="select_time">Pilih waktu</string>
     <string name="until">hingga</string>
-    <string name="choose">Pilih</string>
-    <string name="choose_child">Pilih Anak</string>
+    <string name="select">Pilih</string>
+    <string name="select_child">Pilih Anak</string>
     <string name="task_count_on_going">Sedang\ndikerjakan</string>
     <string name="task_count_finished">Selesai\ndikerjakan</string>
     <string name="task_count_failed">Gagal\ndikerjakan</string>
     <string name="zero">0</string>
     <string name="history_congrats">Kamu hebat!</string>
-    <string name="choose_category">Pilih Kategori</string>
-    <string name="choose_task">Pilih Pekerjaan</string>
+    <string name="select_category">Pilih Kategori</string>
+    <string name="select_task">Pilih Pekerjaan</string>
     <!-- Button Labels -->
     <string name="button_label_add_child">Tambah Anak</string>
     <string name="button_label_start_task">Kerjakan</string>
@@ -220,7 +220,7 @@
     <string name="hint_task_creation">Isikan nama pekerjaan…</string>
     <string name="hint_task_detail">Beri keterangan tambahan terkait pekerjaan</string>
     <string name="hint_task_area">Beritahu area pekerjaannya…</string>
-    <string name="hint_choose_grade">Pilih nilai…</string>
+    <string name="hint_select_grade">Pilih nilai…</string>
     <string name="hint_notes">Catatan tambahan untuk anak…</string>
     <string name="hint_task_category">Isikan kategori pekerjaannya…</string>
     <string name="hint_difficulty">Pilih salah satu…</string>

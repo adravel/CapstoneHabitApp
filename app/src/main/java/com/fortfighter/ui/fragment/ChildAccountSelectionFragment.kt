@@ -36,7 +36,7 @@ class ChildAccountSelectionFragment: Fragment() {
         _binding = FragmentChildAccountSelectionBinding.inflate(inflater, container, false)
 
         // Set toolbar title
-        binding.toolbarLayout.toolbar.title = getString(R.string.choose_child_account)
+        binding.toolbarLayout.toolbar.title = getString(R.string.select_child_account)
 
         // Initialize task ID using Safe Args provided by navigation component
         val args: ChildAccountSelectionFragmentArgs by navArgs()

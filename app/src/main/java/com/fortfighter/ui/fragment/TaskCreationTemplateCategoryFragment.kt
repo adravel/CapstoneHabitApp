@@ -27,7 +27,7 @@ class TaskCreationTemplateCategoryFragment : Fragment() {
         _binding = FragmentTaskCreationTemplateCategoryBinding.inflate(inflater, container, false)
 
         // Set toolbar title
-        binding.toolbarLayout.toolbar.title = getString(R.string.choose_category)
+        binding.toolbarLayout.toolbar.title = getString(R.string.select_category)
 
         return binding.root
     }
@@ -67,7 +67,7 @@ class TaskCreationTemplateCategoryFragment : Fragment() {
                 )
 
                 // Change description text appearance
-                binding.oneTimeTaskCardDescriptionText.text = getString(R.string.choose_time)
+                binding.oneTimeTaskCardDescriptionText.text = getString(R.string.select_time)
                 binding.oneTimeTaskCardDescriptionText.setTextColor(
                     ContextCompat.getColor(requireContext(), R.color.state_error_dark)
                 )
