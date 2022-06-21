@@ -40,7 +40,7 @@ class RoleSelectionFragment: Fragment() {
             .load(R.drawable.img_general_male)
             .into(binding.parentRoleCardIcon)
         Glide.with(this)
-            .load(R.drawable.img_general_female)
+            .load(R.drawable.img_soldier_male)
             .into(binding.childRoleCardIcon)
 
         // Set Parent card onClickListener
