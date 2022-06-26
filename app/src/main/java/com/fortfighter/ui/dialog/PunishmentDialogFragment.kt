@@ -40,6 +40,9 @@ class PunishmentDialogFragment: DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Accept punishment so the dialog will not be displayed again
+        viewModel.acceptPunishment()
+
         // Observe house LiveData in SharedViewModel
         viewModel.house.observe(viewLifecycleOwner) { response ->
             if (response is Response.Success) {
@@ -70,16 +73,8 @@ class PunishmentDialogFragment: DialogFragment() {
 
         // Set button onCLickListener
         binding.button.setOnClickListener {
-            // Accept punishment so the dialog will not be displayed again
-            viewModel.acceptPunishment()
-
-            // Observe punishmentAcceptResponse
-            viewModel.punishmentAcceptResponse.observe(viewLifecycleOwner) { response ->
-                if (response is Response.Success) {
-                    // Pop this fragment
-                    findNavController().popBackStack()
-                }
-            }
+            // Pop this fragment
+            findNavController().popBackStack()
         }
     }
 
