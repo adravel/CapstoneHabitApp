@@ -173,6 +173,7 @@
     <string name="history_congrats">Kamu hebat!</string>
     <string name="select_category">Pilih Kategori</string>
     <string name="select_task">Pilih Pekerjaan</string>
+    <string name="no_time_limit">Tidak ada batas waktu</string>
     <!-- Button Labels -->
     <string name="button_label_add_child">Tambah Anak</string>
     <string name="button_label_start_task">Kerjakan</string>

@@ -18,6 +18,8 @@ import com.fortfighter.R
 import com.fortfighter.databinding.FragmentGradingFormBinding
 import com.fortfighter.model.Task
 import com.fortfighter.util.Response
+import com.fortfighter.util.emptyTextWrapper
+import com.fortfighter.util.timeLimitTextWrapper
 import com.fortfighter.viewmodel.TaskDetailViewModel
 
 class GradingFormFragment: Fragment() {
@@ -183,7 +185,7 @@ class GradingFormFragment: Fragment() {
     private fun displayTaskData(task: Task) {
         binding.apply {
             titleDataText.text = task.title
-            categoryDataText.text = task.category
+            categoryDataText.text = emptyTextWrapper(task.category)
             areaDataText.text = task.area
             difficultyDataText.text = when (task.difficulty.toInt()) {
                 0 -> getString(R.string.task_difficulty_0)
@@ -193,8 +195,8 @@ class GradingFormFragment: Fragment() {
             }
             // TODO: Implement task repetition data display in ViewModel
             repetitionDataText.text = "-"
-            timeLimitDataText.text = getString(
-                R.string.task_time_limit_placeholder,
+            timeLimitDataText.text = timeLimitTextWrapper(
+                requireContext(),
                 task.startTimeLimit,
                 task.finishTimeLimit
             )
@@ -208,7 +210,7 @@ class GradingFormFragment: Fragment() {
                 statusDataText.text = getString(R.string.task_status_3_for_parent_with_child_name, task.childName)
                 statusDataText.setTextColor(ContextCompat.getColor(requireContext(), R.color.state_error))
             }
-            detailDataText.text = task.detail
+            detailDataText.text = emptyTextWrapper(task.detail)
         }
     }
 }

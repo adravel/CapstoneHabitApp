@@ -92,3 +92,21 @@ fun getTaskDifficultyImageResId(difficulty: Int): Int {
         else -> R.drawable.img_difficulty_easy
     }
 }
+
+// String wrapper that return a "-" symbol if text is empty
+fun emptyTextWrapper(text: String): String {
+    return if (text.trim().isEmpty()) "-" else text
+}
+
+// Time limit text wrapper
+fun timeLimitTextWrapper(
+    context: Context,
+    startTimeLimit: String,
+    finishTimeLimit: String
+): String {
+    return if (startTimeLimit.trim().isEmpty() && finishTimeLimit.trim().isEmpty()) {
+        context.getString(R.string.no_time_limit)
+    } else {
+        context.getString(R.string.task_time_limit_placeholder, startTimeLimit, finishTimeLimit)
+    }
+}

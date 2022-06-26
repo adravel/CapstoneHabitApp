@@ -18,7 +18,9 @@ import com.fortfighter.R
 import com.fortfighter.databinding.FragmentTaskDetailBinding
 import com.fortfighter.model.Task
 import com.fortfighter.util.Response
+import com.fortfighter.util.emptyTextWrapper
 import com.fortfighter.util.getTaskDifficultyString
+import com.fortfighter.util.timeLimitTextWrapper
 import com.fortfighter.viewmodel.TaskDetailViewModel
 
 class TaskDetailFragment : Fragment() {
@@ -224,17 +226,17 @@ class TaskDetailFragment : Fragment() {
     private fun displayTaskData(task: Task, isForParent: Boolean) {
         binding.apply {
             titleDataText.text = task.title
-            categoryDataText.text = task.category
+            categoryDataText.text = emptyTextWrapper(task.category)
             areaDataText.text = task.area
             difficultyDataText.text = getTaskDifficultyString(requireContext(), task.difficulty.toInt())
             // TODO: Implement task repetition data display in ViewModel
             repetitionDataText.text = "-"
-            timeLimitDataText.text = getString(
-                R.string.task_time_limit_placeholder,
+            timeLimitDataText.text = timeLimitTextWrapper(
+                requireContext(),
                 task.startTimeLimit,
                 task.finishTimeLimit
             )
-            detailDataText.text = task.detail
+            detailDataText.text = emptyTextWrapper(task.detail)
 
             // Display the rest of the data according to status
             when (task.status.toInt()) {
@@ -345,7 +347,7 @@ class TaskDetailFragment : Fragment() {
                         3 -> getString(R.string.task_grade_3)
                         else -> "-"
                     }
-                    notesDataText.text = task.notes
+                    notesDataText.text = emptyTextWrapper(task.notes)
 
                     changeTaskStatusButton.visibility = hide
                 }

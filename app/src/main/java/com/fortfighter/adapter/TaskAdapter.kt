@@ -12,6 +12,7 @@ import com.fortfighter.databinding.ItemTaskBinding
 import com.fortfighter.ui.fragment.TaskListFragmentDirections
 import com.fortfighter.util.getTaskDifficultyImageResId
 import com.fortfighter.util.getTaskDifficultyString
+import com.fortfighter.util.timeLimitTextWrapper
 
 class TaskAdapter(private val tasks: MutableList<Task>, private val isForParent: Boolean)
     : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
@@ -32,8 +33,8 @@ class TaskAdapter(private val tasks: MutableList<Task>, private val isForParent:
         holder.itemBinding.apply {
             titleText.text = tasks[position].title
             areaText.text = tasks[position].area
-            timeLimitText.text = context.getString(
-                R.string.task_time_limit_placeholder,
+            timeLimitText.text = timeLimitTextWrapper(
+                context,
                 tasks[position].startTimeLimit,
                 tasks[position].finishTimeLimit
             )
