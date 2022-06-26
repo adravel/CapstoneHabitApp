@@ -19,6 +19,7 @@ import com.fortfighter.databinding.FragmentGradingFormBinding
 import com.fortfighter.model.Task
 import com.fortfighter.util.Response
 import com.fortfighter.util.emptyTextWrapper
+import com.fortfighter.util.nonEmptiableFieldTitleWrapper
 import com.fortfighter.util.timeLimitTextWrapper
 import com.fortfighter.viewmodel.TaskDetailViewModel
 
@@ -58,6 +59,9 @@ class GradingFormFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
+            // Add apostrophe symbol to some field title texts
+            gradePointsText.text = nonEmptiableFieldTitleWrapper(requireContext(), getString(R.string.task_grade_points))
+
             // Set close button onClickListener to hide task photo pop up
             closeButton.setOnClickListener {
                 binding.popupCard.visibility = View.GONE

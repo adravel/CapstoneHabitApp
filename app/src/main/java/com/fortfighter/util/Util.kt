@@ -1,7 +1,10 @@
 package com.fortfighter.util
 
 import android.content.Context
+import android.text.SpannableStringBuilder
 import android.util.Log
+import androidx.core.content.ContextCompat
+import androidx.core.text.color
 import com.fortfighter.R
 import com.google.firebase.Timestamp
 import java.lang.Exception
@@ -109,4 +112,13 @@ fun timeLimitTextWrapper(
     } else {
         context.getString(R.string.task_time_limit_placeholder, startTimeLimit, finishTimeLimit)
     }
+}
+
+// Text wrapper for the title of a form field that cannot be empty
+// Return the title text with a red apostrophe "*" symbol
+fun nonEmptiableFieldTitleWrapper(context: Context, title: String): SpannableStringBuilder {
+    val red = ContextCompat.getColor(context, R.color.state_error_dark)
+    return SpannableStringBuilder()
+        .append(title)
+        .color(red) { append("*") }
 }

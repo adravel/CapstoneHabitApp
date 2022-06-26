@@ -18,10 +18,7 @@ import androidx.navigation.fragment.navArgs
 import com.fortfighter.R
 import com.fortfighter.databinding.FragmentTaskCreationManualBinding
 import com.fortfighter.model.Task
-import com.fortfighter.util.Response
-import com.fortfighter.util.getTaskDifficultyString
-import com.fortfighter.util.validateTimeLimit
-import com.fortfighter.util.validateTimeStringFormat
+import com.fortfighter.util.*
 import com.fortfighter.viewmodel.TaskCreationManualViewModel
 import com.fortfighter.viewmodel.TaskDetailViewModel
 
@@ -65,6 +62,11 @@ class TaskCreationManualFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
+            // Add apostrophe symbol to some field title texts
+            titleText.text = nonEmptiableFieldTitleWrapper(requireContext(), getString(R.string.task_title))
+            areaText.text = nonEmptiableFieldTitleWrapper(requireContext(), getString(R.string.task_area))
+            difficultyText.text = nonEmptiableFieldTitleWrapper(requireContext(), getString(R.string.task_difficulty))
+
             // Disable create task button by default
             createTaskButton.isEnabled = false
 
