@@ -217,9 +217,11 @@ class HouseDetailViewModel: ViewModel() {
                             val maxCP = house.getHouseStaticData()!!.maxCP
 
                             // Update house status if CP becomes more than or equal to Max CP
+                            // and set the currentHouseId field in child document to null
                             if (cp >= maxCP) {
                                  cp = maxCP
                                 transaction.update(houseDocRef, "status", 3)
+                                transaction.update(childDocRef, "currentHouseId", null)
                             }
 
                             // Update CP field in house document

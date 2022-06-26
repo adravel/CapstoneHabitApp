@@ -16,6 +16,6 @@ data class Child(
     var didWorkToday: Boolean = false,
     @field:JvmField
     var isPunished: Boolean = false,
-    var currentHouseId: String = "",
+    var currentHouseId: String? = null,
     var timeCreated: Timestamp? = null
 )

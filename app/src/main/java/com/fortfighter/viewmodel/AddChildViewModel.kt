@@ -41,6 +41,7 @@ class AddChildViewModel: ViewModel() {
                         "hasLeveledUp" to false,
                         "didWorkToday" to false,
                         "isPunished" to false,
+                        "currentHouseId" to null,
                         "timeCreated" to FieldValue.serverTimestamp()
                     )
                     val newChildDocRef = parentDocRef.collection("children").document()
@@ -60,9 +61,9 @@ class AddChildViewModel: ViewModel() {
                     val newHouseDocRef = newChildDocRef.collection("houses").document()
                     batch.set(newHouseDocRef, newHouse)
 
-                    // Add currentHouse field in child document
-                    // The value is the ID of his/her type 0 House document
-                    batch.update(newChildDocRef, "currentHouseId", newHouseDocRef.id)
+//                    // Add currentHouse field in child document
+//                    // The value is the ID of his/her type 0 House document
+//                    batch.update(newChildDocRef, "currentHouseId", newHouseDocRef.id)
 
                     // Add all 4 type of Tools documents
                     for (type in 0..3) {
