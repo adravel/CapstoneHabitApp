@@ -226,6 +226,9 @@ class HouseDetailFragment: Fragment() {
                     playToolAnimation(toolType)
                 }
                 is Response.Failure -> {
+                    // Clear the LiveData so the code below will be executed only once
+                    viewModel.toolPurchaseResultResponseHandled()
+
                     // Show error message as a toast
                     val message = when (response.message) {
                         "NOT_ENOUGH_CASH_ERROR" -> R.string.not_enough_cash_failure
@@ -439,7 +442,11 @@ class HouseDetailFragment: Fragment() {
                     dataSource: DataSource?,
                     isFirstResource: Boolean
                 ): Boolean {
-                    // Play GIF only once
+                    // Disable touch events for the whole screen
+                    // when animation starts playing
+                    binding.transparentTouchView.isClickable = true
+
+                    // Play the GIF only once
                     resource?.setLoopCount(1)
 
                     // Play sound effect after a delay
@@ -461,6 +468,10 @@ class HouseDetailFragment: Fragment() {
 
                             // Stop playing sound effect
                             stopSound()
+
+                            // Enable touch events again
+                            // after animation completes
+                            binding.transparentTouchView.isClickable = false
                         }
                     })
                     return false
