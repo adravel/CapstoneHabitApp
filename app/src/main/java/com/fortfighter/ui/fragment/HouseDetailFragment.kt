@@ -3,15 +3,18 @@ package com.fortfighter.ui.fragment
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RawRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
@@ -32,6 +35,8 @@ import com.fortfighter.model.Tool
 import com.fortfighter.util.Response
 import com.fortfighter.viewmodel.HouseDetailViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class HouseDetailFragment: Fragment() {
 
@@ -42,6 +47,7 @@ class HouseDetailFragment: Fragment() {
 
     private lateinit var houseId: String
     private lateinit var houseName: String
+    private var mediaPlayer: MediaPlayer? = null
 
     private lateinit var storeBottomSheetBehavior: BottomSheetBehavior<*>
 
@@ -269,6 +275,17 @@ class HouseDetailFragment: Fragment() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+
+        // Release media player instance
+        if (mediaPlayer != null) {
+            if (mediaPlayer!!.isPlaying) mediaPlayer!!.stop()
+            mediaPlayer!!.release()
+            mediaPlayer = null
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -390,14 +407,17 @@ class HouseDetailFragment: Fragment() {
         val toolStaticData = Tool(type = toolType.toLong()).getToolStaticData()!!
         val fragment = this
 
-        // Initialize the animation drawable resource ID and its target imageView
+        // Initialize the animation resources ID and its target imageView
         val animationResId = toolStaticData.animationResId
+        val soundResId = toolStaticData.soundResId
+        val soundDelayInMilliseconds = toolStaticData.soundDelayInMilliseconds
         val imageView = if (toolStaticData.isCrushingTool) {
             binding.frontGifImage
         } else {
             binding.centerGifImage
         }
 
+        // Load and play GIF
         Glide.with(fragment)
             .asGif()
             .load(animationResId)
@@ -422,8 +442,13 @@ class HouseDetailFragment: Fragment() {
                     // Play GIF only once
                     resource?.setLoopCount(1)
 
+                    // Play sound effect after a delay
+                    // to synchronize it with the GIF
+                    playSound(soundResId, soundDelayInMilliseconds)
+
                     // Set listener to know when the animation is complete
                     resource?.registerAnimationCallback(object : Animatable2Compat.AnimationCallback() {
+
                         override fun onAnimationEnd(drawable: Drawable?) {
                             super.onAnimationEnd(drawable)
 
@@ -433,11 +458,36 @@ class HouseDetailFragment: Fragment() {
 
                             // Clear the ImageView
                             Glide.with(fragment).clear(imageView)
+
+                            // Stop playing sound effect
+                            stopSound()
                         }
                     })
                     return false
                 }
             })
             .into(imageView)
+    }
+
+    // Play sound effect with delay
+    private fun playSound(@RawRes soundResId: Int, delayInMilliseconds: Long) {
+        if (mediaPlayer == null) {
+            mediaPlayer = MediaPlayer.create(context, soundResId)
+
+            lifecycleScope.launch {
+                delay(delayInMilliseconds)
+                mediaPlayer!!.isLooping = false
+                mediaPlayer!!.start()
+            }
+        }
+    }
+
+    // Stop playing sound effect
+    private fun stopSound() {
+        if (mediaPlayer != null) {
+            mediaPlayer!!.stop()
+            mediaPlayer!!.release()
+            mediaPlayer = null
+        }
     }
 }
