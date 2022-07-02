@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar_layout"
+        layout="@layout/layout_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_layout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
+
+            <!-- Constraint layout for task data -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/task_attributes_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <!-- Task attributes texts -->
+                <TextView
+                    android:id="@+id/title_text"
+                    style="@style/body_medium_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/task_title"
+                    android:textColor="@color/dark_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/category_text"
+                    style="@style/body_medium_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/task_category"
+                    android:textColor="@color/dark_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/title_data_text" />
+
+                <TextView
+                    android:id="@+id/area_text"
+                    style="@style/body_medium_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/task_area"
+                    android:textColor="@color/dark_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/category_data_text" />
+
+                <TextView
+                    android:id="@+id/difficulty_text"
+                    style="@style/body_medium_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/task_difficulty"
+                    android:textColor="@color/dark_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/area_data_text" />
+
+                <TextView
+                    android:id="@+id/repetition_text"
+                    style="@style/body_medium_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/task_repetition"
+                    android:textColor="@color/dark_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/difficulty_data_text" />
+
+                <TextView
+                    android:id="@+id/time_limit_text"
+                    style="@style/body_medium_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/task_time_limit"
+                    android:textColor="@color/dark_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/repetition_data_text" />
+
+                <TextView
+                    android:id="@+id/duration_text"
+                    style="@style/body_medium_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/task_duration"
+                    android:textColor="@color/dark_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/time_limit_data_text" />
+
+                <TextView
+                    android:id="@+id/status_text"
+                    style="@style/body_medium_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/task_status"
+                    android:textColor="@color/dark_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/duration_data_text" />
+
+                <TextView
+                    android:id="@+id/detail_text"
+                    style="@style/body_medium_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/task_detail"
+                    android:textColor="@color/dark_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/status_data_text" />
+
+                <TextView
+                    android:id="@+id/grade_points_text"
+                    style="@style/body_medium_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/task_grade_points"
+                    android:textColor="@color/dark_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/detail_data_text" />
+
+                <TextView
+                    android:id="@+id/notes_text"
+                    style="@style/body_medium_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/task_notes"
+                    android:textColor="@color/dark_1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/grade_text_input_layout" />
+
+                <!-- Task attributes data texts -->
+                <TextView
+                    android:id="@+id/title_data_text"
+                    style="@style/body_medium_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/dark_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/title_text"
+                    app:layout_constraintTop_toTopOf="@id/title_text"
+                    tools:text="@string/task_title_placeholder" />
+
+                <TextView
+                    android:id="@+id/category_data_text"
+                    style="@style/body_medium_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/title_data_text"
+                    app:layout_constraintTop_toTopOf="@id/category_text"
+                    tools:text="@string/task_category_placeholder" />
+
+                <TextView
+                    android:id="@+id/area_data_text"
+                    style="@style/body_medium_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/title_data_text"
+                    app:layout_constraintTop_toTopOf="@id/area_text"
+                    tools:text="@string/task_area_placeholder" />
+
+                <TextView
+                    android:id="@+id/difficulty_data_text"
+                    style="@style/body_medium_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/title_data_text"
+                    app:layout_constraintTop_toTopOf="@id/difficulty_text"
+                    tools:text="@string/task_difficulty_placeholder" />
+
+                <TextView
+                    android:id="@+id/repetition_data_text"
+                    style="@style/body_medium_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/title_data_text"
+                    app:layout_constraintTop_toTopOf="@id/repetition_text"
+                    tools:text="@string/task_repetition_placeholder" />
+
+                <TextView
+                    android:id="@+id/time_limit_data_text"
+                    style="@style/body_medium_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/title_data_text"
+                    app:layout_constraintTop_toTopOf="@id/time_limit_text"
+                    tools:text="@string/task_time_limit_placeholder" />
+
+                <TextView
+                    android:id="@+id/duration_data_text"
+                    style="@style/body_medium_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/title_data_text"
+                    app:layout_constraintTop_toTopOf="@id/duration_text"
+                    tools:text="@string/task_duration_placeholder" />
+
+                <TextView
+                    android:id="@+id/status_data_text"
+                    style="@style/body_medium_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/title_data_text"
+                    app:layout_constraintTop_toTopOf="@id/status_text"
+                    tools:text="@string/task_status_2_with_child_name" />
+
+                <TextView
+                    android:id="@+id/detail_data_text"
+                    style="@style/body_medium_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/title_data_text"
+                    app:layout_constraintTop_toTopOf="@id/detail_text"
+                    tools:text="@string/task_detail_placeholder" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/grade_text_input_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:boxBackgroundColor="@color/white"
+                    app:hintEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/detail_data_text"
+                    app:layout_constraintTop_toTopOf="@+id/grade_points_text">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/grade_auto_complete_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/hint_select_grade"
+                        android:inputType="none" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/notes_text_input_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:boxBackgroundColor="@color/white"
+                    app:hintEnabled="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/detail_data_text"
+                    app:layout_constraintTop_toTopOf="@+id/notes_text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/notes_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="top"
+                        android:hint="@string/hint_notes"
+                        android:inputType="text|textMultiLine"
+                        android:lines="5" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/open_photo_button"
+                style="@style/normal_button"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/button_label_open_task_photo" />
+
+            <Button
+                android:id="@+id/grade_task_button"
+                style="@style/normal_button"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/button_label_grade_task" />
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/popup_card"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="30dp"
+        app:cardBackgroundColor="@color/black"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="H, 300:350"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/photo_image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/close_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/ic_close_background"
+                android:src="@drawable/ic_close_foreground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
