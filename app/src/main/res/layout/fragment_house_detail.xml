@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            layout="@layout/layout_toolbar_with_menu"
+            android:id="@+id/toolbar_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:contentPaddingTop="4dp"
+            app:contentPaddingBottom="4dp"
+            app:contentPaddingLeft="10dp"
+            app:contentPaddingRight="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_layout">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/house_name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_2"
+                    style="@style/body_regular"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Nama Rumah"/>
+
+                <TextView
+                    android:id="@+id/house_progress_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_2"
+                    style="@style/body_regular"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="HP : 200/1000"/>
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/house_progress_bar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="4dp"
+                    app:indicatorColor="@color/state_error"
+                    app:trackColor="#F8E0D1"
+                    app:trackThickness="12dp"
+                    app:trackCornerRadius="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/house_name_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:max="100"
+                    tools:progress="40" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/house_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintDimensionRatio="H,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
+            tools:src="@drawable/img_game_house_0_intact" />
+
+        <ImageView
+            android:id="@+id/fort_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="H,360:195"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/house_image"
+            tools:src="@drawable/img_game_fort_intact" />
+
+        <ImageView
+            android:id="@+id/dirt_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="70dp"
+            app:layout_constraintDimensionRatio="H,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/house_image"
+            tools:src="@drawable/img_game_dirt_both"/>
+
+        <ImageView
+            android:id="@+id/center_gif_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:src="@drawable/gif_hammer"
+            app:layout_constraintDimensionRatio="H, 1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/house_image" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/shop_bottom_sheet_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="30dp"
+        app:cardBackgroundColor="@color/white"
+        app:behavior_hideable="false"
+        app:behavior_peekHeight="150dp"
+        app:layout_behavior="@string/bottom_sheet_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/arrow_icon_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/ic_arrow_upward"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/store_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/store"
+                android:textColor="@color/dark_1"
+                style="@style/header2"
+                android:textAllCaps="true"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/cash_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/state_info_dark"
+                style="@style/body_medium_2"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/store_text"
+                app:layout_constraintBottom_toBottomOf="@id/store_text"
+                tools:text="Dana : Rp 2400" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tool_list_recycler_view"
+                android:layout_width="0dp"
+                android:layout_height="400dp"
+                android:layout_marginHorizontal="8dp"
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="8dp"
+                android:clipToPadding="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/store_text"
+                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:spanCount="2"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_tool" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="2dp">
+
+        <ImageView
+            android:id="@+id/front_gif_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/gif_cannon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/transparent_touch_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="3dp"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

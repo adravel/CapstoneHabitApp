@@ -1,6 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1445" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/fab_add_icon.xml" value="0.168" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/ic_arrow_upward.xml" value="0.1445" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/ic_back_button.xml" value="0.1445" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/ic_fab_add.xml" value="0.1475" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/ic_notification.xml" value="0.1445" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/ic_placeholder.xml" value="0.1445" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/ic_visibility.xml" value="0.1445" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/ic_visibility_off.xml" value="0.1445" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/image_placeholder.xml" value="0.168" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/img_placeholder.xml" value="0.1645" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/drawable/rounded_corner.xml" value="0.1445" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout-v26/fragment_house_info.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/card_task.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/dialog_big_icon.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/dialog_detail.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/dialog_level_up.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/dialog_one_button.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/dialog_time_picker.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/dialog_time_picker_with_days.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/dialog_two_buttons.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_add_child.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_ask_for_grading_dialog.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_big_icon_dialog.xml" value="0.2" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_child_account_selection.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_child_home.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_child_selection.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_finished_task_list.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_grading_form.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_grading_method_selection_dialog.xml" value="0.20863616930312098" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_history.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_history_2.xml" value="0.253125" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_house_detail.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_house_info.xml" value="0.253125" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_house_list.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_login.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_one_button_dialog.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_parent_account_verification.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_parent_home.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_ranking.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_register.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_role_selection.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_shop.xml" value="0.20863616930312098" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_store.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_task_creation.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_task_creation_from_template.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_task_creation_manual.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_task_creation_template_category.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_task_creation_template_task.xml" value="0.253125" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_task_detail.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_task_list.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_template_task_creation.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_test.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_tool_sale_confirmation_dialog.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_two_buttons_dialog.xml" value="0.25" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_upload_photo.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/fragment_welcome.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/home_fragment.xml" value="0.20863616930312098" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/item_child.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/item_child_account.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/item_child_rank.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/item_dropdown.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/item_essential_task.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/item_house.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/item_task.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/item_time_picker.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/item_time_picker_repeatedly.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/item_tool.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/layout_home_toolbar.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/layout_shop_bottom_sheet.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/layout_toolbar.xml" value="0.264" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/layout_toolbar_with_dropdown.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/layout_toolbar_with_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/2-Code/kotlin/CapstoneHabitApp/app/src/main/res/layout/task_list_fragment.xml" value="0.2223731884057971" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/drawable/image_placeholder.xml" value="0.144" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/font/martel_sans.xml" value="0.20364583333333333" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/activity_main.xml" value="0.21693840579710144" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_add_child.xml" value="0.25" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_big_icon_dialog.xml" value="0.21693840579710144" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_child_account_selection.xml" value="0.21693840579710144" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_child_home.xml" value="0.5" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_grading_form.xml" value="0.33" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_house_detail.xml" value="0.25" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_house_list.xml" value="0.21693840579710144" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_level_up_dialog.xml" value="0.25" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_login.xml" value="0.22" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_one_button_dialog.xml" value="0.5" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_parent_account_verification.xml" value="0.33" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_parent_home.xml" value="0.21693840579710144" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_ranking.xml" value="0.25" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_register.xml" value="0.21693840579710144" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_role_selection.xml" value="0.25" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_shop.xml" value="0.21693840579710144" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_task_creation.xml" value="0.33" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_task_detail.xml" value="0.33" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_task_list.xml" value="0.21693840579710144" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_two_buttons_dialog.xml" value="0.21693840579710144" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/fragment_welcome.xml" value="0.21693840579710144" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/item_child_account.xml" value="0.21693840579710144" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/item_child_rank.xml" value="0.25" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/item_dropdown.xml" value="0.21693840579710144" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/item_essential_task.xml" value="0.5" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/item_house.xml" value="0.12907608695652173" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/item_task.xml" value="0.33" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/item_tool.xml" value="0.33" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/layout_home_toolbar.xml" value="0.21693840579710144" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/layout_toolbar.xml" value="0.21693840579710144" />
+        <entry key="..\:/TETI/Semester 7/Capstone/Aplikasi/CapstoneHabitApp/app/src/main/res/layout/layout_toolbar_with_menu.xml" value="0.21693840579710144" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

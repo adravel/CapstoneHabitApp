@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    tools:ignore="InvalidNavigation"
+    app:startDestination="@id/addChildFragment">
+
+    <fragment
+        android:id="@+id/taskListFragment"
+        android:name="com.fortfighter.ui.fragment.TaskListFragment"
+        android:label="fragment_task_list"
+        tools:layout="@layout/fragment_task_list" >
+        <action
+            android:id="@+id/action_taskListFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
+        <action
+            android:id="@+id/action_taskListFragment_to_taskDeleteSuccessDialogFragment"
+            app:destination="@id/taskDeleteSuccessDialogFragment" />
+        <action
+            android:id="@+id/action_taskListFragment_to_taskCreationTemplateCategoryFragment"
+            app:destination="@id/taskCreationTemplateCategoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskDetailFragment"
+        android:name="com.fortfighter.ui.fragment.TaskDetailFragment"
+        android:label="fragment_task_detail"
+        tools:layout="@layout/fragment_task_detail" >
+        <argument
+            android:name="taskId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_taskDetailFragment_to_gradingMethodSelectionDialogFragment"
+            app:destination="@id/gradingMethodSelectionDialogFragment" />
+        <action
+            android:id="@+id/action_taskDetailFragment_to_gradingFormFragment"
+            app:destination="@id/gradingFormFragment" />
+        <action
+            android:id="@+id/action_taskDetailFragment_to_gradingSuccessDialogFragment"
+            app:destination="@id/gradingSuccessDialogFragment" />
+        <action
+            android:id="@+id/action_taskDetailFragment_to_taskDeleteConfirmationDialogFragment"
+            app:destination="@id/taskDeleteConfirmationDialogFragment" />
+        <action
+            android:id="@+id/action_taskDetailFragment_to_taskCreationManualFragment"
+            app:destination="@id/taskCreationManualFragment" />
+        <action
+            android:id="@+id/action_taskDetailFragment_to_askForGradingSuccessDialogFragment"
+            app:destination="@id/askForGradingSuccessDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/roleSelectionFragment"
+        android:name="com.fortfighter.ui.fragment.RoleSelectionFragment"
+        android:label="fragment_role_selection"
+        tools:layout="@layout/fragment_role_selection" >
+        <action
+            android:id="@+id/action_roleSelectionFragment_to_childAccountSelectionFragment"
+            app:destination="@id/childAccountSelectionFragment" />
+        <action
+            android:id="@+id/action_roleSelectionFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/parentHomeFragment"
+        android:name="com.fortfighter.ui.fragment.ParentHomeFragment"
+        android:label="fragment_parent_home"
+        tools:layout="@layout/fragment_parent_home" >
+        <action
+            android:id="@+id/action_parentHomeFragment_to_taskListFragment"
+            app:destination="@id/taskListFragment" />
+        <action
+            android:id="@+id/action_parentHomeFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
+        <action
+            android:id="@+id/action_parentHomeFragment_to_childAccountSelectionFragment"
+            app:destination="@id/childAccountSelectionFragment" />
+        <action
+            android:id="@+id/action_parentHomeFragment_to_roleSelectionFragment"
+            app:destination="@id/roleSelectionFragment" />
+        <action
+            android:id="@+id/action_parentHomeFragment_to_rankingFragment"
+            app:destination="@id/rankingFragment" />
+        <action
+            android:id="@+id/action_parentHomeFragment_to_history"
+            app:destination="@id/historyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/childAccountSelectionFragment"
+        android:name="com.fortfighter.ui.fragment.ChildAccountSelectionFragment"
+        android:label="fragment_child_account_selection"
+        tools:layout="@layout/fragment_child_account_selection" >
+        <action
+            android:id="@+id/action_childAccountSelectionFragment_to_childHomeFragment"
+            app:destination="@id/childHomeFragment" />
+        <action
+            android:id="@+id/action_childAccountSelectionFragment_to_storeFragment"
+            app:destination="@id/storeFragment" />
+        <argument
+            android:name="isForParent"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_childAccountSelectionFragment_to_addChildFragment"
+            app:destination="@id/addChildFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/childHomeFragment"
+        android:name="com.fortfighter.ui.fragment.ChildHomeFragment"
+        android:label="fragment_child_home"
+        tools:layout="@layout/fragment_child_home" >
+        <action
+            android:id="@+id/action_childHomeFragment_to_taskListFragment"
+            app:destination="@id/taskListFragment" />
+        <action
+            android:id="@+id/action_childHomeFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
+        <action
+            android:id="@+id/action_childHomeFragment_to_houseListFragment"
+            app:destination="@id/houseListFragment" />
+        <action
+            android:id="@+id/action_childHomeFragment_to_levelUpDialogFragment"
+            app:destination="@id/levelUpDialogFragment" />
+        <action
+            android:id="@+id/action_childHomeFragment_to_rankingFragment"
+            app:destination="@id/rankingFragment" />
+        <action
+            android:id="@+id/action_childHomeFragment_to_history"
+            app:destination="@id/historyFragment" />
+        <action
+            android:id="@+id/action_childHomeFragment_to_parentAccountVerificationFragment"
+            app:destination="@id/parentAccountVerificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskCreationManualFragment"
+        android:name="com.fortfighter.ui.fragment.TaskCreationManualFragment"
+        android:label="fragment_task_creation_manual"
+        tools:layout="@layout/fragment_task_creation_manual" >
+        <action
+            android:id="@+id/action_taskCreationManualFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
+        <argument
+            android:name="isForEditing"
+            app:argType="boolean" />
+    </fragment>
+    <dialog
+        android:id="@+id/gradingMethodSelectionDialogFragment"
+        android:name="com.fortfighter.ui.dialog.GradingMethodSelectionDialogFragment"
+        android:label="GradingMethodSelectionDialogFragment" >
+        <action
+            android:id="@+id/action_gradingMethodSelectionDialogFragment_to_parentAccountVerificationFragment"
+            app:destination="@id/parentAccountVerificationFragment" />
+        <action
+            android:id="@+id/action_gradingMethodSelectionDialogFragment_to_uploadPhotoFragment"
+            app:destination="@id/uploadPhotoFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/gradingFormFragment"
+        android:name="com.fortfighter.ui.fragment.GradingFormFragment"
+        android:label="fragment_grading_form"
+        tools:layout="@layout/fragment_grading_form" />
+    <fragment
+        android:id="@+id/storeFragment"
+        android:name="com.fortfighter.ui.fragment.StoreFragment"
+        android:label="StoreFragment"
+        tools:layout="@layout/fragment_store" >
+        <action
+            android:id="@+id/action_storeFragment_to_toolShipmentConfirmationDialogFragment"
+            app:destination="@id/toolShipmentConfirmationDialogFragment" />
+        <argument
+            android:name="childId"
+            app:argType="string" />
+        <argument
+            android:name="childName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_storeFragment_to_toolShipmentSuccessDialogFragment"
+            app:destination="@id/toolShipmentSuccessDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/toolShipmentConfirmationDialogFragment"
+        android:name="com.fortfighter.ui.dialog.ToolShipmentConfirmationDialogFragment"
+        android:label="ToolShipmentConfirmationDialogFragment" >
+        <argument
+            android:name="toolId"
+            app:argType="string" />
+        <argument
+            android:name="toolName"
+            app:argType="string" />
+        <argument
+            android:name="childId"
+            app:argType="string" />
+        <argument
+            android:name="childName"
+            app:argType="string" />
+    </dialog>
+    <dialog
+        android:id="@+id/toolShipmentSuccessDialogFragment"
+        android:name="com.fortfighter.ui.dialog.ToolShipmentSuccessDialogFragment"
+        android:label="ToolShipmentSuccessDialogFragment" >
+        <argument
+            android:name="toolName"
+            app:argType="string" />
+    </dialog>
+    <fragment
+        android:id="@+id/houseListFragment"
+        android:name="com.fortfighter.ui.fragment.HouseListFragment"
+        android:label="HouseListFragment"
+        tools:layout="@layout/fragment_house_list">
+        <action
+            android:id="@+id/action_houseListFragment_to_houseSelectionConfirmationDialogFragment"
+            app:destination="@id/houseSelectionConfirmationDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/houseSelectionConfirmationDialogFragment"
+        android:name="com.fortfighter.ui.dialog.HouseSelectionConfirmationDialogFragment"
+        android:label="HouseSelectionConfirmationDialogFragment" >
+        <argument
+            android:name="houseId"
+            app:argType="string" />
+        <argument
+            android:name="houseName"
+            app:argType="string" />
+        <argument
+            android:name="houseStatus"
+            app:argType="integer"/>
+        <action
+            android:id="@+id/action_houseSelectionConfirmationDialogFragment_to_houseDetailFragment"
+            app:destination="@id/houseDetailFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/houseDetailFragment"
+        android:name="com.fortfighter.ui.fragment.HouseDetailFragment"
+        android:label="HouseDetailFragment"
+        tools:layout="@layout/fragment_house_detail">
+        <argument
+            android:name="houseId"
+            app:argType="string" />
+        <argument
+            android:name="houseName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_houseDetailFragment_to_toolPurchaseConfirmationDialogFragment"
+            app:destination="@id/toolPurchaseConfirmationDialogFragment" />
+        <action
+            android:id="@+id/action_houseDetailFragment_to_houseRescueIntroDialogFragment"
+            app:destination="@id/houseRescueIntroDialogFragment" />
+        <action
+            android:id="@+id/action_houseDetailFragment_to_houseCareIntroDialogFragment"
+            app:destination="@id/houseCareIntroDialogFragment" />
+        <action
+            android:id="@+id/action_houseDetailFragment_to_houseInfoFragment"
+            app:destination="@id/houseInfoFragment" />
+        <action
+            android:id="@+id/action_houseDetailFragment_to_houseCareSuccessDialogFragment"
+            app:destination="@id/houseCareSuccessDialogFragment" />
+        <action
+            android:id="@+id/action_houseDetailFragment_to_punishmentDialogFragment"
+            app:destination="@id/punishmentDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/toolPurchaseConfirmationDialogFragment"
+        android:name="com.fortfighter.ui.dialog.ToolPurchaseConfirmationDialogFragment"
+        android:label="ToolPurchaseConfirmationDialogFragment" >
+        <argument
+            android:name="toolId"
+            app:argType="string" />
+        <argument
+            android:name="toolName"
+            app:argType="string" />
+        <argument
+            android:name="toolType"
+            app:argType="integer"/>
+    </dialog>
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.fortfighter.ui.fragment.WelcomeFragment"
+        android:label="WelcomeFragment"
+        tools:layout="@layout/fragment_welcome" >
+        <action
+            android:id="@+id/action_welcomeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.fortfighter.ui.fragment.RegisterFragment"
+        android:label="RegisterFragment"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_roleSelectionFragment"
+            app:destination="@id/roleSelectionFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.fortfighter.ui.fragment.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_roleSelectionFragment"
+            app:destination="@id/roleSelectionFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addChildFragment"
+        android:name="com.fortfighter.ui.fragment.AddChildFragment"
+        android:label="AddChildFragment"
+        tools:layout="@layout/fragment_add_child"/>
+    <fragment
+        android:id="@+id/parentAccountVerificationFragment"
+        android:name="com.fortfighter.ui.fragment.ParentAccountVerificationFragment"
+        android:label="ParentAccountVerificationFragment"
+        tools:layout="@layout/fragment_parent_account_verification">
+        <action
+            android:id="@+id/action_parentAccountVerificationFragment_to_gradingFormFragment"
+            app:destination="@id/gradingFormFragment" />
+        <argument android:name="isForGrading"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_parentAccountVerificationFragment_to_roleSelectionFragment"
+            app:destination="@id/roleSelectionFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/gradingSuccessDialogFragment"
+        android:name="com.fortfighter.ui.dialog.GradingSuccessDialogFragment"
+        android:label="GradingSuccessDialogFragment" />
+    <dialog
+        android:id="@+id/levelUpDialogFragment"
+        android:name="com.fortfighter.ui.dialog.LevelUpDialogFragment"
+        android:label="LevelUpDialogFragment" >
+        <argument
+            android:name="childId"
+            app:argType="string" />
+        <argument
+            android:name="childNewLevel"
+            app:argType="integer" />
+        <argument
+            android:name="childNewLevelName"
+            app:argType="string" />
+    </dialog>
+    <fragment
+        android:id="@+id/rankingFragment"
+        android:name="com.fortfighter.ui.fragment.RankingFragment"
+        android:label="RankingFragment"
+        tools:layout="@layout/fragment_ranking"/>
+    <dialog
+        android:id="@+id/taskDeleteConfirmationDialogFragment"
+        android:name="com.fortfighter.ui.dialog.TaskDeleteConfirmationDialogFragment"
+        android:label="TaskDeleteConfirmationDialogFragment" />
+    <dialog
+        android:id="@+id/taskDeleteSuccessDialogFragment"
+        android:name="com.fortfighter.ui.dialog.TaskDeleteSuccessDialogFragment"
+        android:label="TaskDeleteSuccessDialogFragment" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.fortfighter.ui.fragment.HistoryFragment"
+        android:label="HistoryFragment"
+        tools:layout="@layout/fragment_history">
+        <action
+            android:id="@+id/action_historyFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
+        <action
+            android:id="@+id/action_historyFragment_to_finishedTaskListFragment"
+            app:destination="@id/finishedTaskListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/finishedTaskListFragment"
+        android:name="com.fortfighter.ui.fragment.FinishedTaskListFragment"
+        android:label="FinishedTaskListFragment"
+        tools:layout="@layout/fragment_finished_task_list">
+        <action
+            android:id="@+id/action_finishedTaskListFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskCreationTemplateCategoryFragment"
+        android:name="com.fortfighter.ui.fragment.TaskCreationTemplateCategoryFragment"
+        android:label="TaskCreationTemplateCategoryFragment"
+        tools:layout="@layout/fragment_task_creation_template_category">
+        <action
+            android:id="@+id/action_taskCreationTemplateCategoryFragment_to_taskCreationManualFragment"
+            app:destination="@id/taskCreationManualFragment" />
+        <action
+            android:id="@+id/action_taskCreationTemplateCategoryFragment_to_taskCreationTemplateTaskFragment"
+            app:destination="@id/taskCreationTemplateTaskFragment" />
+        <action
+            android:id="@+id/action_taskCreationTemplateCategoryFragment_to_timePickerDialogFragment"
+            app:destination="@id/timePickerDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskCreationTemplateTaskFragment"
+        android:name="com.fortfighter.ui.fragment.TaskCreationTemplateTaskFragment"
+        android:label="TaskCreationTemplateTaskFragment"
+        tools:layout="@layout/fragment_task_creation_template_task">
+        <action
+            android:id="@+id/action_taskCreationTemplateTaskFragment_to_taskCreationManualFragment"
+            app:destination="@id/taskCreationManualFragment" />
+        <action
+            android:id="@+id/action_taskCreationTemplateTaskFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/timePickerDialogFragment"
+        android:name="com.fortfighter.ui.dialog.TimePickerDialogFragment"
+        android:label="TimePickerDialogFragment" />
+    <fragment
+        android:id="@+id/uploadPhotoFragment"
+        android:name="com.fortfighter.ui.fragment.UploadPhotoFragment"
+        android:label="UploadPhotoFragment"
+        tools:layout="@layout/fragment_upload_photo"/>
+    <dialog
+        android:id="@+id/askForGradingSuccessDialogFragment"
+        android:name="com.fortfighter.ui.dialog.AskForGradingSuccessDialogFragment"
+        android:label="AskForGradingSuccessDialogFragment" />
+    <dialog
+        android:id="@+id/houseRescueIntroDialogFragment"
+        android:name="com.fortfighter.ui.dialog.HouseRescueIntroDialogFragment"
+        android:label="HouseRescueIntroDialogFragment" />
+    <dialog
+        android:id="@+id/houseCareIntroDialogFragment"
+        android:name="com.fortfighter.ui.dialog.HouseCareIntroDialogFragment"
+        android:label="HouseCareIntroDialogFragment" />
+    <fragment
+        android:id="@+id/houseInfoFragment"
+        android:name="com.fortfighter.ui.fragment.HouseInfoFragment"
+        android:label="HouseInfoFragment"
+        tools:layout="@layout/fragment_house_info"/>
+    <dialog
+        android:id="@+id/houseCareSuccessDialogFragment"
+        android:name="com.fortfighter.ui.dialog.HouseCareSuccessDialogFragment"
+        android:label="HouseCareSuccessDialogFragment" />
+    <dialog
+        android:id="@+id/punishmentDialogFragment"
+        android:name="com.fortfighter.ui.dialog.PunishmentDialogFragment"
+        android:label="PunishmentDialogFragment" />
+</navigation>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <include
+        layout="@layout/layout_toolbar"
+        android:id="@+id/toolbar_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/choose_child_account_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_child_account"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/dark_1"
+        style="@style/header1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
+        android:layout_marginTop="40dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/child_account_list_recycle_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/choose_child_account_text"
+        android:layout_marginTop="30dp"
+        tools:listitem="@layout/item_child_account"
+        tools:itemCount="5"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/add_child_button"
+        style="@style/text_button"
+        android:layout_width="wrap_content"
+        android:text="@string/button_label_add_child"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/child_account_list_recycle_view"
+        android:layout_marginTop="40dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

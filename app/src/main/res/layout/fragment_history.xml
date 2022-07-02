@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        layout="@layout/layout_toolbar_with_dropdown"
+        android:id="@+id/toolbar_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/month_summary_card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="16dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:id="@+id/month_summary_avatar_image"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        tools:src="@drawable/img_soldier_male"/>
+
+                    <TextView
+                        android:id="@+id/month_summary_congrats_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_1"
+                        style="@style/body_large_4"
+                        app:layout_constraintStart_toEndOf="@+id/month_summary_avatar_image"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="2dp"
+                        tools:text="@string/history_congrats_placeholder"
+                        android:textAllCaps="true"/>
+
+                    <TextView
+                        android:id="@+id/month_summary_description_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_1"
+                        style="@style/body_medium_1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/month_summary_congrats_text"
+                        app:layout_constraintTop_toBottomOf="@+id/month_summary_congrats_text"
+                        tools:text="@string/history_description_placeholder" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/weekly_summary_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/weekly_summary"
+                android:textColor="@color/dark_1"
+                style="@style/body_medium_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/month_summary_card"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="16dp"/>
+
+            <HorizontalScrollView
+                android:id="@+id/weekly_summary_scroll_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fillViewport="true"
+                android:scrollbarThumbHorizontal="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weekly_summary_text">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/week1_summary_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="4dp"
+                        android:layout_marginStart="8dp"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/week1_summary_card_number"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginTop="9dp"
+                                android:fontFamily="@font/martel_sans_extrabold"
+                                android:text="@string/zero"
+                                android:textColor="@color/state_success_dark"
+                                android:textSize="36sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/week1_summary_card_title"
+                                style="@style/body_large_4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="15dp"
+                                android:text="@string/task"
+                                android:textColor="@color/dark_green"
+                                app:layout_constraintBottom_toBottomOf="@id/week1_summary_card_number"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/week1_summary_card_number"
+                                app:layout_constraintTop_toTopOf="@id/week1_summary_card_number" />
+
+                            <TextView
+                                android:id="@+id/week1_summary_card_text"
+                                style="@style/body_medium_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="16dp"
+                                android:layout_marginBottom="12dp"
+                                android:text="@string/week1_content"
+                                android:textColor="@color/dark_1"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/week1_summary_card_number" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/week2_summary_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="4dp"
+                        android:layout_marginStart="20dp"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/week1_summary_card"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/week2_summary_card_number"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginTop="9dp"
+                                android:fontFamily="@font/martel_sans_extrabold"
+                                android:text="@string/zero"
+                                android:textColor="@color/state_success_dark"
+                                android:textSize="36sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/week2_summary_card_title"
+                                style="@style/body_large_4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="15dp"
+                                android:text="@string/task"
+                                android:textColor="@color/dark_green"
+                                app:layout_constraintBottom_toBottomOf="@id/week2_summary_card_number"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/week2_summary_card_number"
+                                app:layout_constraintTop_toTopOf="@id/week2_summary_card_number" />
+
+                            <TextView
+                                android:id="@+id/week2_summary_card_text"
+                                style="@style/body_medium_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="16dp"
+                                android:layout_marginBottom="12dp"
+                                android:text="@string/week2_content"
+                                android:textColor="@color/dark_1"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/week2_summary_card_number" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/week3_summary_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="4dp"
+                        android:layout_marginStart="20dp"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/week2_summary_card"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/week3_summary_card_number"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginTop="9dp"
+                                android:fontFamily="@font/martel_sans_extrabold"
+                                android:text="@string/zero"
+                                android:textColor="@color/state_success_dark"
+                                android:textSize="36sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/week3_summary_card_title"
+                                style="@style/body_large_4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="15dp"
+                                android:text="@string/task"
+                                android:textColor="@color/dark_green"
+                                app:layout_constraintBottom_toBottomOf="@id/week3_summary_card_number"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/week3_summary_card_number"
+                                app:layout_constraintTop_toTopOf="@id/week3_summary_card_number" />
+
+                            <TextView
+                                android:id="@+id/week3_summary_card_text"
+                                style="@style/body_medium_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="16dp"
+                                android:layout_marginBottom="12dp"
+                                android:text="@string/week3_content"
+                                android:textColor="@color/dark_1"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/week3_summary_card_number" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/week4_summary_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="4dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="8dp"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/week3_summary_card"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/week4_summary_card_number"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginTop="9dp"
+                                android:fontFamily="@font/martel_sans_extrabold"
+                                android:text="@string/zero"
+                                android:textColor="@color/state_success_dark"
+                                android:textSize="36sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/week4_summary_card_title"
+                                style="@style/body_large_4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="15dp"
+                                android:text="@string/task"
+                                android:textColor="@color/dark_green"
+                                app:layout_constraintBottom_toBottomOf="@id/week4_summary_card_number"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/week4_summary_card_number"
+                                app:layout_constraintTop_toTopOf="@id/week4_summary_card_number" />
+
+                            <TextView
+                                android:id="@+id/week4_summary_card_text"
+                                style="@style/body_medium_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="16dp"
+                                android:layout_marginBottom="12dp"
+                                android:text="@string/week4_content"
+                                android:textColor="@color/dark_1"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/week4_summary_card_number" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/finished_tasks_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/finished_tasks"
+                android:textColor="@color/dark_1"
+                style="@style/body_medium_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weekly_summary_scroll_view"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="16dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/finished_task_list_recycler_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/finished_tasks_text"
+                android:layout_marginTop="14dp"
+                tools:listitem="@layout/item_essential_task"
+                tools:itemCount="3"/>
+
+            <Button
+                android:id="@+id/see_all_button"
+                style="@style/outline_button"
+                android:layout_width="0dp"
+                android:layout_margin="20dp"
+                android:text="@string/button_label_see_all"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/finished_task_list_recycler_view" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
