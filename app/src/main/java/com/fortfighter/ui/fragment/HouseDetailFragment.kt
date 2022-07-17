@@ -118,6 +118,9 @@ class HouseDetailFragment: Fragment() {
 
                         // Display tool list depending on House status
                         toolAdapter.updateList(tools, houseStatus)
+
+                        // Display empty text if tools is empty
+                        binding.emptyToolsText.visibility = if (tools.isEmpty()) View.VISIBLE else View.GONE
                     }
 
                     // Display house rescue intro dialog if house status is 1,
@@ -171,6 +174,9 @@ class HouseDetailFragment: Fragment() {
 
                         // Display tool list depending on House status
                         toolAdapter.updateList(tools, houseStatus)
+
+                        // Display empty text if tools is empty
+                        binding.emptyToolsText.visibility = if (tools.isEmpty()) View.VISIBLE else View.GONE
                     }
                 }
                 is Response.Failure -> {

@@ -45,75 +45,144 @@ class HistoryFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set the adapter and layoutManager for finished task list RecyclerView
-        // and show only the latest 3 finished tasks
-        finishedTaskAdapter = FinishedTaskAdapter(mutableListOf(), false)
-        binding.finishedTaskListRecyclerView.apply {
-            adapter = finishedTaskAdapter
-            layoutManager = LinearLayoutManager(context)
-        }
+        binding.apply {
+            // Set the adapter and layoutManager for finished task list RecyclerView
+            // and show only the latest 3 finished tasks
+            finishedTaskAdapter = FinishedTaskAdapter(mutableListOf(), false)
+            finishedTaskListRecyclerView.apply {
+                adapter = finishedTaskAdapter
+                layoutManager = LinearLayoutManager(context)
+            }
 
-        // Retrieve user's role from shared preference
-        val sharedPref = requireActivity().getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
-        val isParent = sharedPref.getBoolean(getString(R.string.role_pref_is_parent_key), false)
+            // Retrieve user's role from shared preference
+            val sharedPref = requireActivity().getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
+            val isParent = sharedPref.getBoolean(getString(R.string.role_pref_is_parent_key), false)
 
-        // Load data according to user's role
-        if (isParent) {
-            // Fetch children data from Firestore
-            viewModel.getChildrenFromFirebase()
+            // Load data according to user's role
+            if (isParent) {
+                // Fetch children data from Firestore
+                viewModel.getChildrenFromFirebase()
 
-            // Observe children LiveData in ViewModel
-            viewModel.children.observe(viewLifecycleOwner) { response ->
+                // Observe children LiveData in ViewModel
+                viewModel.children.observe(viewLifecycleOwner) { response ->
+                    when (response) {
+                        is Response.Loading -> {}
+                        is Response.Success -> {
+                            val children = response.data
+
+                            // Handle empty Children data
+                            if (children.isEmpty()) {
+                                // Empty Children data
+                                // Display the empty child accounts text and hide all the other Views
+                                emptyChildAccountsText.visibility = View.VISIBLE
+                                scrollViewLayout.visibility = View.GONE
+                            } else {
+                                // Children is not empty
+                                // Hide the empty child accounts text and display all the other Views
+                                emptyChildAccountsText.visibility = View.GONE
+                                scrollViewLayout.visibility = View.VISIBLE
+
+                                // Display the selected child data
+                                // If the user has not selected any child,
+                                // display the oldest child account data
+                                // as the selectedChildIndex default value is 0
+                                val selectedChildIndex = viewModel.selectedChildIndex
+                                children[selectedChildIndex].let { selectedChild ->
+                                    // Fetch finished tasks data from Firestore
+                                    viewModel.getFinishedTasksFromFirebase(selectedChild.id)
+
+                                    // Display child avatar image and congratulation text data
+                                    displayMonthSummaryCardChildData(selectedChild, isParent)
+                                }
+
+                                // Instantiate a PopupMenu for displaying a list of child name
+                                val childrenPopupMenu = PopupMenu(
+                                    requireContext(),
+                                    toolbarLayout.chooseChildButton
+                                )
+
+                                // Populate childrenPopupMenu item with children data from Firestore
+                                for ((index, child) in children.withIndex()) {
+                                    // Add method takes group ID, item ID, item position, and item title as inputs
+                                    childrenPopupMenu.menu.add(Menu.NONE, index, index, child.name)
+                                }
+
+                                // Set choose child button onClickListener to display childrenPopupMenu
+                                toolbarLayout.chooseChildButton.setOnClickListener {
+                                    childrenPopupMenu.show()
+                                }
+
+                                // Set childrenPopupMenu item onClickListener
+                                childrenPopupMenu.setOnMenuItemClickListener { item ->
+                                    val selectedChild = children[item.itemId]
+
+                                    // Store selected child index in ViewModel
+                                    viewModel.selectedChildIndex = item.itemId
+
+                                    // Fetch finished tasks data from Firestore
+                                    viewModel.getFinishedTasksFromFirebase(selectedChild.id)
+
+                                    // Display child avatar image and congratulation text data
+                                    displayMonthSummaryCardChildData(selectedChild, isParent)
+
+                                    // Return true to indicate that a menu item is successfully selected
+                                    true
+                                }
+                            }
+                        }
+                        is Response.Failure -> {
+                            Log.e("History", response.message)
+                            Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            } else {
+                // Hide choose child button and empty child accounts text
+                toolbarLayout.chooseChildButton.visibility = View.GONE
+                emptyChildAccountsText.visibility = View.GONE
+
+                // Get child ID from shared preference
+                childId = sharedPref.getString(getString(R.string.role_pref_child_id_key), "")!!
+
+                // Fetch the finished tasks and child data from Firestore for this child ID
+                viewModel.getFinishedTasksFromFirebase(childId)
+                viewModel.getChildFromFirebase(childId)
+
+                // Observe child LiveData in ViewModel
+                viewModel.child.observe(viewLifecycleOwner) { response ->
+                    when (response) {
+                        is Response.Loading -> {}
+                        is Response.Success -> {
+                            val child = response.data
+
+                            // Display child avatar image and congratulation text data
+                            displayMonthSummaryCardChildData(child, false)
+                        }
+                        is Response.Failure -> {
+                            Log.e("History", response.message)
+                            Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+
+            // Observe finishedTasks LiveData in ActivityViewModel
+            viewModel.finishedTasks.observe(viewLifecycleOwner) { response ->
                 when (response) {
                     is Response.Loading -> {}
                     is Response.Success -> {
-                        val children = response.data
+                        val tasks = response.data
 
-                        // Display the selected child data
-                        // If the user has not selected any child,
-                        // display the oldest child account data
-                        // as the selectedChildIndex default value is 0
-                        val selectedChildIndex = viewModel.selectedChildIndex
-                        children[selectedChildIndex].let { selectedChild ->
-                            // Fetch finished tasks data from Firestore
-                            viewModel.getFinishedTasksFromFirebase(selectedChild.id)
+                        // Update the RecyclerView
+                        finishedTaskAdapter.updateList(tasks)
 
-                            // Display child avatar image and congratulation text data
-                            displayMonthSummaryCardChildData(selectedChild, isParent)
-                        }
-
-                        // Instantiate a PopupMenu for displaying a list of child name
-                        val childrenPopupMenu = PopupMenu(
-                            requireContext(),
-                            binding.toolbarLayout.chooseChildButton
-                        )
-
-                        // Populate childrenPopupMenu item with children data from Firestore
-                        for ((index, child) in children.withIndex()) {
-                            // Add method takes group ID, item ID, item position, and item title as inputs
-                            childrenPopupMenu.menu.add(Menu.NONE, index, index, child.name)
-                        }
-
-                        // Set choose child button onClickListener to display childrenPopupMenu
-                        binding.toolbarLayout.chooseChildButton.setOnClickListener {
-                            childrenPopupMenu.show()
-                        }
-
-                        // Set childrenPopupMenu item onClickListener
-                        childrenPopupMenu.setOnMenuItemClickListener { item ->
-                            val selectedChild = children[item.itemId]
-
-                            // Store selected child index in ViewModel
-                            viewModel.selectedChildIndex = item.itemId
-
-                            // Fetch finished tasks data from Firestore
-                            viewModel.getFinishedTasksFromFirebase(selectedChild.id)
-
-                            // Display child avatar image and congratulation text data
-                            displayMonthSummaryCardChildData(selectedChild, isParent)
-
-                            // Return true to indicate that a menu item is successfully selected
-                            true
+                        // Display empty text and hide see all button if tasks is empty
+                        if (tasks.isEmpty()) {
+                            emptyFinishedTasksText.visibility = View.VISIBLE
+                            seeAllButton.visibility = View.GONE
+                        } else {
+                            emptyFinishedTasksText.visibility = View.GONE
+                            seeAllButton.visibility = View.VISIBLE
                         }
                     }
                     is Response.Failure -> {
@@ -122,55 +191,9 @@ class HistoryFragment: Fragment() {
                     }
                 }
             }
-        } else {
-            // Hide choose child button
-            binding.toolbarLayout.chooseChildButton.visibility = View.GONE
 
-            // Get child ID from shared preference
-            childId = sharedPref.getString(getString(R.string.role_pref_child_id_key), "")!!
-
-            // Fetch the finished tasks and child data from Firestore for this child ID
-            viewModel.getFinishedTasksFromFirebase(childId)
-            viewModel.getChildFromFirebase(childId)
-
-            // Observe child LiveData in ViewModel
-            viewModel.child.observe(viewLifecycleOwner) { response ->
-                when (response) {
-                    is Response.Loading -> {}
-                    is Response.Success -> {
-                        val child = response.data
-
-                        // Display child avatar image and congratulation text data
-                        displayMonthSummaryCardChildData(child, false)
-                    }
-                    is Response.Failure -> {
-                        Log.e("History", response.message)
-                        Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-        }
-
-        // Observe finishedTasks LiveData in ActivityViewModel
-        viewModel.finishedTasks.observe(viewLifecycleOwner) { response ->
-            when (response) {
-                is Response.Loading -> {}
-                is Response.Success -> {
-                    val tasks = response.data
-
-                    // Update the RecyclerView
-                    finishedTaskAdapter.updateList(tasks)
-                }
-                is Response.Failure -> {
-                    Log.e("History", response.message)
-                    Toast.makeText(context, getString(R.string.data_fetch_failed), Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-
-        // Observe weeklyTaskCounts LiveData in ViewModel
-        viewModel.weeklyTaskCounts.observe(viewLifecycleOwner) {
-            binding.apply {
+            // Observe weeklyTaskCounts LiveData in ViewModel
+            viewModel.weeklyTaskCounts.observe(viewLifecycleOwner) {
                 // Display current month task count
                 val currentMonthTaskCount = it.sum()
                 monthSummaryDescriptionText.text = getString(
@@ -184,16 +207,16 @@ class HistoryFragment: Fragment() {
                 week3SummaryCardNumber.text = it[2].toString()
                 week4SummaryCardNumber.text = it[3].toString()
             }
-        }
 
-        // Set back button onClickListener
-        binding.toolbarLayout.toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
-        }
+            // Set back button onClickListener
+            toolbarLayout.toolbar.setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
 
-        // Set see all finished task list button onClickListener
-        binding.seeAllButton.setOnClickListener {
-            findNavController().navigate(R.id.finishedTaskListFragment)
+            // Set see all finished task list button onClickListener
+            seeAllButton.setOnClickListener {
+                findNavController().navigate(R.id.finishedTaskListFragment)
+            }
         }
     }
 

@@ -45,4 +45,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/grey_background"
         tools:listitem="@layout/item_child_rank"/>
+
+    <TextView
+        style="@style/body_regular"
+        android:id="@+id/empty_child_accounts_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/empty_child_accounts"
+        android:textColor="@color/dark_1"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -239,6 +239,18 @@
                 android:layout_marginTop="14dp"
                 tools:listitem="@layout/item_essential_task"
                 tools:itemCount="3"/>
+
+            <TextView
+                style="@style/body_regular"
+                android:id="@+id/empty_essential_tasks_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/empty_tasks_needs_grading"
+                android:textColor="@color/dark_1"
+                app:layout_constraintTop_toBottomOf="@id/tasks_need_grading_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

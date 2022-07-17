@@ -270,10 +270,10 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/tasks_need_grading_text"
+                android:id="@+id/on_going_tasks_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/tasks_unfinished"
+                android:text="@string/tasks_on_going"
                 android:textColor="@color/dark_1"
                 style="@style/body_medium_2"
                 app:layout_constraintStart_toStartOf="parent"
@@ -287,11 +287,23 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tasks_need_grading_text"
+                app:layout_constraintTop_toBottomOf="@+id/on_going_tasks_text"
                 android:layout_marginVertical="8dp"
                 android:layout_marginTop="14dp"
                 tools:listitem="@layout/item_essential_task"
                 tools:itemCount="3" />
+
+            <TextView
+                style="@style/body_regular"
+                android:id="@+id/empty_essential_tasks_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/empty_tasks_on_going"
+                android:textColor="@color/dark_1"
+                app:layout_constraintTop_toBottomOf="@id/on_going_tasks_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

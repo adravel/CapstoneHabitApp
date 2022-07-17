@@ -78,10 +78,13 @@ class TaskListFragment : Fragment() {
             when (response) {
                 is Response.Loading -> {}
                 is Response.Success -> {
-                    val task = response.data
+                    val tasks = response.data
 
                     // Update the RecyclerView
-                    taskAdapter.updateList(task)
+                    taskAdapter.updateList(tasks)
+
+                    // Display empty text if tasks is empty
+                    binding.emptyTasksText.visibility = if (tasks.isEmpty()) View.VISIBLE else View.GONE
                 }
                 is Response.Failure -> {
                     Log.e("TaskList", response.message)

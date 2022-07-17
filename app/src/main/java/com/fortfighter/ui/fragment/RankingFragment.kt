@@ -51,7 +51,10 @@ class RankingFragment : Fragment() {
         // and get the child ID if the current Role is Child
         val sharedPref = requireActivity().getSharedPreferences(getString(R.string.role_pref_key), Context.MODE_PRIVATE)
         val isParent = sharedPref.getBoolean(getString(R.string.role_pref_is_parent_key), true)
-        if (!isParent) childId = sharedPref.getString(getString(R.string.role_pref_child_id_key), "")!!
+        if (!isParent) {
+            childId = sharedPref.getString(getString(R.string.role_pref_child_id_key), "")!!
+            binding.emptyChildAccountsText.visibility = View.GONE
+        }
 
         // Set the adapter and layoutManager for child rank RecyclerView
         childRankAdapter = ChildRankAdapter(mutableListOf())
@@ -69,11 +72,17 @@ class RankingFragment : Fragment() {
                 is Response.Loading -> {}
                 is Response.Success -> {
                     val children = response.data
+
+                    // Update the RecyclerView
                     childRankAdapter.updateList(children)
 
-                    // Get the index of the Child data that match the ID if the current user is Child
-                    // and show the highlighted rank card
-                    if (!isParent) {
+                    // Check the Role
+                    if (isParent) {
+                        // Display empty text if children is empty
+                        binding.emptyChildAccountsText.visibility = if (children.isEmpty()) View.VISIBLE else View.GONE
+                    } else {
+                        // Get the index of the Child data that match the ID if the current user is Child
+                        // and show the highlighted rank card
                         val index = children.indexOfFirst { it.id == childId}
                         displayCurrentChildRankCard(children[index], index + 1)
                     }

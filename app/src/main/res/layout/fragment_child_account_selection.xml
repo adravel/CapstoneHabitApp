@@ -28,15 +28,27 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
         android:layout_marginTop="40dp"/>
 
+    <TextView
+        style="@style/body_regular"
+        android:id="@+id/empty_child_accounts_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/empty_child_accounts"
+        android:textColor="@color/dark_1"
+        app:layout_constraintTop_toBottomOf="@id/choose_child_account_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/child_account_list_recycle_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_marginHorizontal="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/choose_child_account_text"
-        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/empty_child_accounts_text"
         tools:listitem="@layout/item_child_account"
         tools:itemCount="5"/>
 
