@@ -16,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
+        android:id="@+id/scroll_view_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
@@ -362,7 +363,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/finished_tasks_text"
+                app:layout_constraintTop_toBottomOf="@+id/empty_finished_tasks_text"
                 android:layout_marginTop="14dp"
                 tools:listitem="@layout/item_essential_task"
                 tools:itemCount="3"/>
@@ -376,6 +377,30 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/finished_task_list_recycler_view" />
+
+            <TextView
+                style="@style/body_regular"
+                android:id="@+id/empty_finished_tasks_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/empty_tasks_finished"
+                android:textColor="@color/dark_1"
+                app:layout_constraintTop_toBottomOf="@id/finished_tasks_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <TextView
+        style="@style/body_regular"
+        android:id="@+id/empty_child_accounts_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/empty_child_accounts"
+        android:textColor="@color/dark_1"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

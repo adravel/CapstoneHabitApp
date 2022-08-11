@@ -75,7 +75,12 @@ class ChildHomeFragment: Fragment() {
                 is Response.Loading -> {}
                 is Response.Success -> {
                     val tasks = response.data
-                    if (tasks.isNotEmpty()) essentialTaskAdapter.updateList(tasks)
+
+                    // Update the RecyclerView
+                    essentialTaskAdapter.updateList(tasks)
+
+                    // Display empty text if tasks is empty
+                    binding.emptyEssentialTasksText.visibility = if (tasks.isEmpty()) View.VISIBLE else View.GONE
                 }
                 is Response.Failure -> {
                     Log.e("ChildHome", response.message)
