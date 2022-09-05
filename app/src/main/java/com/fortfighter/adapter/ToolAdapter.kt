@@ -74,7 +74,7 @@ class ToolAdapter(
                 }
             } else {
                 // Set button text and function for Child in house detail page
-                itemButton.text = context.getString(R.string.button_label_buy)
+                itemButton.text = context.getString(R.string.button_label_use)
 
                 itemButton.setOnClickListener { view ->
                     // Display tool purchase confirmation dialog
