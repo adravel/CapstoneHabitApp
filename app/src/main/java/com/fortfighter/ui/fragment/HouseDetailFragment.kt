@@ -113,11 +113,14 @@ class HouseDetailFragment: Fragment() {
                     // Get tool list data
                     val toolResponse = viewModel.tools.value
                     if (toolResponse is Response.Success) {
-                        val tools = toolResponse.data
+                        var tools = toolResponse.data
                         val houseStatus = house.status.toInt()
 
-                        // Display tool list depending on House status
-                        toolAdapter.updateList(tools, houseStatus)
+                        // Filter tool list depending on house status
+                        tools = viewModel.filterTools(tools, houseStatus)
+
+                        // Display filtered tool list
+                        toolAdapter.updateList(tools)
 
                         // Display empty text if tools is empty
                         binding.emptyToolsText.visibility = if (tools.isEmpty()) View.VISIBLE else View.GONE
@@ -165,15 +168,18 @@ class HouseDetailFragment: Fragment() {
             when (response) {
                 is Response.Loading -> {}
                 is Response.Success -> {
-                    val tools = response.data
+                    var tools = response.data
 
                     // Get house data
                     val houseResponse = viewModel.house.value
                     if (houseResponse is Response.Success) {
                         val houseStatus = houseResponse.data.status.toInt()
 
-                        // Display tool list depending on House status
-                        toolAdapter.updateList(tools, houseStatus)
+                        // Filter tool list depending on house status
+                        tools = viewModel.filterTools(tools, houseStatus)
+
+                        // Display filtered tool list
+                        toolAdapter.updateList(tools)
 
                         // Display empty text if tools is empty
                         binding.emptyToolsText.visibility = if (tools.isEmpty()) View.VISIBLE else View.GONE
@@ -237,9 +243,9 @@ class HouseDetailFragment: Fragment() {
 
                     // Show error message as a toast
                     val message = when (response.message) {
-                        "NOT_ENOUGH_CASH_ERROR" -> R.string.not_enough_cash_failure
-                        "MAX_CLEAN_COUNT_REACHED" -> R.string.max_clean_count_reached
-                        "MAX_REPAIR_COUNT_REACHED" -> R.string.max_repair_count_reached
+                        HouseDetailViewModel.NOT_ENOUGH_CASH -> R.string.not_enough_cash_failure
+                        HouseDetailViewModel.MAX_CLEAN_COUNT_REACHED -> R.string.max_clean_count_reached
+                        HouseDetailViewModel.MAX_REPAIR_COUNT_REACHED -> R.string.max_repair_count_reached
                         else -> {
                             Log.e("HouseDetailToolPurchase", response.message)
                             R.string.request_failed
