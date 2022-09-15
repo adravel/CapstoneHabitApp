@@ -7,12 +7,13 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <include
-            layout="@layout/layout_toolbar_with_menu"
             android:id="@+id/toolbar_layout"
+            layout="@layout/layout_toolbar_with_menu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -24,12 +25,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:layout_marginEnd="6dp"
-            app:cardCornerRadius="10dp"
             app:cardBackgroundColor="@color/white"
-            app:contentPaddingTop="4dp"
+            app:cardCornerRadius="10dp"
             app:contentPaddingBottom="4dp"
             app:contentPaddingLeft="10dp"
             app:contentPaddingRight="10dp"
+            app:contentPaddingTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_layout">
 
@@ -39,23 +40,23 @@
 
                 <TextView
                     android:id="@+id/house_name_text"
+                    style="@style/body_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/dark_2"
-                    style="@style/body_regular"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Nama Rumah"/>
+                    tools:text="Nama Rumah" />
 
                 <TextView
                     android:id="@+id/house_progress_text"
+                    style="@style/body_regular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/dark_2"
-                    style="@style/body_regular"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="HP : 200/1000"/>
+                    tools:text="HP : 200/1000" />
 
                 <com.google.android.material.progressindicator.LinearProgressIndicator
                     android:id="@+id/house_progress_bar"
@@ -63,13 +64,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="4dp"
                     app:indicatorColor="@color/state_error"
-                    app:trackColor="#F8E0D1"
-                    app:trackThickness="12dp"
-                    app:trackCornerRadius="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/house_name_text"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:trackColor="#F8E0D1"
+                    app:trackCornerRadius="10dp"
+                    app:trackThickness="12dp"
                     tools:max="100"
                     tools:progress="40" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -90,10 +91,10 @@
             android:id="@+id/fort_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/house_image"
             app:layout_constraintDimensionRatio="H,360:195"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/house_image"
             tools:src="@drawable/img_game_fort_intact" />
 
         <ImageView
@@ -105,17 +106,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/house_image"
-            tools:src="@drawable/img_game_dirt_both"/>
+            tools:src="@drawable/img_game_dirt_both" />
 
         <ImageView
             android:id="@+id/center_gif_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            tools:src="@drawable/gif_hammer"
             app:layout_constraintDimensionRatio="H, 1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/house_image" />
+            app:layout_constraintTop_toTopOf="@id/house_image"
+            tools:src="@drawable/gif_hammer" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
@@ -183,29 +184,35 @@
                 tools:spanCount="2"
                 tools:itemCount="2"
                 tools:listitem="@layout/item_tool" />
+
+            <TextView
+                style="@style/body_regular"
+                android:id="@+id/empty_tools_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/empty_tools"
+                android:textColor="@color/dark_1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageView
+        android:id="@+id/front_gif_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="2dp">
-
-        <ImageView
-            android:id="@+id/front_gif_image"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="centerCrop"
-            tools:src="@drawable/gif_cannon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:elevation="2dp"
+        android:scaleType="centerCrop"
+        app:layout_anchor="@+id/constraintLayout"
+        app:layout_anchorGravity="center"
+        tools:src="@drawable/gif_cannon" />
 
     <View
         android:id="@+id/transparent_touch_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="3dp"/>
+        android:elevation="3dp"
+        tools:visibility="gone"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

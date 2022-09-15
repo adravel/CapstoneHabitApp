@@ -18,6 +18,12 @@ import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 
 class HouseDetailViewModel: ViewModel() {
+    companion object {
+        const val NOT_ENOUGH_CASH = "NOT_ENOUGH_CASH"
+        const val MAX_CLEAN_COUNT_REACHED = "MAX_CLEAN_COUNT_REACHED"
+        const val MAX_REPAIR_COUNT_REACHED = "MAX_REPAIR_COUNT_REACHED"
+    }
+
     private val auth = Firebase.auth
     private val db = Firebase.firestore
     private val parentId = auth.currentUser!!.uid
@@ -46,6 +52,17 @@ class HouseDetailViewModel: ViewModel() {
     // Functions to set document IDs
     fun setChildId(id: String) { childId = id }
     fun setHouseId(id: String) { houseId = id }
+
+    // Filter tool list depending on house status
+    fun filterTools(tools: List<Tool>, houseStatus: Int): List<Tool> {
+        val list = mutableListOf<Tool>()
+        if (houseStatus == 1) {
+            list.addAll(tools.filter { it.getToolStaticData()!!.isCrushingTool })
+        } else if (houseStatus == 2) {
+            list.addAll(tools.filterNot { it.getToolStaticData()!!.isCrushingTool })
+        }
+        return list
+    }
 
     // Fetch house data from Firestore
     fun getHouseFromFirebase() {
@@ -132,9 +149,10 @@ class HouseDetailViewModel: ViewModel() {
         val houseDocRef = childDocRef.collection("houses").document(houseId)
         val toolDocRef = childDocRef.collection("tools").document(toolId)
 
-        var toolType = 0
-
         CoroutineScope(Dispatchers.IO).launch {
+            var toolType = 0
+            var error: String? = null
+
             try {
                 db.runTransaction { transaction ->
                     val childSnapshot = transaction.get(childDocRef)
@@ -154,7 +172,8 @@ class HouseDetailViewModel: ViewModel() {
                     val child = childSnapshot.toObject<Child>()!!
                     val cash = child.cash.toInt() - toolPrice
                     if (cash < 0) {
-                        _toolPurchaseResponse.postValue(Response.Failure("NOT_ENOUGH_CASH_ERROR"))
+//                        _toolPurchaseResponse.postValue(Response.Failure("NOT_ENOUGH_CASH_ERROR"))
+                        error = NOT_ENOUGH_CASH
                         return@runTransaction
                     }
 
@@ -199,7 +218,8 @@ class HouseDetailViewModel: ViewModel() {
                                 if (houseCleanCount < 2) {
                                     transaction.update(houseDocRef, "cleanCount", houseCleanCount + 1)
                                 } else {
-                                    _toolPurchaseResponse.postValue(Response.Failure("MAX_CLEAN_COUNT_REACHED"))
+//                                    _toolPurchaseResponse.postValue(Response.Failure("MAX_CLEAN_COUNT_REACHED"))
+                                    error = MAX_CLEAN_COUNT_REACHED
                                     return@runTransaction
                                 }
                             } else if (toolType == 3) {
@@ -207,7 +227,8 @@ class HouseDetailViewModel: ViewModel() {
                                 if (houseRepairCount < 8) {
                                     transaction.update(houseDocRef, "repairCount", houseRepairCount + 1)
                                 } else {
-                                    _toolPurchaseResponse.postValue(Response.Failure("MAX_REPAIR_COUNT_REACHED"))
+//                                    _toolPurchaseResponse.postValue(Response.Failure("MAX_REPAIR_COUNT_REACHED"))
+                                    error = MAX_REPAIR_COUNT_REACHED
                                     return@runTransaction
                                 }
                             }
@@ -231,8 +252,9 @@ class HouseDetailViewModel: ViewModel() {
                 }.await()
 
                 // Check if there is any failure in completing transaction
-                if (_toolPurchaseResponse.value is Response.Failure) {
-                    return@launch
+                val finalError = error
+                if (finalError != null) {
+                    _toolPurchaseResponse.postValue(Response.Failure(finalError))
                 } else {
                     _toolPurchaseResponse.postValue(Response.Success(toolType))
                 }

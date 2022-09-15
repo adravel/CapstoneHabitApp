@@ -64,7 +64,12 @@ class ChildAccountSelectionFragment: Fragment() {
                 is Response.Loading -> {}
                 is Response.Success -> {
                     val children = response.data
-                    if (children.isNotEmpty()) childAccountAdapter.updateList(children)
+
+                    // Update the RecyclerView
+                    childAccountAdapter.updateList(children)
+
+                    // Display empty text if children is empty
+                    binding.emptyChildAccountsText.visibility = if (children.isEmpty()) View.VISIBLE else View.GONE
                 }
                 is Response.Failure -> {
                     Log.e("ChildAccountSelection", response.message)

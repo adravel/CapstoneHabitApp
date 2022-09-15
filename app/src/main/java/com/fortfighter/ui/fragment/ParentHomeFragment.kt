@@ -98,7 +98,12 @@ class ParentHomeFragment: Fragment() {
                 is Response.Loading -> {}
                 is Response.Success -> {
                     val tasks = response.data
+
+                    // Update the RecyclerView
                     essentialTaskAdapter.updateList(tasks)
+
+                    // Display empty text if tasks is empty
+                    binding.emptyEssentialTasksText.visibility = if (tasks.isEmpty()) View.VISIBLE else View.GONE
                 }
                 is Response.Failure -> {
                     Log.e("ParentHome", response.message)
