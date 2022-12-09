@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.fortfighter"
         minSdk 22
-        targetSdk 31
+        targetSdk 33
         versionCode 5
         versionName "1.4"
 
@@ -42,11 +42,10 @@ android {
         jvmTarget = '1.8'
     }
 
-    lintOptions {
+    namespace 'com.fortfighter'
+    lint {
         disable 'ContentDescription'
     }
-
-    namespace 'com.fortfighter'
 }
 
 dependencies {
